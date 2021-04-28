@@ -1,7 +1,9 @@
 <template>
 <v-app>
     <AppBar></AppBar>
-    <rutineCard></rutineCard>
+  <v-main>
+    <router-view></router-view>
+  </v-main>
 </v-app>
 
 </template>
@@ -9,18 +11,14 @@
 <script>
 
 import AppBar from "./components/AppBar";
-import RutineCard from "./components/rutineCard";
 
 export default {
   name: 'App',
 
   components: {
-    RutineCard,
     AppBar,
   },
 
-  data: () => ({
-    //
-  }),
 };
+
 </script>

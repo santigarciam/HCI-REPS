@@ -2,14 +2,16 @@
 
       <v-container >
         <v-row v-for="(item,i) in 2"
-               :key="i" class="mb-1" no-gutters justify="center">
+               :key="i" class="pb-8" no-gutters justify="center">
           <v-col cols="10">
-            <v-expansion-panels >
-              <v-expansion-panel>
-                <span>
-                <v-expansion-panel-header>Rutina Pecho</v-expansion-panel-header>
-
-                </span>
+            <v-expansion-panels>
+              <v-expansion-panel >
+                <v-expansion-panel-header class="mb-2"><h3>Nombre Rutina</h3></v-expansion-panel-header>
+                <div class="pl-8">
+                <p>Duracion: ...</p>
+                <p>Descripcion: ...</p>
+                <p>Materiales: ...</p>
+                </div>
                 <v-expansion-panel-content>
                   <v-data-table
                       :headers="headers"
