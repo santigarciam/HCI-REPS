@@ -22,7 +22,6 @@ const router = new VueRouter({
     {path:'*', component: NotFound}
   ]
 })
-
 new Vue({
   router,
   vuetify,
