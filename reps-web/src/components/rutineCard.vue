@@ -1,44 +1,75 @@
 <template>
+  <div class="text-center">
+    <v-dialog
+        v-model="dialog"
+        width="500"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-container class = "container_v_card">
+          <v-card  v-bind="attrs" v-on="on" >
+            <v-col>
+              <v-row>
+                <v-card-title v-model="tituloRut">Rutina Pecho</v-card-title>
+                <v-rating
+                    v-model="rating"
+                    background-color="grey"
+                    color="orange"
+                    medium
+                ></v-rating>
+                <v-spacer></v-spacer>
+                <v-btn
+                    icon
+                    color="grey"
+                >
+                  <v-icon>mdi-share</v-icon>
+                </v-btn>
 
-      <v-container >
-        <v-row v-for="(item,i) in 2"
-               :key="i" class="pb-8" no-gutters justify="center">
-          <v-col cols="10">
-            <v-expansion-panels>
-              <v-expansion-panel >
-                <v-expansion-panel-header class="mb-2"><h3>Nombre Rutina</h3></v-expansion-panel-header>
-                <div class="pl-8">
-                <p>Duracion: ...</p>
-                <p>Descripcion: ...</p>
-                <p>Materiales: ...</p>
-                </div>
-                <v-expansion-panel-content>
-                  <v-data-table
-                      :headers="headers"
-                      :items="rutinas"
-                      class="elevation-1"
-                  >
-                    <template v-slot:items="props">
-                      <td>{{ props.item.name }}</td>
-                      <td class="text-xs-right">{{ props.item.repeticiones }}</td>
-                      <td class="text-xs-right">{{ props.item.peso }}</td>
-                      <td class="text-xs-right">{{ props.item.pausa }}</td>
-                    </template>
-                  </v-data-table>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-expansion-panels>
-          </v-col>
-          <v-col>
-            <v-btn rounded plain>
-              <v-icon color="darck">mdi-delete</v-icon>
-            </v-btn>
-            <v-btn rounded plain >
-              <v-icon color="grey">mdi-pencil</v-icon>
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
+            <v-btn
+                    icon
+                    color="pink"
+                >
+                  <v-icon>mdi-heart</v-icon>
+                </v-btn>
+
+
+            </v-row>
+
+            </v-col>
+            <v-col class="text-left">
+             <v-card-subtitle v-model="autorRut">Autor: PONER EN AZUL  </v-card-subtitle>
+            <v-card-subtitle v-model="descripcionRut">Descripcion:</v-card-subtitle>
+            <v-card-subtitle v-model="duracionRut">Duracion:</v-card-subtitle>
+            </v-col>
+
+
+          </v-card>
+        </v-container>
+
+      </template>
+
+      <v-card flat>
+         <v-card-title> Rutina Pecho</v-card-title>
+        <v-divider></v-divider>
+        <v-card-subtitle></v-card-subtitle>
+        <v-card-subtitle>Descripcion:</v-card-subtitle>
+        <v-card-subtitle>Duracion:</v-card-subtitle>
+        <v-container >
+        <h4>Entrada en calor</h4>
+          <p>Ejercicio</p>
+        </v-container>
+        <v-container >
+          <h4>Ejercitacion</h4>
+          <p>Ejercicio</p>
+        </v-container>
+        <v-container >
+          <h4>Enfriamiento</h4>
+          <p>Ejercicio</p>
+        </v-container>
+
+
+      </v-card>
+    </v-dialog>
+  </div>
 </template>
 
 <script>
