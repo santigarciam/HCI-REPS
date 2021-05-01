@@ -1,12 +1,5 @@
 <template>
   <div class="MisRutinas">
-    <v-container>
-      <v-col class="text-right">
-
-      </v-col>
-
-    </v-container>
-
     <v-divider></v-divider>
 <v-col>
     <v-row>
