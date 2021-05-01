@@ -1,19 +1,19 @@
 <template>
   <v-dialog v-model="dialog" width="800px">
     <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-    <v-btn flat slot="activator" v-bind="attrs" v-on="on">+Anadir</v-btn>
+    <v-btn depressed class="ma-2" slot="activator" v-bind="attrs" v-on="on">+Anadir</v-btn>
     </template>
 
     <v-card>
       <v-card-title>
-        <h2>Agregar rutina</h2>
+        <h2>Agregar nueva rutina</h2>
       </v-card-title>
 
       <v-card-text>
         <v-form class="px-3">
           <v-text-field label="Nombre" v-model="nombreRut"></v-text-field>
           <v-textarea label="Descripcion" v-model="descripcionRut" ></v-textarea>
-          <v-text-field label="Duracion"></v-text-field>
+          <v-text-field label="Duracion" v-model="durRut"></v-text-field>
 
           <v-col>
             <v-row>
@@ -73,13 +73,14 @@ export default {
   data(){
     return{
       nombreRut:'',
-      descripcionRut:''
+      descripcionRut:'',
+      durRut:''
     }
   },
   methods :{
     submit(){
-      console.log(this.nombreRut,this.descripcionRut)
-    }
+      console.log(this.nombreRut,this.descripcionRut,this.durRut)
+    },
   }
 }
 </script>
