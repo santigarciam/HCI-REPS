@@ -8,33 +8,37 @@
 <!--      <v-toolbar-title><span class="titulo1 font-weight-light">RE</span><span class="titulo2">PS</span></v-toolbar-title>-->
 <!--      </router-link>-->
 <!--      <v-spacer></v-spacer>-->
-<!--      <v-spacer></v-spacer>-->
-      <!--   VER SI SE PUEDE HACER UN TEMPLATE   -->
+      <v-spacer></v-spacer>
+
       <router-link to="/MisRutinas">
       <div class="text-center pr-2">
         <v-btn
             rounded
-            color="black"
+            :color="active ? 'primary' : 'black'"
             dark
+            @click="toggle"
         >
           Mis Rutinas
         </v-btn>
       </div>
       </router-link>
       <!--  -------  -->
-<!--      <v-spacer></v-spacer>-->
+      <v-spacer></v-spacer>
       <!--   VER SI SE PUEDE HACER UN TEMPLATE   -->
+
       <router-link to="/MisEjercicios">
       <div class="text-center pr-2">
         <v-btn
             rounded
-            color="black"
+            :color="active? 'primar':'black'"
+            @click="toggle"
             dark
         >
           Mis Ejercicios
         </v-btn>
       </div>
       </router-link>
+      <v-spacer></v-spacer>
       <!--  -------  -->
       <router-link to="/Favoritos">
         <div class="text-center pr-2">
@@ -47,7 +51,7 @@
           </v-btn>
         </div>
       </router-link>
-<!--      <v-spacer></v-spacer>-->
+      <v-spacer></v-spacer>
       <!--   VER SI SE PUEDE HACER UN TEMPLATE   -->
       <router-link to="/Descubrir">
       <div class="text-center pr-2">
