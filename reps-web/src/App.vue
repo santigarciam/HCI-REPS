@@ -1,6 +1,6 @@
 <template>
 <v-app>
-    <AppBar></AppBar>
+    <AppBar v-if="isNotHome" ></AppBar>
   <v-main>
     <router-view></router-view>
   </v-main>
@@ -18,6 +18,12 @@ export default {
   components: {
     AppBar,
   },
+  computed: {
+    isNotHome() {
+      return this.$route.path != '/'
+    }
+  },
+
 
 };
 

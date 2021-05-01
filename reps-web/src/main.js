@@ -7,6 +7,7 @@ import MisRutinas from './views/MisRutinas';
 import Descubrir from './views/Descubrir';
 import NotFound from './views/NotFound';
 import Favoritos from "./views/Favoritos";
+import LandingPage from "./views/LandingPage"
 
 
 Vue.use(VueRouter);
@@ -15,7 +16,7 @@ Vue.config.productionTip = false
 
 const router = new VueRouter({
   routes: [
-    {path:'/', component: MisRutinas},
+    {path:'/', component: LandingPage},
     {path:'/MisRutinas', component: MisRutinas},
     {path:'/MisEjercicios', component: MisEjercicios},
     {path:'/Favoritos', component: Favoritos},

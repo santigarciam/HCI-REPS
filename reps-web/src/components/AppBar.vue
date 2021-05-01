@@ -94,7 +94,7 @@
           </v-list>
           <v-list>
             <v-list-item>
-              <v-btn plain>Cerrar Sesion</v-btn>
+              <v-btn plain to="/">Cerrar Sesion</v-btn>
             </v-list-item>
           </v-list>
         </v-menu>
