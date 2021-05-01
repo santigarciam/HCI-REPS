@@ -1,7 +1,7 @@
 <template>
   <v-container fluid id="Mis Ejercicios">
 
-    <v-row>
+    <v-row class="mt-2">
       <v-col>
        <search-field></search-field>
       </v-col>

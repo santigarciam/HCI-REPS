@@ -1,6 +1,6 @@
 <template>
   <v-container fluid id="Favoritos">
-    <v-row>
+    <v-row class="mt-2">
       <v-col>
         <v-row>
         <filtrar-por></filtrar-por>

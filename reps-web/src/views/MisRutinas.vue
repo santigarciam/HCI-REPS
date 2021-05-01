@@ -2,12 +2,12 @@
   <div class="MisRutinas">
     <v-divider></v-divider>
 <v-col>
-    <v-row>
+    <v-row class="mt-2">
     <filtrar-por></filtrar-por>
       <order-by></order-by>
       <search-field></search-field>
       <v-spacer></v-spacer>
-      <nueva-rutina ></nueva-rutina>
+      <nueva-rutina></nueva-rutina>
 
 
     </v-row>

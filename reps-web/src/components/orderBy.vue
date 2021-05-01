@@ -1,7 +1,8 @@
 <template>
-  <v-menu transition="scroll-y-transition">
+  <v-menu offset-y transition="scroll-y-transition" bottom>
     <template v-slot:activator="{ on, attrs }">
       <v-btn
+          outlined
           depressed
           class="ma-2"
           v-bind="attrs"
