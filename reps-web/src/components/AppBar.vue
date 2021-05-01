@@ -89,7 +89,7 @@
           </template>
           <v-list>
             <v-list-item>
-              <v-btn plain>Mi Perfil</v-btn>
+             <perfil-pop-up></perfil-pop-up>
             </v-list-item>
           </v-list>
           <v-list>
@@ -156,8 +156,10 @@
 
 <script>
 
+import PerfilPopUp from "@/components/perfilPopUp";
 export default {
   name: "AppBar",
+  components: {PerfilPopUp},
 }
 
 </script>
