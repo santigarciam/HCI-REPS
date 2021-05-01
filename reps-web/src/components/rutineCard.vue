@@ -17,9 +17,11 @@
                     medium
                 ></v-rating>
                 <v-spacer></v-spacer>
+                <div>
                 <v-btn
                     icon
                     color="grey"
+                    v-model="boton"
                     @click="snackbar = true"
                 >
                   <v-icon>mdi-share</v-icon>
@@ -49,8 +51,7 @@
                 >
                   <v-icon>mdi-heart</v-icon>
                 </v-btn>
-
-
+                </div>
             </v-row>
 
             </v-col>
