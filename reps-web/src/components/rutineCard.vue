@@ -17,7 +17,9 @@
                     medium
                 ></v-rating>
                 <v-spacer></v-spacer>
-                <div>
+
+                  <div>
+                    <edit-rut></edit-rut>
                 <v-btn
                     icon
                     color="grey"
@@ -44,13 +46,7 @@
                   </template>
                 </v-snackbar>
 
-
-            <v-btn
-                    icon
-                    color="pink"
-                >
-                  <v-icon>mdi-heart</v-icon>
-                </v-btn>
+                    <delete-confirmaticon></delete-confirmaticon>
                 </div>
             </v-row>
 
@@ -92,21 +88,20 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "rutineCard"
-}
-</script>
 
-<style scoped>
-
-</style>
 
 
 <script>
+import NuevaRutina from "@/components/nuevoEjercicio";
+import  EditRutina from "@/components/editRut"
+import EditRut from "@/components/editRut";
+import DeleteConfirmaticon from "@/components/deleteConfirmation";
+
 export default {
+  components: {DeleteConfirmaticon, EditRut},
   data () {
     return {
+      componets:{NuevaRutina,EditRutina},
       headers: [
         {
           text: 'Ejericios',

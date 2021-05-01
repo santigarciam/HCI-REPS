@@ -1,29 +1,33 @@
 <template>
-  <v-dialog v-model="dialog" width="800px">
-    <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-    <v-btn depressed class="ma-2" slot="activator" v-bind="attrs" v-on="on">+Anadir</v-btn>
+  <v-dialog v-model="dialogEditRut" width="800px">
+    <template  v-slot:activator="{ on, attrs }">
+      <v-btn plain color = "grey" slot="activator" small  v-bind="attrs" v-on="on">
+        <v-icon>
+          mdi-pencil
+        </v-icon>
+      </v-btn>
     </template>
 
     <v-card>
       <v-card-title>
-        <h2>Agregar nueva rutina</h2>
+        <h2>Editar Rutina</h2>
       </v-card-title>
 
       <v-card-text>
         <v-form class="px-3">
-          <v-text-field label="Nombre" v-model="nombreRut"></v-text-field>
-          <v-textarea label="Descripcion" v-model="descripcionRut" ></v-textarea>
-          <v-text-field label="Duracion" v-model="durRut"></v-text-field>
+          <v-text-field label="Nombre*" v-model="nombreRut"></v-text-field>
+          <v-textarea label="Descripcion*" v-model="descripcionRut" ></v-textarea>
+          <v-text-field label="Duracion*" v-model="durRut"></v-text-field>
 
           <v-col>
             <v-row>
-          <v-card-title>
-            Ciclos de entrenamiento
-          </v-card-title>
+              <v-card-title>
+                Ciclos de entrenamiento
+              </v-card-title>
               <v-menu transition="scroll-y-transition">
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
-                      depressed
+                      plain
                       class="ma-2"
                       v-bind="attrs"
                       v-on="on"
@@ -56,18 +60,28 @@
                 <v-text-field label="Repeticiones:" v-model="repsEj"></v-text-field>
               </v-col>
               <v-col>
-                <v-text-field label="Descanso Entre Repeticiones:" v-model="descReps"></v-text-field>
+              <v-text-field label="Descanso Entre Repeticiones:" v-model="descReps"></v-text-field>
               </v-col>
               <v-col>
                 <v-text-field label="Descanso Entre Ejercicios:" v-model="descReps"></v-text-field>
               </v-col>
             </v-row>
           </v-container>
+
+<!--            <v-col>-->
+<!--              <v-row>-->
+<!--              <v-text-field label="Repeticiones:" v-model="repsEj"></v-text-field>-->
+<!--              <v-text-field label="Descanso Entre Repeticiones:" v-model="descReps"></v-text-field>-->
+<!--             <v-text-field label="Descanso Entre Ejercicios::" v-model="descEjs"></v-text-field>-->
+<!--              </v-row>-->
+<!--            </v-col>-->
+
+
           <v-col>
             <v-row>
               <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
               <v-btn flat class="red mx-0" @click="submit">Cancelar</v-btn>
-                  <v-btn flat class="success mx-10" @click="submit">Guardar</v-btn>
+              <v-btn flat class="success mx-10" @click="submit">Guardar</v-btn>
 
             </v-row>
           </v-col>
@@ -76,24 +90,17 @@
       </v-card-text>
 
     </v-card>
+
+
+
+
+
   </v-dialog>
 </template>
 
 <script>
 export default {
-  name: "nuevaRutina",
-  data(){
-    return{
-      nombreRut:'',
-      descripcionRut:'',
-      durRut:''
-    }
-  },
-  methods :{
-    submit(){
-      console.log(this.nombreRut,this.descripcionRut,this.durRut)
-    },
-  }
+  name: "editRut"
 }
 </script>
 

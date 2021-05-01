@@ -6,19 +6,8 @@
           <v-row>
             <v-card-title v-model="nombreEj">Flexiones</v-card-title>
             <v-spacer></v-spacer>
-            <v-btn
-                icon
-                color="grey"
-
-            >
-              <v-icon>mdi-pencil</v-icon>
-            </v-btn>
-            <v-btn
-                icon
-                color="red"
-            >
-              <v-icon>mdi-delete</v-icon>
-            </v-btn>
+            <edit-ej></edit-ej>
+            <delete-confirmaticon></delete-confirmaticon>
 
 
           </v-row>
@@ -45,8 +34,11 @@
 </template>
 
 <script>
+import EditEj from "@/components/editEj";
+import DeleteConfirmaticon from "@/components/deleteConfirmation";
 export  default {
-data(){
+  components: {DeleteConfirmaticon, EditEj},
+  data(){
   return{
     nombreEj:''
   }
