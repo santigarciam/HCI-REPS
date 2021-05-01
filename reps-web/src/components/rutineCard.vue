@@ -20,9 +20,28 @@
                 <v-btn
                     icon
                     color="grey"
+                    @click="snackbar = true"
                 >
                   <v-icon>mdi-share</v-icon>
                 </v-btn>
+                <v-snackbar
+                    v-model="snackbar"
+                    :timeout="timeout"
+                >
+                  Se copio al clipboard el link de la rutina
+
+                  <template v-slot:action="{ attrs }">
+                    <v-btn
+                        color="blue"
+                        text
+                        v-bind="attrs"
+                        @click="snackbar = false"
+                    >
+                      Close
+                    </v-btn>
+                  </template>
+                </v-snackbar>
+
 
             <v-btn
                     icon
