@@ -9,13 +9,13 @@
           <v-card  v-bind="attrs" v-on="on" >
             <v-col>
               <v-row>
-                <v-card-title v-model="tituloRut">Rutina Pecho</v-card-title>
-                <v-rating
+                <v-card-title v-model="tituloRut">Rutina Pecho <v-rating
                     v-model="rating"
                     background-color="grey"
                     color="orange"
                     medium
-                ></v-rating>
+                    class="ml-2"
+                ></v-rating></v-card-title>
                 <v-spacer></v-spacer>
                 <div>
                 <v-btn
