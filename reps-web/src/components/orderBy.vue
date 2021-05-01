@@ -1,22 +1,29 @@
 <template>
-  <v-menu transition="scroll-y-transition">
+  <v-menu offset-y transition="scroll-y-transition" bottom>
     <template v-slot:activator="{ on, attrs }">
       <v-btn
+          outlined
           depressed
           class="ma-2"
           v-bind="attrs"
           v-on="on"
       >
         Ordenar
+        <v-icon>mdi-chevron-down</v-icon>
       </v-btn>
     </template>
     <v-list>
-      <v-list-item
-          v-for="n in 5"
-          :key="n"
-          link
-      >
-        <v-list-item-title v-text="'Opcion ' + n"></v-list-item-title>
+      <v-list-item>
+        <v-list-item-title>A-Z</v-list-item-title>
+      </v-list-item>
+      <v-list-item>
+        <v-list-item-title>Z-A</v-list-item-title>
+      </v-list-item>
+      <v-list-item>
+        <v-list-item-title>Puntuacion</v-list-item-title>
+      </v-list-item>
+      <v-list-item>
+        <v-list-item-title>Duracion</v-list-item-title>
       </v-list-item>
     </v-list>
 
