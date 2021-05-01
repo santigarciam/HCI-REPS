@@ -1,0 +1,27 @@
+<template>
+  <v-menu transition="scroll-y-transition">
+    <template v-slot:activator="{ on, attrs }">
+      <v-btn
+          depressed
+          class="ma-2"
+          v-bind="attrs"
+          v-on="on"
+      >
+        Ordenar
+      </v-btn>
+    </template>
+    <v-list>
+      <v-list-item
+          v-for="n in 5"
+          :key="n"
+          link
+      >
+        <v-list-item-title v-text="'Opcion ' + n"></v-list-item-title>
+      </v-list-item>
+    </v-list>
+
+  </v-menu>
+</template>
+
+
+

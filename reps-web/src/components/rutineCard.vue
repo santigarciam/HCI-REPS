@@ -58,7 +58,7 @@
             <v-col class="text-left">
              <v-card-subtitle v-model="autorRut">Autor: PONER EN AZUL  </v-card-subtitle>
             <v-card-subtitle v-model="descripcionRut">Descripcion:</v-card-subtitle>
-            <v-card-subtitle v-model="duracionRut">Duracion:</v-card-subtitle>
+            <v-card-subtitle v-model="durRut">Duracion:</v-card-subtitle>
             </v-col>
 
 
@@ -119,8 +119,10 @@ export default {
         { text: 'Peso (KG) ', value: 'peso' },
 
       ],
-      rutinas: [
-      ]
+      tituloRut:'',
+      autorRut:'',
+      durRut:'',
+
     }
   }
 }

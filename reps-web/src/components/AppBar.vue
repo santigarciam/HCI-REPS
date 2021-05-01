@@ -44,7 +44,7 @@
         <div class="text-center pr-2">
           <v-btn
               rounded
-              color="black"
+              color="primary"
               dark
           >
             Favoritos
@@ -74,7 +74,7 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn icon
-                color="primary"
+                color="black"
                 dark
                 v-bind="attrs"
                 v-on="on"
@@ -103,6 +103,56 @@
     </v-toolbar>
     </nav>
 </template>
+
+
+<!--<template>-->
+<!--  <v-container fluid class="pa-0 ma-0">-->
+<!--    <v-app-bar color="#202026" dark fixed app>-->
+<!--      <img-->
+<!--          :src="require('../assets/logoreps.png')"-->
+<!--          height="100%"-->
+<!--          alt=""-->
+<!--      />-->
+
+<!--      <v-col>-->
+<!--        <v-tabs-->
+<!--            align-with-title-->
+<!--            background-color="#202026"-->
+<!--            grow-->
+<!--            slider-color="light blue"-->
+<!--        >-->
+<!--          <v-tab to="/MisRutinas">Mis Rutinas</v-tab>-->
+<!--          <v-tab to="/MisEjercicios">Mis Ejercicios</v-tab>-->
+<!--          <v-tab to="/Favoritos">Favoritos</v-tab>-->
+<!--          <v-tab to="/Descubrir">Descubrir</v-tab>-->
+<!--        </v-tabs>-->
+<!--      </v-col>-->
+
+<!--      &lt;!&ndash;menu del costadito&ndash;&gt;-->
+<!--      <v-menu offset-y>-->
+<!--        <template v-slot:activator="{ on, attrs }">-->
+<!--          <v-btn icon v-bind="attrs" v-on="on">-->
+<!--            <v-icon>mdi-account</v-icon>-->
+<!--          </v-btn>-->
+<!--        </template>-->
+<!--        <v-list>-->
+<!--          <v-list-item >-->
+<!--            <v-list-item-title><h3>nombre de usuario</h3></v-list-item-title>-->
+<!--          </v-list-item>-->
+<!--          <v-list-item>-->
+<!--            <v-list-item-title>Editar perfil</v-list-item-title>-->
+<!--          </v-list-item>-->
+
+<!--          <v-list-item-->
+<!--              to="/"-->
+<!--              @click="logOut()">-->
+<!--            <v-list-item-title>Cerrar sesión</v-list-item-title>-->
+<!--          </v-list-item>-->
+<!--        </v-list>-->
+<!--      </v-menu>-->
+<!--    </v-app-bar>-->
+<!--  </v-container>-->
+<!--</template>-->
 
 <script>
 
