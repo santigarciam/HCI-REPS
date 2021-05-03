@@ -21,6 +21,7 @@
                   <div>
                     <edit-rut></edit-rut>
                 <v-btn
+                    class="mt-4 mr-2"
                     icon
                     color="grey"
                     v-model="boton"

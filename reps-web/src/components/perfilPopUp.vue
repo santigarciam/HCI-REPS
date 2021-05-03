@@ -38,7 +38,7 @@
           <v-col>
             <v-row>
               <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-              <v-btn flat class="red mx-0" @click="submit">Cancelar</v-btn>
+              <v-btn dark flat class="red mx-0" @click="submit">Cancelar</v-btn>
               <v-btn flat class="success mx-10" @click="submit">Guardar</v-btn>
 
             </v-row>

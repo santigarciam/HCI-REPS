@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialogEditRut" width="800px">
     <template  v-slot:activator="{ on, attrs }">
-      <v-btn plain color = "grey" slot="activator" small  v-bind="attrs" v-on="on">
+      <v-btn icon class="mt-4 mr-2" plain color = "grey" slot="activator" small  v-bind="attrs" v-on="on">
         <v-icon>
           mdi-pencil
         </v-icon>

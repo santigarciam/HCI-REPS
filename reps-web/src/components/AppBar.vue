@@ -13,10 +13,12 @@
       <router-link to="/MisRutinas">
       <div class="text-center pr-2">
         <v-btn
+            to="/MisRutinas"
             rounded
             :color="active ? 'primary' : 'black'"
             dark
             @click="toggle"
+            active-class="activo"
         >
           Mis Rutinas
         </v-btn>
@@ -30,9 +32,11 @@
       <div class="text-center pr-2">
         <v-btn
             rounded
+            to="/MisEjercicios"
             :color="active? 'primar':'black'"
             @click="toggle"
             dark
+            active-class="activo"
         >
           Mis Ejercicios
         </v-btn>
@@ -44,8 +48,10 @@
         <div class="text-center pr-2">
           <v-btn
               rounded
+              to="/Favoritos"
               color="black"
               dark
+              active-class="activo"
           >
             Favoritos
           </v-btn>
@@ -56,9 +62,11 @@
       <router-link to="/Descubrir">
       <div class="text-center pr-2">
         <v-btn
+            to="/Descubrir"
             rounded
             color="black"
             dark
+            active-class="activo"
         >
           Descubrir
         </v-btn>
@@ -182,5 +190,9 @@ a { text-decoration: none; }
 
   background-color: blue;
 }
+.activo {
+  background-color: #00B2EB !important;
+}
+
 
 </style>

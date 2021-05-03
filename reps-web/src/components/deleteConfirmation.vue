@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="deleteConfi" width="800px">
     <template  v-slot:activator="{ on, attrs }">
-      <v-btn plain color = "red" slot="activator" small  v-bind="attrs" v-on="on">
+      <v-btn icon class="mt-4 mr-3" plain color = "red" slot="activator" small  v-bind="attrs" v-on="on">
         <v-icon>
           mdi-delete
         </v-icon>
@@ -13,7 +13,7 @@
       <v-col text--center>
         <v-row>
           <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-          <v-btn flat class="red mx-0" @click="submit">No</v-btn>
+          <v-btn dark flat class="red mx-0" @click="submit">No</v-btn>
           <v-btn flat class="success mx-10" @click="submit">Si</v-btn>
 
         </v-row>
