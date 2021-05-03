@@ -20,6 +20,7 @@
                                 elevation="2"
                                 color="#2679CC"
                                 dark
+                                x-large
                                 rounded
                                 class="mr-3"
                                 v-bind="attrs"
@@ -125,6 +126,7 @@
                                 elevation="2"
                                 color="#00B2EB"
                                 dark
+                                x-large
                                 rounded
                                 class="mr-3"
                                 v-bind="attrs"
