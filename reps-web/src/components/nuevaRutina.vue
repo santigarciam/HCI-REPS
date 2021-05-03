@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" width="800px">
+  <v-dialog v-model="dialog" width="900px">
     <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
     <v-btn depressed class="ma-2 mr-4" slot="activator" v-bind="attrs" v-on="on" outlined>+Anadir</v-btn>
     </template>
@@ -11,9 +11,9 @@
 
       <v-card-text>
         <v-form class="px-3">
-          <v-text-field label="Nombre" v-model="nombreRut"></v-text-field>
-          <v-textarea label="Descripcion" v-model="descripcionRut" ></v-textarea>
-          <v-text-field label="Duracion" v-model="durRut"></v-text-field>
+          <v-text-field outlined label="Nombre" v-model="nombreRut"></v-text-field>
+          <v-textarea outlined auto-grow label="Descripcion" v-model="descripcionRut" ></v-textarea>
+          <v-text-field outlined label="Duracion" v-model="durRut"></v-text-field>
 
           <v-col>
             <v-row>
@@ -80,6 +80,9 @@
 </template>
 
 <script>
+
+import rutineCard from "./rutineCard";
+
 export default {
   name: "nuevaRutina",
   data(){
@@ -91,7 +94,8 @@ export default {
   },
   methods :{
     submit(){
-      console.log(this.nombreRut,this.descripcionRut,this.durRut)
+      rutineCard.generarRutinaNueva(this.nombreRut,"YO",this.descripcionRut,this.durRut, "0")
+      // generarRutinaNueva(tituloRut, autorRut, descripcionRut, durRut, rating)
     },
   }
 }
