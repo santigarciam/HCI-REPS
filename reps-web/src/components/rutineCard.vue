@@ -7,7 +7,7 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-container class ="container_v_card pb-4">
-          <v-card v-bind="attrs" v-on="on" >
+          <v-card v-bind="attrs" v-on="on" hover @click.stop="dialog = true" >
             <v-col>
               <v-row>
                 <v-card-title v-model="tituloRut">{{ rutina.tituloRut }} <v-rating
@@ -22,34 +22,25 @@
                 <v-spacer></v-spacer>
 
                 <div>
+
                   <edit-rut></edit-rut>
+
                   <v-btn
                       icon
                       color="grey"
                       v-model="boton"
-                      @click="snackbar = true"
+                      @click.stop="showSnackbar()"
+
                   >
                     <v-icon>mdi-share</v-icon>
                   </v-btn>
                   <v-snackbar
                       v-model="snackbar"
                       :timeout="timeout"
-                  >
-                    Se copio al clipboard el link de la rutina
-
-                    <template v-slot:action="{ attrs }">
-                      <v-btn
-                          color="blue"
-                          text
-                          v-bind="attrs"
-                          @click="snackbar = false"
-                      >
-                        Close
-                      </v-btn>
-                    </template>
-                  </v-snackbar>
+                  >Se copio al clipboard el link de la rutina!</v-snackbar>
 
                   <delete-confirmaticon></delete-confirmaticon>
+
                 </div>
               </v-row>
 
@@ -102,9 +93,10 @@ import DeleteConfirmaticon from "@/components/deleteConfirmation";
 
 export default {
   components: {DeleteConfirmaticon, EditRut},
-  data () {
+  data() {
     return {
-      componets:{NuevaRutina,EditRutina},
+      componets: {NuevaRutina, EditRutina},
+      snackbar: false,
       headers: [
         {
           text: 'Ejericios',
@@ -122,24 +114,30 @@ export default {
           rating: 3.5
         },
         {
-          tituloRut:'Rutina 2',
+          tituloRut: 'Rutina 2',
           autorRut: 'Autor 2',
-          descripcionRut:'Descrip 2',
+          descripcionRut: 'Descrip 2',
           durRut: '2',
           rating: 5
         },
         {
-          tituloRut:'Rutina 3',
+          tituloRut: 'Rutina 3',
           autorRut: 'Autor 3',
-          descripcionRut:'Descrip 3',
+          descripcionRut: 'Descrip 3',
           durRut: '3',
           rating: 1
         }
       ]
     }
   },
-  generarRutinaNueva(tituloRut, autorRut, descripcionRut, durRut, rating){
-    this.data().rutinas.push(tituloRut, autorRut, descripcionRut, durRut, rating)
+  methods: {
+    generarRutinaNueva(tituloRut, autorRut, descripcionRut, durRut, rating) {
+      this.rutinas.add(tituloRut, autorRut, descripcionRut, durRut, rating);
+    },
+    showSnackbar() {
+      this.snackbar=true;
+      setTimeout(() => { this.$emit("yourEvent"); },this.timeout);
+    }
   }
 }
 </script>
