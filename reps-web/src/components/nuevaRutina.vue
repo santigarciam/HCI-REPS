@@ -17,10 +17,19 @@
 
           <v-col>
             <v-row>
-          <v-card-title>
+          <v-card-title class="text--black">
             Ciclos de entrenamiento
+            <v-select
+                :items="ciclos"
+                label="Ciclo"
+                dense
+                class="mt-6 ml-4"
+                outlined
+            ></v-select>
           </v-card-title>
-              <v-menu transition="scroll-y-transition">
+
+
+             <!-- <v-menu transition="scroll-y-transition">
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
                       depressed
@@ -48,6 +57,7 @@
                 </v-list>
 
               </v-menu>
+              -->
             </v-row>
           </v-col>
           <v-container>
@@ -56,10 +66,10 @@
                 <v-text-field label="Repeticiones:" v-model="repsEj"></v-text-field>
               </v-col>
               <v-col>
-                <v-text-field label="Descanso Entre Repeticiones:" v-model="descReps"></v-text-field>
+                <v-text-field label="Descanso entre repeticiones:" v-model="descReps"></v-text-field>
               </v-col>
               <v-col>
-                <v-text-field label="Descanso Entre Ejercicios:" v-model="descReps"></v-text-field>
+                <v-text-field label="Descanso entre ejercicios:" v-model="descReps"></v-text-field>
               </v-col>
             </v-row>
           </v-container>
@@ -89,7 +99,8 @@ export default {
     return{
       nombreRut:'',
       descripcionRut:'',
-      durRut:''
+      durRut:'',
+      ciclos: ['Entrada en calor', 'Entrenamiento', 'Enfriamiento'],
     }
   },
   methods :{

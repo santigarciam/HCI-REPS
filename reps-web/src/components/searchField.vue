@@ -1,7 +1,8 @@
 <template>
+
   <v-text-field
       append-icon="mdi-magnify"
-      class="ma-2"
+      class="mt-3"
       dense
       label="Buscar"
       clearable

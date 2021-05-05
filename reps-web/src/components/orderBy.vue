@@ -1,5 +1,14 @@
 <template>
-  <v-menu offset-y transition="scroll-y-transition" bottom>
+  <v-col cols="2">
+  <v-select
+      :items="orderBy"
+      label="Ordenar por"
+      dense
+      class="mr-3"
+      outlined
+  ></v-select>
+    </v-col>
+  <!--<v-menu offset-y transition="scroll-y-transition" bottom>
     <template v-slot:activator="{ on, attrs }">
       <v-btn
           outlined
@@ -27,8 +36,14 @@
       </v-list-item>
     </v-list>
 
-  </v-menu>
+  </v-menu>-->
 </template>
 
-
+<script>
+export default {
+  data: () => ({
+    orderBy: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+  }),
+}
+</script>
 

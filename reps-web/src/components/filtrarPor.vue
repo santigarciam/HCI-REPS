@@ -1,6 +1,18 @@
 <template>
+  <v-col cols="2">
+  <v-select
+      v-model="value"
+      :items="filters"
+
+      label="Filtrar"
+      multiple
+      outlined
+      dense
+      :menu-props="{ maxHeight: '400' }"
+  ></v-select>
+    </v-col>
 <!--  <v-container>-->
-  <v-menu offset-y transition="scroll-y-transition" bottom>
+  <!--<v-menu offset-y transition="scroll-y-transition" bottom>
     <template v-slot:activator="{ on, attrs }">
       <v-btn
           outlined
@@ -12,6 +24,7 @@
         Filtrar
         <v-icon>mdi-chevron-down</v-icon>
       </v-btn>
+
     </template>
     <v-list>
       <v-list-item
@@ -22,7 +35,7 @@
         <v-list-item-title v-text="'Opcion ' + n"></v-list-item-title>
       </v-list-item>
     </v-list>
-  </v-menu>
+  </v-menu>-->
 
 <!--  <v-row>-->
 
@@ -86,10 +99,10 @@
 <!--</v-container>-->
 </template>
 
-<!--<script>-->
-<!--export default {-->
-<!--  data: () => ({-->
-<!--    filters: ['Foo', 'Bar', 'Fizz', 'Buzz'],-->
-<!--  }),-->
-<!--}-->
-<!--</script>-->
+<script>
+export default {
+  data: () => ({
+  filters: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+ }),
+}
+</script>
