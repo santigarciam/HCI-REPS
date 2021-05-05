@@ -27,6 +27,7 @@
                       icon
                       color="grey"
                       v-model="boton"
+                      class="mt-4 mr-2"
                       @click="snackbar = true"
                   >
                     <v-icon>mdi-share</v-icon>
