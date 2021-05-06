@@ -13,8 +13,9 @@ import LandingPage from "./views/LandingPage"
 Vue.use(VueRouter);
 
 Vue.config.productionTip = false
+Vue.config.silent = true
 
-const router = new VueRouter({
+export const router = new VueRouter({
   routes: [
     {path:'/', component: LandingPage},
     {path:'/MisRutinas', component: MisRutinas},

@@ -173,9 +173,8 @@
                                           color="#00B2EB"
                                           dark
                                           rounded
-                                          to="/MisRutinas"
-                                          @click="logIn()"
-                                          @keyup.enter="logIn()"
+                                          @click="loginUser()"
+                                          @keyup.enter="loginUser()"
                                       >INICIAR SESION
                                       </v-btn>
                                     </v-row>
@@ -216,6 +215,9 @@
 </style>
 
 <script>
+//import router from 'vue-router';
+import { UserApi } from "../API_EJS/js/user";
+
 export default {
   data() {
     return {
@@ -227,22 +229,28 @@ export default {
       usernameReg: "",
       emailReg: "",
       passReg: "",
-      confirmPassword:'',
+      confirmPassword: '',
       verification: false,
       verificationInput: "",
 
       rules: {
         required: (value) => !!value || "Obligatorio",
         min: (v) => v.length >= 8 || "Mínimo 8 caracteres",
-        minUsername:(v) => v.length >=1 || "Ingrese un nombre de usuario",
+        minUsername: (v) => v.length >= 1 || "Ingrese un nombre de usuario",
         email: value => {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           return pattern.test(value) || 'Correo inválido.'
-        },
-      },
-    };
+        }
+      }
+    }
   },
-
+        methods:{
+          loginUser: function(){
+            UserApi.login({username: this.username, password: this.password},null);
+            //console.log(JSON.stringify(UserApi.constructor(this.username, this.password)));
+          //
+          }
+        }
 };
 
 </script>

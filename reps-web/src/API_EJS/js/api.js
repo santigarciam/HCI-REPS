@@ -4,7 +4,7 @@ class Api {
   static token;
 
   static get baseUrl() {
-    return 'http://127.0.0.1:8080/api';
+    return 'http://localhost:8080/api';
   }
 
   static get timeout() {
@@ -33,6 +33,7 @@ class Api {
       return result;
     } catch (error) {
       if (!error.code) {
+        // eslint-disable-next-line no-ex-assign
         error = { "code": 99, "description": error.message.toLowerCase() };
       }
       throw error;

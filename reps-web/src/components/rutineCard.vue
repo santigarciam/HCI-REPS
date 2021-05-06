@@ -30,7 +30,7 @@
                       color="grey"
                       v-model="boton"
                       class="mt-4 mr-2"
-                      @click.stop="showSnackbar()"
+                      v-on:click="showSnackbar"
 
                   >
                     <v-icon>mdi-share</v-icon>
@@ -135,6 +135,13 @@ export default {
             descripcionRut: 'Descrip 4',
             durRut: '4',
             rating: 3
+          },
+          {
+            tituloRut: 'Rutina 5',
+            autorRut: 'Autor 5',
+            descripcionRut: 'Descrip 4',
+            durRut: '4',
+            rating: 3
           }
         ]
       }
@@ -142,9 +149,13 @@ export default {
       newRutine: function (tituloRut, autorRut, descripcionRut, durRut, rating) {
         const newR = {tituloRut:tituloRut, autorRut: autorRut, descripcionRut: descripcionRut, durRut: durRut, rating: rating}
         this.data().rutinas.push(newR);
-        console.log(JSON.stringify(this.data().rutinas));
+        console.log(this.data().rutinas);
+        //console.log(JSON.stringify(this.data().rutinas));
       },
-      showSnackbar: function () {
+      showSnackbar: function (event) {
+      event.stopPropagation();
+      console.log(this);
+      alert("PRUEBA");
         this.snackbar = true;
         setTimeout(() => {
           this.$emit("yourEvent");
