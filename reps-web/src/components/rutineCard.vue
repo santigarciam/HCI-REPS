@@ -3,7 +3,7 @@
     <v-dialog
         v-model="dialog"
         width="500"
-        v-for="rutina in rutinas" :key="rutina.tituloRut"
+        v-for="rutina in data().rutinas" :key="rutina.tituloRut"
     >
       <template v-slot:activator="{ on, attrs }">
         <v-container class ="container_v_card pb-4">
@@ -94,51 +94,62 @@ import DeleteConfirmaticon from "@/components/deleteConfirmation";
 
 export default {
   components: {DeleteConfirmaticon, EditRut},
-  data() {
-    return {
-      componets: {NuevaRutina, EditRutina},
-      snackbar: false,
-      headers: [
-        {
-          text: 'Ejericios',
-          align: 'left',
-          sortable: false,
-          value: 'name',
-        }
-      ],
-      rutinas: [
-        {
-          tituloRut: 'Pecho',
-          autorRut: 'Paulo',
-          descripcionRut: 'Descrip 1 ',
-          durRut: '10hs',
-          rating: 3.5
-        },
-        {
-          tituloRut: 'Rutina 2',
-          autorRut: 'Autor 2',
-          descripcionRut: 'Descrip 2',
-          durRut: '2',
-          rating: 5
-        },
-        {
-          tituloRut: 'Rutina 3',
-          autorRut: 'Autor 3',
-          descripcionRut: 'Descrip 3',
-          durRut: '3',
-          rating: 1
-        }
-      ]
-    }
-  },
   methods: {
-    generarRutinaNueva(tituloRut, autorRut, descripcionRut, durRut, rating) {
-      this.rutinas.add(tituloRut, autorRut, descripcionRut, durRut, rating);
+    data: function () {
+      return {
+        componets: {NuevaRutina, EditRutina},
+        snackbar: false,
+        headers: [
+          {
+            text: 'Ejericios',
+            align: 'left',
+            sortable: false,
+            value: 'name',
+          }
+        ],
+        rutinas: [
+          {
+            tituloRut: 'Pecho',
+            autorRut: 'Paulo',
+            descripcionRut: 'Descrip 1 ',
+            durRut: '10hs',
+            rating: 3.5
+          },
+          {
+            tituloRut: 'Rutina 2',
+            autorRut: 'Autor 2',
+            descripcionRut: 'Descrip 2',
+            durRut: '2',
+            rating: 5
+          },
+          {
+            tituloRut: 'Rutina 3',
+            autorRut: 'Autor 3',
+            descripcionRut: 'Descrip 3',
+            durRut: '3',
+            rating: 1
+          },
+          {
+            tituloRut: 'Rutina 4',
+            autorRut: 'Autor 4',
+            descripcionRut: 'Descrip 4',
+            durRut: '4',
+            rating: 3
+          }
+        ]
+      }
     },
-    showSnackbar() {
-      this.snackbar=true;
-      setTimeout(() => { this.$emit("yourEvent"); },this.timeout);
+      newRutine: function (tituloRut, autorRut, descripcionRut, durRut, rating) {
+        const newR = {tituloRut:tituloRut, autorRut: autorRut, descripcionRut: descripcionRut, durRut: durRut, rating: rating}
+        this.data().rutinas.push(newR);
+        console.log(JSON.stringify(this.data().rutinas));
+      },
+      showSnackbar: function () {
+        this.snackbar = true;
+        setTimeout(() => {
+          this.$emit("yourEvent");
+        }, this.timeout);
+      }
     }
-  }
 }
 </script>

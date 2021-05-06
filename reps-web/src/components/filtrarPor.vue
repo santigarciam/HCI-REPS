@@ -102,7 +102,7 @@
 <script>
 export default {
   data: () => ({
-  filters: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+  filters: ['Foo', 'Bar', 'Fizz', 'Buzz', 'Otro'],
  }),
 }
 </script>

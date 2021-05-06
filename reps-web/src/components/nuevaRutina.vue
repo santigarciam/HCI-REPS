@@ -76,8 +76,8 @@
           <v-col>
             <v-row>
               <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-              <v-btn flat dark class="red mx-0" @click="submit">Cancelar</v-btn>
-                  <v-btn flat class="success mx-10" @click="submit">Guardar</v-btn>
+              <v-btn flat dark class="red mx-0" v-on:click="submit">Cancelar</v-btn>
+                  <v-btn flat class="success mx-10" v-on:click="submit">Guardar</v-btn>
 
             </v-row>
           </v-col>
@@ -91,7 +91,7 @@
 
 <script>
 
-import rutineCard from "./rutineCard";
+import rutineCard from "./rutineCard.vue";
 
 export default {
   name: "nuevaRutina",
@@ -104,8 +104,10 @@ export default {
     }
   },
   methods :{
-    submit(){
-      rutineCard.generarRutinaNueva(this.nombreRut,"YO",this.descripcionRut,this.durRut, "0")
+    submit: function (event){
+      if (event){
+        rutineCard.methods.newRutine(this.nombreRut,"YO",this.descripcionRut,this.durRut, "0");
+      }
       // generarRutinaNueva(tituloRut, autorRut, descripcionRut, durRut, rating)
     },
   }
