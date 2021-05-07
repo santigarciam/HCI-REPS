@@ -11,8 +11,8 @@
 
       <v-card-text>
         <v-form class="px-3">
-          <v-text-field outlined label="Nombre" v-model="nombreRut"></v-text-field>
-          <v-textarea outlined auto-grow label="Descripcion" v-model="descripcionRut" ></v-textarea>
+          <v-text-field outlined label="Nombre" v-model="nameRut"></v-text-field>
+          <v-textarea outlined auto-grow label="Descripcion" v-model="detailRut" ></v-textarea>
           <v-text-field outlined label="Duracion" v-model="durRut"></v-text-field>
 
           <v-col>
@@ -27,37 +27,6 @@
                 outlined
             ></v-select>
           </v-card-title>
-
-
-             <!-- <v-menu transition="scroll-y-transition">
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                      depressed
-                      class="ma-2"
-                      v-bind="attrs"
-                      v-on="on"
-                  >
-                    Ciclo
-                  </v-btn>
-                </template>
-                <v-list>
-                  <v-list-item link>
-                    <v-list-item-title>Entrada en calor</v-list-item-title>
-                  </v-list-item>
-                </v-list>
-                <v-list>
-                  <v-list-item link>
-                    <v-list-item-title>Ejercitacion</v-list-item-title>
-                  </v-list-item>
-                </v-list>
-                <v-list>
-                  <v-list-item link>
-                    <v-list-item-title>Enfriamiento</v-list-item-title>
-                  </v-list-item>
-                </v-list>
-
-              </v-menu>
-              -->
             </v-row>
           </v-col>
           <v-container>
@@ -73,11 +42,24 @@
               </v-col>
             </v-row>
           </v-container>
+          <v-col class="text-center">
+            <v-dialog>
+              <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
+                <v-btn  slot="activator" color="grey lighten-1" v-bind="attrs" v-on="on" >Ejercicios</v-btn>
+              </template>
+
+              <v-card>
+                <v-card-title>HAY QUE PONER LA LISTA DE EJERCICIOS Y VER COMO SE SELECCIONAN</v-card-title>
+              </v-card>
+            </v-dialog>
+          </v-col>
+
+          <v-col></v-col>
           <v-col>
             <v-row>
               <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
               <v-btn flat dark class="red mx-0" v-on:click="submit">Cancelar</v-btn>
-                  <v-btn flat class="success mx-10" v-on:click="submit">Guardar</v-btn>
+              <v-btn flat class="success mx-10" v-on:click="addNewRoutine">Guardar</v-btn>
 
             </v-row>
           </v-col>
@@ -92,13 +74,13 @@
 <script>
 
 import rutineCard from "./rutineCard.vue";
-
+import  { routineApi } from "@/API_EJS/js/routines"
 export default {
   name: "nuevaRutina",
   data(){
     return{
-      nombreRut:'',
-      descripcionRut:'',
+      nameRut:'',
+      detailRut:'',
       durRut:'',
       ciclos: ['Entrada en calor', 'Entrenamiento', 'Enfriamiento'],
     }
@@ -108,8 +90,12 @@ export default {
       if (event){
         rutineCard.methods.newRutine(this.nombreRut,"YO",this.descripcionRut,this.durRut, "0");
       }
+
       // generarRutinaNueva(tituloRut, autorRut, descripcionRut, durRut, rating)
     },
+    addNewRoutine: function(){
+      routineApi.add({name:this.nameRut,detail:this.detailRut,isPublic:true,difficulty:"rookie",category:{ id:1},metadata:null},null);
+    }
   }
 }
 </script>
