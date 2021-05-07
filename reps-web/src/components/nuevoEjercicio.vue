@@ -11,9 +11,9 @@
 
       <v-card-text>
         <v-form class="px-3">
-          <v-text-field label="Nombre" v-model="nombreRut"></v-text-field>
-          <v-textarea label="Descripcion" v-model="descripcionRut" ></v-textarea>
-          <v-text-field label="Materiales" v-model="durRut"></v-text-field>
+          <v-text-field label="Nombre" v-model="nameEj"></v-text-field>
+          <v-textarea label="Descripcion" v-model="detailEj" ></v-textarea>
+          <v-text-field label="Materiales" v-model="matEj"></v-text-field>
           <v-file-input
               v-model="files"
               placeholder="Subi tu demostracion"
@@ -34,24 +34,36 @@
         </v-form>
       </v-card-text>
 
+      <v-col>
+        <v-row>
+          <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
+          <v-btn flat dark class="red mx-0" v-on:click.stop="">Cancelar</v-btn>
+          <v-btn flat class="success mx-10" v-on:click="addNewExcercise">Guardar</v-btn>
+
+        </v-row>
+      </v-col>
+
     </v-card>
   </v-dialog>
 </template>
 
 <script>
+import { ExerciseApi } from "@/API_EJS/js/exercises";
 export default {
+
   name: "nuevaRutina",
   data(){
     return{
-      nombreRut:'',
-      descripcionRut:'',
-      durRut:''
+      nameEj:'',
+      detailEj:'',
+      matEj:''
     }
   },
   methods :{
-    submit(){
-      console.log(this.nombreRut,this.descripcionRut,this.durRut)
-    },
+    addNewExcercise: function (){
+      ExerciseApi.add({name:this.nameEj,detail:this.detailEj,type:"exercise",metadata:null},null);
+
+    }
   }
 }
 </script>

@@ -8,6 +8,7 @@ import Descubrir from './views/Descubrir';
 import NotFound from './views/NotFound';
 import Favoritos from "./views/Favoritos";
 import LandingPage from "./views/LandingPage"
+import ConfirmacionMail from "@/views/ConfirmacionMail";
 
 
 Vue.use(VueRouter);
@@ -22,6 +23,7 @@ export const router = new VueRouter({
     {path:'/MisEjercicios', component: MisEjercicios},
     {path:'/Favoritos', component: Favoritos},
     {path:'/Descubrir', component: Descubrir},
+    {path:'/ConfirmacionMail',component: ConfirmacionMail},
     {path:'*', component: NotFound}
   ]
 })

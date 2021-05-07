@@ -4,16 +4,16 @@ module.exports = {
         host: 'smtp.ethereal.email',
         port: 587,
         secure: false,
-        user: 'soledad.raynor@ethereal.email',
-        password: 'M757vN4EPRhkZPwh5W'
+        user: 'fredy93@ethereal.email',
+        password: 'tDQ2pfp4wGhz9KQwWN'
     },
     registerVerification: {
-        from: 'Exercise <noreply@exercise.com>',
+        from: 'REPS <noreply@reps.com>',
         subject: 'Email Confirmation',
         htmlBodyTemplate:
             `<div>
                 <h1 style="text-align: center;">
-                    <strong>Welcome to <span style="color: #fc987e;">Exercise</span></strong>
+                    <strong>Welcome to <span style="color: blue;">REPS</span></strong>
                 </h1>
                 <p>
                     <span>Valid until <%EXPIRATION_DATE%></span>

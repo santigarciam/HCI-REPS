@@ -25,6 +25,7 @@
                                 class="mr-3"
                                 v-bind="attrs"
                                 v-on="on"
+
                             >REGISTRARSE</v-btn
                             >
                           </template>
@@ -105,8 +106,8 @@
                                           color="#2679CC"
                                           dark
                                           rounded
-                                          @click="register()"
-                                          @keyup.enter="register()"
+                                          @click="registerUser()"
+                                          @keyup.enter="registerUser"
                                       >REGISTRARSE
                                       </v-btn>
                                     </v-row>
@@ -180,6 +181,59 @@
                                     </v-row>
                                   </v-container>
 
+<!--                                  <v-card v-if="UserApi.getRegisteredUsr() === 1">-->
+<!--                                    <v-card-text>-->
+<!--                                      <v-card-title>PONER QUE SE LE ENVIO UN MAIL BLA BLA BLA. VER COMO CENTRAR LAS COSAS </v-card-title>-->
+<!--                                      <v-row>-->
+<!--                                        <v-col cols="12">-->
+
+<!--                                          &lt;!&ndash;Input registro usuario &ndash;&gt;-->
+<!--                                          <v-container>-->
+<!--                                            <v-row>-->
+<!--                                              <v-text-field-->
+<!--                                                  label="Codigo"-->
+<!--                                                  filled-->
+<!--                                                  class= "mt-6"-->
+<!--                                                  rounded-->
+
+<!--                                                  v-model="verificationCode"-->
+<!--                                                  @keyup.enter="verifyCode"-->
+<!--                                              ></v-text-field>-->
+<!--                                            </v-row>-->
+
+<!--                                            <v-row class="text-center">-->
+
+<!--                                              <v-btn-->
+<!--                                                  elevation="2"-->
+<!--                                                  color="#00B2EB"-->
+<!--                                                  dark-->
+<!--                                                  rounded-->
+<!--                                                  center-->
+<!--                                                  class="text-center"-->
+<!--                                                  @click="verifyCode"-->
+<!--                                                  @keyup.enter="verifyCode"-->
+<!--                                              >CONFIRMAR-->
+<!--                                              </v-btn>-->
+<!--                                              <v-btn-->
+<!--                                                  elevation="2"-->
+<!--                                                  color="#00B2EB"-->
+<!--                                                  dark-->
+<!--                                                  class="text-center"-->
+<!--                                                  rounded-->
+<!--                                                  @click="resendCode"-->
+<!--                                                  @keyup.enter="resendCode"-->
+<!--                                              >REENVIAR CODIGO-->
+<!--                                              </v-btn>-->
+
+<!--                                            </v-row>-->
+<!--                                          </v-container>-->
+
+
+<!--                                        </v-col>-->
+<!--                                      </v-row>-->
+<!--                                    </v-card-text>-->
+<!--                                  </v-card>-->
+
 
                                 </v-col>
                               </v-row>
@@ -219,6 +273,7 @@
 import { UserApi } from "../API_EJS/js/user";
 
 export default {
+  name: "LandingPage",
   data() {
     return {
       show1: false,
@@ -227,7 +282,7 @@ export default {
       password: "",
       token: "",
       usernameReg: "",
-      emailReg: "",
+      emailReg: "sssss",
       passReg: "",
       confirmPassword: '',
       verification: false,
@@ -245,11 +300,21 @@ export default {
     }
   },
         methods:{
+          registerUser: function (){
+            if(this.usernameReg === ""){
+              console.log("Usuario vacio") ;
+              console.log(this.usernameReg);
+            }
+
+            UserApi.register({username:this.usernameReg,password: this.passReg,firstName:"leonel",lastName:'parisian',gender:'male',birthdate:29021990,email:this.emailReg,phone:'234532123',avatarUrl:'https://flic.kr/p/3ntH2u',metadata:null},null);
+          },
           loginUser: function(){
+            console.log(this.username);
             UserApi.login({username: this.username, password: this.password},null);
             //console.log(JSON.stringify(UserApi.constructor(this.username, this.password)));
           //
           }
+
         }
 };
 
