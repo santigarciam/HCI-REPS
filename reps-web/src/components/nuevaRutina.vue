@@ -1,105 +1,216 @@
 <template>
-  
+
   <v-dialog v-model="dialog" width="900px">
     <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
     <v-btn depressed class="ma-2 mr-4" slot="activator" v-bind="attrs" v-on="on" outlined>+Anadir</v-btn>
     </template>
 
     <v-card>
-      <v-card-title>
-        <h2>Agregar nueva rutina</h2>
-      </v-card-title>
+      <v-card-title>Cuantos ciclos desea incluir entrela entrada en calor y el entrenamiento?</v-card-title>
+      <v-col text--center>
+        <v-row>
+          <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
+          <v-btn dark flat class="red mx-0">Cancelar</v-btn>
+          <v-dialog v-model="dialog" width="900px">
+            <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
+              <v-btn class="success ma-2 mr-4" slot="activator" v-bind="attrs" v-on="on" outlined>Continuar</v-btn>
+            </template>
 
-      <v-card-text>
-        <v-form class="px-3">
-          <v-text-field outlined label="Nombre" v-model="nameRut"></v-text-field>
-          <v-textarea outlined auto-grow label="Descripcion" v-model="detailRut" ></v-textarea>
-          <v-text-field outlined label="Duracion" v-model="durRut"></v-text-field>
+            <v-card>
+              <v-card-title>
+                <h2>Agregar nueva rutina</h2>
+              </v-card-title>
 
-          <v-col>
-            <v-row>
-          <v-card-title class="text--black">
-            Ciclos de entrenamiento
-            <v-select
-                :items="ciclos"
-                label="Ciclo"
-                dense
-                class="mt-6 ml-4"
-                outlined
-            ></v-select>
-          </v-card-title>
-            </v-row>
-          </v-col>
-          <v-col class="text-center">
-            <v-dialog>
-              <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-                <v-btn  slot="activator" color="grey lighten-1" v-bind="attrs" v-on="on" >Ejercicios</v-btn>
-              </template>
+              <v-card-text>
+                <v-form class="px-3">
+                  <v-text-field outlined label="Nombre" v-model="nameRut"></v-text-field>
+                  <v-textarea outlined auto-grow label="Descripcion" v-model="detailRut" ></v-textarea>
+                  <v-text-field outlined label="Duracion" v-model="durRut"></v-text-field>
 
-              <v-card>
-                <v-card-title>LISTA EJERS</v-card-title>
-              </v-card>
-            </v-dialog>
-          </v-col>
+                  <v-col>
+                    <v-row>
+                      <v-card-title class="text--black">
+                        Ciclos de entrenamiento
+                        <v-select
+                            :items="ciclos"
+                            label="Ciclo"
+                            dense
+                            class="mt-6 ml-4"
+                            outlined
+                        ></v-select>
+                      </v-card-title>
+                    </v-row>
+                  </v-col>
+                  <v-col class="text-center">
+                    <v-dialog>
+                      <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
+                        <v-btn  slot="activator" color="grey lighten-1" v-bind="attrs" v-on="on" >Ejercicios</v-btn>
+                      </template>
 
-          <v-col></v-col>
+                      <v-card>
+                        <v-card-title>LISTA EJERS</v-card-title>
+                      </v-card>
+                    </v-dialog>
+                  </v-col>
+
+                  <v-col></v-col>
 
 
-          <v-container>
+                  <v-container>
 
 
-            <v-row>
-              <v-col>
-                <v-text-field label="Repeticiones:" v-model="repsEj"></v-text-field>
-              </v-col>
-              <v-col>
-                <v-text-field label="Descanso entre repeticiones:" v-model="descReps"></v-text-field>
-              </v-col>
-              <v-col>
-                <v-text-field label="Descanso entre ejercicios:" v-model="descReps"></v-text-field>
-              </v-col>
-            </v-row>
-          </v-container>
+                    <v-row>
+                      <v-col>
+                        <v-text-field label="Repeticiones:" v-model="repsEj"></v-text-field>
+                      </v-col>
+                      <v-col>
+                        <v-text-field label="Descanso entre repeticiones:" v-model="descReps"></v-text-field>
+                      </v-col>
+                      <v-col>
+                        <v-text-field label="Descanso entre ejercicios:" v-model="descReps"></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
 
-          <v-row>
-          <v-col class="text-center">
-            <v-dialog>
-              <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-                <v-btn  slot="activator" color="grey lighten-1" v-bind="attrs" v-on="on" >Seleccionados</v-btn>
-              </template>
+                  <v-row>
+                    <v-col class="text-center">
+                      <v-dialog>
+                        <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
+                          <v-btn  slot="activator" color="grey lighten-1" v-bind="attrs" v-on="on" >Seleccionados</v-btn>
+                        </template>
 
-              <v-card>
-                <v-card-title>LISTA EJERS</v-card-title>
-              </v-card>
-            </v-dialog>
+                        <v-card>
+                          <v-card-title>LISTA EJERS</v-card-title>
+                        </v-card>
+                      </v-dialog>
 
-<!--            <v-spacer></v-spacer>-->
-            <v-dialog>
-              <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-                <v-btn  slot="activator" color="success" v-bind="attrs" v-on="on" >Agregar</v-btn>
-              </template>
+                      <!--            <v-spacer></v-spacer>-->
+                      <v-dialog>
+                        <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
+                          <v-btn  slot="activator" color="success" v-bind="attrs" v-on="on" >Agregar</v-btn>
+                        </template>
 
-              <v-card>
-                <v-card-title>LISTA EJERS</v-card-title>
-              </v-card>
-            </v-dialog>
-            </v-col>
-          </v-row>
+                        <v-card>
+                          <v-card-title>LISTA EJERS</v-card-title>
+                        </v-card>
+                      </v-dialog>
+                    </v-col>
+                  </v-row>
 
-          <v-col></v-col>
-          <v-col>
-            <v-row>
-              <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-              <v-btn flat dark class="red mx-0" v-on:click="submit">Cancelar</v-btn>
-              <v-btn flat class="success mx-10" v-on:click="addNewRoutine">Guardar</v-btn>
+                  <v-col></v-col>
+                  <v-col>
+                    <v-row>
+                      <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
+                      <v-btn flat dark class="red mx-0" v-on:click="submit">Cancelar</v-btn>
+                      <v-btn flat class="success mx-10" v-on:click="addNewRoutine">Guardar</v-btn>
 
-            </v-row>
-          </v-col>
+                    </v-row>
+                  </v-col>
 
-        </v-form>
-      </v-card-text>
+                </v-form>
+              </v-card-text>
 
+            </v-card>
+          </v-dialog>
+        </v-row>
+      </v-col>
     </v-card>
+
+<!--    <v-card>-->
+<!--      <v-card-title>-->
+<!--        <h2>Agregar nueva rutina</h2>-->
+<!--      </v-card-title>-->
+
+<!--      <v-card-text>-->
+<!--        <v-form class="px-3">-->
+<!--          <v-text-field outlined label="Nombre" v-model="nameRut"></v-text-field>-->
+<!--          <v-textarea outlined auto-grow label="Descripcion" v-model="detailRut" ></v-textarea>-->
+<!--          <v-text-field outlined label="Duracion" v-model="durRut"></v-text-field>-->
+
+<!--          <v-col>-->
+<!--            <v-row>-->
+<!--          <v-card-title class="text&#45;&#45;black">-->
+<!--            Ciclos de entrenamiento-->
+<!--            <v-select-->
+<!--                :items="ciclos"-->
+<!--                label="Ciclo"-->
+<!--                dense-->
+<!--                class="mt-6 ml-4"-->
+<!--                outlined-->
+<!--            ></v-select>-->
+<!--          </v-card-title>-->
+<!--            </v-row>-->
+<!--          </v-col>-->
+<!--          <v-col class="text-center">-->
+<!--            <v-dialog>-->
+<!--              <template v-slot:activator="{ on, attrs }"> &lt;!&ndash; Por que hace falta esto &ndash;&gt;-->
+<!--                <v-btn  slot="activator" color="grey lighten-1" v-bind="attrs" v-on="on" >Ejercicios</v-btn>-->
+<!--              </template>-->
+
+<!--              <v-card>-->
+<!--                <v-card-title>LISTA EJERS</v-card-title>-->
+<!--              </v-card>-->
+<!--            </v-dialog>-->
+<!--          </v-col>-->
+
+<!--          <v-col></v-col>-->
+
+
+<!--          <v-container>-->
+
+
+<!--            <v-row>-->
+<!--              <v-col>-->
+<!--                <v-text-field label="Repeticiones:" v-model="repsEj"></v-text-field>-->
+<!--              </v-col>-->
+<!--              <v-col>-->
+<!--                <v-text-field label="Descanso entre repeticiones:" v-model="descReps"></v-text-field>-->
+<!--              </v-col>-->
+<!--              <v-col>-->
+<!--                <v-text-field label="Descanso entre ejercicios:" v-model="descReps"></v-text-field>-->
+<!--              </v-col>-->
+<!--            </v-row>-->
+<!--          </v-container>-->
+
+<!--          <v-row>-->
+<!--          <v-col class="text-center">-->
+<!--            <v-dialog>-->
+<!--              <template v-slot:activator="{ on, attrs }"> &lt;!&ndash; Por que hace falta esto &ndash;&gt;-->
+<!--                <v-btn  slot="activator" color="grey lighten-1" v-bind="attrs" v-on="on" >Seleccionados</v-btn>-->
+<!--              </template>-->
+
+<!--              <v-card>-->
+<!--                <v-card-title>LISTA EJERS</v-card-title>-->
+<!--              </v-card>-->
+<!--            </v-dialog>-->
+
+<!--&lt;!&ndash;            <v-spacer></v-spacer>&ndash;&gt;-->
+<!--            <v-dialog>-->
+<!--              <template v-slot:activator="{ on, attrs }"> &lt;!&ndash; Por que hace falta esto &ndash;&gt;-->
+<!--                <v-btn  slot="activator" color="success" v-bind="attrs" v-on="on" >Agregar</v-btn>-->
+<!--              </template>-->
+
+<!--              <v-card>-->
+<!--                <v-card-title>LISTA EJERS</v-card-title>-->
+<!--              </v-card>-->
+<!--            </v-dialog>-->
+<!--            </v-col>-->
+<!--          </v-row>-->
+
+<!--          <v-col></v-col>-->
+<!--          <v-col>-->
+<!--            <v-row>-->
+<!--              <v-spacer></v-spacer> &lt;!&ndash; VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS &ndash;&gt;-->
+<!--              <v-btn flat dark class="red mx-0" v-on:click="submit">Cancelar</v-btn>-->
+<!--              <v-btn flat class="success mx-10" v-on:click="addNewRoutine">Guardar</v-btn>-->
+
+<!--            </v-row>-->
+<!--          </v-col>-->
+
+<!--        </v-form>-->
+<!--      </v-card-text>-->
+
+<!--    </v-card>-->
   </v-dialog>
 </template>
 

@@ -74,7 +74,7 @@
                 <v-col text--center>
                   <v-row>
                     <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                    <v-btn dark flat class="red mx-0" @click="closeDialog">No</v-btn>
+                    <v-btn dark flat class="red mx-0" @click="cancelAction">No</v-btn>
                     <v-btn flat class="success mx-10" @click="deleteEj(excercise.id)">Si</v-btn>
 
                   </v-row>
@@ -134,11 +134,10 @@ export default {
     },
     deleteEj: function (id){
       ExerciseApi.delete(id);
-      this.$store.dispatch("changeCardID");
+      this.$store.dispatch("changeCardID");//es como un flag que avisa un cambio de estado
     },
-    closeDialog: function (){
-      this.deleteConfi = false;
-
+    cancelAction: function (){
+      this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     },
     editEj: function (excersise,target){
       let l = target.classList;
