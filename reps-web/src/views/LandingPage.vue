@@ -96,6 +96,7 @@
                                           name="input-10-1"
                                           label="Confirmar Contraseña *"
                                           counter
+                                          @keyup.enter="registerUser"
                                           @click:append="show1 = !show1"
                                       ></v-text-field>
                                     </v-row>
@@ -139,7 +140,6 @@
                             <v-card-text>
                               <v-row>
                                 <v-col cols="12">
-
                                   <!--Input registro usuario -->
                                   <v-container v-show="!verification">
                                     <v-row>
@@ -158,11 +158,11 @@
                                           filled
                                           rounded
                                           dense
-
                                           v-model="password"
                                           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                                           :type="show1 ? 'text' : 'password'"
                                           name="input-10-1"
+                                          @keyup.enter="loginUser"
                                           @click:append="show1 = !show1"
                                       ></v-text-field>
                                     </v-row>
@@ -175,66 +175,10 @@
                                           dark
                                           rounded
                                           @click="loginUser()"
-                                          @keyup.enter="loginUser()"
                                       >INICIAR SESION
                                       </v-btn>
                                     </v-row>
                                   </v-container>
-
-<!--                                  <v-card v-if="UserApi.getRegisteredUsr() === 1">-->
-<!--                                    <v-card-text>-->
-<!--                                      <v-card-title>PONER QUE SE LE ENVIO UN MAIL BLA BLA BLA. VER COMO CENTRAR LAS COSAS </v-card-title>-->
-<!--                                      <v-row>-->
-<!--                                        <v-col cols="12">-->
-
-<!--                                          &lt;!&ndash;Input registro usuario &ndash;&gt;-->
-<!--                                          <v-container>-->
-<!--                                            <v-row>-->
-<!--                                              <v-text-field-->
-<!--                                                  label="Codigo"-->
-<!--                                                  filled-->
-<!--                                                  class= "mt-6"-->
-<!--                                                  rounded-->
-
-<!--                                                  v-model="verificationCode"-->
-<!--                                                  @keyup.enter="verifyCode"-->
-<!--                                              ></v-text-field>-->
-<!--                                            </v-row>-->
-
-<!--                                            <v-row class="text-center">-->
-
-<!--                                              <v-btn-->
-<!--                                                  elevation="2"-->
-<!--                                                  color="#00B2EB"-->
-<!--                                                  dark-->
-<!--                                                  rounded-->
-<!--                                                  center-->
-<!--                                                  class="text-center"-->
-<!--                                                  @click="verifyCode"-->
-<!--                                                  @keyup.enter="verifyCode"-->
-<!--                                              >CONFIRMAR-->
-<!--                                              </v-btn>-->
-<!--                                              <v-btn-->
-<!--                                                  elevation="2"-->
-<!--                                                  color="#00B2EB"-->
-<!--                                                  dark-->
-<!--                                                  class="text-center"-->
-<!--                                                  rounded-->
-<!--                                                  @click="resendCode"-->
-<!--                                                  @keyup.enter="resendCode"-->
-<!--                                              >REENVIAR CODIGO-->
-<!--                                              </v-btn>-->
-
-<!--                                            </v-row>-->
-<!--                                          </v-container>-->
-
-
-<!--                                        </v-col>-->
-<!--                                      </v-row>-->
-<!--                                    </v-card-text>-->
-<!--                                  </v-card>-->
-
-
                                 </v-col>
                               </v-row>
                             </v-card-text>
@@ -305,7 +249,6 @@ export default {
               console.log("Usuario vacio") ;
               console.log(this.usernameReg);
             }
-
             UserApi.register({username:this.usernameReg,password: this.passReg,firstName:"leonel",lastName:'parisian',gender:'male',birthdate:29021990,email:this.emailReg,phone:'234532123',avatarUrl:'https://flic.kr/p/3ntH2u',metadata:null},null);
           },
           loginUser: function(){
