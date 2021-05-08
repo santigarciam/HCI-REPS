@@ -1,5 +1,6 @@
 import { Api } from './api.js';
 import { router } from '../../main';
+import state from "../../store/state";
 
 export { UserApi, Credentials };
 let registeredUsr = 0;
@@ -14,6 +15,7 @@ class UserApi {
         const result = await Api.post(`${UserApi.url}/login`, false, credentials, controller);
         Api.token = result.token;
         if (Api.token){
+            state.token = Api.token;
             await router.push('/MisRutinas');
         }
     }

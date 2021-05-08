@@ -1,4 +1,5 @@
 <template>
+  
   <v-dialog v-model="dialog" width="900px">
     <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
     <v-btn depressed class="ma-2 mr-4" slot="activator" v-bind="attrs" v-on="on" outlined>+Anadir</v-btn>
