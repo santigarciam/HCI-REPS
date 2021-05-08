@@ -6,98 +6,189 @@
     </template>
 
     <v-card>
-      <v-card-title>Cuantos ciclos desea incluir entrela entrada en calor y el entrenamiento?</v-card-title>
-      <v-col text--center>
-        <v-row>
-          <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-          <v-btn dark flat class="red mx-0">Cancelar</v-btn>
-          <v-dialog v-model="dialog" width="900px">
-            <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-              <v-btn class="success ma-2 mr-4" slot="activator" v-bind="attrs" v-on="on" outlined>Continuar</v-btn>
-            </template>
+      <v-card-title>
+        <h2>Agregar nueva rutina</h2>
+      </v-card-title>
+      <v-card-text>
+          <v-text-field outlined label="Nombre" v-model="nameRut"></v-text-field>
+          <v-textarea outlined auto-grow label="Descripcion" v-model="detailRut" ></v-textarea>
 
-            <v-card>
-              <v-card-title>
-                <h2>Agregar nueva rutina</h2>
-              </v-card-title>
-
+<!--        STEPPEER-->
+          <div>
+            <v-card class="mb-4" outlined>
               <v-card-text>
-                <v-form class="px-3">
-                  <v-text-field outlined label="Nombre" v-model="nameRut"></v-text-field>
-                  <v-textarea outlined auto-grow label="Descripcion" v-model="detailRut" ></v-textarea>
-                  <v-text-field outlined label="Duracion" v-model="durRut"></v-text-field>
+                <v-select
+                    v-model="steps"
+                    :items="[1,2, 3, 4, 5]"
+                    label="Numero de ciclos"
+                ></v-select>
+              </v-card-text>
+            </v-card>
+            <v-stepper v-model="e1">
+              <v-stepper-header>
+                <v-stepper-step
+                    :key="`calentamiento-step`"
+                    :step="0"
+                    editable
+                >
+                  Calentamiento
+                </v-stepper-step>
+                <v-divider
+                    v-if="n !== steps"
+                    :key="n"
+                ></v-divider>
+                <template v-for="n in steps">
+                  <v-stepper-step
+                      :key="`${n}-step`"
 
-                  <v-col>
-                    <v-row>
-                      <v-card-title class="text--black">
-                        Ciclos de entrenamiento
-                        <v-select
-                            :items="ciclos"
-                            label="Ciclo"
-                            dense
-                            class="mt-6 ml-4"
-                            outlined
-                        ></v-select>
-                      </v-card-title>
-                    </v-row>
-                  </v-col>
-                  <v-col class="text-center">
-                    <v-dialog>
-                      <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-                        <v-btn  slot="activator" color="grey lighten-1" v-bind="attrs" v-on="on" >Ejercicios</v-btn>
-                      </template>
+                      :step="n"
+                      editable
+                  >
+                   {{ n }}º Ciclo
+                  </v-stepper-step>
 
-                      <v-card>
-                        <v-card-title>LISTA EJERS</v-card-title>
-                      </v-card>
-                    </v-dialog>
-                  </v-col>
+                  <v-divider
+                      v-if="n !== steps"
+                      :key="n"
+                  ></v-divider>
+                </template>
+                <v-divider
+                    v-if="n !== steps"
+                    :key="n"
+                ></v-divider>
+                <v-stepper-step
+                    :key="`enfriemiento-step`"
+                    :step="steps+1"
+                    editable
+                >
+                  Enfriamiento
+                </v-stepper-step>
+              </v-stepper-header>
 
-                  <v-col></v-col>
+<!--             DATA STEEPPER CALENTAMIENTO -->
+              <v-stepper-items>
+                  <v-stepper-content
+                      :key="`calentamiento-content`"
+                      :step="0"
+                  >
+                    <v-card
+                        class="mb-12"
+                        color="grey lighten-1"
+                        height="200px"
+                    >
+                      <v-list two-line  style="max-height:250px"
+
+                              class="overflow-y-auto">
+
+                        <v-list-item-group
+                            v-model="selected"
+                            active-class="grey--text"
+                            multiple
+                        >
+                          <template v-for="(excersise, index) in ejercicios ">
+                            <v-list-item :key="excersise.id">
+                              <template v-slot:default="{ active }">
+                                <v-list-item-content>
+                                  <v-list-item-title v-text="excersise.name"></v-list-item-title>
+
+                                </v-list-item-content>
+
+                                <v-list-item-action>
+                                  <v-list-item-action-text v-text="excersise.action"></v-list-item-action-text>
+
+                                  <v-icon
+                                      v-if="active"
+                                      color="grey lighten-1"
+                                  >
+                                    mdi-check
+                                  </v-icon>
+
+                                </v-list-item-action>
+                              </template>
+                            </v-list-item>
+
+                            <v-divider
+                                v-if="index < excersise.length - 1"
+                                :key="index"
+                            ></v-divider>
+                          </template>
+                        </v-list-item-group>
+
+                      </v-list>
 
 
-                  <v-container>
+                    </v-card>
+                  </v-stepper-content>
+                <!--             DATA STEEPPER CALENTAMIENTO -->
+                <v-stepper-content
+                    :key="`enfriamiento-content`"
+                    :step="steps+1"
+                >
+                  <v-card
+                      class="mb-12"
+                      color="grey lighten-1"
+                      height="200px"
+                  ></v-card>
 
+                </v-stepper-content>
 
-                    <v-row>
-                      <v-col>
-                        <v-text-field label="Repeticiones:" v-model="repsEj"></v-text-field>
-                      </v-col>
-                      <v-col>
-                        <v-text-field label="Descanso entre repeticiones:" v-model="descReps"></v-text-field>
-                      </v-col>
-                      <v-col>
-                        <v-text-field label="Descanso entre ejercicios:" v-model="descReps"></v-text-field>
-                      </v-col>
-                    </v-row>
-                  </v-container>
+                <v-stepper-content
+                    v-for="n in steps"
+                    :key="`${n}-content`"
+                    :step="n"
+                >
+                  <v-card
+                      class="mb-12"
+                      color="grey lighten-1"
+                      height="200px"
+                  >
+                    <v-list two-line  style="max-height:250px"
 
-                  <v-row>
-                    <v-col class="text-center">
-                      <v-dialog>
-                        <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-                          <v-btn  slot="activator" color="grey lighten-1" v-bind="attrs" v-on="on" >Seleccionados</v-btn>
+                            class="overflow-y-auto">
+
+                      <v-list-item-group
+                          v-model="selected"
+                          active-class="grey--text"
+                          multiple
+                      >
+                        <template v-for="(excersise, index) in ejercicios ">
+                          <v-list-item :key="excersise.id">
+                            <template v-slot:default="{ active }">
+                              <v-list-item-content>
+                                <v-list-item-title v-text="excersise.name"></v-list-item-title>
+
+                              </v-list-item-content>
+
+                              <v-list-item-action>
+                                <v-list-item-action-text v-text="excersise.action"></v-list-item-action-text>
+
+                                <v-icon
+                                    v-if="active"
+                                    color="grey lighten-1"
+                                >
+                                  mdi-check
+                                </v-icon>
+
+                              </v-list-item-action>
+                            </template>
+                          </v-list-item>
+
+                          <v-divider
+                              v-if="index < excersise.length - 1"
+                              :key="index"
+                          ></v-divider>
                         </template>
+                      </v-list-item-group>
 
-                        <v-card>
-                          <v-card-title>LISTA EJERS</v-card-title>
-                        </v-card>
-                      </v-dialog>
+                    </v-list>
+                  </v-card>
 
-                      <!--            <v-spacer></v-spacer>-->
-                      <v-dialog>
-                        <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-                          <v-btn  slot="activator" color="success" v-bind="attrs" v-on="on" >Agregar</v-btn>
-                        </template>
+                </v-stepper-content>
+              </v-stepper-items>
+            </v-stepper>
+          </div>
 
-                        <v-card>
-                          <v-card-title>LISTA EJERS</v-card-title>
-                        </v-card>
-                      </v-dialog>
-                    </v-col>
-                  </v-row>
-
-                  <v-col></v-col>
+        <v-col></v-col>
                   <v-col>
                     <v-row>
                       <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
@@ -106,111 +197,8 @@
 
                     </v-row>
                   </v-col>
-
-                </v-form>
               </v-card-text>
-
             </v-card>
-          </v-dialog>
-        </v-row>
-      </v-col>
-    </v-card>
-
-<!--    <v-card>-->
-<!--      <v-card-title>-->
-<!--        <h2>Agregar nueva rutina</h2>-->
-<!--      </v-card-title>-->
-
-<!--      <v-card-text>-->
-<!--        <v-form class="px-3">-->
-<!--          <v-text-field outlined label="Nombre" v-model="nameRut"></v-text-field>-->
-<!--          <v-textarea outlined auto-grow label="Descripcion" v-model="detailRut" ></v-textarea>-->
-<!--          <v-text-field outlined label="Duracion" v-model="durRut"></v-text-field>-->
-
-<!--          <v-col>-->
-<!--            <v-row>-->
-<!--          <v-card-title class="text&#45;&#45;black">-->
-<!--            Ciclos de entrenamiento-->
-<!--            <v-select-->
-<!--                :items="ciclos"-->
-<!--                label="Ciclo"-->
-<!--                dense-->
-<!--                class="mt-6 ml-4"-->
-<!--                outlined-->
-<!--            ></v-select>-->
-<!--          </v-card-title>-->
-<!--            </v-row>-->
-<!--          </v-col>-->
-<!--          <v-col class="text-center">-->
-<!--            <v-dialog>-->
-<!--              <template v-slot:activator="{ on, attrs }"> &lt;!&ndash; Por que hace falta esto &ndash;&gt;-->
-<!--                <v-btn  slot="activator" color="grey lighten-1" v-bind="attrs" v-on="on" >Ejercicios</v-btn>-->
-<!--              </template>-->
-
-<!--              <v-card>-->
-<!--                <v-card-title>LISTA EJERS</v-card-title>-->
-<!--              </v-card>-->
-<!--            </v-dialog>-->
-<!--          </v-col>-->
-
-<!--          <v-col></v-col>-->
-
-
-<!--          <v-container>-->
-
-
-<!--            <v-row>-->
-<!--              <v-col>-->
-<!--                <v-text-field label="Repeticiones:" v-model="repsEj"></v-text-field>-->
-<!--              </v-col>-->
-<!--              <v-col>-->
-<!--                <v-text-field label="Descanso entre repeticiones:" v-model="descReps"></v-text-field>-->
-<!--              </v-col>-->
-<!--              <v-col>-->
-<!--                <v-text-field label="Descanso entre ejercicios:" v-model="descReps"></v-text-field>-->
-<!--              </v-col>-->
-<!--            </v-row>-->
-<!--          </v-container>-->
-
-<!--          <v-row>-->
-<!--          <v-col class="text-center">-->
-<!--            <v-dialog>-->
-<!--              <template v-slot:activator="{ on, attrs }"> &lt;!&ndash; Por que hace falta esto &ndash;&gt;-->
-<!--                <v-btn  slot="activator" color="grey lighten-1" v-bind="attrs" v-on="on" >Seleccionados</v-btn>-->
-<!--              </template>-->
-
-<!--              <v-card>-->
-<!--                <v-card-title>LISTA EJERS</v-card-title>-->
-<!--              </v-card>-->
-<!--            </v-dialog>-->
-
-<!--&lt;!&ndash;            <v-spacer></v-spacer>&ndash;&gt;-->
-<!--            <v-dialog>-->
-<!--              <template v-slot:activator="{ on, attrs }"> &lt;!&ndash; Por que hace falta esto &ndash;&gt;-->
-<!--                <v-btn  slot="activator" color="success" v-bind="attrs" v-on="on" >Agregar</v-btn>-->
-<!--              </template>-->
-
-<!--              <v-card>-->
-<!--                <v-card-title>LISTA EJERS</v-card-title>-->
-<!--              </v-card>-->
-<!--            </v-dialog>-->
-<!--            </v-col>-->
-<!--          </v-row>-->
-
-<!--          <v-col></v-col>-->
-<!--          <v-col>-->
-<!--            <v-row>-->
-<!--              <v-spacer></v-spacer> &lt;!&ndash; VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS &ndash;&gt;-->
-<!--              <v-btn flat dark class="red mx-0" v-on:click="submit">Cancelar</v-btn>-->
-<!--              <v-btn flat class="success mx-10" v-on:click="addNewRoutine">Guardar</v-btn>-->
-
-<!--            </v-row>-->
-<!--          </v-col>-->
-
-<!--        </v-form>-->
-<!--      </v-card-text>-->
-
-<!--    </v-card>-->
   </v-dialog>
 </template>
 
@@ -218,6 +206,7 @@
 
 import rutineCard from "./rutineCard.vue";
 import  { routineApi } from "@/API_EJS/js/routines"
+//import state from "/"
 
 export default {
   name: "nuevaRutina",
@@ -226,9 +215,18 @@ export default {
     return{
       nameRut:'',
       detailRut:'',
+      e1: 1,
+      steps: 2,
       durRut:'',
       ciclos: ['Entrada en calor', 'Entrenamiento', 'Enfriamiento'],
     }
+  },
+  watch: {
+    steps (val) {
+      if (this.e1 > val) {
+        this.e1 = val
+      }
+    },
   },
   methods :{
     submit: function (event){
@@ -240,7 +238,15 @@ export default {
     },
     addNewRoutine: function(){
       routineApi.add({name:this.nameRut,detail:this.detailRut,isPublic:true,difficulty:"rookie",category:{ id:1},metadata:null},null);
+    },
+    },
+  computed: {
+    ejercicios(){
+      return this.$store.state.listaEjercicios;
     }
+  },
+  mounted() {
+    this.$store.dispatch("getExercises");
   }
 }
 </script>
