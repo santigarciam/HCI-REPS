@@ -1,13 +1,22 @@
-import {Api} from '../API_EJS/js/api';
+import {routineApi} from '../API_EJS/js/routines';
+import {ExerciseApi} from '../API_EJS/js/exercises';
 
 export const getRoutines = async ({ commit }) => {
-    // console.log(Api.baseUrl + '/routines');
-    const response = await Api.get(Api.baseUrl + '/routines', false, null);
-    console.log(Promise.resolve(response));
+    const response = await routineApi.getAll(null);
     if (!response.code){
-        console.log("ENTRO");
-        console.log(response.content);
-        commit('SET_ROUTINES', response.data);
+        // console.log("ENTRO");
+        // console.log(response);
+        commit('SET_ROUTINES', response.content);
     }
+}
 
+export const getExercises = async ({ commit }) => {
+    const response = await ExerciseApi.getAll(null);
+    if (!response.code){
+        commit('SET_EXERCISES', response.content);
+    }
+}
+
+export const changeCardID = ({ commit }) => {
+    commit('INCREMENT_ID');
 }

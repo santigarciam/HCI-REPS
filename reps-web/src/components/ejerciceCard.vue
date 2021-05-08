@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-  <v-dialog v-model="dialog" width="800px" v-for="excercise in excercises " :key="excercise.id" >
+  <v-dialog v-model="dialog" width="800px" v-for="excercise in ejercicios " :key="excercise.id" >
     <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
       <v-card depressed class="ma-2" slot="activator" v-bind="attrs" v-on="on">
         <v-col>
@@ -40,18 +40,28 @@ import EditEj from "@/components/editEj";
 import { ExerciseApi } from "@/API_EJS/js/exercises";
 import DeleteConfirmaticon from "@/components/deleteConfirmation";
 //import {ExerciseApi} from "@/API_EJS/js/exercises";
-export  default {
+export default {
   components: {DeleteConfirmaticon, EditEj},
   data: () => ({ // Esto es lo de clousure CREO
-    excercises:ExerciseApi.getAll().content
+    // excercises:ExerciseApi.getAll().content
 }),
   methods: {
-    retrieve: function (){
-      this.excercises= ExerciseApi.getAll().content;
-    },
+    // retrieve: function (){
+    //   this.excercises= ExerciseApi.getAll().content;
+    // },
     modifyExercise: function (excercise){
       ExerciseApi.modify(excercise);
+    },
+
+  },
+  computed: {
+    ejercicios(){
+      return this.$store.state.listaEjercicios;
     }
+  },
+
+  mounted() {
+    this.$store.dispatch("getExercises");
   }
 }
 

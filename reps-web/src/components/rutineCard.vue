@@ -108,43 +108,43 @@ export default {
             value: 'name',
           }
         ],
-        rutinas: [
-          {
-            tituloRut: 'Pecho',
-            autorRut: 'Paulo',
-            descripcionRut: 'Descrip 1 ',
-            durRut: '10hs',
-            rating: 3.5
-          },
-          {
-            tituloRut: 'Rutina 2',
-            autorRut: 'Autor 2',
-            descripcionRut: 'Descrip 2',
-            durRut: '2',
-            rating: 5
-          },
-          {
-            tituloRut: 'Rutina 3',
-            autorRut: 'Autor 3',
-            descripcionRut: 'Descrip 3',
-            durRut: '3',
-            rating: 1
-          },
-          {
-            tituloRut: 'Rutina 4',
-            autorRut: 'Autor 4',
-            descripcionRut: 'Descrip 4',
-            durRut: '4',
-            rating: 3
-          },
-          {
-            tituloRut: 'Rutina 5',
-            autorRut: 'Autor 5',
-            descripcionRut: 'Descrip 4',
-            durRut: '4',
-            rating: 3
-          }
-        ]
+        // rutinas: [
+        //   {
+        //     tituloRut: 'Pecho',
+        //     autorRut: 'Paulo',
+        //     descripcionRut: 'Descrip 1 ',
+        //     durRut: '10hs',
+        //     rating: 3.5
+        //   },
+        //   {
+        //     tituloRut: 'Rutina 2',
+        //     autorRut: 'Autor 2',
+        //     descripcionRut: 'Descrip 2',
+        //     durRut: '2',
+        //     rating: 5
+        //   },
+        //   {
+        //     tituloRut: 'Rutina 3',
+        //     autorRut: 'Autor 3',
+        //     descripcionRut: 'Descrip 3',
+        //     durRut: '3',
+        //     rating: 1
+        //   },
+        //   {
+        //     tituloRut: 'Rutina 4',
+        //     autorRut: 'Autor 4',
+        //     descripcionRut: 'Descrip 4',
+        //     durRut: '4',
+        //     rating: 3
+        //   },
+        //   {
+        //     tituloRut: 'Rutina 5',
+        //     autorRut: 'Autor 5',
+        //     descripcionRut: 'Descrip 4',
+        //     durRut: '4',
+        //     rating: 3
+        //   }
+        // ]
       }
     },
       newRutine: function (tituloRut, autorRut, descripcionRut, durRut, rating) {

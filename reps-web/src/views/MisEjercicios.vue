@@ -10,7 +10,7 @@
     </v-row>
 
 
-  <ejercice-card></ejercice-card>
+  <ejercice-card :key="cardID"></ejercice-card>
   </v-container>
 </template>
 
@@ -20,7 +20,16 @@ import SearchField from "@/components/searchField";
 import EjerciceCard from "@/components/ejerciceCard";
 export default {
   name: "MisEjercicios",
-  components: {EjerciceCard, SearchField, NuevoEjercicio}
+  components: {EjerciceCard, SearchField, NuevoEjercicio},
+  computed: {
+    cardID(){
+      return this.$store.state.cardID;
+    }
+  },
+
+  mounted() {
+    this.$store.dispatch("changeCardID");
+  }
 }
 </script>
 

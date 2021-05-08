@@ -49,6 +49,7 @@
 
 <script>
 import { ExerciseApi } from "@/API_EJS/js/exercises";
+
 export default {
 
   name: "nuevaRutina",
@@ -62,7 +63,7 @@ export default {
   methods :{
     addNewExcercise: function (){
       ExerciseApi.add({name:this.nameEj,detail:this.detailEj,type:"exercise",metadata:null},null);
-
+      this.$store.dispatch("changeCardID");
     }
   }
 }
