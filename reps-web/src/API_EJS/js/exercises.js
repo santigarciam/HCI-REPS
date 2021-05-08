@@ -19,7 +19,11 @@ class ExerciseApi {
     }
 
     static async modify(excercise, controller) {
-        return await Api.put(`${ExerciseApi.url}/${excercise.id}`, true, excercise, controller);
+        const result= await Api.put(`${ExerciseApi.url}/${excercise.id}`, true, excercise, controller);
+        if(result.id){
+            console.log("Se logro moficar el ejercicio ");
+            console.log(excercise);
+        }
     }
 
     static async delete(excerciseID, controller) {

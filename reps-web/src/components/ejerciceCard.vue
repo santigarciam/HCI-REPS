@@ -7,7 +7,8 @@
           <v-row>
             <v-card-title>{{ excercise.name }}</v-card-title>
             <v-spacer></v-spacer>
-            <edit-ej></edit-ej>
+            <edit-ej v-on:click="modifyExercise(excercise)"></edit-ej>
+<!--        <edit-ej ></edit-ej>      -->
             <delete-confirmaticon></delete-confirmaticon>
 
 
@@ -43,11 +44,13 @@ export  default {
   components: {DeleteConfirmaticon, EditEj},
   data: () => ({ // Esto es lo de clousure CREO
     excercises:ExerciseApi.getAll().content
-
 }),
   methods: {
     retrieve: function (){
       this.excercises= ExerciseApi.getAll().content;
+    },
+    modifyExercise: function (excercise){
+      ExerciseApi.modify(excercise);
     }
   }
 }
