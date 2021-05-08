@@ -215,6 +215,8 @@
 <script>
 //import router from 'vue-router';
 import { UserApi } from "../API_EJS/js/user";
+// import { Api } from "../API_EJS/js/api";
+// import state from "../store/state";
 
 export default {
   name: "LandingPage",

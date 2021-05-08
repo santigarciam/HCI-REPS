@@ -11,6 +11,8 @@ import LandingPage from "./views/LandingPage"
 import ConfirmacionMail from "@/views/ConfirmacionMail";
 import store from "./store";
 
+import state from "./store/state";
+
 
 Vue.use(VueRouter);
 
@@ -20,14 +22,28 @@ Vue.config.silent = true
 export const router = new VueRouter({
   routes: [
     {path:'/', component: LandingPage},
-    {path:'/MisRutinas', component: MisRutinas},
-    {path:'/MisEjercicios', component: MisEjercicios},
-    {path:'/Favoritos', component: Favoritos},
-    {path:'/Descubrir', component: Descubrir},
+    {path:'/MisRutinas', component: MisRutinas, meta: {requiresAuth: true}},
+    {path:'/MisEjercicios', component: MisEjercicios, meta: {requiresAuth: true}},
+    {path:'/Favoritos', component: Favoritos, meta: {requiresAuth: true}},
+    {path:'/Descubrir', component: Descubrir, meta: {requiresAuth: true}},
     {path:'/ConfirmacionMail',component: ConfirmacionMail},
     {path:'*', component: NotFound}
   ]
 })
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)){
+    if (!state.token){
+      next({
+        path: '/'
+      });
+    }else{
+      next();
+    }
+  }else{
+    next();
+  }
+});
 
 new Vue({
   router,
