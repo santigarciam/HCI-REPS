@@ -29,7 +29,24 @@
           </v-card-title>
             </v-row>
           </v-col>
+          <v-col class="text-center">
+            <v-dialog>
+              <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
+                <v-btn  slot="activator" color="grey lighten-1" v-bind="attrs" v-on="on" >Ejercicios</v-btn>
+              </template>
+
+              <v-card>
+                <v-card-title>LISTA EJERS</v-card-title>
+              </v-card>
+            </v-dialog>
+          </v-col>
+
+          <v-col></v-col>
+
+
           <v-container>
+
+
             <v-row>
               <v-col>
                 <v-text-field label="Repeticiones:" v-model="repsEj"></v-text-field>
@@ -42,17 +59,31 @@
               </v-col>
             </v-row>
           </v-container>
+
+          <v-row>
           <v-col class="text-center">
             <v-dialog>
               <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-                <v-btn  slot="activator" color="grey lighten-1" v-bind="attrs" v-on="on" >Ejercicios</v-btn>
+                <v-btn  slot="activator" color="grey lighten-1" v-bind="attrs" v-on="on" >Seleccionados</v-btn>
               </template>
 
               <v-card>
-                <v-card-title>HAY QUE PONER LA LISTA DE EJERCICIOS Y VER COMO SE SELECCIONAN</v-card-title>
+                <v-card-title>LISTA EJERS</v-card-title>
               </v-card>
             </v-dialog>
-          </v-col>
+
+<!--            <v-spacer></v-spacer>-->
+            <v-dialog>
+              <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
+                <v-btn  slot="activator" color="success" v-bind="attrs" v-on="on" >Agregar</v-btn>
+              </template>
+
+              <v-card>
+                <v-card-title>LISTA EJERS</v-card-title>
+              </v-card>
+            </v-dialog>
+            </v-col>
+          </v-row>
 
           <v-col></v-col>
           <v-col>
@@ -75,8 +106,10 @@
 
 import rutineCard from "./rutineCard.vue";
 import  { routineApi } from "@/API_EJS/js/routines"
+
 export default {
   name: "nuevaRutina",
+  components: {},
   data(){
     return{
       nameRut:'',

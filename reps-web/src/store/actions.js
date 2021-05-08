@@ -11,7 +11,7 @@ export const getRoutines = async ({ commit }) => {
 }
 
 export const getExercises = async ({ commit }) => {
-    const response = await ExerciseApi.getAll(null);
+    const response = await ExerciseApi.getAll("size=20",null);
     if (!response.code){
         commit('SET_EXERCISES', response.content);
     }

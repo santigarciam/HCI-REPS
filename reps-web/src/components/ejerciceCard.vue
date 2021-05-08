@@ -9,7 +9,32 @@
             <v-spacer></v-spacer>
             <edit-ej v-on:click="modifyExercise(excercise)"></edit-ej>
 <!--        <edit-ej ></edit-ej>      -->
-            <delete-confirmaticon></delete-confirmaticon>
+            <v-dialog v-model="deleteConfi" width="800px">
+              <template  v-slot:activator="{ on, attrs }">
+                <v-btn icon class="mt-4 mr-3" plain color = "red" slot="activator" small  v-bind="attrs" v-on="on">
+                  <v-icon>
+                    mdi-delete
+                  </v-icon>
+                </v-btn>
+              </template>
+
+              <v-card>
+                <v-card-title>Estas seguro que quiere borrar?</v-card-title>
+                <v-col text--center>
+                  <v-row>
+                    <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
+                    <v-btn dark flat class="red mx-0" @click="submit">No</v-btn>
+                    <v-btn flat class="success mx-10" @click="deleteEj(excercise.id)">Si</v-btn>
+
+                  </v-row>
+                </v-col>
+
+                <v-col></v-col>
+              </v-card>
+
+
+            </v-dialog>
+            <!--            -->
 
 
           </v-row>
@@ -38,20 +63,21 @@
 <script>
 import EditEj from "@/components/editEj";
 import { ExerciseApi } from "@/API_EJS/js/exercises";
-import DeleteConfirmaticon from "@/components/deleteConfirmation";
+//import DeleteConfirmaticon from "@/components/deleteConfirmation";
 //import {ExerciseApi} from "@/API_EJS/js/exercises";
 export default {
-  components: {DeleteConfirmaticon, EditEj},
-  data: () => ({ // Esto es lo de clousure CREO
-    // excercises:ExerciseApi.getAll().content
+  components: { EditEj},
+  data: () => ({
+
 }),
   methods: {
-    // retrieve: function (){
-    //   this.excercises= ExerciseApi.getAll().content;
-    // },
     modifyExercise: function (excercise){
       ExerciseApi.modify(excercise);
     },
+    deleteEj: function (id){
+      ExerciseApi.delete(id);
+      this.$store.dispatch("changeCardID");
+    }
 
   },
   computed: {
