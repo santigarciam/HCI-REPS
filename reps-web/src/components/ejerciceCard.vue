@@ -23,7 +23,7 @@
                 <v-col text--center>
                   <v-row>
                     <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                    <v-btn dark flat class="red mx-0" @click="submit">No</v-btn>
+                    <v-btn dark flat class="red mx-0" @click="cancelAction">No</v-btn>
                     <v-btn flat class="success mx-10" @click="deleteEj(excercise.id)">Si</v-btn>
 
                   </v-row>
@@ -66,7 +66,7 @@ import { ExerciseApi } from "@/API_EJS/js/exercises";
 //import DeleteConfirmaticon from "@/components/deleteConfirmation";
 //import {ExerciseApi} from "@/API_EJS/js/exercises";
 export default {
-  components: { EditEj},
+  components: { EditEj },
   data: () => ({
 
 }),
@@ -76,7 +76,10 @@ export default {
     },
     deleteEj: function (id){
       ExerciseApi.delete(id);
-      this.$store.dispatch("changeCardID");
+      this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
+    },
+    cancelAction: function (){
+      this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     }
 
   },
