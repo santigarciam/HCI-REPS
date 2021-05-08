@@ -1,3 +1,5 @@
 export default {
-    listaRutinas: []
+    listaRutinas: [],
+    listaEjercicios: [],
+    cardID: 0,
 }
