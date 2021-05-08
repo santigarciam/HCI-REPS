@@ -78,6 +78,7 @@
               <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
               <v-btn flat dark class="red mx-0" v-on:click="submit">Cancelar</v-btn>
                   <v-btn flat class="success mx-10" v-on:click="submit">Guardar</v-btn>
+<!--              <v-btn flat class="success mx-10" v-on:click="saveNewRoutine">Guardar</v-btn>-->
 
             </v-row>
           </v-col>
@@ -110,6 +111,9 @@ export default {
       }
       // generarRutinaNueva(tituloRut, autorRut, descripcionRut, durRut, rating)
     },
+    // saveNewRoutine: function (){
+    //
+    // }
   }
 }
 </script>

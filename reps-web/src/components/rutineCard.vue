@@ -3,14 +3,15 @@
     <v-dialog
         v-model="dialog"
         width="500"
-        v-for="rutina in data().rutinas" :key="rutina.tituloRut"
+        v-for="rutina in rutinas.content" :key="rutina.name"
     >
+      <!--        v-for="rutina in data().rutinas" :key="rutina.tituloRut"  UNA LINEA MAS ARRIBA -->
       <template v-slot:activator="{ on, attrs }">
         <v-container class ="container_v_card pb-4">
           <v-card v-bind="attrs" v-on="on" hover @click.stop="dialog = true" >
             <v-col>
               <v-row>
-                <v-card-title v-model="tituloRut">{{ rutina.tituloRut }} <v-rating
+                <v-card-title v-model="tituloRut">{{ rutina.name }} <v-rating
                     v-model="rutina.rating"
                     half-increments
                     readonly
@@ -47,9 +48,9 @@
 
             </v-col>
             <v-col class="text-left">
-              <v-card-subtitle v-model="autorRut">Autor: {{ rutina.autorRut }} </v-card-subtitle>
-              <v-card-subtitle v-model="descripcionRut">Descripcion: {{ rutina.descripcionRut }}</v-card-subtitle>
-              <v-card-subtitle v-model="durRut">Duracion: {{ rutina.durRut }}</v-card-subtitle>
+              <v-card-subtitle v-model="autorRut">Autor: {{ rutina.user.id }} </v-card-subtitle>
+              <v-card-subtitle v-model="descripcionRut">Descripcion: {{ rutina.detail }}</v-card-subtitle>
+<!--              <v-card-subtitle v-model="durRut">Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
             </v-col>
 
 
@@ -59,11 +60,11 @@
       </template>
 
       <v-card flat>
-        <v-card-title>{{ rutina.tituloRut }}</v-card-title>
+        <v-card-title>{{ rutina.name }}</v-card-title>
         <v-divider></v-divider>
         <v-card-subtitle></v-card-subtitle>
-        <v-card-subtitle>Descripcion: {{ rutina.descripcionRut }}</v-card-subtitle>
-        <v-card-subtitle>Duracion: {{ rutina.durRut }}</v-card-subtitle>
+        <v-card-subtitle>Descripcion: {{ rutina.detail }}</v-card-subtitle>
+<!--        <v-card-subtitle>Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
         <v-container >
           <h4>Entrada en calor</h4>
           <p>Ejercicio</p>
@@ -161,6 +162,16 @@ export default {
           this.$emit("yourEvent");
         }, this.timeout);
       }
+    },
+
+    computed: {
+      rutinas(){
+        return this.$store.state.listaRutinas;
+      }
+    },
+
+    mounted() {
+      this.$store.dispatch("getRoutines");
     }
 }
 </script>

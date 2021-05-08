@@ -9,6 +9,7 @@ import NotFound from './views/NotFound';
 import Favoritos from "./views/Favoritos";
 import LandingPage from "./views/LandingPage"
 import ConfirmacionMail from "@/views/ConfirmacionMail";
+import store from "./store";
 
 
 Vue.use(VueRouter);
@@ -30,6 +31,7 @@ export const router = new VueRouter({
 
 new Vue({
   router,
+  store,
   vuetify,
   render: h => h(App)
 }).$mount('#app')
