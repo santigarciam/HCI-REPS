@@ -1,6 +1,6 @@
 <template>
 
-  <v-dialog v-model="dialog" width="900px">
+  <v-dialog v-model="dialog" width="900px" :key="cardID">
     <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
     <v-btn depressed class="ma-2 mr-4" slot="activator" v-bind="attrs" v-on="on" outlined>+Anadir</v-btn>
     </template>
@@ -242,7 +242,7 @@
                   <v-col>
                     <v-row>
                       <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                      <v-btn flat dark class="red mx-0" v-on:click="submit">Cancelar</v-btn>
+                      <v-btn flat dark class="red mx-0" v-on:click="cancelActionNewRut">Cancelar</v-btn>
                       <v-btn flat class="success mx-10" v-on:click="addNewRoutine">Guardar</v-btn>
 <!--                      <v-btn flat class="success mx-10" v-on:click="pqAnda">Guardar</v-btn>-->
 
@@ -271,8 +271,8 @@ export default {
       selected:{},
       detailRut:'',
       categoryRut:'',
-      e1: 1,
-      steps: 2,
+      e1: 0,
+      steps: 1,
       durRut:'',
       ciclos: ['Entrada en calor', 'Entrenamiento', 'Enfriamiento'],
     }
@@ -415,10 +415,23 @@ export default {
       }
 
     },
+    cancelActionNewRut: function (){
+      this.dialog = false;
+      this.nameRut='';
+      this.e1= 0;
+      this.steps= 1;
+      this.selected={};
+      this.detailRut='';
+      this.categoryRut='';
+      this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
+    },
     },
   computed: {
     ejercicios(){
       return this.$store.state.listaEjercicios;
+    },
+    cardID(){
+      return this.$store.state.cardID;
     }
   },
   mounted() {

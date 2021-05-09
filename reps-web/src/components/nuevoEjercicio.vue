@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" width="800px">
+  <v-dialog v-model="dialog" width="800px" :key="cardID">
     <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
       <v-btn depressed class="ma-2 mr-4" slot="activator" v-bind="attrs" v-on="on" outlined>+Anadir</v-btn>
     </template>
@@ -37,7 +37,7 @@
       <v-col>
         <v-row>
           <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-          <v-btn flat dark class="red mx-0" v-on:click.stop="">Cancelar</v-btn>
+          <v-btn flat dark class="red mx-0" v-on:click="cleanAndCloseDialog">Cancelar</v-btn>
           <v-btn flat class="success mx-10" v-on:click="addNewExcercise">Guardar</v-btn>
 
         </v-row>
@@ -63,8 +63,23 @@ export default {
   methods :{
     addNewExcercise: function (){
       ExerciseApi.add({name:this.nameEj,detail:this.detailEj,type:"exercise",metadata:null},null);
-      this.$store.dispatch("changeCardID");
+      this.cleanAndCloseDialog();
+    },
+    cleanAndCloseDialog: function (){
+      this.dialog = false;
+      this.nameEj = "";
+      this.detailEj = "";
+      this.matEj = "";
+      this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
+    },
+  },
+  computed: {
+    cardID(){
+      return this.$store.state.cardID;
     }
+  },
+  mounted() {
+    this.$store.dispatch("changeCardID");
   }
 }
 </script>

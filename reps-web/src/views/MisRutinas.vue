@@ -13,7 +13,7 @@
     </v-row>
 </v-col>
 
-    <rutine-card></rutine-card>
+    <rutine-card :key="cardID"></rutine-card>
   </div>
 </template>
 
@@ -24,6 +24,7 @@ import NuevaRutina from "@/components/nuevaRutina";
 import FiltrarPor from "@/components/filtrarPor";
 import OrderBy from "@/components/orderBy";
 import SearchField from "@/components/searchField";
+
 export default {
   name: "MisRutinas",
   components: {
@@ -33,6 +34,14 @@ export default {
     NuevaRutina,
     RutineCard
   },
+  mounted() {
+    this.$store.dispatch("changeCardID");
+  },
+  computed: {
+    cardID(){
+      return this.$store.state.cardID;
+    }
+  }
 };
 </script>
 
