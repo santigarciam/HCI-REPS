@@ -8,12 +8,14 @@ class cycleApi {
     }
 
     static async add(routineId,cycle, controller) {
-        console.log(cycle);
+        //console.log(cycle);
         const result= await Api.post(`${cycleApi.url}/${routineId}/cycles`, true, cycle, controller);
         if(result.id){
             // const r1 = await cycleApi.getAll(null);
             // console.log(r1);
         }else{
+            console.log("---------------------------------");
+            console.log(result);
             console.log("No se podo agregar el ciclo");
         }
         return result;

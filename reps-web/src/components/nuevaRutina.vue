@@ -300,14 +300,11 @@ export default {
         catID = respCat.id;
       }catch (error){
            var auxCats = await categoryApi.getAll(null);
-           // console.log(auxCats);
            if (auxCats.totalCount > 0) {
                 var arr = auxCats.content;
              for (var j = 0; j < arr.length; j++) {
-               // console.log(arr[j].name);
                if (arr[j].name === this.categoryRut) {
                  catID = arr[j].id;
-                 // console.log("ENTRO");
                }
              }
              if(catID === -1){
@@ -324,33 +321,47 @@ export default {
           const respRut =  await routineApi.add({name:this.nameRut,detail:this.detailRut,isPublic:true,difficulty:"rookie",category:{ id: catID},metadata:null},null);
       console.log("Resprut : ");
           console.log(respRut);
-          if(respRut.id){
-            for (var i = 0; i < this.steps +2; i++) {
-              let t =1;
-              switch(i){
+          if(respRut.id) {
+            for (var i = 0; i < this.steps + 2; i++) {
+              let t = 1;
+              switch (i) {
                 case 0:
                   // eslint-disable-next-line no-case-declarations
-                      const respCal = await cycleApi.add(respRut.id,{name:"Calentamiento",detail:"N/A",type:"warmup",order:1,repetitions:1,metadata:null},null);
-                      if(respCal.id){
-                         // this.selected[i].forEach(k =>console.log(this.ejercicios[k]));
-                         for (const k of this.selected[i]) {
-                           await cycleExercisesApi.add(respCal.id, this.ejercicios[k].id, {
-                             order: t++,
-                             duration: 1,
-                             repetitions: 1
-                           }, null);
-                         }
-                      }else{
-                        console.log("Error calentamiento");
-                        return;
-                      }
+                  const respCal = await cycleApi.add(respRut.id, {
+                    name: "Calentamiento",
+                    detail: "N/A",
+                    type: "warmup",
+                    order: 1,
+                    repetitions: 1,
+                    metadata: null
+                  }, null);
+                  if (respCal.id) {
+                    for (const k of this.selected[i]) {
+                      await cycleExercisesApi.add(respCal.id, this.ejercicios[k].id, {
+                        order: t++,
+                        duration: 1,
+                        repetitions: 1
+                      }, null);
+                    }
+                    console.log(await cycleApi.get(respRut.id,respCal,null));
+                  } else {
+                    console.log("Error calentamiento");
+                    return;
+                  }
                   console.log("Creo calentamiento");
-                      break;
-                case this.steps +1:
+                  break;
+                case (this.steps + 1):
                   /////
                   //eslint-disable-next-line no-case-declarations
-                  const respEnfri = await  cycleApi.add(respRut.id,{name:"Enfriamiento",detail:"N/A",type:"cooldown",order:i+1,repetitions:1,metadata:null},null);
-                  if(respEnfri.id){
+                  const respEnfri = await cycleApi.add(respRut.id, {
+                    name: "Enfriamiento",
+                    detail: "N/A",
+                    type: "cooldown",
+                    order: i + 1,
+                    repetitions: 1,
+                    metadata: null
+                  }, null);
+                  if (respEnfri.id) {
                     for (const k of this.selected[i]) {
                       await cycleExercisesApi.add(respEnfri.id, this.ejercicios[k].id, {
                         order: t++,
@@ -358,14 +369,21 @@ export default {
                         repetitions: 1
                       }, null);
                     }
-                  }else {
-                    console.log("ERROR ENFRI");
-                   }
-                      break;
+                  } else {
+                    console.log("ERROR ENFRI"); //ERROR
+                  }
+                  break;
                 default:
                   //eslint-disable-next-line no-case-declarations
-                  const respCiclo = await  cycleApi.add(respRut.id,{name:"Ciclo "+ i ,detail:"N/A",type:"workout",order:i+1,repetitions:1,metadata:null},null);
-                  if(respCiclo.id) {
+                  const respCiclo = await cycleApi.add(respRut.id, {
+                    name: "Ciclo " + i,
+                    detail: "N/A",
+                    type: "exercise",
+                    order: i + 1,
+                    repetitions: 1,
+                    metadata: null
+                  }, null);
+                  if (respCiclo.id) {
                     for (const k of this.selected[i]) {
                       await cycleExercisesApi.add(respCiclo.id, this.ejercicios[k].id, {
                         order: t++,
@@ -373,25 +391,29 @@ export default {
                         repetitions: 1
                       }, null);
                     }
-                  }else{
-                    console.log("Error ciclo");
+                    console.log(await cycleApi.get(respRut.id,respCiclo,null));
+                  } else {
+                    console.log("Error ciclo"); //ERROR
                   }
-                  console.log("Creo ciclo " + i);
-                      break;
-
+                  break;
               }
-
-              const rutCreada = routineApi.get(respRut.id,null);
-              console.log("----------------");
-              console.log(rutCreada);
-
-               console.log("----------------");
-              //console.log(this.ejercicios[this.selected[i]]);
-              //console.log(this.selected[i]);
             }
           }else{
-            console.log("No se pudo crear la rutina")
+            console.log("No se pudo crear la rutina"); //ERROR
           }
+
+          // Lo de arriba es toda la logica de crear una rutina (rutina, ciclos, ejercicios)
+
+          const rutinaAux = await routineApi.get(respRut.id,null);
+          console.log(rutinaAux);
+          const ciclosAux = await cycleApi.getAll(respRut.id, null);
+          console.log(ciclosAux);
+      for (const h of ciclosAux.content) {
+        console.log(h.id);
+          var ejerCiclo = await cycleExercisesApi.getAll(h.id, null);
+          console.log(ejerCiclo);
+      }
+
     },
     },
   computed: {
