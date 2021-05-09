@@ -10,7 +10,7 @@
 
 <!--            EDITAR EJERCICIO-->
 <!--            <v-dialog v-model="dialog[excersise.id]" width="800px" :retain-focus="false" >-->
-            <v-dialog v-model="dialog[excercise.id]" width="800px" :retain-focus="false" > 
+            <v-dialog v-model="dialog[excercise.id]" width="800px" :retain-focus="false" >
             <template  v-slot:activator="{ on, attrs }">
               <v-btn icon class="mt-4 mr-2" plain color = "grey" slot="activator" small  v-on:click.prevent="editEj(excercise.id)" v-bind="attrs" v-on="on">
                 <v-icon>
@@ -139,6 +139,7 @@ export default {
      }else{
        console.log(" NO se logro modificar el ej");
      }
+      this.dialog[excercise.id] = false;
 
       this.$store.dispatch("changeCardID");
      return resp;

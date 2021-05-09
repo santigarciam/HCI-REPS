@@ -1,6 +1,6 @@
 import { Api } from './api.js';
 
-export { routineApi, Exercise };
+export { routineApi };
 
 class routineApi {
     static get url() {
@@ -8,14 +8,15 @@ class routineApi {
     }
 
     static async add(routine, controller) {
-        console.log(routine);
+        // console.log(routine);
         const result= await Api.post(routineApi.url, true, routine, controller);
         if(result.id){
-            const r1 = await routineApi.getAll(null);
-            console.log(r1);
+            // const r1 = await routineApi.getAll(null);
+            // console.log(r1);
         }else{
             console.log("No se podo agregar la rutina");
         }
+        return result;
     }
 
     static async modify(routine, controller) {
@@ -39,12 +40,12 @@ class routineApi {
     }
 }
 
-class Exercise {
-    constructor(id, name, detail) {
-        if (id) {
-            this.id = id;
-        }
-        this.name = name;
-        this.detail = detail;
-    }
-}
+// class Exercise {
+//     constructor(id, name, detail) {
+//         if (id) {
+//             this.id = id;
+//         }
+//         this.name = name;
+//         this.detail = detail;
+//     }
+// }

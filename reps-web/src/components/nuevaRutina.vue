@@ -12,6 +12,8 @@
       <v-card-text>
           <v-text-field outlined label="Nombre" v-model="nameRut"></v-text-field>
           <v-textarea outlined auto-grow label="Descripcion" v-model="detailRut" ></v-textarea>
+          <v-text-field outlined label="Categoría" v-model="categoryRut"></v-text-field>
+
 
 <!--        STEPPEER-->
           <div>
@@ -81,7 +83,7 @@
                               class="overflow-y-auto">
 
                         <v-list-item-group
-                            v-model="selected"
+                            v-model="selected[0]"
                             active-class="grey--text"
                             multiple
                         >
@@ -94,7 +96,7 @@
                                 </v-list-item-content>
 
                                 <v-list-item-action>
-                                  <v-list-item-action-text v-text="excersise.action"></v-list-item-action-text>
+<!--                                  <v-list-item-action-text v-text="excersise.action"></v-list-item-action-text>-->
 
                                   <v-icon
                                       v-if="active"
@@ -119,7 +121,10 @@
 
                     </v-card>
                   </v-stepper-content>
-                <!--             DATA STEEPPER CALENTAMIENTO -->
+                <!--             DATA STEEPPER CALENTAMIENTO FIN -->
+
+
+                <!--             DATA STEEPPER ENFRIAMIENTO -->
                 <v-stepper-content
                     :key="`enfriamiento-content`"
                     :step="steps+1"
@@ -128,10 +133,54 @@
                       class="mb-12"
                       color="grey lighten-1"
                       height="200px"
-                  ></v-card>
+                  >
+                    <v-list two-line  style="max-height:250px"
+
+                            class="overflow-y-auto">
+
+                      <v-list-item-group
+                          v-model="selected[steps+1]"
+                          active-class="grey--text"
+                          multiple
+                      >
+                        <template v-for="(excersise, index) in ejercicios ">
+                          <v-list-item :key="excersise.id">
+                            <template v-slot:default="{ active }">
+                              <v-list-item-content>
+                                <v-list-item-title v-text="excersise.name"></v-list-item-title>
+
+                              </v-list-item-content>
+
+                              <v-list-item-action>
+                                <!--                                  <v-list-item-action-text v-text="excersise.action"></v-list-item-action-text>-->
+
+                                <v-icon
+                                    v-if="active"
+                                    color="grey lighten-1"
+                                >
+                                  mdi-check
+                                </v-icon>
+
+                              </v-list-item-action>
+                            </template>
+                          </v-list-item>
+
+                          <v-divider
+                              v-if="index < excersise.length - 1"
+                              :key="index"
+                          ></v-divider>
+                        </template>
+                      </v-list-item-group>
+
+                    </v-list>
+
+                  </v-card>
 
                 </v-stepper-content>
 
+                <!--             DATA STEEPPER ENFRIAMIENTO FIN -->
+
+                <!--             DATA STEEPPER CICLOS -->
                 <v-stepper-content
                     v-for="n in steps"
                     :key="`${n}-content`"
@@ -147,7 +196,7 @@
                             class="overflow-y-auto">
 
                       <v-list-item-group
-                          v-model="selected"
+                          v-model="selected[n]"
                           active-class="grey--text"
                           multiple
                       >
@@ -184,6 +233,7 @@
                   </v-card>
 
                 </v-stepper-content>
+                <!--             DATA STEEPPER CICLOS FIN -->
               </v-stepper-items>
             </v-stepper>
           </div>
@@ -194,6 +244,7 @@
                       <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
                       <v-btn flat dark class="red mx-0" v-on:click="submit">Cancelar</v-btn>
                       <v-btn flat class="success mx-10" v-on:click="addNewRoutine">Guardar</v-btn>
+<!--                      <v-btn flat class="success mx-10" v-on:click="pqAnda">Guardar</v-btn>-->
 
                     </v-row>
                   </v-col>
@@ -206,6 +257,9 @@
 
 import rutineCard from "./rutineCard.vue";
 import  { routineApi } from "@/API_EJS/js/routines"
+import  { categoryApi} from "../API_EJS/js/category";
+import {cycleApi} from "../API_EJS/js/cycles";
+import  {cycleExercisesApi} from "../API_EJS/js/cycleExercises";
 //import state from "/"
 
 export default {
@@ -214,7 +268,9 @@ export default {
   data(){
     return{
       nameRut:'',
+      selected:{},
       detailRut:'',
+      categoryRut:'',
       e1: 1,
       steps: 2,
       durRut:'',
@@ -236,8 +292,106 @@ export default {
 
       // generarRutinaNueva(tituloRut, autorRut, descripcionRut, durRut, rating)
     },
-    addNewRoutine: function(){
-      routineApi.add({name:this.nameRut,detail:this.detailRut,isPublic:true,difficulty:"rookie",category:{ id:1},metadata:null},null);
+    addNewRoutine: async function(){
+      var catID = -1;
+      var respCat;
+      try {
+         respCat = await categoryApi.add({name: this.categoryRut, detail: "N/A"});
+        catID = respCat.id;
+      }catch (error){
+           var auxCats = await categoryApi.getAll(null);
+           // console.log(auxCats);
+           if (auxCats.totalCount > 0) {
+                var arr = auxCats.content;
+             for (var j = 0; j < arr.length; j++) {
+               // console.log(arr[j].name);
+               if (arr[j].name === this.categoryRut) {
+                 catID = arr[j].id;
+                 // console.log("ENTRO");
+               }
+             }
+             if(catID === -1){
+               console.log("ERROR CATEGORIAS 1");
+               return;
+             }
+           } else {
+             console.log("ERROR CATEGORIAS 2" );
+             return;
+           }
+      }
+      // Lo de arriba es para agregar/usar una categoria dependiendo si esta o no creada.
+
+          const respRut =  await routineApi.add({name:this.nameRut,detail:this.detailRut,isPublic:true,difficulty:"rookie",category:{ id: catID},metadata:null},null);
+      console.log("Resprut : ");
+          console.log(respRut);
+          if(respRut.id){
+            for (var i = 0; i < this.steps +2; i++) {
+              let t =1;
+              switch(i){
+                case 0:
+                  // eslint-disable-next-line no-case-declarations
+                      const respCal = await cycleApi.add(respRut.id,{name:"Calentamiento",detail:"N/A",type:"warmup",order:1,repetitions:1,metadata:null},null);
+                      if(respCal.id){
+                         // this.selected[i].forEach(k =>console.log(this.ejercicios[k]));
+                         for (const k of this.selected[i]) {
+                           await cycleExercisesApi.add(respCal.id, this.ejercicios[k].id, {
+                             order: t++,
+                             duration: 1,
+                             repetitions: 1
+                           }, null);
+                         }
+                      }else{
+                        console.log("Error calentamiento");
+                        return;
+                      }
+                  console.log("Creo calentamiento");
+                      break;
+                case this.steps +1:
+                  /////
+                  //eslint-disable-next-line no-case-declarations
+                  const respEnfri = await  cycleApi.add(respRut.id,{name:"Enfriamiento",detail:"N/A",type:"cooldown",order:i+1,repetitions:1,metadata:null},null);
+                  if(respEnfri.id){
+                    for (const k of this.selected[i]) {
+                      await cycleExercisesApi.add(respEnfri.id, this.ejercicios[k].id, {
+                        order: t++,
+                        duration: 1,
+                        repetitions: 1
+                      }, null);
+                    }
+                  }else {
+                    console.log("ERROR ENFRI");
+                   }
+                      break;
+                default:
+                  //eslint-disable-next-line no-case-declarations
+                  const respCiclo = await  cycleApi.add(respRut.id,{name:"Ciclo "+ i ,detail:"N/A",type:"workout",order:i+1,repetitions:1,metadata:null},null);
+                  if(respCiclo.id) {
+                    for (const k of this.selected[i]) {
+                      await cycleExercisesApi.add(respCiclo.id, this.ejercicios[k].id, {
+                        order: t++,
+                        duration: 1,
+                        repetitions: 1
+                      }, null);
+                    }
+                  }else{
+                    console.log("Error ciclo");
+                  }
+                  console.log("Creo ciclo " + i);
+                      break;
+
+              }
+
+              const rutCreada = routineApi.get(respRut.id,null);
+              console.log("----------------");
+              console.log(rutCreada);
+
+               console.log("----------------");
+              //console.log(this.ejercicios[this.selected[i]]);
+              //console.log(this.selected[i]);
+            }
+          }else{
+            console.log("No se pudo crear la rutina")
+          }
     },
     },
   computed: {
