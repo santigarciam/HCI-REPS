@@ -49,7 +49,7 @@
               <v-col>
                 <v-row>
                   <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                  <v-btn dark flat class="red mx-0" >Cancelar</v-btn>
+                  <v-btn dark flat class="red mx-0" @click="cancelAction">Cancelar</v-btn>
                   <v-btn flat class="success mx-10" @click="modifyExercise(excercise)">Guardar</v-btn>
 
                 </v-row>

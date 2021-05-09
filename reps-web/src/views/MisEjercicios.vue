@@ -18,6 +18,7 @@
 import NuevoEjercicio from "@/components/nuevoEjercicio";
 import SearchField from "@/components/searchField";
 import EjerciceCard from "@/components/ejerciceCard";
+
 export default {
   name: "MisEjercicios",
   components: {EjerciceCard, SearchField, NuevoEjercicio},
