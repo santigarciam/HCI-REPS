@@ -6,9 +6,10 @@
         v-for="rutina in rutinas" :key="rutina.id"
     >
       <!--        v-for="rutina in data().rutinas" :key="rutina.tituloRut"  UNA LINEA MAS ARRIBA -->
+
       <template v-slot:activator="{ on, attrs }">
         <v-container class ="container_v_card pb-4">
-          <v-card v-bind="attrs" v-on="on" hover @click.stop="dialog = true" >
+          <v-card v-bind="attrs" v-on="on" hover @click.stop="dialog = true; + funcionAUX(rutina.id)" >
             <v-col>
               <v-row>
                 <v-card-title v-model="tituloRut">{{ rutina.name }} <v-rating
@@ -87,25 +88,24 @@
 
       <v-card flat>
         <v-card-title>{{ rutina.name }}</v-card-title>
+<!--        <v-btn v-on:click="getCiclosInID(parseInt(rutina.id))">BOTON</v-btn>-->
         <v-divider></v-divider>
         <v-card-subtitle></v-card-subtitle>
         <v-card-subtitle>Descripcion: {{ rutina.detail }}</v-card-subtitle>
 <!--        <v-card-subtitle>Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
-        <v-container >
-          <h4>Entrada en calor</h4>
-          <p>Ejercicio</p>
-        </v-container>
-        <v-container >
-          <h4>Ejercitacion</h4>
-          <p>Ejercicio</p>
-        </v-container>
-        <v-container >
-          <h4>Enfriamiento</h4>
-          <p>Ejercicio</p>
-        </v-container>
+        <h4 class="pl-6">Ciclos:</h4>
+        <template v-for="ciclo in funcionAUX2()">
+          <v-list-item :key="ciclo">
+            <template>
+              <v-list-item-content>
+                <v-list-item-title class="pl-6" v-text="ciclo.name"></v-list-item-title>
 
-
+              </v-list-item-content>
+            </template>
+          </v-list-item>
+        </template>
       </v-card>
+
     </v-dialog>
   </div>
 </template>
@@ -134,6 +134,7 @@ export default {
             align: 'left',
             sortable: false,
             value: 'name',
+            cyclesOfRutine: [],
           }
         ],
       }
@@ -169,6 +170,18 @@ export default {
     cancelActionRut: function (){
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     },
+    //////////////////////////////////////////////////////////////////////////////////
+    funcionAUX: async function (id){
+      console.log(id);
+      this.cyclesOfRutine = await cycleApi.getAll(id, null);
+      this.cyclesOfRutine = this.cyclesOfRutine.content;
+      console.log(this.cyclesOfRutine);
+    },
+    funcionAUX2: function (){
+      console.log("llegooooooooooooooooooooo");
+      return this.cyclesOfRutine;
+    },
+    /////////////////////////////////////////////////////////////////////////////////
     },
 
     computed: {
@@ -177,7 +190,7 @@ export default {
       },
       cardID(){
         return this.$store.state.cardID;
-      }
+      },
     },
 
     mounted() {
