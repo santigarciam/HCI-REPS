@@ -24,6 +24,7 @@ class ExerciseApi {
             console.log("Se logro moficar el ejercicio ");
             console.log(excercise);
         }
+        return result;
     }
 
     static async delete(excerciseID, controller) {
@@ -34,8 +35,8 @@ class ExerciseApi {
         return await Api.get(`${ExerciseApi.url}/${excerciseID}`,true,  controller);
     }
 
-    static async getAll(controller) {
-        return await Api.get(ExerciseApi.url, true, controller);
+    static async getAll(parameters,controller) {
+        return await Api.get(`${ExerciseApi.url}?${parameters}`, true, controller);
     }
 }
 

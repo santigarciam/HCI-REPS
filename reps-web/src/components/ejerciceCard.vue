@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-  <v-dialog v-model="dialog" width="800px" v-for="excercise in ejercicios " :key="excercise.id" >
+  <v-dialog v-model="dialogEJ" width="800px" v-for="excercise in ejercicios " :key="excercise.id" >
     <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
       <v-card depressed class="ma-2" slot="activator" v-bind="attrs" v-on="on">
         <v-col>
@@ -9,9 +9,10 @@
             <v-spacer></v-spacer>
 
 <!--            EDITAR EJERCICIO-->
-            <v-dialog v-model="dialogEditRut" width="800px" :retain-focus="false" >
+<!--            <v-dialog v-model="dialog[excersise.id]" width="800px" :retain-focus="false" >-->
+            <v-dialog v-model="dialog[excercise.id]" width="800px" :retain-focus="false" > 
             <template  v-slot:activator="{ on, attrs }">
-              <v-btn icon class="mt-4 mr-2" plain color = "grey" slot="activator" small  v-on:click.prevent="editEj(excercise, $event.target)" v-bind="attrs" v-on="on">
+              <v-btn icon class="mt-4 mr-2" plain color = "grey" slot="activator" small  v-on:click.prevent="editEj(excercise.id)" v-bind="attrs" v-on="on">
                 <v-icon>
                   mdi-pencil
                 </v-icon>
@@ -19,13 +20,13 @@
             </template>
 
             <v-card>
-              <v-card-title>Editar Ejercicio {{excercise.id}}</v-card-title>
+              <v-card-title>Editar Ejercicio {{excerciseAux.id}}</v-card-title>
 
 
               <v-card-text>
                 <v-form class="px-3">
-                  <v-text-field label="Nombre*" v-model.lazy="excercise.name"></v-text-field>
-                  <v-textarea label="Descripcion*" v-model="excercise.detail" ></v-textarea>
+                  <v-text-field label="Nombre*" v-model.lazy="excerciseAux.name"></v-text-field>
+                  <v-textarea label="Descripcion*" v-model="excerciseAux.detail" ></v-textarea>
                   <v-file-input
                       v-model="files"
                       placeholder="Subi tu demostracion"
@@ -120,17 +121,27 @@ export default {
   data (){
     return {
       nameEdited: '',
+      dialog:{id:0,on:false},
       detailEdited:'',
       currentID:-1,
-      dialog: false,
+      // dialog: false,
       dialogEditRut: false,
+      excerciseAux:{id:0,name:'',detail:''},
     }
 },
   methods: {
-    modifyExercise: function (excercise){
-      // excercise.name = this.nameEdited;
-      // excercise.detail = this.detailEdited;
-      ExerciseApi.modify(excercise);
+    modifyExercise: async function (excercise){
+      excercise.name = this.excerciseAux.name;
+      excercise.detail = this.excerciseAux.detail;
+     const resp = await ExerciseApi.modify(excercise);
+     if(resp.id){
+       console.log("se logro modificar el ej");
+     }else{
+       console.log(" NO se logro modificar el ej");
+     }
+
+      this.$store.dispatch("changeCardID");
+     return resp;
     },
     deleteEj: function (id){
       ExerciseApi.delete(id);
@@ -139,13 +150,14 @@ export default {
     cancelAction: function (){
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     },
-    editEj: function (excersise,target){
-      let l = target.classList;
-      console.log(l);
-      console.log("-------");
-
-
-
+    editEj: async function (excersiseID){
+      const resp = await ExerciseApi.get(excersiseID,null);
+      if(resp.id){
+      console.log(resp);
+      this.excerciseAux.id = resp.id;
+      this.excerciseAux.name = resp.name;
+      this.excerciseAux.detail = resp.detail;
+      }
     }
 
   },
