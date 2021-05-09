@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav :key="cardID">
     <v-toolbar color="black">
       <router-link to="/MisRutinas">
       <img class="mr-3" :src="require('../assets/reps4.png')" height="40"/>
@@ -103,7 +103,30 @@
           <v-list>
             <v-list-item>
               <v-row>
-              <v-btn plain @click="toLanding">Cerrar Sesion</v-btn>
+<!--              <v-btn plain>Cerrar Sesion</v-btn>-->
+<!--                -->
+
+                <v-dialog v-model="dialog" width="800px">
+                  <template  v-slot:activator="{ on, attrs }">
+                    <v-btn plain v-bind="attrs" v-on="on">
+                    <!--         slot="activator"             -->
+                      Cerrar Sesión
+                    </v-btn>
+                  </template>
+                  <v-card>
+                    <v-card-title>¿Estás seguro de que deseas cerrar sesión? </v-card-title>
+                    <v-col text--center>
+                      <v-row>
+                        <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
+                        <v-btn dark flat class="red mx-0" @click="funToCancel">No</v-btn>
+                        <v-btn flat class="success mx-10" @click="toLanding">Si</v-btn>
+                      </v-row>
+                    </v-col>
+
+                    <v-col></v-col>
+                  </v-card>
+                </v-dialog>
+<!--                -->
               </v-row>
             </v-list-item>
           </v-list>
@@ -124,11 +147,23 @@ export default {
   name: "AppBar",
   components: {PerfilPopUp},
   methods:{
+    funToCancel: function (){
+      this.dialog = false;
+      this.$store.dispatch("changeCardID");
+    },
+    // notLogOut: function (){
+    //   this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
+    // },
     toLanding: function (){
       state.token = null;
       router.push('/');
     }
-  }
+  },
+  computed: {
+    cardID(){
+      return this.$store.state.cardID;
+    }
+  },
 
 }
 

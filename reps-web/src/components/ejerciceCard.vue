@@ -140,8 +140,10 @@ export default {
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     },
     editEj: function (excersise,target){
-      let l = target.classList;
-      console.log(l);
+      //let l = target.classList;
+      console.log(target);
+      console.log(excersise.id);
+
       console.log("-------");
 
 
