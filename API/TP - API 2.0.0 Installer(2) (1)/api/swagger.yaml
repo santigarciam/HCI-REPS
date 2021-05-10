@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   description: "This is an Exercise server.  You can find \nout more about Swagger\
     \ at \n[http://swagger.io](http://swagger.io) or on \n[irc.freenode.net, #swagger](http://swagger.io/irc/).\n"
-  version: "2.0.0"
+  version: "2.0.1"
   title: "Swagger Exercise"
   termsOfService: "http://swagger.io/terms/"
   contact:
@@ -108,6 +108,29 @@ parameters:
       - "advanced"
       - "expert"
     description: "Difficulty level"
+  averageRating:
+    in: "query"
+    name: "averageRating"
+    required: false
+    type: "integer"
+    format: "int32"
+    minimum: 0
+    maximum: 10
+    description: "Average rating"
+  categoryId2:
+    in: "query"
+    name: "categoryId"
+    required: false
+    type: "integer"
+    format: "int64"
+    description: "Category identifier"
+  userId2:
+    in: "query"
+    name: "userId"
+    required: false
+    type: "integer"
+    format: "int64"
+    description: "User identifier"
   page:
     in: "query"
     name: "page"
@@ -132,6 +155,14 @@ parameters:
     enum: [ "asc", "desc" ]
     default: "asc"
     description: "Order direction"
+  userOrderBy:
+    in: "query"
+    name: "orderBy"
+    required: false
+    type: "string"
+    enum: [ "id" , "username", "lastName", "email" ]
+    default: "username"
+    description: "Order by"
   achievementOrderBy:
     in: "query"
     name: "orderBy"
@@ -315,6 +346,33 @@ parameters:
 paths:
 # USERS
   /users:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - "users"
+      summary: "Retrieve users"
+      operationId: "retrieveList"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/search"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/userOrderBy"
+        - $ref: "#/parameters/direction"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/PublicUser"
+        "400":
+          $ref: '#/responses/BadRequest'
+        "401":
+          $ref: '#/responses/Unauthorized'
+        "500":
+          $ref: '#/responses/Unexpected'
+      x-swagger-router-controller: "User"
     post:
       security: []
       tags:
@@ -1118,8 +1176,11 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - $ref: "#/parameters/search"
+        - $ref: "#/parameters/categoryId2"
+        - $ref: "#/parameters/userId2"
         - $ref: "#/parameters/difficulty"
+        - $ref: "#/parameters/averageRating"
+        - $ref: "#/parameters/search"
         - $ref: "#/parameters/page"
         - $ref: "#/parameters/size"
         - $ref: "#/parameters/routineOrderBy"
@@ -2492,7 +2553,7 @@ definitions:
         format: "int64"
       averageRating:
         type: "number"
-        format: "float"
+        format: "int32"
       isPublic:
         type: "boolean"
       difficulty:
@@ -2543,7 +2604,7 @@ definitions:
         format: "int64"
       averageRating:
         type: "number"
-        format: "float"
+        format: "int32"
       isPublic:
         type: "boolean"
       category:
