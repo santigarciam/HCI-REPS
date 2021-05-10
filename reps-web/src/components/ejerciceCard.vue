@@ -71,7 +71,7 @@
               </template>
 
               <v-card>
-                <v-card-title>Estas seguro que quiere borrar?</v-card-title>
+                <v-card-title>¿Está seguro que desea borrar este ejercicio?</v-card-title>
                 <v-col text--center>
                   <v-row>
                     <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->

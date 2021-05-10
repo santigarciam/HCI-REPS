@@ -3,6 +3,8 @@
   <v-select
       :items="orderBy"
       label="Ordenar por"
+      v-model="value"
+      @click="ordenar"
       dense
       class="mr-3"
       outlined
@@ -42,8 +44,12 @@
 <script>
 export default {
   data: () => ({
-    orderBy: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+    orderBy: ['Nombre', 'Descripción', 'Autor','Fecha', 'Categoría', 'Rating', 'Dificultad'],
+    value: ['name', 'detail', 'userId', 'date', 'categoryId', 'averageRating', 'difficulty']
   }),
+
+
+
 }
 </script>
 

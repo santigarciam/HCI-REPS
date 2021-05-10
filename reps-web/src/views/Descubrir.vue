@@ -10,6 +10,7 @@
         </v-row>
       </v-col>
     </v-row>
+    <other-routines></other-routines>
   </v-container>
 </template>
 <script>
@@ -18,12 +19,38 @@
 import FiltrarPor from "@/components/filtrarPor";
 import OrderBy from "@/components/orderBy";
 import SearchField from "@/components/searchField";
+import OtherRoutines from "../components/otherRoutines";
+import {bus} from "../main";
 export default {
   name: "Descubrir",
-  components: {SearchField, OrderBy, FiltrarPor}
+  components: {OtherRoutines, SearchField, OrderBy, FiltrarPor},
+  data(){
+    return {
+      busqueda: ""
+    }
+  },
+  created(){
+    bus.$on('busqueda', (data) =>{
+      this.busqueda = data;
+      console.log(this.busqueda)
+      this.buscar()
+    })
+  },
+  methods: {
+    buscar: function (){
+      if (this.busqueda=="" || this.busqueda == null ){
+        this.$store.dispatch("getRoutines");
+      }
+      else {
+        this.$store.dispatch("searchRoutines", this.busqueda);
+      }
+    }
+  }
 }
 </script>
 
-<style scoped>
-
+<style >
+.fixed{
+  position: fixed;
+}
 </style>

@@ -9,6 +9,9 @@ class UserApi {
         return `${Api.baseUrl}/users`;
     }
 
+    static async getRoutines(parameters, controller){
+        return await Api.get(`${UserApi.url}/current/routines/?${parameters}`,true, controller);
+    }
 
     static async login(credentials, controller) {
         console.log(credentials);

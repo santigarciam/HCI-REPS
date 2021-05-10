@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" width="800px">
     <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-      <v-btn plain class="ma-2" slot="activator" v-bind="attrs" v-on="on">Mi Perfil</v-btn>
+      <v-btn plain block class="ma-2" slot="activator" v-bind="attrs" v-on="on">Mi Perfil</v-btn>
     </template>
 
     <v-card>
