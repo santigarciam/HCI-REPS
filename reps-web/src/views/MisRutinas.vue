@@ -24,6 +24,7 @@ import NuevaRutina from "@/components/nuevaRutina";
 import FiltrarPor from "@/components/filtrarPor";
 import OrderBy from "@/components/orderBy";
 import SearchField from "@/components/searchField";
+import {bus} from "../main";
 
 export default {
   name: "MisRutinas",
@@ -34,6 +35,11 @@ export default {
     NuevaRutina,
     RutineCard
   },
+  data(){
+    return {
+      busqueda: ""
+    }
+  },
   mounted() {
     this.$store.dispatch("changeCardID");
   },
@@ -41,6 +47,23 @@ export default {
     cardID(){
       return this.$store.state.cardID;
     }
+  },
+  created(){
+   bus.$on('busqueda', (data) =>{
+     this.busqueda = data;
+     console.log(this.busqueda)
+     this.buscar()
+   })
+ },
+ methods: {
+   buscar: function (){
+     if (this.busqueda=="" || this.busqueda == null ){
+       this.$store.dispatch("getUserRoutines");
+     }
+     else {
+       this.$store.dispatch("searchUserRoutines", this.busqueda);
+     }
+   }
   }
 };
 </script>

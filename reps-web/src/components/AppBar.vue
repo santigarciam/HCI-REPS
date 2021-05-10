@@ -1,6 +1,6 @@
 <template>
   <nav :key="cardID">
-    <v-toolbar color="black">
+    <v-app-bar fixed app color="black">
       <router-link to="/MisRutinas">
       <img class="mr-3" :src="require('../assets/reps4.png')" height="40"/>
       </router-link>
@@ -97,10 +97,15 @@
           </template>
           <v-list>
             <v-list-item>
+
+              <v-btn plain disabled>
+                nombre del usuario
+              </v-btn>
+            </v-list-item>
+            <v-list-item>
              <perfil-pop-up></perfil-pop-up>
             </v-list-item>
-          </v-list>
-          <v-list>
+
             <v-list-item>
               <v-row>
 <!--              <v-btn plain>Cerrar Sesion</v-btn>-->
@@ -108,13 +113,13 @@
 
                 <v-dialog v-model="dialog" width="800px">
                   <template  v-slot:activator="{ on, attrs }">
-                    <v-btn plain v-bind="attrs" v-on="on">
+                    <v-btn block plain v-bind="attrs" v-on="on">
                     <!--         slot="activator"             -->
                       Cerrar Sesión
                     </v-btn>
                   </template>
                   <v-card>
-                    <v-card-title>¿Estás seguro de que deseas cerrar sesión? </v-card-title>
+                    <v-card-title>¿Está seguro que desea cerrar sesión? </v-card-title>
                     <v-col text--center>
                       <v-row>
                         <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
@@ -133,7 +138,7 @@
         </v-menu>
       </div>
 <!--      -->
-    </v-toolbar>
+    </v-app-bar>
     </nav>
 </template>
 

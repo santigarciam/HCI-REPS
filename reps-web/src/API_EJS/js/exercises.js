@@ -32,7 +32,7 @@ class ExerciseApi {
     }
 
     static async get(excerciseID, controller) {
-        return await Api.get(`${ExerciseApi.url}/${excerciseID}`,true,  controller);
+        return await Api.get(`${ExerciseApi.url}/${excerciseID}`,true, controller);
     }
 
     static async getAll(parameters,controller) {

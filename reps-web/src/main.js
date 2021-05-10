@@ -13,6 +13,7 @@ import store from "./store";
 
 import state from "./store/state";
 
+export const bus = new Vue();
 
 Vue.use(VueRouter);
 

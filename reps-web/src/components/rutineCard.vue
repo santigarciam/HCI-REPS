@@ -12,15 +12,7 @@
           <v-card v-bind="attrs" v-on="on" hover @click.stop="dialog = true; + funcionAUX(rutina.id)" >
             <v-col>
               <v-row>
-                <v-card-title v-model="tituloRut">{{ rutina.name }} <v-rating
-                    v-model="rutina.rating"
-                    half-increments
-                    readonly
-                    background-color="grey"
-                    color="orange"
-                    medium
-                    class="ml-2"
-                ></v-rating></v-card-title>
+                <v-card-title v-model="tituloRut">{{ rutina.name }} </v-card-title>
                 <v-spacer></v-spacer>
 
                 <div>
@@ -53,7 +45,7 @@
                     </template>
 
                     <v-card>
-                      <v-card-title>Estas seguro que quiere borrar?</v-card-title>
+                      <v-card-title>¿Está seguro que desea borrar esta rutina?</v-card-title>
                       <v-col text--center>
                         <v-row>
                           <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
@@ -75,7 +67,7 @@
 
             </v-col>
             <v-col class="text-left">
-              <v-card-subtitle v-model="autorRut">Autor: {{ rutina.user.id }} </v-card-subtitle>
+              <v-card-subtitle v-model="autorRut">Autor: {{ HACERFUNCIONDECURRENTUSER }} </v-card-subtitle>
               <v-card-subtitle v-model="descripcionRut">Descripcion: {{ rutina.detail }}</v-card-subtitle>
 <!--              <v-card-subtitle v-model="durRut">Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
             </v-col>
@@ -194,7 +186,8 @@ export default {
     },
 
     mounted() {
-      this.$store.dispatch("getRoutines");
+      this.$store.dispatch("getUserRoutines");
+      console.log(this.$store.state.listaRutinas)
     },
 }
 </script>

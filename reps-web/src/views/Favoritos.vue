@@ -8,8 +8,11 @@
           <search-field></search-field>
           <v-spacer></v-spacer>
         </v-row>
+        <v-row>
+
+        </v-row>
       </v-col>
-    </v-row>
+    </v-row><favourite-routines></favourite-routines>
   </v-container>
 </template>
 
@@ -18,9 +21,10 @@
 import filtrarPor from "@/components/filtrarPor";
 import OrderBy from "@/components/orderBy";
 import SearchField from "@/components/searchField";
+import FavouriteRoutines from "../components/favouriteRoutines";
 export default {
   name: "Favoritos",
-  components: {SearchField, OrderBy, filtrarPor}
+  components: {FavouriteRoutines, SearchField, OrderBy, filtrarPor}
 }
 </script>
 
