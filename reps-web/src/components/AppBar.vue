@@ -89,8 +89,8 @@
             >
               <v-avatar>
                 <img
-                    src="https://cdn.vuetifyjs.com/images/john.jpg"
-                    alt="John"
+                    v-bind:src="userAvatar"
+                    v-bind:alt="userName"
                 >
               </v-avatar>
             </v-btn>
@@ -99,7 +99,7 @@
             <v-list-item>
 
               <v-btn plain disabled>
-                nombre del usuario
+                {{userName}}
               </v-btn>
             </v-list-item>
             <v-list-item>
@@ -123,8 +123,11 @@
                     <v-col text--center>
                       <v-row>
                         <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                        <v-btn dark flat class="red mx-0" @click="funToCancel">No</v-btn>
-                        <v-btn flat class="success mx-10" @click="toLanding">Si</v-btn>
+                        <v-btn flat :disabled="loading"
+                               class="mx-0"
+                               color="primary"
+                               @click="funToCancel">No</v-btn>
+                        <v-btn plain :loading="loading" color="grey" class="mx-10" @click="toLanding">Si</v-btn>
                       </v-row>
                     </v-col>
 
@@ -147,10 +150,20 @@
 import PerfilPopUp from "@/components/perfilPopUp";
 import state from "../store/state";
 import {router} from "../main"
+import { UserApi } from "../API_EJS/js/user";
 
 export default {
   name: "AppBar",
   components: {PerfilPopUp},
+  data() {
+    return {
+      loading: false,
+      // user: '',
+      // userAvatar: '',
+      // userFirstName:'',
+      // userInfoLoaded: false,
+    }
+  },
   methods:{
     funToCancel: function (){
       this.dialog = false;
@@ -159,16 +172,44 @@ export default {
     // notLogOut: function (){
     //   this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     // },
-    toLanding: function (){
+    toLanding: async function (){
       state.token = null;
-      router.push('/');
+      await this.loadingAnimation();
+      await router.push('/');
+    },
+    async loadingAnimation () {
+      this.loading = true;
+      console.log("Antes del promise");
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      console.log("Despues del promise");
+      this.loading = false;
+    },
+    getUserInformation: async function (){
+      const result = await UserApi.getCurrentUser(null);
+      this.data.user = result.username;
+      this.data.userFirstName = result.firstName;
+      this.data.userAvatar = result.avatarUrl;
+      this.data.userInfoLoaded = true;
+      console.log(result);
     }
   },
   computed: {
     cardID(){
       return this.$store.state.cardID;
+    },
+    user(){
+      return this.$store.state.user;
+    },
+    userName(){
+      return this.$store.state.userFirstName;
+    },
+    userAvatar(){
+      return this.$store.state.userAvatar;
     }
   },
+  mounted() {
+    this.$store.dispatch("getUserInformation");
+  }
 
 }
 

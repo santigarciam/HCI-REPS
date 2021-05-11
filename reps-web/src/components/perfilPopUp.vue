@@ -23,14 +23,43 @@
             </v-row>
             <v-row>
               <v-col>
-                <v-text-field outlined label="Fecha De Nacimiento" v-model="fechaNacUsuario"></v-text-field>
-              </v-col>
-              <v-col>
-                <v-text-field outlined label="Usuario" v-model="usuario" >usuario</v-text-field>
+<!--                -->
+
+                <template>
+                  <v-menu
+                      ref="menu"
+                      v-model="menu"
+                      :close-on-content-click="false"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="auto"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                          outlined
+                          v-model="date"
+                          label="Fecha de Nacimiento"
+                          append-icon="mdi-calendar"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                        locale="es-ES"
+                        ref="picker"
+                        v-model="date"
+                        :max="new Date().toISOString().substr(0, 10)"
+                        min="1950-01-01"
+                        @change="save"
+                    ></v-date-picker>
+                  </v-menu>
+                </template>
+
+<!--                <v-text-field outlined label="Fecha De Nacimiento" v-model="fechaNacUsuario"></v-text-field>-->
+<!--                -->
               </v-col>
             </v-row>
-
-          <v-text-field outlined label="Contacto" v-model="durRut"></v-text-field>
           </v-container>
 
 
@@ -38,8 +67,11 @@
           <v-col>
             <v-row>
               <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-              <v-btn dark flat class="red mx-0" @click="submit">Cancelar</v-btn>
-              <v-btn flat class="success mx-10" @click="submit">Guardar</v-btn>
+              <v-btn :disabled="loading"
+                     class="mx-0"
+                     color="grey"
+                     plain @click="cancelActionEditProfile">Cancelar</v-btn>
+              <v-btn :loading="loading" flat class="primary mx-10" @click="submit">Guardar</v-btn>
 
             </v-row>
           </v-col>
@@ -52,8 +84,69 @@
 </template>
 
 <script>
+import { UserApi } from "../API_EJS/js/user";
+
 export default {
-  name: "perfilPopUp"
+  name: "perfilPopUp",
+  data(){
+    return{
+      loading: false,
+      nombreUsuario: '',
+      apellidoUsuario: '',
+      fechaNacUsuario: '',
+      usuario: '',
+      date: null,
+      menu: false,
+    }
+  },
+  watch: {
+    menu(val) {
+      val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
+    },
+  },
+  methods: {
+    save (date) {
+      this.$refs.menu.save(date)
+    },
+    cancelActionEditProfile: function (){
+      console.log("CANCEL edit Profile");
+      this.dialog = false;
+      this.nombreUsuario='';
+      this.usuario='';
+      this.apellidoUsuario='';
+      this.fechaNacUsuario='';
+      this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
+    },
+    submit: async function (){
+      this.loading = true;
+      //console.log(this.date.replaceAll('-',''));
+      const data = {  firstName: this.nombreUsuario,
+        lastName: this.apellidoUsuario,
+        gender: "male",
+        birthdate: parseInt(this.date.replaceAll('-','')),
+        phone: "98295822",
+        avatarUrl: "https://flic.kr/p/3ntH2u",
+        metadata: null};
+      console.log(data);
+      await UserApi.modifyUserInformation(data, null);
+      this.loading = false;
+      //await this.loadingAnimation();
+      this.cancelActionEditProfile();
+    },
+    async loadingAnimation () {
+      this.loading = true;
+      console.log("Antes del promise");
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      console.log("Despues del promise");
+      this.loading = false;
+    },
+  },
+  computed: {
+    cardID(){
+      return this.$store.state.cardID;
+    }
+  },
+
 }
 </script>
 

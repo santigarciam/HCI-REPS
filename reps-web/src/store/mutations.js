@@ -1,4 +1,5 @@
 import {cycleApi} from "../API_EJS/js/cycles";
+import {UserApi} from "../API_EJS/js/user";
 
 export const SET_ROUTINES = (state, rutinas) => {
     state.listaRutinas = rutinas;
@@ -27,4 +28,12 @@ export const GET_CYCLES_OF_ID = async (state, id) => {
     }else{
         console.log("ERROR"); //ERROR
     }
+}
+
+export const GET_USER_INFO = async (state) => {
+    const result = await UserApi.getCurrentUser(null);
+    console.log(result);
+    state.user= result.username;
+    state.userFirstName = result.firstName;
+    state.userAvatar = result.avatarUrl;
 }

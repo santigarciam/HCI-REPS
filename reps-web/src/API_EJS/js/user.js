@@ -3,7 +3,9 @@ import {bus2, router} from '../../main';
 import state from "../../store/state";
 
 export { UserApi, Credentials };
+
 let registeredUsr = 0;
+
 class UserApi {
     static get url() {
         return `${Api.baseUrl}/users`;
@@ -27,6 +29,14 @@ class UserApi {
                 await router.push('/MisRutinas');
             }
         }
+    }
+
+    static async getCurrentUser(controller){
+        const result = await Api.get(`${UserApi.url}/current`,true, controller);
+        if (!result.id){
+            console.log("ERROR!"); //ERROR
+        }
+        return result;
     }
 
     getRegisteredUsr(){
@@ -61,6 +71,13 @@ class UserApi {
     static async logout(controller) {
         await Api.post(`${UserApi.url}/logout`, true, controller);
         Api.token = undefined;
+    }
+
+    static async modifyUserInformation(data, controller){
+        const result = await Api.put(`${UserApi.url}/current`, true, data, controller);
+        if (!result.id){
+            console.log("ERROR!"); //ERROR
+        }
     }
 }
 
