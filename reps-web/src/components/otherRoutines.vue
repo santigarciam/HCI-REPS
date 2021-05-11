@@ -104,7 +104,7 @@ export default {
         snackbar: false,
         headers: [
           {
-            text: 'Ejericios',
+            text: 'Ejercicios',
             align: 'left',
             sortable: false,
             value: 'name',

@@ -20,6 +20,17 @@ export const searchRoutines = async ({ commit }, busqueda) => {
         commit('SET_OTHERS', response.content);
     }
 }
+
+export const sortRoutines = async ({ commit }, orden) => {
+    const response = await routineApi.getAll("orderBy=" + orden, null);
+    if (!response.code){
+        // console.log("ENTRO");
+        //console.log(response);
+        commit('SET_OTHERS', response.content);
+    }
+}
+
+
 export const getUserRoutines = async ({ commit }) => {
     const response = await UserApi.getRoutines( '',null);
     if (!response.code){

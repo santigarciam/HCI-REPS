@@ -4,10 +4,10 @@
       <v-container fluid class="fill-height pa-0 ma-0">
         <v-row>
           <v-col>
-            <v-row justify="center" align="center" style="height: 550px">
-              <v-card rounded color="transparent" elevation="0">
+            <v-row justify="center" align="end" style="height: 550px">
+              <v-card v-show="!buttonPressed" rounded color="transparent" elevation="0">
                 <v-card-title class="justify-center white--text">
-                  <h1>EMPIECE A CREAR RUTINAS PARA ENTRENAR</h1>
+                  <h1 class="frase">EMPIECE A CREAR RUTINAS PARA ENTRENAR</h1>
                 </v-card-title>
                 <v-card-text>
 
@@ -26,10 +26,10 @@
                                 v-bind="attrs"
                                 v-on="on"
 
-                            >REGISTRARSE</v-btn
-                            >
+                            >REGISTRARSE</v-btn>
+
                           </template>
-                          <v-card>
+                          <v-card color="rgb(0, 0, 0, 0.7)">
                             <v-card-text>
                               <v-row>
                                 <v-col cols="12">
@@ -42,8 +42,10 @@
                                           v-model="usernameReg"
                                           required
                                           filled
+                                          background-color="white"
                                           rounded
                                           dense
+                                          light
                                           class= "mt-6"
                                           :rules="[rules.required, rules.minUsername]"
                                       ></v-text-field>
@@ -52,12 +54,14 @@
                                     <!--Input registro email -->
                                     <v-row>
                                       <v-text-field
-                                          label="Email *"
+                                          label="Correo electrónico *"
                                           v-model="emailReg"
                                           required
                                           :rules="[rules.required, rules.email]"
                                           filled
                                           rounded
+                                          background-color="white"
+                                          light
                                           dense
                                       ></v-text-field>
                                     </v-row>
@@ -69,6 +73,8 @@
                                           filled
                                           rounded
                                           dense
+                                          background-color="white"
+                                          light
                                           required
                                           :append-icon="
                                           show1 ? 'mdi-eye' : 'mdi-eye-off'
@@ -87,6 +93,8 @@
                                           v-model="confirmPassword"
                                           filled
                                           rounded
+                                          background-color="white"
+                                          light
                                           dense
                                           required
                                           :append-icon="
@@ -94,7 +102,7 @@
                                           :type="show1 ? 'text' : 'password'"
                                           :rules="[comparePassword]"
                                           name="input-10-1"
-                                          label="Confirmar Contraseña *"
+                                          label="Confirmar contraseña *"
                                           counter
                                           @keyup.enter="registerUser"
                                           @click:append="show1 = !show1"
@@ -199,9 +207,9 @@
 </template>
 
 <style>
-.caja {
+.frase {
   font-weight: bold;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
 .bg {
   background-image: url("../assets/principal2.png");
@@ -228,11 +236,12 @@ export default {
       password: "",
       token: "",
       usernameReg: "",
-      emailReg: "sssss",
+      emailReg: "",
       passReg: "",
       confirmPassword: '',
       verification: false,
       verificationInput: "",
+      buttonPressed: false,
 
       rules: {
         required: (value) => !!value || "Obligatorio",

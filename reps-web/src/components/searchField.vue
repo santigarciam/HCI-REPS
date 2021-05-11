@@ -30,7 +30,7 @@ export default {
 
   methods: {
     buscar: function (){
-      if (this.busqueda.length < 3 && this.busqueda.length != 0 ){
+      if (this.busqueda != null && this.busqueda.length < 3 && this.busqueda.length != 0 ){
         this.error = true;
       }
       else {

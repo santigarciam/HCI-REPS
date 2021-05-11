@@ -1,5 +1,5 @@
 import { Api } from './api.js';
-import { router } from '../../main';
+import {bus2, router} from '../../main';
 import state from "../../store/state";
 
 export { UserApi, Credentials };
@@ -16,10 +16,16 @@ class UserApi {
     static async login(credentials, controller) {
         console.log(credentials);
         const result = await Api.post(`${UserApi.url}/login`, false, credentials, controller);
-        Api.token = result.token;
-        if (Api.token){
-            state.token = Api.token;
-            await router.push('/MisRutinas');
+        if (result.code == 4){
+            console.log('entroo')
+            bus2.$emit('errorLogIn', "Usuario o contraseña incorrecta")
+        }
+        else{
+            Api.token = result.token;
+            if (Api.token){
+                state.token = Api.token;
+                await router.push('/MisRutinas');
+            }
         }
     }
 

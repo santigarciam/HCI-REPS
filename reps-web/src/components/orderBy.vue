@@ -3,9 +3,11 @@
   <v-select
       :items="orderBy"
       label="Ordenar por"
-      v-model="value"
-      @click="ordenar"
+      v-model="selected"
+      @input="ordenar"
       dense
+      item-text="show"
+      item-value="value"
       class="mr-3"
       outlined
   ></v-select>
@@ -42,12 +44,25 @@
 </template>
 
 <script>
+import {bus} from "../main";
+
 export default {
   data: () => ({
-    orderBy: ['Nombre', 'Descripción', 'Autor','Fecha', 'Categoría', 'Rating', 'Dificultad'],
-    value: ['name', 'detail', 'userId', 'date', 'categoryId', 'averageRating', 'difficulty']
+    selected: "",
+    orderBy: [
+      {show:'Nombre', value:'name' },
+      {show:'Descripción', value: 'detail' },
+      {show:'Autor', value:'userId' },
+      {show:'Fecha', value:'date'},
+      {show:'Categoría', value:'categoryId'},
+      {show:'Rating', value:'averageRating'},
+      {show:'Dificultad', value:'difficulty'}]
   }),
-
+methods:{
+    ordenar: function (){
+      bus.$emit('ordenar', this.selected)
+    }
+}
 
 
 }

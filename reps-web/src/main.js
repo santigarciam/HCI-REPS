@@ -7,13 +7,14 @@ import MisRutinas from './views/MisRutinas';
 import Descubrir from './views/Descubrir';
 import NotFound from './views/NotFound';
 import Favoritos from "./views/Favoritos";
-import LandingPage from "./views/LandingPage"
+import LandingPage2 from "./views/LandingPage2"
 import ConfirmacionMail from "@/views/ConfirmacionMail";
 import store from "./store";
 
 import state from "./store/state";
 
 export const bus = new Vue();
+export const bus2 = new Vue();
 
 Vue.use(VueRouter);
 
@@ -22,7 +23,7 @@ Vue.config.silent = true
 
 export const router = new VueRouter({
   routes: [
-    {path:'/', component: LandingPage},
+    {path:'/', component: LandingPage2},
     {path:'/MisRutinas', component: MisRutinas, meta: {requiresAuth: true}},
     {path:'/MisEjercicios', component: MisEjercicios, meta: {requiresAuth: true}},
     {path:'/Favoritos', component: Favoritos, meta: {requiresAuth: true}},
