@@ -212,7 +212,10 @@
         <v-snackbar bottom color="error" v-model="error">
           <p> {{error}} </p>
         </v-snackbar>
-      </v-container></v-img>
+      </v-container>
+      <v-col></v-col>
+      <v-col></v-col>
+    </v-img>
   </div>
 
 </template>
