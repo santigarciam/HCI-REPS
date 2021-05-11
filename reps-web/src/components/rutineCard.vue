@@ -131,7 +131,7 @@
                         </v-row>
                       </v-col>
 
-
+                      <v-col></v-col>
                     </v-card>
                   </v-dialog>
 <!--                  EDITAR RUTINA FIN-->
