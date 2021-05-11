@@ -147,8 +147,8 @@
                       <v-col>
                         <v-row>
                           <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                          <v-btn dark flat class="red mx-0" @click="cancelActionRut">Cancelar</v-btn>
-                          <v-btn flat class="success mx-10" @click="modifyRut(rutina)">Guardar</v-btn>
+                          <v-btn plain color="grey" class="mx-0" @click="cancelActionRut">Cancelar</v-btn>
+                          <v-btn :loading="loading" flat class="primary mx-10" @click="modifyRut(rutina)">Guardar</v-btn>
 
                         </v-row>
                       </v-col>
@@ -188,8 +188,8 @@
                       <v-col text--center>
                         <v-row>
                           <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                          <v-btn dark flat class="red mx-0" @click="cancelActionRut">No</v-btn>
-                          <v-btn flat class="success mx-10" @click="deleteRut(rutina.id)">Si</v-btn>
+                          <v-btn plain color="grey" class="mx-0" @click="cancelActionRut">No</v-btn>
+                          <v-btn :loading="loading" flat class="primary mx-10" @click="deleteRut(rutina.id)">Si</v-btn>
 
                         </v-row>
                       </v-col>
@@ -257,6 +257,7 @@ export default {
   componets: {NuevaRutina, EditRutina},
   data() {
     return {
+      loading: false,
       snackbar: false,
       dialog:{id:0,on:false},
       selected:[],
@@ -283,6 +284,7 @@ export default {
         }, this.timeout);
       },
     deleteRut: async function (id) {
+      this.loading = true;
       const cyclesIDaux = await cycleApi.getAll(id, null);
       for (const ciclo of cyclesIDaux.content) {
         const ejercicios = await cycleExercisesApi.getAll(ciclo.id,null);
@@ -293,6 +295,7 @@ export default {
         await cycleApi.delete(id,ciclo,null);
       }
       await routineApi.delete(id);
+      this.loading = false;
       await this.$store.dispatch("changeCardID");//es como un flag que avisa un cambio de estado
     },
     cancelActionRut: function (){
