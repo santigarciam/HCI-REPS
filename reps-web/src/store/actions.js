@@ -76,6 +76,7 @@ export const getCyclesOfID = ({ commit }, id) => {
 }
 
 
+
 export const changeCardID = ({ commit }) => {
     commit('INCREMENT_ID');
 }

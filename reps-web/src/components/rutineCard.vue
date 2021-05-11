@@ -39,16 +39,120 @@
                           <v-text-field outlined label="Categoría" v-model="rutAux.category.name"></v-text-field>
 
                         </v-form>
+<!--                        Ciclos en EDITAR RUT-->
+
+
+
+
+
+
+
+
+
+
+
+
+                        <v-stepper v-model="e1">
+                          <v-stepper-header>
+                            <template v-for="(ciclo,n) in cyclesOfRutine">
+                              <v-divider
+                                  v-if="n !== steps"
+                                  :key="ciclo.id"
+                              ></v-divider>
+                              <v-stepper-step
+                                  :key="ciclo.id"
+                                  :step="n"
+                                  editable
+                              >
+                              {{ciclo.name}}
+                              </v-stepper-step>
+                              <v-divider
+                                  v-if="n !== steps"
+                                  :key="ciclo.id"
+                              ></v-divider>
+                            </template>
+                          </v-stepper-header>
+                        </v-stepper>
+
+
+
+                        <!--                          <v-stepper-items>-->
+<!--                            <v-stepper-content-->
+<!--                                v-for="(ciclo,n) in cyclesOfRutine"-->
+<!--                                :key="ciclo.id"-->
+<!--                                :step="n"-->
+<!--                            >-->
+<!--                              <v-card-->
+<!--                                  class="mb-12"-->
+<!--                                  color="grey lighten-1"-->
+<!--                                  height="200px"-->
+<!--                              >-->
+<!--                                <v-list two-line  style="max-height:250px"-->
+<!--                                        class="overflow-y-auto">-->
+<!--                                  <v-list-item-group-->
+<!--                                      v-model="selected[n]"-->
+<!--                                      active-class="grey&#45;&#45;text"-->
+<!--                                      multiple-->
+<!--                                  >-->
+<!--                                    <template v-for="(excersise, index) in exercisesOfCycle(n) ">-->
+<!--                                      <v-list-item :key="excersise.id">-->
+<!--                                        <template v-slot:default="{ active }">-->
+<!--                                          <v-list-item-content>-->
+<!--                                            <v-list-item-title v-text="excersise.name"></v-list-item-title>-->
+
+<!--                                          </v-list-item-content>-->
+
+<!--                                          <v-list-item-action>-->
+
+<!--                                            <v-icon-->
+<!--                                                v-if="active"-->
+<!--                                                color="grey lighten-1"-->
+<!--                                            >-->
+<!--                                              mdi-check-->
+<!--                                            </v-icon>-->
+
+<!--                                          </v-list-item-action>-->
+<!--                                        </template>-->
+<!--                                      </v-list-item>-->
+
+<!--                                      <v-divider-->
+<!--                                          v-if="index < excersise.length - 1"-->
+<!--                                          :key="index"-->
+<!--                                      ></v-divider>-->
+<!--                                    </template>-->
+<!--                                  </v-list-item-group>-->
+
+<!--                                </v-list>-->
+
+
+<!--                              </v-card>-->
+<!--                            </v-stepper-content>-->
+<!--                          </v-stepper-items>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--                        CICLO EDITAR RUT FIN-->
                       </v-card-text>
                       <v-col>
                         <v-row>
                           <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                          <v-btn plain color="grey" class="mx-0" @click="cancelActionRut">Cancelar</v-btn>
-                          <v-btn :loading="loading" flat class="primary mx-10" @click="modifyRut(rutina)">Guardar</v-btn>
+                          <v-btn dark flat class="red mx-0" @click="cancelActionRut">Cancelar</v-btn>
+                          <v-btn flat class="success mx-10" @click="modifyRut(rutina)">Guardar</v-btn>
 
                         </v-row>
                       </v-col>
-                    <v-col></v-col>
+
 
                     </v-card>
                   </v-dialog>
@@ -84,8 +188,8 @@
                       <v-col text--center>
                         <v-row>
                           <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                          <v-btn dark flat class="primary mx-0" @click="cancelActionRut">No</v-btn>
-                          <v-btn :loading="loading" plain color="grey" class="mx-10" @click="deleteRut(rutina.id)">Si</v-btn>
+                          <v-btn dark flat class="red mx-0" @click="cancelActionRut">No</v-btn>
+                          <v-btn flat class="success mx-10" @click="deleteRut(rutina.id)">Si</v-btn>
 
                         </v-row>
                       </v-col>
@@ -151,13 +255,15 @@ import {categoryApi} from "../API_EJS/js/category";
 
 export default {
   componets: {NuevaRutina, EditRutina},
-  data () {
+  data() {
     return {
       snackbar: false,
       dialog:{id:0,on:false},
-      loading: false,
+      selected:[],
       modalVisible:null,
       dialogEdit:false,
+      e1: 0,
+      steps: 1,
       rutAux:{id:0,name:'',detail:'',category:{name:'',id:0}},
     }
   },
@@ -167,7 +273,6 @@ export default {
       modalData: null,
       }
     },
-
     showSnackbar: function (event) {
       event.stopPropagation();
       console.log(this);
@@ -178,7 +283,6 @@ export default {
         }, this.timeout);
       },
     deleteRut: async function (id) {
-      this.loading = true;
       const cyclesIDaux = await cycleApi.getAll(id, null);
       for (const ciclo of cyclesIDaux.content) {
         const ejercicios = await cycleExercisesApi.getAll(ciclo.id,null);
@@ -189,7 +293,6 @@ export default {
         await cycleApi.delete(id,ciclo,null);
       }
       await routineApi.delete(id);
-      this.loading = false;
       await this.$store.dispatch("changeCardID");//es como un flag que avisa un cambio de estado
     },
     cancelActionRut: function (){
@@ -197,13 +300,12 @@ export default {
     },
     //////////////////////////////////////////////////////////////////////////////////
     funcionAUX: async function (id,item){
-      console.log("acaaa");
-      console.log(id);
       this.data.modalData = item;
       this.data.modalVisible = true;
       // ver de hacer el dispatch aca
 
       await this.$store.dispatch("getCyclesOfID", id);
+
     },
     funcionAUX2: function (){
       console.log("llegooooooooooooooooooooo");
@@ -214,18 +316,28 @@ export default {
       console.log('entrooooooo');
       console.log(this);
 
+
       const resp = await routineApi.get(rutID,null);
       if(resp.id){
         this.rutAux.id = resp.id;
         this.rutAux.name = resp.name;
         this.rutAux.detail = resp.detail;
         const respCat = await categoryApi.get(resp.category.id,null);
+        await this.$store.dispatch("getCyclesOfID", resp.id);
+
         console.log(respCat);
         this.rutAux.category.name = respCat.name;
       }
     }
     /////////////////////////////////////////////////////////////////////////////////
     },
+  watch: {
+    steps (val) {
+      if (this.e1 > val) {
+        this.e1 = val
+      }
+    },
+  },
 
     computed: {
       rutinas(){
@@ -234,10 +346,16 @@ export default {
       cardID(){
         return this.$store.state.cardID;
       },
+      ejercicios(){
+        return this.$store.state.listaEjercicios;
+      },
       cyclesOfRutine(){
         console.log(this.$store.state.cyclesOfRutine);
         return this.$store.state.cyclesOfRutine;
-      }
+      },
+      // exercisesOfCycle(numberOfcycle){
+      //   return this.$store.state.exersisesOfRoutineOnCycle[numberOfcycle];
+      // } DESCOMENTAR CUANDO EL API FUNCIONE
     },
 
     mounted() {
