@@ -41,13 +41,13 @@
                                         <v-text-field
                                             label="Usuario *"
                                             v-model="newUsername"
-                                            required
+
                                             filled
-                                            background-color="white"
+                                            class= "mt-6"
                                             rounded
                                             dense
-                                            light
-                                            class= "mt-6"
+                                            required
+
                                             :rules="usernameRules"
                                         ></v-text-field>
                                       </v-row>
@@ -57,13 +57,14 @@
                                         <v-text-field
                                             label="Correo electrónico *"
                                             v-model="email"
-                                            required
+
                                             :rules=emailRules
+
                                             filled
+                                            class= "mt-6"
                                             rounded
-                                            background-color="white"
-                                            light
                                             dense
+                                            required
                                         ></v-text-field>
                                       </v-row>
 
@@ -71,11 +72,11 @@
                                       <v-row>
                                         <v-text-field
                                             v-model="newPassword"
+
                                             filled
+                                            class= "mt-6"
                                             rounded
                                             dense
-                                            background-color="white"
-                                            light
                                             required
                                             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                                             :type="show1 ? 'text' : 'password'"
@@ -92,10 +93,10 @@
                                       <v-row>
                                         <v-text-field
                                             v-model="confirmPassword"
+
                                             filled
+                                            class= "mt-6"
                                             rounded
-                                            background-color="white"
-                                            light
                                             dense
                                             required
                                             :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -143,7 +144,7 @@
                             >INICIAR SESIÓN</v-btn
                             >
                           </template>
-                          <v-card>
+                          <v-card  color="rgb(0, 0, 0, 0.7)">
                             <v-card-text>
                               <v-form ref="form2" v-model="valid">
                               <v-row>
