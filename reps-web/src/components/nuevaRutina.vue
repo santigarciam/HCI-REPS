@@ -255,7 +255,7 @@
 
 <script>
 
-import rutineCard from "./rutineCard.vue";
+// import rutineCard from "./rutineCard.vue";
 import  { routineApi } from "@/API_EJS/js/routines"
 import  { categoryApi} from "../API_EJS/js/category";
 import {cycleApi} from "../API_EJS/js/cycles";
@@ -285,13 +285,7 @@ export default {
     },
   },
   methods :{
-    submit: function (event){
-      if (event){
-        rutineCard.methods.newRutine(this.nombreRut,"YO",this.descripcionRut,this.durRut, "0");
-      }
-
-      // generarRutinaNueva(tituloRut, autorRut, descripcionRut, durRut, rating)
-    },
+    // generarRutinaNueva(tituloRut, autorRut, descripcionRut, durRut, rating)
     addNewRoutine: async function(){
       var catID = -1;
       var respCat;

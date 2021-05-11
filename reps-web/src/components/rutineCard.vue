@@ -2,10 +2,8 @@
   <div class="text-center">
     <v-dialog
         width="900px"
-
-        v-for="(rutina) in rutinas"
+        v-for="rutina in rutinas"
         :key="rutina.id"
-        :retain-focus="false"
         scrollable
     >
       <!--        v-for="rutina in data().rutinas" :key="rutina.tituloRut"  UNA LINEA MAS ARRIBA -->
@@ -15,12 +13,46 @@
           <v-card v-bind="attrs" v-on="on"  @click.stop="funcionAUX(rutina.id,rutina)" :data="modalData" >
             <v-col>
               <v-row>
-                <v-card-title v-model="tituloRut">{{ rutina.name }} </v-card-title>
+                <v-card-title>{{ rutina.name }} </v-card-title>
                 <v-spacer></v-spacer>
 
-                <div>
 
-                  <edit-rut></edit-rut>
+<!-- EDITAR RUTINAA-->
+                  <v-dialog v-model="dialog[rutina.id]" width="800px" :retain-focus="false" >
+                    <template  v-slot:activator="{ on, attrs }">
+                      <v-btn icon class="mt-4 mr-2" plain color = "grey" slot="activator" small  v-on:click.prevent="editarRutina(rutina.id)" v-bind="attrs" v-on="on">
+                        <v-icon>
+                          mdi-pencil
+                        </v-icon>
+                      </v-btn>
+                    </template>
+
+                    <v-card>
+                      <v-card-title>Editar Rutina {{rutina.id}}</v-card-title>
+
+
+                      <v-card-text>
+
+                        <v-form class="px-3">
+                          <v-text-field outlined label="Nombre*" v-model="rutAux.name"></v-text-field>
+                          <v-textarea  outlined label="Descripcion*" v-model="rutAux.detail" ></v-textarea>
+                          <v-text-field outlined label="Categoría" v-model="rutAux.category.name"></v-text-field>
+
+                        </v-form>
+                      </v-card-text>
+                      <v-col>
+                        <v-row>
+                          <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
+                          <v-btn dark flat class="red mx-0" @click="cancelActionRut">Cancelar</v-btn>
+                          <v-btn flat class="success mx-10" @click="modifyRut(rutina)">Guardar</v-btn>
+
+                        </v-row>
+                      </v-col>
+
+
+                    </v-card>
+                  </v-dialog>
+<!--                  EDITAR RUTINA FIN-->
 
                   <v-btn
                       icon
@@ -65,12 +97,11 @@
                   </v-dialog>
                   <!--      Boton de borrar      -->
 
-                </div>
               </v-row>
 
             </v-col>
             <v-col class="text-left">
-              <v-card-subtitle v-model="autorRut">Autor: {{ HACERFUNCIONDECURRENTUSER }} </v-card-subtitle>
+<!--              <v-card-subtitle v-model="autorRut">Autor: {{ HACERFUNCIONDECURRENTUSER }} </v-card-subtitle>-->
               <v-card-subtitle v-model="descripcionRut">Descripcion: {{ rutina.detail }}</v-card-subtitle>
 <!--              <v-card-subtitle v-model="durRut">Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
             </v-col>
@@ -111,24 +142,27 @@
 <script>
 import NuevaRutina from "@/components/nuevoEjercicio";
 import  EditRutina from "@/components/editRut"
-import EditRut from "@/components/editRut";
+// import EditRut from "@/components/editRut";
 import { routineApi } from "../API_EJS/js/routines";
 import { cycleApi } from "../API_EJS/js/cycles";
 import {cycleExercisesApi} from "../API_EJS/js/cycleExercises";
+import {categoryApi} from "../API_EJS/js/category";
 //import {cycleExercisesApi } from "../API_EJS/js/cycleExercises";
 
 export default {
-  components: {EditRut},
+  componets: {NuevaRutina, EditRutina},
+  data () {
+    return {
+      snackbar: false,
+      dialog:{id:0,on:false},
+      modalData: null,
+      modalVisible:null,
+      dialogEdit:false,
+      rutAux:{id:0,name:'',detail:'',category:{name:'',id:0}},
+    }
+  },
   methods: {
-    data: function () {
-      return {
-        componets: {NuevaRutina, EditRutina},
-        snackbar: false,
-        dialog:{},
-        modalData: null,
-        modalVisible:null,
-      }
-    },
+
     showSnackbar: function (event) {
       event.stopPropagation();
       console.log(this);
@@ -168,6 +202,21 @@ export default {
       console.log("llegooooooooooooooooooooo");
       return this.cyclesOfRutine;
     },
+
+    editarRutina: async function(rutID){
+      console.log('entrooooooo');
+      console.log(this);
+
+      const resp = await routineApi.get(rutID,null);
+      if(resp.id){
+        this.rutAux.id = resp.id;
+        this.rutAux.name = resp.name;
+        this.rutAux.detail = resp.detail;
+        const respCat = await categoryApi.get(resp.category.id,null);
+        console.log(respCat);
+        this.rutAux.category.name = respCat.name;
+      }
+    }
     /////////////////////////////////////////////////////////////////////////////////
     },
 
