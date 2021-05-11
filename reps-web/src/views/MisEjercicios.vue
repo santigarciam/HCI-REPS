@@ -1,17 +1,29 @@
+<!--<template>-->
+<!--  <v-container fluid id="Mis Ejercicios">-->
+<!--    <v-col>-->
+<!--    <v-row class="mt-2">-->
+<!--       <search-field></search-field>-->
+<!--        <v-spacer></v-spacer>-->
+<!--        <nuevo-ejercicio></nuevo-ejercicio>-->
+<!--    </v-row>-->
+<!--    </v-col>-->
+<!--  <ejercice-card :key="cardID"></ejercice-card>-->
+<!--  </v-container>-->
+<!--</template>-->
+
 <template>
-  <v-container fluid id="Mis Ejercicios">
+  <div class="MisEjercicios">
+    <v-divider></v-divider>
+    <v-col>
+      <v-row class="mt-2">
+        <search-field class="ml-3"></search-field>
+        <v-spacer></v-spacer>
+        <nuevo-ejercicio></nuevo-ejercicio>
+      </v-row>
+    </v-col>
 
-    <v-row class="mt-2">
-      <v-col>
-       <search-field></search-field>
-      </v-col>
-      <v-spacer></v-spacer>
-      <nuevo-ejercicio></nuevo-ejercicio>
-    </v-row>
-
-
-  <ejercice-card :key="cardID"></ejercice-card>
-  </v-container>
+    <ejercice-card :key="cardID"></ejercice-card>
+  </div>
 </template>
 
 <script>
