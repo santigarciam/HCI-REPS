@@ -88,7 +88,7 @@
                 v-on="on"
             >
               <v-avatar>
-                <img
+                <img :key="cardID"
                     v-bind:src="userAvatar"
                     v-bind:alt="userName"
                 >
@@ -98,8 +98,8 @@
           <v-list>
             <v-list-item>
 
-              <v-btn plain disabled>
-                {{userName}}
+              <v-btn plain disabled :key="cardID">
+                {{userName + " " + userLastName}}
               </v-btn>
             </v-list-item>
             <v-list-item>
@@ -202,6 +202,9 @@ export default {
     },
     userName(){
       return this.$store.state.userFirstName;
+    },
+    userLastName(){
+      return this.$store.state.userLastName;
     },
     userAvatar(){
       return this.$store.state.userAvatar;

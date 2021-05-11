@@ -35,5 +35,7 @@ export const GET_USER_INFO = async (state) => {
     console.log(result);
     state.user= result.username;
     state.userFirstName = result.firstName;
+    state.userLastName = result.lastName;
     state.userAvatar = result.avatarUrl;
+    state.userDate = result.birthdate;
 }

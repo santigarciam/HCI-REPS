@@ -37,12 +37,12 @@
       <v-col>
         <v-row>
           <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-          <v-btn flat dark class="red mx-0" v-on:click="cleanAndCloseDialog">Cancelar</v-btn>
-          <v-btn flat class="success mx-10" v-on:click="addNewExcercise">Guardar</v-btn>
+          <v-btn  plain color="grey" class="mx-0" v-on:click="cleanAndCloseDialog">Cancelar</v-btn>
+          <v-btn :loading="loading" flat class="primary mx-10" v-on:click="addNewExcercise">Guardar</v-btn>
 
         </v-row>
       </v-col>
-
+<v-col></v-col>
     </v-card>
   </v-dialog>
 </template>
@@ -57,12 +57,15 @@ export default {
     return{
       nameEj:'',
       detailEj:'',
-      matEj:''
+      matEj:'',
+      loading: false,
     }
   },
   methods :{
-    addNewExcercise: function (){
-      ExerciseApi.add({name:this.nameEj,detail:this.detailEj,type:"exercise",metadata:null},null);
+    addNewExcercise: async function (){
+      this.loading = true;
+      await ExerciseApi.add({name:this.nameEj,detail:this.detailEj,type:"exercise",metadata:null},null);
+      this.loading = false;
       this.cleanAndCloseDialog();
     },
     cleanAndCloseDialog: function (){
