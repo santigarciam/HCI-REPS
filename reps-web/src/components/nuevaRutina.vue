@@ -242,8 +242,8 @@
                   <v-col>
                     <v-row>
                       <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                      <v-btn flat dark class="red mx-0" v-on:click="cancelActionNewRut">Cancelar</v-btn>
-                      <v-btn flat class="success mx-10" v-on:click="addNewRoutine">Guardar</v-btn>
+                      <v-btn plain color="grey" class="mx-0" v-on:click="cancelActionNewRut">Cancelar</v-btn>
+                      <v-btn flat class="primary mx-10" v-on:click="addNewRoutine">Guardar</v-btn>
 <!--                      <v-btn flat class="success mx-10" v-on:click="pqAnda">Guardar</v-btn>-->
 
                     </v-row>
@@ -267,6 +267,7 @@ export default {
   components: {},
   data(){
     return{
+      loading: false,
       nameRut:'',
       selected:{},
       detailRut:'',
@@ -287,6 +288,7 @@ export default {
   methods :{
     // generarRutinaNueva(tituloRut, autorRut, descripcionRut, durRut, rating)
     addNewRoutine: async function(){
+      this.loading = true;
       var catID = -1;
       var respCat;
       try {
@@ -407,7 +409,7 @@ export default {
         var ejerCiclo = await cycleExercisesApi.getAll(h.id, null);
         console.log(ejerCiclo);
       }
-
+    this.loading = false;
     this.cancelActionNewRut();
     },
     cancelActionNewRut: function (){

@@ -15,10 +15,10 @@
           <v-container>
             <v-row>
               <v-col>
-          <v-text-field outlined label="Nombre" v-model="nombreUsuario">nombre</v-text-field>
+          <v-text-field outlined label="Nombre*" v-model="nombreUsuario">nombre</v-text-field>
               </v-col>
               <v-col>
-          <v-text-field outlined label="Apellido" v-model="apellidoUsuario" >apellido</v-text-field>
+          <v-text-field outlined label="Apellido*" v-model="apellidoUsuario" >apellido</v-text-field>
               </v-col>
             </v-row>
             <v-row>
@@ -60,6 +60,11 @@
 <!--                -->
               </v-col>
             </v-row>
+            <v-row>
+              <v-col>
+                <v-text-field outlined label="URL al Avatar" v-model="urlAvatar">URL</v-text-field>
+              </v-col>
+            </v-row>
           </v-container>
 
 
@@ -85,16 +90,17 @@
 
 <script>
 import { UserApi } from "../API_EJS/js/user";
+import state from "../store/state";
 
 export default {
   name: "perfilPopUp",
   data(){
     return{
       loading: false,
-      nombreUsuario: '',
-      apellidoUsuario: '',
+      nombreUsuario: state.userFirstName,
+      apellidoUsuario: state.userLastName,
       fechaNacUsuario: '',
-      usuario: '',
+      urlAvatar: state.userAvatar,
       date: null,
       menu: false,
     }
@@ -115,22 +121,33 @@ export default {
       this.usuario='';
       this.apellidoUsuario='';
       this.fechaNacUsuario='';
+      this.urlAvatar='';
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     },
     submit: async function (){
       this.loading = true;
+      let dateAux = 20210511;
+      if (this.date != null){
+        dateAux = parseInt(this.date.replaceAll('-',''));
+      }
+      let avatarUrlAux = state.userAvatar;
+      if (this.urlAvatar !== ''){
+        avatarUrlAux = this.urlAvatar;
+      }
+
       //console.log(this.date.replaceAll('-',''));
       const data = {  firstName: this.nombreUsuario,
         lastName: this.apellidoUsuario,
         gender: "male",
-        birthdate: parseInt(this.date.replaceAll('-','')),
+        birthdate: dateAux,
         phone: "98295822",
-        avatarUrl: "https://flic.kr/p/3ntH2u",
+        avatarUrl: avatarUrlAux,
         metadata: null};
       console.log(data);
       await UserApi.modifyUserInformation(data, null);
       this.loading = false;
       //await this.loadingAnimation();
+      await this.$store.dispatch("getUserInformation");
       this.cancelActionEditProfile();
     },
     async loadingAnimation () {

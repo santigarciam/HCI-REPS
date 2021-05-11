@@ -49,13 +49,11 @@
               <v-col>
                 <v-row>
                   <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                  <v-btn dark flat class="red mx-0" @click="cancelAction">Cancelar</v-btn>
-                  <v-btn flat class="success mx-10" @click="modifyExercise(excercise)">Guardar</v-btn>
-
+                  <v-btn plain color="grey" class="mx-0" @click="cancelAction">Cancelar</v-btn>
+                  <v-btn flat class="primary mx-10" @click="modifyExercise(excercise)">Guardar</v-btn>
                 </v-row>
               </v-col>
-
-
+              <v-col></v-col>
             </v-card>
           </v-dialog>
 
@@ -75,8 +73,8 @@
                 <v-col text--center>
                   <v-row>
                     <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                    <v-btn dark flat class="red mx-0" @click="cancelAction">No</v-btn>
-                    <v-btn flat class="success mx-10" @click="deleteEj(excercise.id)">Si</v-btn>
+                    <v-btn dark flat class="primary mx-0" @click="cancelAction">No</v-btn>
+                    <v-btn plain color="grey" class="mx-10" @click="deleteEj(excercise.id)">Si</v-btn>
 
                   </v-row>
                 </v-col>
@@ -127,10 +125,12 @@ export default {
       // dialog: false,
       dialogEditRut: false,
       excerciseAux:{id:0,name:'',detail:''},
+      loading: false,
     }
 },
   methods: {
     modifyExercise: async function (excercise){
+      this.loading = true;
       excercise.name = this.excerciseAux.name;
       excercise.detail = this.excerciseAux.detail;
      const resp = await ExerciseApi.modify(excercise);
@@ -141,7 +141,8 @@ export default {
      }
       this.dialog[excercise.id] = false;
 
-      this.$store.dispatch("changeCardID");
+      await this.$store.dispatch("changeCardID");
+      this.loading = false;
      return resp;
     },
     deleteEj: function (id){
