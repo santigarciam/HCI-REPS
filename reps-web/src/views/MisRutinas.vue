@@ -8,8 +8,6 @@
       <search-field></search-field>
       <v-spacer></v-spacer>
       <nueva-rutina></nueva-rutina>
-
-
     </v-row>
 </v-col>
 

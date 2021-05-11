@@ -43,15 +43,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
                         <v-stepper v-model="e1">
                           <v-stepper-header>
                             <template v-for="(ciclo,n) in cyclesOfRutine">
@@ -73,7 +64,6 @@
                             </template>
                           </v-stepper-header>
                         </v-stepper>
-
 
 
                         <!--                          <v-stepper-items>-->
@@ -130,18 +120,6 @@
 <!--                          </v-stepper-items>-->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 <!--                        CICLO EDITAR RUT FIN-->
                       </v-card-text>
                       <v-col>
@@ -165,7 +143,7 @@
                       class="mt-4 mr-2"
                       v-on:click="showSnackbar"
                   >
-                    <v-icon>mdi-share</v-icon>
+                    <v-icon class="pb-3">mdi-share</v-icon>
                   </v-btn>
                   <v-snackbar
                       v-model="snackbar"

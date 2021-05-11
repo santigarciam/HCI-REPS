@@ -105,12 +105,8 @@
             <v-list-item>
              <perfil-pop-up></perfil-pop-up>
             </v-list-item>
-
             <v-list-item>
               <v-row>
-<!--              <v-btn plain>Cerrar Sesion</v-btn>-->
-<!--                -->
-
                 <v-dialog v-model="dialog" width="800px">
                   <template  v-slot:activator="{ on, attrs }">
                     <v-btn block plain v-bind="attrs" v-on="on">

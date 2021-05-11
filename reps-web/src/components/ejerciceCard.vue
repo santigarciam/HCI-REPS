@@ -2,7 +2,8 @@
   <div class="text-center">
   <v-dialog v-model="dialogEJ" width="800px" v-for="excercise in ejercicios " :key="excercise.id" >
     <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-      <v-card depressed class="ma-2" slot="activator" v-bind="attrs" v-on="on">
+      <v-container class ="container_v_card">
+      <v-card depressed slot="activator" v-bind="attrs" v-on="on">
         <v-col>
           <v-row>
             <v-card-title>{{ excercise.name }}</v-card-title>
@@ -91,6 +92,7 @@
         </v-col>
 
       </v-card>
+      </v-container>
     </template>
 
     <v-card>
