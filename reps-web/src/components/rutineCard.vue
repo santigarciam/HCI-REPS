@@ -276,7 +276,7 @@ export default {
     showSnackbar: function (event) {
       event.stopPropagation();
       console.log(this);
-      alert("PRUEBA");
+     // alert("PRUEBA");
         this.snackbar = true;
         setTimeout(() => {
           this.$emit("yourEvent");
