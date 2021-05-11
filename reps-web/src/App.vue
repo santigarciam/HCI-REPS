@@ -1,6 +1,6 @@
 <template>
 <v-app>
-    <AppBar v-if="isNotHome" ></AppBar>
+    <AppBar v-if="isNotLoged" ></AppBar>
   <v-main>
     <router-view></router-view>
   </v-main>
@@ -11,6 +11,7 @@
 <script>
 
 import AppBar from "./components/AppBar";
+import state from "./store/state";
 
 export default {
   name: 'App',
@@ -21,6 +22,9 @@ export default {
   computed: {
     isNotHome() {
       return this.$route.path != '/'
+    },
+    isNotLoged(){
+      return state.token != null;
     }
   },
 

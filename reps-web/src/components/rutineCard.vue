@@ -164,13 +164,11 @@
                       v-model="boton"
                       class="mt-4 mr-2"
                       v-on:click="showSnackbar"
-
                   >
                     <v-icon>mdi-share</v-icon>
                   </v-btn>
                   <v-snackbar
                       v-model="snackbar"
-                      :timeout="timeout"
                   >Se copio al clipboard el link de la rutina!</v-snackbar>
 
                   <!--       Boton de borrar   -->

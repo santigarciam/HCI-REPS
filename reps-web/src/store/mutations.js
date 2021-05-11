@@ -51,3 +51,7 @@ export const GET_USER_INFO = async (state) => {
     state.userAvatar = result.avatarUrl;
     state.userDate = result.birthdate;
 }
+
+export const SAVE_REGISTERED_MAIL = (state,mail) =>{
+    state.userRegisteredMail = mail;
+}

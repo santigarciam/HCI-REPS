@@ -10,7 +10,7 @@
         </v-row>
       </v-col>
     </v-row>
-    <other-routines></other-routines>
+    <other-routines :key="cardID"></other-routines>
   </v-container>
 </template>
 <script>
@@ -55,6 +55,14 @@ export default {
 
     ordenar: function (){
       this.$store.dispatch("sortRoutines", this.orden);
+    }
+  },
+  mounted() {
+    this.$store.dispatch("changeCardID");
+  },
+  computed: {
+    cardID(){
+      return this.$store.state.cardID;
     }
   }
 }

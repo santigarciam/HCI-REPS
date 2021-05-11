@@ -1,5 +1,5 @@
 <template>
-  <div class="bg">
+  <div class="bg" :key="cardID">
     <v-img>
       <v-container fluid class="fill-height pa-0 ma-0">
         <v-row>
@@ -41,13 +41,11 @@
                                         <v-text-field
                                             label="Usuario *"
                                             v-model="newUsername"
-
                                             filled
                                             class= "mt-6"
                                             rounded
                                             dense
                                             required
-
                                             :rules="usernameRules"
                                         ></v-text-field>
                                       </v-row>
@@ -108,9 +106,12 @@
                                             @click:append="show2 = !show2"
                                         ></v-text-field>
                                       </v-row>
-
+<!--REGISTRARSEEEEEEEEEEEEEEEEEEEEeeee-->
                                       <v-row>
-                                        <v-btn
+                                        <v-dialog v-model="dialogRegist" width="900px">
+                                          <template v-slot:activator="{ on, attrs }">
+                                          <v-btn
+                                              slot="activator" v-bind="attrs" v-on="on"
                                             block
                                             elevation="2"
                                             color="#2679CC"
@@ -120,6 +121,66 @@
                                             @keyup.enter="validar()"
                                         >REGISTRARSE
                                         </v-btn>
+                                          </template>
+                                          <v-card  rounded color="grey lighten-1" elevation="0" >
+                                            <v-card-text>
+                                              <v-card-title align="center">Ingrese el codigo de verificacion</v-card-title>
+                                              <v-row>
+                                                <v-col cols="12">
+
+                                                  <!--Input registro usuario -->
+                                                  <v-container>
+                                                    <v-row>
+                                                      <v-text-field
+
+                                                          label="Codigo"
+                                                          filled
+                                                          class= "mt-6"
+                                                          rounded
+                                                          dense
+                                                          v-model="verificationCode"
+                                                          @keyup.enter="verifyCode"
+                                                      ></v-text-field>
+                                                    </v-row>
+
+                                                    <v-row  justify="center" align="center">
+
+                                                      <v-btn
+                                                          elevation="2"
+                                                          color="#00B2EB"
+                                                          dark
+                                                          rounded
+                                                          center
+                                                          class="text-center"
+                                                          v-on:click="verificarCodigo"
+                                                          @keyup.enter="verificarCodigo"
+                                                      >CONFIRMAR
+                                                      </v-btn>
+                                                      <v-btn
+                                                          elevation="2"
+                                                          color="#00B2EB"
+                                                          dark
+                                                          class="text-center"
+                                                          rounded
+                                                          @click="resendCode"
+                                                          @keyup.enter="resendCode"
+                                                      >REENVIAR CODIGO
+                                                      </v-btn>
+
+                                                    </v-row>
+                                                    <v-snackbar
+                                                        v-model="snackbar"
+
+                                                    >Se reenvio el codigo de verificacion a su mail {{this.$store.state.userRegisteredMail}}</v-snackbar>
+                                                  </v-container>
+
+
+                                                </v-col>
+                                              </v-row>
+                                            </v-card-text>
+                                          </v-card>
+                                        </v-dialog>
+<!--                                          FIN REGISTRARSE-->
                                       </v-row>
                                     </v-container>
                                   </v-col>
@@ -247,6 +308,9 @@ export default {
     return {
       error: "",
       valid: false,
+      dialogRegist: false,
+      verificationCode: "",
+      snackbar:false,
       //reglas para el form
       usernameRules: [
         v => !!v || 'El usuario es obligatorio'
@@ -294,7 +358,27 @@ export default {
 
     }
   },
+  computed: {
+    cardID() {
+      return this.$store.state.cardID;
+    },
+  },
   methods:{
+    verificarCodigo(){
+      console.log("ACAAA");
+      // eslint-disable-next-line no-undef
+      console.log(this.$store.state.userRegisteredMail);
+      // console.log({userRegisteredMail,code:this.verificationCode});
+      UserApi.verifyCode({email:this.$store.state.userRegisteredMail,code:this.verificationCode},null);
+    },
+    resendCode(){
+      console.log("reenviado");
+      UserApi.resendCode({email:this.$store.state.userRegisteredMail},null);
+      this.snackbar = true;
+      setTimeout(() => {
+        this.$emit("yourEvent");
+      }, this.timeout);
+    },
     check: function (password){
       return password == this.newPassword
     },
@@ -320,14 +404,25 @@ export default {
       }//hay q hacer un else??
 
     },
-    registerUser: function (){
-      if(this.newUsername === ""){
-        console.log("Usuario vacio") ;
+    registerUser: async function () {
+      console.log("ACAAA");
+      this.dialogRegist =true;
+      this.dialog = false;
+      await this.$store.dispatch('changeCardID');
+      if (this.newUsername === "") {
+        console.log("Usuario vacio");
         console.log(this.newUsername);
       }
-      UserApi.register({username:this.newUsername,password: this.newPassword,firstName:"leonel",
-        lastName:'parisian',gender:'male', birthdate:29021990,email:this.email,phone:'234532123',
-        avatarUrl:'https://flic.kr/p/3ntH2u',metadata:null},null);
+      const resp = await UserApi.register({
+        username: this.newUsername, password: this.newPassword, firstName: "leonel",
+        lastName: 'parisian', gender: 'male', birthdate: 29021990, email: this.email, phone: '234532123',
+        avatarUrl: 'https://flic.kr/p/3ntH2u', metadata: null
+      }, null);
+      if (resp.id){
+
+        await this.$store.dispatch('saveRegisteredMail', this.email);
+      }
+
     },
     loginUser: function(){
       console.log(this.username);
@@ -337,6 +432,6 @@ export default {
     }
 
   }
-};
+}
 
 </script>

@@ -28,8 +28,8 @@
                   rounded
                   center
                   class="text-center"
-                  @click="verifyCode"
-                  @keyup.enter="verifyCode"
+                  v-on:click="verificarCodigo"
+                  @keyup.enter="verificarCodigo"
               >CONFIRMAR
               </v-btn>
             <v-btn
@@ -44,6 +44,10 @@
             </v-btn>
 
       </v-row>
+            <v-snackbar
+                v-model="snackbar"
+
+            >Se reenvio el codigo de verificacion a su mail {{this.$store.state.userRegisteredMail}}</v-snackbar>
           </v-container>
 
 
@@ -55,24 +59,38 @@
 
 <script>
 import { UserApi } from "@/API_EJS/js/user";
-import { LandingPage } from "@/views/LandingPage";
+
 
 export default {
   name: "ConfirmacionMail",
   data(){
     return {
-      verificationCode: ""
+      verificationCode: "",
+      snackbar:false,
     }
   },
-  methods:{
-    verifyCode: function (){
-      console.log(this.LandingPage.emailReg);
-      console.log({email:LandingPage.emailReg,code:this.verificationCode});
-      UserApi.verifyCode({email:LandingPage.emailReg,code:this.verificationCode},null);
+
+    methods:{
+      verificarCodigo(){
+        console.log("ACAAA");
+        // eslint-disable-next-line no-undef
+        console.log(this.$store.state.userRegisteredMail);
+        // console.log({userRegisteredMail,code:this.verificationCode});
+         UserApi.verifyCode({email:this.$store.state.userRegisteredMail,code:this.verificationCode},null);
+      },
+      resendCode(){
+        console.log("reenviado");
+        UserApi.resendCode({email:this.$store.state.userRegisteredMail},null);
+        this.snackbar = true;
+        setTimeout(() => {
+          this.$emit("yourEvent");
+        }, this.timeout);
+      }
     },
-    resendCode: function (){
-        UserApi.resendCode({email:LandingPage.emailReg},null);
-    }
+  computed:{
+    getMail(){
+      return this.$store.state.userRegisteredMail;
+    },
   }
 }
 </script>

@@ -75,6 +75,9 @@ export const getCyclesOfID = ({ commit }, id) => {
     commit('GET_CYCLES_OF_ID', id);
 }
 
+export const saveRegisteredMail = ({commit},mail) =>{
+    commit('SAVE_REGISTERED_MAIL',mail);
+}
 
 
 export const changeCardID = ({ commit }) => {

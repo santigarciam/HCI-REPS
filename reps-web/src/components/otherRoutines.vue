@@ -32,14 +32,13 @@
                       color="grey"
                       v-model="boton"
                       class="mt-4 mr-2"
-                      v-on:click="showSnackbar"
+                      v-on:click="mostrarSnack"
 
                   >
                     <v-icon>mdi-share</v-icon>
                   </v-btn>
                   <v-snackbar
                       v-model="snackbar"
-                      :timeout="timeout"
                   >Se copio al clipboard el link de la rutina!</v-snackbar>
 
 
@@ -90,35 +89,24 @@
 
 
 <script>
-import NuevaRutina from "@/components/nuevoEjercicio";
 
 import { cycleApi } from "../API_EJS/js/cycles";
 //import {cycleExercisesApi } from "../API_EJS/js/cycleExercises";
 
 export default {
-  components: {},
+
   methods: {
     data: function () {
       return {
-        componets: {NuevaRutina},
         snackbar: false,
-        headers: [
-          {
-            text: 'Ejercicios',
-            align: 'left',
-            sortable: false,
-            value: 'name',
-            cyclesOfRutine: [],
-          }
-        ],
       }
     },
 
-    showSnackbar: function (event) {
+    mostrarSnack: function (event) {
       event.stopPropagation();
       console.log(this);
-      alert("PRUEBA");
       this.snackbar = true;
+      this.$store.dispatch('changeCardID');
       setTimeout(() => {
         this.$emit("yourEvent");
       }, this.timeout);
