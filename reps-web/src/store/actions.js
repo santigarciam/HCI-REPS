@@ -59,6 +59,10 @@ export const searchExercises = async ({ commit }, busqueda) => {
         commit('SET_EXERCISES', response.content);
     }
 }
+export const getCyclesOfID = ({ commit }, id) => {
+    console.log("En actions: " + id);
+    commit('GET_CYCLES_OF_ID', id);
+}
 
 
 export const changeCardID = ({ commit }) => {

@@ -401,21 +401,23 @@ export default {
           }else{
             console.log("No se pudo crear la rutina"); //ERROR
           }
-
           // Lo de arriba es toda la logica de crear una rutina (rutina, ciclos, ejercicios)
 
-          const rutinaAux = await routineApi.get(respRut.id,null);
-          console.log(rutinaAux);
-          const ciclosAux = await cycleApi.getAll(respRut.id, null);
-          console.log(ciclosAux);
+
+      const rutinaAux = await routineApi.get(respRut.id,null);
+      console.log(rutinaAux);
+      const ciclosAux = await cycleApi.getAll(respRut.id, null);
+      console.log(ciclosAux);
       for (const h of ciclosAux.content) {
         console.log(h.id);
-          var ejerCiclo = await cycleExercisesApi.getAll(h.id, null);
-          console.log(ejerCiclo);
+        var ejerCiclo = await cycleExercisesApi.getAll(h.id, null);
+        console.log(ejerCiclo);
       }
 
+    this.cancelActionNewRut();
     },
     cancelActionNewRut: function (){
+      console.log("CANCEL");
       this.dialog = false;
       this.nameRut='';
       this.e1= 0;

@@ -4,5 +4,6 @@ export default {
     listaEjercicios: [],
     cardID: 0,
     otrasRutinas: [],
-    rutinasFavoritas: []
+    rutinasFavoritas: [],
+    cyclesOfRutine: [],
 }
