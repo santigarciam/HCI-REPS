@@ -10,7 +10,7 @@
 
       <template v-slot:activator="{ on, attrs }">
         <v-container class ="container_v_card pb-4">
-          <v-card v-bind="attrs" v-on="on"  @click.stop="funcionAUX(rutina.id,rutina)" :data="modalData" >
+          <v-card v-bind="attrs" v-on="on"  @click.stop="funcionAUX(rutina.id,rutina)"  :data="modalData" >
             <v-col>
               <v-row>
                 <v-card-title>{{ rutina.name }} </v-card-title>
@@ -155,13 +155,18 @@ export default {
     return {
       snackbar: false,
       dialog:{id:0,on:false},
-      modalData: null,
+
       modalVisible:null,
       dialogEdit:false,
       rutAux:{id:0,name:'',detail:'',category:{name:'',id:0}},
     }
   },
   methods: {
+    data: function ()  {
+      return {
+      modalData: null,
+      }
+    },
 
     showSnackbar: function (event) {
       event.stopPropagation();
