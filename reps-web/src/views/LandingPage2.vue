@@ -55,9 +55,8 @@
                                         <v-text-field
                                             label="Correo electrónico *"
                                             v-model="email"
-
                                             :rules=emailRules
-
+                                            :error-messages= "this.emailError"
                                             filled
                                             class= "mt-6"
                                             rounded
@@ -106,7 +105,7 @@
                                             @click:append="show2 = !show2"
                                         ></v-text-field>
                                       </v-row>
-<!--REGISTRARSEEEEEEEEEEEEEEEEEEEEeeee-->
+                              <!--REGISTRARSEEEEEEEEEEEEEEEEEEEEeeee-->
                                       <v-row>
                                         <v-dialog v-model="dialogRegist" width="900px">
                                           <template v-slot:activator="{ on, attrs }">
@@ -219,6 +218,7 @@
                                           class= "mt-6"
                                           rounded
                                           dense
+                                          @keydown="checkError()"
                                           required
                                           :rules="loginUsernameRules"
                                           v-model="username"
@@ -233,6 +233,7 @@
                                           rounded
                                           required
                                           dense
+                                          @keydown="checkError()"
                                           v-model="password"
                                           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                                           :type="show1 ? 'text' : 'password'"
@@ -241,7 +242,7 @@
                                           @click:append="show1 = !show1"
                                       ></v-text-field>
                                     </v-row>
-
+                                   <p v-if="this.loginError" class="mb-5 red--text">Usuario o contraseña incorrecta</p>
                                     <v-row>
                                       <v-btn
                                           block
@@ -270,9 +271,6 @@
             </v-row>
           </v-col>
         </v-row>
-        <v-snackbar bottom color="error" v-model="error">
-          <p> {{errorMessage}} </p>
-        </v-snackbar>
       </v-container>
       <v-col></v-col>
       <v-col></v-col>
@@ -306,8 +304,8 @@ export default {
   name: "LandingPage",
   data() {
     return {
-      error: false,
-      errorMessage: "",
+      emailError: "",
+      loginError: false,
       valid: false,
       dialogRegist: false,
       verificationCode: "",
@@ -391,17 +389,26 @@ export default {
     },
     resetearCampos: function (){
       this.$refs.form.reset()
+      this.emailError = ""
     },
     resetear: function (){
       this.$refs.form2.reset()
+      this.loginError = false
+    },
+    resetErrors: function (){
+      this.loginError = ""
+    },
+    checkError: function (){
+      if (this.loginError == true){
+        this.loginError = false
+      }
     },
     validar: function (){
       if (this.$refs.form.validate() == true){
-        this.registerUser() //acá habria q chequear si el username o el mail ya existen porq tira error
+        this.registerUser()
         bus2.$on('error', (data) =>{
           if (data == 2){
-            this.error = true
-            this.errorMessage= "Usuario o contraseña incorrecta"
+            this.emailError = "El correo electrónico ingresado ya se encuentra registrado"
             console.log("aca")
           }
         })
@@ -410,11 +417,10 @@ export default {
     },
     validarLogIn: function (){
       if (this.$refs.form2.validate() == true){
-        this.loginUser() //acá habria q chequear si el username o el mail ya existen porq tira error
+        this.loginUser()
         bus2.$on('error', (data) =>{
           if (data == 4){
-            this.error = true
-            this.errorMessage= "Usuario o contraseña incorrecta"
+            this.loginError = true
           }
         })
       }//hay q hacer un else??
