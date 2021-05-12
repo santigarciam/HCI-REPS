@@ -59,8 +59,9 @@ class UserApi {
             console.log("Se creo el usr. El resultado obtenido fue: ");
             console.log(result);
             registeredUsr = 1;
-            await this.$store.dispatch('changeCardID');
+            // await this.$store.dispatch('changeCardID');
         }
+        return result;
     }
 
     static async logout(controller) {
