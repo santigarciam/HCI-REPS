@@ -12,6 +12,7 @@ import ConfirmacionMail from "@/views/ConfirmacionMail";
 import store from "./store";
 
 import state from "./store/state";
+import {Api} from "./API_EJS/js/api";
 
 export const bus = new Vue();
 export const bus2 = new Vue();
@@ -46,6 +47,8 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+
+Api.restoreToken();
 
 new Vue({
   router,

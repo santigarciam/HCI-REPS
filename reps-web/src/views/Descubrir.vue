@@ -3,7 +3,7 @@
     <v-row class="mt-2">
       <v-col>
         <v-row>
-          <filtrar-por></filtrar-por>
+          <filtrar></filtrar>
           <order-by></order-by>
           <search-field></search-field>
           <v-spacer></v-spacer>
@@ -16,35 +16,58 @@
 <script>
 
 
-import FiltrarPor from "@/components/filtrarPor";
+import Filtrar from "@/components/filtrar";
 import OrderBy from "@/components/orderBy";
 import SearchField from "@/components/searchField";
 import OtherRoutines from "../components/otherRoutines";
 import {bus} from "../main";
-//import {bus2} from "../main";
 export default {
   name: "Descubrir",
-  components: {OtherRoutines, SearchField, OrderBy, FiltrarPor},
+  components: {OtherRoutines, SearchField, OrderBy, Filtrar},
   data(){
     return {
+      params: "",
+
+      categoria: "",
+      dificultad:"",
+      rating: "",
       busqueda: "",
-      orden: ""
+      orden: "",
+      direc: "asc"
     }
   },
   created(){
-    bus.$on('busqueda', (data) =>{
+    bus.$on('busqueda/Descubrir', (data) =>{
       this.busqueda = data;
       console.log(this.busqueda)
-      this.buscar()
+      this.filtrar()
     })
-    bus.$on('ordenar', (data) =>{
+    bus.$on('ordenar/Descubrir', (data) =>{
       this.orden = data;
       console.log(this.orden)
-      this.ordenar()
+      this.filtrar()
     })
   },
   methods: {
-    buscar: function (){
+    filtrar: function (){
+      if (this.busqueda!= ""){
+        if (this.params!=""){
+          this.params += "&"
+        }
+        this.params += "search=" + this.busqueda
+        console.log("jojo")
+      }
+      if (this.orden!= ""){
+        if (this.params!=""){
+          this.params += "&"
+        }
+        this.params += "orderBy=" + this.orden
+      }
+      console.log(this.params)
+      this.$store.dispatch("getRoutines", this.params);
+      this.params=""
+    },
+    /*buscar: function (){
       if (this.busqueda=="" || this.busqueda == null ){
         this.$store.dispatch("getRoutines");
       }
@@ -55,7 +78,8 @@ export default {
 
     ordenar: function (){
       this.$store.dispatch("sortRoutines", this.orden);
-    }
+    }*/
+
   },
   mounted() {
     this.$store.dispatch("changeCardID");

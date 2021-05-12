@@ -3,11 +3,11 @@ import {ExerciseApi} from '../API_EJS/js/exercises';
 import {UserApi} from "../API_EJS/js/user";
 import {FavApi} from "../API_EJS/js/favourites";
 
-export const getRoutines = async ({ commit }) => {
-    const response = await routineApi.getAll("", null);
+//si le agrego lo del userID le tengo q pasar state ademas del commit pero ahora como lo comente lo saco
+export const getRoutines = async ({ commit}, parameters) => {
+    const response = await routineApi.getAll(parameters, null);
     if (!response.code){
-        // console.log("ENTRO");
-        // console.log(response);
+       // var aux = response.content.filter(n => n.user.id != state.userID)
         commit('SET_OTHERS', response.content);
     }
 }
@@ -37,6 +37,7 @@ export const getUserRoutines = async ({ commit }) => {
         // console.log("ENTRO");
         // console.log(response);
         commit('SET_ROUTINES', response.content);
+        return response.content
     }
 }
 export const searchUserRoutines = async ({ commit },busqueda) => {

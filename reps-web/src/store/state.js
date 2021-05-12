@@ -1,5 +1,7 @@
+import {Api} from "../API_EJS/js/api";
+
 export default {
-    token: null,
+    token: Api.token,
     listaRutinas: [],
     listaEjercicios: [],
     cardID: 0,

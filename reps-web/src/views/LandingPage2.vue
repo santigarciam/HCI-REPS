@@ -29,7 +29,7 @@
                             >REGISTRARSE</v-btn>
 
                           </template>
-                          <v-card color="rgb(0, 0, 0, 0.7)">
+                          <v-card color="rgb(0, 0, 0, 0.8)">
                             <v-card-text>
                               <v-form ref="form" v-model="valid">
                                 <v-row>
@@ -205,7 +205,7 @@
                             >INICIAR SESIÓN</v-btn
                             >
                           </template>
-                          <v-card  color="rgb(0, 0, 0, 0.7)">
+                          <v-card color="rgb(0, 0, 0, 0.7)">
                             <v-card-text>
                               <v-form ref="form2" v-model="valid">
                               <v-row>
@@ -271,7 +271,7 @@
           </v-col>
         </v-row>
         <v-snackbar bottom color="error" v-model="error">
-          <p> {{error}} </p>
+          <p> {{errorMessage}} </p>
         </v-snackbar>
       </v-container>
       <v-col></v-col>
@@ -306,7 +306,8 @@ export default {
   name: "LandingPage",
   data() {
     return {
-      error: "",
+      error: false,
+      errorMessage: "",
       valid: false,
       dialogRegist: false,
       verificationCode: "",
@@ -391,15 +392,24 @@ export default {
     validar: function (){
       if (this.$refs.form.validate() == true){
         this.registerUser() //acá habria q chequear si el username o el mail ya existen porq tira error
-
+        bus2.$on('error', (data) =>{
+          if (data == 2){
+            this.error = true
+            this.errorMessage= "Usuario o contraseña incorrecta"
+            console.log("aca")
+          }
+        })
       }//hay q hacer un else??
 
     },
     validarLogIn: function (){
       if (this.$refs.form2.validate() == true){
         this.loginUser() //acá habria q chequear si el username o el mail ya existen porq tira error
-        bus2.$on('errorLogIn', (data) =>{
-          this.error = data;
+        bus2.$on('error', (data) =>{
+          if (data == 4){
+            this.error = true
+            this.errorMessage= "Usuario o contraseña incorrecta"
+          }
         })
       }//hay q hacer un else??
 

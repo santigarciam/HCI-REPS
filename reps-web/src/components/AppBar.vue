@@ -98,7 +98,7 @@
           <v-list>
             <v-list-item>
 
-              <v-btn plain disabled :key="cardID">
+              <v-btn plain style="color:black !important;" block :key="cardID" disabled>
                 {{userName + " " + userLastName}}
               </v-btn>
             </v-list-item>
@@ -217,6 +217,10 @@ export default {
 <style scoped>
 
 a { text-decoration: none; }
+
+.negro{
+  color: black !important;
+}
 
 .titulo1 {
   color: dodgerblue;

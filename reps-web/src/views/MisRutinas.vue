@@ -35,7 +35,15 @@ export default {
   },
   data(){
     return {
-      busqueda: ""
+      params: "",
+
+      categoria: "",
+      dificultad:"",
+      rating: "",
+      busqueda: "",
+      orden: "",
+      direc: "asc"
+
     }
   },
   mounted() {
@@ -47,21 +55,39 @@ export default {
     }
   },
   created(){
-   bus.$on('busqueda', (data) =>{
+   bus.$on('busqueda/MisRutinas', (data) =>{
      this.busqueda = data;
      console.log(this.busqueda)
      this.buscar()
    })
  },
  methods: {
-   buscar: function (){
+   filtrar: function (){
+     if (this.busqueda!= ""){
+       if (this.params!=""){
+         this.params += "&"
+       }
+       this.params += "search=" + this.busqueda
+       console.log("jojo")
+     }
+     if (this.orden!= ""){
+       if (this.params!=""){
+         this.params += "&"
+       }
+       this.params += "orderBy=" + this.orden
+     }
+     console.log(this.params)
+     this.$store.dispatch("getRoutines", this.params);
+     this.params=""
+   },
+   /*buscar: function (){
      if (this.busqueda=="" || this.busqueda == null ){
        this.$store.dispatch("getUserRoutines");
      }
      else {
        this.$store.dispatch("searchUserRoutines", this.busqueda);
      }
-   }
+   }*/
   }
 };
 </script>
@@ -74,6 +100,5 @@ export default {
 }
 .MisRutinas{
   margin: auto ;
-
 }
 </style>

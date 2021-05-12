@@ -45,6 +45,7 @@ export const GET_CYCLES_OF_ID = async (state, id) => {
 export const GET_USER_INFO = async (state) => {
     const result = await UserApi.getCurrentUser(null);
     console.log(result);
+    state.userID = result.id;
     state.user= result.username;
     state.userFirstName = result.firstName;
     state.userLastName = result.lastName;

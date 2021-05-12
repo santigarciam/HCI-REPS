@@ -3,9 +3,8 @@
     <v-dialog
         v-model="dialog"
         width="500"
-        v-for="rutina in rutinas" :key="rutina.id"
-    >
-      <!--        v-for="rutina in data().rutinas" :key="rutina.tituloRut"  UNA LINEA MAS ARRIBA -->
+        v-for="rutina in rutinas" v-bind:key="rutina.id">
+      <!-- v-for="rutina in data().rutinas" :key="rutina.tituloRut"  UNA LINEA MAS ARRIBA -->
 
       <template v-slot:activator="{ on, attrs }">
         <v-container class ="container_v_card pb-4">
@@ -123,7 +122,7 @@ export default {
       console.log(this.cyclesOfRutine);
     },
     funcionAUX2: function (){
-      console.log("llegooooooooooooooooooooo");
+      //console.log("llegooooooooooooooooooooo");
       return this.cyclesOfRutine;
     },
     /////////////////////////////////////////////////////////////////////////////////
@@ -139,7 +138,7 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch("getRoutines");
+    this.$store.dispatch("getRoutines", "");
   },
 }
 </script>

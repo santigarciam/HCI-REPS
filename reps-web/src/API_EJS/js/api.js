@@ -1,3 +1,5 @@
+import {bus2} from "../../main";
+
 export { Api };
 
 class Api {
@@ -32,6 +34,7 @@ class Api {
 
       return result;
     } catch (error) {
+      bus2.$emit('error', error.code)
       if (!error.code) {
         // eslint-disable-next-line no-ex-assign
         error = { "code": 99, "description": error.message.toLowerCase() };
@@ -70,5 +73,20 @@ class Api {
     return await Api.fetch(url, secure, {
       method: 'DELETE',
     }, controller);
+  }
+
+  static saveToken() {
+    localStorage.setItem('token', this.token);
+  }
+
+  static restoreToken() {
+    let token = localStorage.getItem('token');
+    if (token)
+      this.token = token;
+  }
+
+  static deleteToken() {
+    this.token = null;
+    localStorage.removeItem('token');
   }
 }
