@@ -5,7 +5,7 @@
         <v-row>
           <v-col>
             <v-row justify="center" align="end" style="height: 550px">
-              <v-card v-show="!buttonPressed" rounded color="transparent" elevation="0">
+              <v-card rounded color="transparent" elevation="0">
                 <v-card-title class="justify-center white--text">
                   <h1 class="frase">EMPIECE A CREAR RUTINAS PARA ENTRENAR</h1>
                 </v-card-title>
@@ -314,7 +314,8 @@ export default {
       snackbar:false,
       //reglas para el form
       usernameRules: [
-        v => !!v || 'El usuario es obligatorio'
+        v => !!v || 'El usuario es obligatorio',
+        v => this.available(v) || 'Este usuario ya esta en uso'
         //ver que pasa si quiere usar un username ya existente
       ],
       emailRules: [
@@ -360,6 +361,9 @@ export default {
     }
   },
   computed: {
+    usuarios(){
+      return this.$store.state.allUsernames
+    },
     cardID() {
       return this.$store.state.cardID;
     },
@@ -382,6 +386,9 @@ export default {
     },
     check: function (password){
       return password == this.newPassword
+    },
+    available: function (username){
+      return ! this.usuarios.includes(username)
     },
     resetearCampos: function (){
       this.$refs.form.reset()
@@ -441,6 +448,9 @@ export default {
       //
     }
 
+  },
+  mounted() {
+    this.$store.dispatch("getAllUsernames");
   }
 }
 
