@@ -9,6 +9,7 @@ export const getRoutines = async ({ commit}, parameters) => {
     if (!response.code){
        // var aux = response.content.filter(n => n.user.id != state.userID)
         commit('SET_OTHERS', response.content);
+        console.log(response.content.id)
     }
 }
 
@@ -87,4 +88,14 @@ export const changeCardID = ({ commit }) => {
 
 export const getUserInformation = ({ commit }) => {
     commit('GET_USER_INFO');
+}
+
+export const getAllUsernames = async ({ commit}) => {
+    const response = await UserApi.getAllUsers( null);
+    if (!response.code){
+        var aux = [];
+        response.content.forEach(e => aux.push(e.username));
+        commit('SET_USERS', aux);
+
+    }
 }
