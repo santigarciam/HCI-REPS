@@ -147,13 +147,14 @@
                           <v-list-item :key="excersise.id">
                             <template v-slot:default="{ active }">
                               <v-list-item-content>
+                                <v-row>
+                                  <v-col>
                                 <v-list-item-title v-text="excersise.name"></v-list-item-title>
-
+                                  </v-col>
+                                </v-row>
                               </v-list-item-content>
 
                               <v-list-item-action>
-                                <!--                                  <v-list-item-action-text v-text="excersise.action"></v-list-item-action-text>-->
-
                                 <v-icon
                                     v-if="active"
                                     color="grey lighten-1"
@@ -243,14 +244,87 @@
                     <v-row>
                       <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
                       <v-btn plain color="grey" class="mx-0" v-on:click="cancelActionNewRut">Cancelar</v-btn>
-                      <v-btn flat class="primary mx-10" v-on:click="addNewRoutine">Guardar</v-btn>
-<!--                      <v-btn flat class="success mx-10" v-on:click="pqAnda">Guardar</v-btn>-->
+<!--                      <v-btn flat class="primary mx-10" v-on:click="addNewRoutine">Guardar</v-btn>&ndash;&gt;-->
+                      <v-dialog>
+                      <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
+                        <v-btn  class="primary mx-10" slot="activator" v-bind="attrs" v-on="on" @click="addNewRoutine" outlined>Guardar</v-btn>
+                      </template>
+
+                      <v-card flat>
+<!--                        <v-card-title>{{ rutina.name }}</v-card-title>-->
+<!--                        &lt;!&ndash;        <v-btn v-on:click="getCiclosInID(parseInt(rutina.id))">BOTON</v-btn>&ndash;&gt;-->
+<!--                        <v-divider></v-divider>-->
+<!--                        <v-card-subtitle></v-card-subtitle>-->
+<!--                        <v-card-subtitle>Descripcion: {{ rutina.detail }}</v-card-subtitle>-->
+                        <!--        <v-card-subtitle>Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
+                        <h4 class="pl-6 mb-4">Ciclos:</h4>
+
+                        <v-expansion-panels  v-for="(ciclo,i) in cyclesOfRutine" :key="ciclo.id">
+                          <v-expansion-panel >
+                            <v-expansion-panel-header>{{ciclo.name}}</v-expansion-panel-header>
+                            <v-expansion-panel-content>
+                              <template v-for="ejs in exercisesOfCycle[i]">
+                                <!--                <v-card :key="ejs">-->
+                                <!--                  <v-card-title>ENTRO</v-card-title>-->
+                                <!--                  <template v-for="ej in ejs">-->
+                                <v-card small  class="mt-1" :key="ejs.exercise.id">
+
+                                  <v-row>
+                                    <v-col>
+                                      <v-card-text>{{ejs.exercise.name}}</v-card-text>
+                                    </v-col> <v-col>
+                                  </v-col>
+                                    <v-spacer></v-spacer>
+                                    <v-col>
+                                      <v-text-field
+                                          v-model="slider"
+                                          class="mt-0 pt-0"
+                                          label="Duracion:"
+                                          hide-details
+                                          single-line
+                                          min = "1"
+                                          type="number"
+                                          style="width: 60px"
+                                      ></v-text-field>
+                                    </v-col>
+                                    <v-col>
+                                      <v-text-field
+                                          v-model="slider"
+                                          class="mt-0 pt-0"
+                                          label="Duracion:"
+                                          hide-details
+                                          min = "1"
+                                          single-line
+                                          type="number"
+                                          style="width: 60px"
+                                      ></v-text-field>
+                                    </v-col>
+                                  </v-row>
+
+                                </v-card>
+                                <!--                  </template>-->
+                                <!--                </v-card>-->
+                              </template>
+                            </v-expansion-panel-content>
+                          </v-expansion-panel>
+                        </v-expansion-panels>
+                      </v-card>
+
+                      </v-dialog>
+
 
                     </v-row>
                   </v-col>
               </v-card-text>
             </v-card>
   </v-dialog>
+
+
+
+
+<!--  </v-dialog>-->
+
+
 </template>
 
 <script>
@@ -410,7 +484,8 @@ export default {
         console.log(ejerCiclo);
       }
     this.loading = false;
-    this.cancelActionNewRut();
+      await this.$store.dispatch("getCyclesOfID", rutinaAux.id);
+    // this.cancelActionNewRut();
     },
     cancelActionNewRut: function (){
       console.log("CANCEL");
@@ -430,7 +505,14 @@ export default {
     },
     cardID(){
       return this.$store.state.cardID;
-    }
+    },
+    cyclesOfRutine(){
+      console.log(this.$store.state.cyclesOfRutine);
+      return this.$store.state.cyclesOfRutine;
+    },
+    exercisesOfCycle(){
+      return this.$store.state.exersisesOfRoutineOnCycle;
+    } ////// DESCOMENTAR CUANDO EL API FUNCIONE
   },
   mounted() {
     this.$store.dispatch("getExercises");

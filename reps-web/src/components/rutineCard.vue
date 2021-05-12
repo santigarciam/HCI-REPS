@@ -10,7 +10,7 @@
 
       <template v-slot:activator="{ on, attrs }">
         <v-container class ="container_v_card pb-4">
-          <v-card v-bind="attrs" v-on="on"  @click.stop="funcionAUX(rutina.id,rutina)"  :data="modalData" >
+          <v-card v-bind="attrs" v-on="on"  @click.stop="funcionAUX(rutina.id,rutina)"  :data="modalData" scrollable>
             <v-col>
               <v-row>
                 <v-card-title>{{ rutina.name }} </v-card-title>
@@ -199,17 +199,39 @@
         <v-card-subtitle></v-card-subtitle>
         <v-card-subtitle>Descripcion: {{ rutina.detail }}</v-card-subtitle>
 <!--        <v-card-subtitle>Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
-        <h4 class="pl-6">Ciclos:</h4>
-        <template v-for="ciclo in cyclesOfRutine">
-          <v-list-item :key="ciclo.id">
-            <template>
-              <v-list-item-content>
-                <v-list-item-title class="pl-6" v-text="ciclo.name"></v-list-item-title>
+        <h4 class="pl-6 mb-4">Ciclos:</h4>
 
-              </v-list-item-content>
-            </template>
-          </v-list-item>
-        </template>
+        <v-expansion-panels  v-for="(ciclo,i) in cyclesOfRutine" :key="ciclo.id">
+                <v-expansion-panel >
+                  <v-expansion-panel-header>{{ciclo.name}}</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                <template v-for="ejs in exercisesOfCycle[i]">
+<!--                <v-card :key="ejs">-->
+<!--                  <v-card-title>ENTRO</v-card-title>-->
+<!--                  <template v-for="ej in ejs">-->
+                          <v-card small  class="mt-1" :key="ejs.exercise.id">
+
+                              <v-row>
+                                <v-col>
+                            <v-card-text>{{ejs.exercise.name}}</v-card-text>
+                                </v-col> <v-col>
+                                </v-col>
+                              <v-spacer></v-spacer>
+                                <v-col>
+                              <v-card-text> Duracion: {{ejs.duration}}</v-card-text>
+                                </v-col>
+                                <v-col>
+                              <v-card-text> REPS: {{ejs.repetitions}}</v-card-text>
+                                </v-col>
+                              </v-row>
+
+                          </v-card>
+<!--                  </template>-->
+<!--                </v-card>-->
+                </template>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+          </v-expansion-panels>
       </v-card>
 
     </v-dialog>
@@ -332,14 +354,14 @@ export default {
         console.log(this.$store.state.cyclesOfRutine);
         return this.$store.state.cyclesOfRutine;
       },
-      // exercisesOfCycle(numberOfcycle){
-      //   return this.$store.state.exersisesOfRoutineOnCycle[numberOfcycle];
-      // } DESCOMENTAR CUANDO EL API FUNCIONE
+      exercisesOfCycle(){
+        return this.$store.state.exersisesOfRoutineOnCycle;
+      } ////// DESCOMENTAR CUANDO EL API FUNCIONE
     },
 
     mounted() {
       this.$store.dispatch("getUserRoutines");
-      console.log(this.$store.state.listaRutinas)
+     // console.log(this.$store.state.listaRutinas)
     },
 }
 </script>

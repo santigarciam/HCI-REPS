@@ -1,6 +1,6 @@
 import {cycleApi} from "../API_EJS/js/cycles";
 import {UserApi} from "../API_EJS/js/user";
-// import {cycleExercisesApi} from "../API_EJS/js/cycleExercises";
+import {cycleExercisesApi} from "../API_EJS/js/cycleExercises";
 
 export const SET_ROUTINES = (state, rutinas) => {
     state.listaRutinas = rutinas;
@@ -27,16 +27,18 @@ export const GET_CYCLES_OF_ID = async (state, id) => {
     if (result.content){
         state.cyclesOfRutine = result.content;
 
-        // let respExercises;
-        // const i = 0;
-        // for(const ciclo of result.content){
-        //     respExercises = await cycleExercisesApi.getAll(ciclo.id,null);
-        //     if(respExercises.totalCount){
-        //     state.exersisesOfRoutineOnCycle[i] = respExercises.content;
-        //     }else{
-        //         console.log("ERROR AL TRAER LOS EJS"); /// ERROR
-        //     }
-        // } DESCOMENTAR CUANDO EL API FUNCIONE
+        let respExercises;
+        let i = 0;
+        for(const ciclo of result.content){
+            respExercises = await cycleExercisesApi.getAll(ciclo.id,null);
+            if(respExercises.totalCount){
+            state.exersisesOfRoutineOnCycle[i++] = respExercises.content;
+                console.log(" AL TRAER LOS EJS"); /// ERROR
+            console.log(state.exersisesOfRoutineOnCycle);
+            }else{
+                console.log("ERROR AL TRAER LOS EJS"); /// ERROR
+            }
+        } //////DESCOMENTAR CUANDO EL API FUNCIONE
     }else{
         console.log("ERROR"); //ERROR
     }
