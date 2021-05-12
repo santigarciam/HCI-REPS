@@ -264,11 +264,11 @@ export default {
       const cyclesIDaux = await cycleApi.getAll(id, null);
       for (const ciclo of cyclesIDaux.content) {
         const ejercicios = await cycleExercisesApi.getAll(ciclo.id,null);
-        for (const ej of ejercicios){
+        let ejs = ejercicios.content.exercise;
+        for (const ej in ejs){
           await cycleExercisesApi.delete(ciclo.id, ej.id, null);
         }
-        // DESCOMENTAR CUANDO LA API FUNCIONE BIEN !!!!!!!!!!!!!!!!!!
-        await cycleApi.delete(id,ciclo,null);
+        // DESCOMENTAR CUANDO LA API FUNCIONE BIEN  !!!!!!!!!!!!!!!!!!
       }
       await routineApi.delete(id);
       this.loading = false;
