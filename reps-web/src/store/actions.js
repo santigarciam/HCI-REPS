@@ -94,9 +94,8 @@ export const getAllUsernames = async ({ commit}) => {
     const response = await UserApi.getAllUsers( null);
     if (!response.code){
         var aux = [];
-        response.content.forEach(e => aux.push(e.username))
-        // var aux = response.content.filter(n => n.user.id != state.userID)
+        response.content.forEach(e => aux.push(e.username));
         commit('SET_USERS', aux);
-        console.log(aux)
+
     }
 }

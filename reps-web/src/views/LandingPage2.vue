@@ -316,7 +316,6 @@ export default {
       usernameRules: [
         v => !!v || 'El usuario es obligatorio',
         v => this.available(v) || 'Este usuario ya esta en uso'
-        //ver que pasa si quiere usar un username ya existente
       ],
       emailRules: [
         v => !!v || 'El correo electrónico es obligatorio',
