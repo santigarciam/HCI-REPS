@@ -13,7 +13,7 @@
           <v-card v-bind="attrs" v-on="on"  @click.stop="funcionAUX(rutina.id,rutina)"  :data="modalData" scrollable>
             <v-col>
               <v-row>
-                <v-card-title>{{ rutina.name }} </v-card-title>
+                <v-card-title class="mb-0 pb-0">{{ rutina.name }} </v-card-title>
                 <v-spacer></v-spacer>
 
 
@@ -179,13 +179,14 @@
 
               </v-row>
 
-            </v-col>
-            <v-col class="text-left">
-<!--              <v-card-subtitle v-model="autorRut">Autor: {{ HACERFUNCIONDECURRENTUSER }} </v-card-subtitle>-->
-              <v-card-text v-model="descripcionRut">Descripcion: {{ rutina.detail }}</v-card-text>
-<!--              <v-card-subtitle v-model="durRut">Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
-            </v-col>
 
+            <v-row class="text-left">
+<!--              <v-card-subtitle v-model="autorRut">Autor: {{ HACERFUNCIONDECURRENTUSER }} </v-card-subtitle>-->
+              <v-card-subtitle class="mr-0 pr-0 font-weight-bold">Descripcion: </v-card-subtitle>
+              <v-card-subtitle class="ml-0 pl-1" v-model="descripcionRut">{{ rutina.detail }}</v-card-subtitle>
+<!--              <v-card-subtitle v-model="durRut">Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
+            </v-row>
+            </v-col>
 
           </v-card>
         </v-container>
