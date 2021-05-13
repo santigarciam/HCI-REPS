@@ -1,5 +1,5 @@
 import { Api } from './api.js';
-import {router} from '../../main';
+//import {router} from '../../main';
 import state from "../../store/state";
 
 export { UserApi, Credentials };
@@ -22,7 +22,6 @@ class UserApi {
         if (Api.token){
             state.token = Api.token;
             Api.saveToken();
-            await router.push('/MisRutinas');
         }
     }
 
