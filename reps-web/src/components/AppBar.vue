@@ -96,9 +96,12 @@
             </v-btn>
           </template>
           <v-list>
-            <v-list-item>
+            <v-list-item disabled>
 
-              <v-btn plain style="color:black !important;" block :key="cardID" disabled>
+              <v-btn color="primary"  :key="cardID">
+                <v-icon left>
+                  mdi-account
+                </v-icon>
                 {{userName + " " + userLastName}}
               </v-btn>
             </v-list-item>
