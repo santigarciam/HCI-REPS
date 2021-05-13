@@ -63,3 +63,7 @@ export const GET_USER_INFO = async (state) => {
 export const SAVE_REGISTERED_MAIL = (state,mail) =>{
     state.userRegisteredMail = mail;
 }
+
+export const SET_EX_IN_CYCLE = (state,arr) =>{
+    state.ejsCycleAux = arr;
+}

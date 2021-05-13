@@ -207,8 +207,6 @@
                               <v-list-item-content>
                                 <v-list-item-title v-text="excersise.name"></v-list-item-title>
                               </v-list-item-content>
-                              <v-spacer></v-spacer>
-                              <v-list-item-content><h1>HOLA</h1></v-list-item-content>
 
                               <v-list-item-action>
                                 <v-list-item-action-text v-text="excersise.action"></v-list-item-action-text>
@@ -218,11 +216,6 @@
                                 >
                                   mdi-check
                                 </v-icon>
-                                <h1 v-if="active">HOLA</h1>
-<!--                                <v-dialog-->
-<!--                                  v-if="active">-->
-<!--                                  <v-card><h1>HOLA</h1></v-card>-->
-<!--                                </v-dialog>-->
                               </v-list-item-action>
                             </template>
                           </v-list-item>
@@ -262,18 +255,20 @@
                           <v-expansion-panel>
                             <v-expansion-panel-header>{{ciclo.name}}</v-expansion-panel-header>
                             <v-expansion-panel-content>
-                              <template v-for="ejs in ejsCycleAux[i]">
+                              <template v-for="(ejs,j) in ejsCycleAux[i]">
                                 <v-card small class="mt-1 mb-1" :key="ejs.id">
                                   <v-row>
                                     <v-col>
-                                      <v-card-text>{{ejs.name}}</v-card-text>
-                                    </v-col> <v-col>
-                                  </v-col>
+                                      <v-card-text>{{ejs.ej.name}}</v-card-text>
+                                    </v-col>
                                     <v-spacer></v-spacer>
+
+<!--                                    <v-col><v-subheader>Orden</v-subheader></v-col>-->
                                     <v-col>
                                       <v-text-field
+                                          prepend-icon="mdi-order-numeric-ascending"
+                                          v-model="ejsCycleAux[i][j].orden"
                                           class="mt-0 pt-0"
-                                          label="Duracion:"
                                           hide-details
                                           single-line
                                           min = "1"
@@ -283,8 +278,21 @@
                                     </v-col>
                                     <v-col>
                                       <v-text-field
+                                          prepend-icon="mdi-counter"
+                                          v-model="ejsCycleAux[i][j].reps"
                                           class="mt-0 pt-0"
-                                          label="Duracion:"
+                                          hide-details
+                                          single-line
+                                          min = "1"
+                                          type="number"
+                                          style="width: 60px"
+                                      ></v-text-field>
+                                    </v-col>
+                                    <v-col>
+                                      <v-text-field
+                                          prepend-icon="mdi-clock-outline"
+                                          v-model="ejsCycleAux[i][j].desc"
+                                          class="mt-0 pt-0"
                                           hide-details
                                           min = "1"
                                           single-line
@@ -304,7 +312,7 @@
                         <v-col>
                           <v-row>
                             <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                            <v-btn plain color="grey" class="mx-0" v-on:click="cancelActionNewRut">Cancelar</v-btn>
+                            <v-btn plain color="grey" class="mx-0" v-on:click="cancelAUX">Cancelar</v-btn>
                             <v-btn plain class="primary mx-0" v-on:click="addNewRoutine">Finalizar</v-btn>
                           </v-row>
                         </v-col>
@@ -352,7 +360,8 @@ export default {
       steps: 1,
       durRut:'',
       ciclos: ['Entrada en calor', 'Entrenamiento', 'Enfriamiento'],
-      ejsCycleAux: [],
+      reps: {},
+      descanso: {},
     }
   },
   watch: {
@@ -502,19 +511,27 @@ export default {
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     },
     loadNextStepNewRut: function (){
-
+      let order = 1;
+      let ejsArr;
+      ejsArr = [];
       for (let i = 0; i < this.steps + 2; i++) {
         let auxArr;
-        auxArr = []
+        auxArr = [];
         for (const k of this.selected[i]) {
-          auxArr.push(this.ejercicios[k]);
+          auxArr.push({orden: order++, ej: this.ejercicios[k], reps: 0, desc:0});
         }
+        order = 1;
           //this.ejsCycleAux[i].push(this.ejercicios[k]);
-        this.ejsCycleAux[i] = auxArr;
+        ejsArr[i] = auxArr;
         //}
       }
       console.log("Siguiente en ADD RUT");
-      console.log(this.ejsCycleAux);
+      console.log(ejsArr);
+      this.$store.dispatch("setSelectedExercisesInCycles", ejsArr);
+    },
+    cancelAUX: function (){
+      console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+      console.log(this.$store.state.ejsCycleAux);
     }
     },
   computed: {
@@ -533,7 +550,10 @@ export default {
     },
     exercisesOfCycle(){
       return this.$store.state.exersisesOfRoutineOnCycle;
-    } ////// DESCOMENTAR CUANDO EL API FUNCIONE
+    }, ////// DESCOMENTAR CUANDO EL API FUNCIONE
+    ejsCycleAux(){
+      return this.$store.state.ejsCycleAux;
+    }
   },
   mounted() {
     this.$store.dispatch("getExercises");
