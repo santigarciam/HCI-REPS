@@ -5,7 +5,7 @@
         <v-row>
           <v-col>
             <v-row justify="center" align="end" style="height: 550px">
-              <v-card rounded color="transparent" elevation="0">
+              <v-card v-show="!this.dialog && !this.dialog2 && !this.dialogRegist" rounded color="transparent" elevation="0">
                 <v-card-title class="justify-center white--text">
                   <h1 class="frase">EMPIECE A CREAR RUTINAS PARA ENTRENAR</h1>
                 </v-card-title>
@@ -44,6 +44,7 @@
                                             filled
                                             class= "mt-6"
                                             rounded
+                                            :error-messages= "this.usernameError"
                                             dense
                                             required
                                             :rules="usernameRules"
@@ -305,6 +306,7 @@ export default {
   data() {
     return {
       emailError: "",
+      usernameError: "",
       loginError: false,
       valid: false,
       dialogRegist: false,
@@ -313,7 +315,7 @@ export default {
       //reglas para el form
       usernameRules: [
         v => !!v || 'El usuario es obligatorio',
-        v => this.available(v) || 'Este usuario ya esta en uso'
+       // v => this.available(v) || 'Este usuario ya esta en uso'
       ],
       emailRules: [
         v => !!v || 'El correo electrónico es obligatorio',
@@ -340,6 +342,7 @@ export default {
       show1: false,
       show2: false,
       dialog: false,
+      dialog2: false,
 
       //v-models de inicio de sesion
       username: "",
@@ -353,7 +356,6 @@ export default {
       confirmPassword: "",
 
 
-      buttonPressed: false,
 
     }
   },
@@ -381,15 +383,17 @@ export default {
         this.$emit("yourEvent");
       }, this.timeout);
     },
+
     check: function (password){
       return password == this.newPassword
     },
-    available: function (username){
+   /* available: function (username){
       return ! this.usuarios.includes(username)
-    },
+    },*/
     resetearCampos: function (){
       this.$refs.form.reset()
       this.emailError = ""
+      this.usernameError = ""
     },
     resetear: function (){
       this.$refs.form2.reset()
@@ -397,6 +401,8 @@ export default {
     },
     resetErrors: function (){
       this.loginError = ""
+      this.emailError = ""
+      this.usernameError = ""
     },
     checkError: function (){
       if (this.loginError == true){
@@ -405,11 +411,16 @@ export default {
     },
     validar: function (){
       if (this.$refs.form.validate() == true){
+        this.resetErrors()
         this.registerUser()
         bus2.$on('error', (data) =>{
-          if (data == 2){
+          this.dialogRegist = false;
+          this.dialog = true;
+          if (data.details[0] == "UNIQUE constraint failed: User.email"){
             this.emailError = "El correo electrónico ingresado ya se encuentra registrado"
-            console.log("aca")
+          }
+          if (data.details[0] == "UNIQUE constraint failed: User.username"){
+            this.usernameError = "El usuario elegido no está disponible"
           }
         })
       }//hay q hacer un else??
@@ -419,7 +430,7 @@ export default {
       if (this.$refs.form2.validate() == true){
         this.loginUser()
         bus2.$on('error', (data) =>{
-          if (data == 4){
+          if (data.code == 4){
             this.loginError = true
           }
         })
@@ -453,10 +464,10 @@ export default {
       //
     }
 
-  },
-  mounted() {
-    this.$store.dispatch("getAllUsernames");
   }
+  /*mounted() {
+    this.$store.dispatch("getAllUsernames");
+  }*/
 }
 
 </script>

@@ -139,6 +139,7 @@ export default {
 
   mounted() {
     this.$store.dispatch("getRoutines", "");
+    console.log("1")
   },
 }
 </script>

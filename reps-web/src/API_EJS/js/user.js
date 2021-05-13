@@ -34,10 +34,10 @@ class UserApi {
         return result;
     }
 
-    static async getAllUsers(controller){
+    /*static async getAllUsers(controller){
         const result = await Api.get(`${UserApi.url}`,true, controller);
         return result;
-    }
+    }*/
 
 
     getRegisteredUsr(){

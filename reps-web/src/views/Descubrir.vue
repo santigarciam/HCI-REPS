@@ -37,6 +37,7 @@ export default {
     }
   },
   created(){
+    console.log("created")
     bus.$on('busqueda/Descubrir', (data) =>{
       this.busqueda = data;
       console.log(this.busqueda)
@@ -67,6 +68,10 @@ export default {
       this.$store.dispatch("getRoutines", this.params);
       this.params=""
     },
+    removeListeners: function (){
+      bus.$off('ordenar/Descubrir');
+      bus.$off('busqueda/Descubrir');
+      }
     /*buscar: function (){
       if (this.busqueda=="" || this.busqueda == null ){
         this.$store.dispatch("getRoutines");
@@ -83,6 +88,9 @@ export default {
   },
   mounted() {
     this.$store.dispatch("changeCardID");
+  },
+  beforeDestroy() {
+    this.removeListeners();
   },
   computed: {
     cardID(){
