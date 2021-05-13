@@ -1,6 +1,6 @@
 import { Api } from './api.js';
-//import {router} from '../../main';
-import state from "../../store/state";
+import {router} from '../../main';
+//import state from "../../store/state";
 
 export { UserApi, Credentials };
 
@@ -18,10 +18,11 @@ class UserApi {
     static async login(credentials, controller) {
         console.log(credentials);
         const result = await Api.post(`${UserApi.url}/login`, false, credentials, controller);
-        Api.token = result.token;
-        if (Api.token){
-            state.token = Api.token;
-            Api.saveToken();
+        var aux = result.token;
+        if (aux){
+            //state.token = Api.token;
+            Api.saveToken(aux);
+            await router.push('/MisRutinas');
         }
     }
 
@@ -73,7 +74,7 @@ class UserApi {
     static async logout(controller) {
         await Api.post(`${UserApi.url}/logout`, true, controller);
         Api.deleteToken();
-        state.token = null;
+        //state.token = null;
     }
 
     static async modifyUserInformation(data, controller){

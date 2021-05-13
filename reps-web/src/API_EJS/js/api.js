@@ -14,11 +14,11 @@ class Api {
   }
 
   static async fetch(url, secure, init = {}, controller) {
-    if (secure && Api.token) {
+    if (secure && this.getToken()) {
       if (!init.headers)
         init.headers = {};
 
-      init.headers['Authorization'] = `bearer ${Api.token}`;
+      init.headers['Authorization'] = `bearer ${this.getToken()}`;
     }
 
     controller = controller || new AbortController();
@@ -75,18 +75,21 @@ class Api {
     }, controller);
   }
 
-  static saveToken() {
-    localStorage.setItem('token', this.token);
+  static saveToken(token) {
+    localStorage.setItem('token', token);
   }
 
   static restoreToken() {
     let token = localStorage.getItem('token');
     if (token)
-      this.token = token;
+      this.saveToken(token);
+  }
+
+  static getToken(){
+    return localStorage.getItem('token')
   }
 
   static deleteToken() {
-    this.token = null;
     localStorage.removeItem('token');
   }
 }

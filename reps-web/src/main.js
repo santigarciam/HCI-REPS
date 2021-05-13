@@ -11,7 +11,7 @@ import LandingPage2 from "./views/LandingPage2"
 import ConfirmacionMail from "@/views/ConfirmacionMail";
 import store from "./store";
 
-import state from "./store/state";
+//import state from "./store/state";
 import {Api} from "./API_EJS/js/api";
 
 export const bus = new Vue();
@@ -36,7 +36,7 @@ export const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)){
-    if (!state.token){
+    if (! Api.getToken()){
       next({
         path: '/'
       });
