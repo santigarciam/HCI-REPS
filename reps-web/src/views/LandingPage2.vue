@@ -5,7 +5,7 @@
         <v-row>
           <v-col>
             <v-row justify="center" align="end" style="height: 550px">
-              <v-card rounded color="transparent" elevation="0">
+              <v-card v-show="!this.dialog && !this.dialog2 && !this.dialogRegist" rounded color="transparent" elevation="0">
                 <v-card-title class="justify-center white--text">
                   <h1 class="frase">EMPIECE A CREAR RUTINAS PARA ENTRENAR</h1>
                 </v-card-title>
@@ -44,6 +44,7 @@
                                             filled
                                             class= "mt-6"
                                             rounded
+                                            :error-messages= "this.usernameError"
                                             dense
                                             required
                                             :rules="usernameRules"
@@ -55,9 +56,8 @@
                                         <v-text-field
                                             label="Correo electrónico *"
                                             v-model="email"
-
                                             :rules=emailRules
-
+                                            :error-messages= "this.emailError"
                                             filled
                                             class= "mt-6"
                                             rounded
@@ -106,7 +106,7 @@
                                             @click:append="show2 = !show2"
                                         ></v-text-field>
                                       </v-row>
-<!--REGISTRARSEEEEEEEEEEEEEEEEEEEEeeee-->
+                              <!--REGISTRARSEEEEEEEEEEEEEEEEEEEEeeee-->
                                       <v-row>
                                         <v-dialog v-model="dialogRegist" width="900px">
                                           <template v-slot:activator="{ on, attrs }">
@@ -219,6 +219,7 @@
                                           class= "mt-6"
                                           rounded
                                           dense
+                                          @keydown="checkError()"
                                           required
                                           :rules="loginUsernameRules"
                                           v-model="username"
@@ -233,6 +234,7 @@
                                           rounded
                                           required
                                           dense
+                                          @keydown="checkError()"
                                           v-model="password"
                                           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                                           :type="show1 ? 'text' : 'password'"
@@ -241,7 +243,7 @@
                                           @click:append="show1 = !show1"
                                       ></v-text-field>
                                     </v-row>
-
+                                   <p v-if="this.loginError" class="mb-5 red--text">Usuario o contraseña incorrecta</p>
                                     <v-row>
                                       <v-btn
                                           block
@@ -270,9 +272,6 @@
             </v-row>
           </v-col>
         </v-row>
-        <v-snackbar bottom color="error" v-model="error">
-          <p> {{errorMessage}} </p>
-        </v-snackbar>
       </v-container>
       <v-col></v-col>
       <v-col></v-col>
@@ -306,8 +305,9 @@ export default {
   name: "LandingPage",
   data() {
     return {
-      error: false,
-      errorMessage: "",
+      emailError: "",
+      usernameError: "",
+      loginError: false,
       valid: false,
       dialogRegist: false,
       verificationCode: "",
@@ -315,7 +315,7 @@ export default {
       //reglas para el form
       usernameRules: [
         v => !!v || 'El usuario es obligatorio',
-        v => this.available(v) || 'Este usuario ya esta en uso'
+       // v => this.available(v) || 'Este usuario ya esta en uso'
       ],
       emailRules: [
         v => !!v || 'El correo electrónico es obligatorio',
@@ -342,6 +342,7 @@ export default {
       show1: false,
       show2: false,
       dialog: false,
+      dialog2: false,
 
       //v-models de inicio de sesion
       username: "",
@@ -355,7 +356,6 @@ export default {
       confirmPassword: "",
 
 
-      buttonPressed: false,
 
     }
   },
@@ -383,26 +383,44 @@ export default {
         this.$emit("yourEvent");
       }, this.timeout);
     },
+
     check: function (password){
       return password == this.newPassword
     },
-    available: function (username){
+   /* available: function (username){
       return ! this.usuarios.includes(username)
-    },
+    },*/
     resetearCampos: function (){
       this.$refs.form.reset()
+      this.emailError = ""
+      this.usernameError = ""
     },
     resetear: function (){
       this.$refs.form2.reset()
+      this.loginError = false
+    },
+    resetErrors: function (){
+      this.loginError = ""
+      this.emailError = ""
+      this.usernameError = ""
+    },
+    checkError: function (){
+      if (this.loginError == true){
+        this.loginError = false
+      }
     },
     validar: function (){
       if (this.$refs.form.validate() == true){
-        this.registerUser() //acá habria q chequear si el username o el mail ya existen porq tira error
+        this.resetErrors()
+        this.registerUser()
         bus2.$on('error', (data) =>{
-          if (data == 2){
-            this.error = true
-            this.errorMessage= "Usuario o contraseña incorrecta"
-            console.log("aca")
+          this.dialogRegist = false;
+          this.dialog = true;
+          if (data.details[0] == "UNIQUE constraint failed: User.email"){
+            this.emailError = "El correo electrónico ingresado ya se encuentra registrado"
+          }
+          if (data.details[0] == "UNIQUE constraint failed: User.username"){
+            this.usernameError = "El usuario elegido no está disponible"
           }
         })
       }//hay q hacer un else??
@@ -410,11 +428,10 @@ export default {
     },
     validarLogIn: function (){
       if (this.$refs.form2.validate() == true){
-        this.loginUser() //acá habria q chequear si el username o el mail ya existen porq tira error
+        this.loginUser()
         bus2.$on('error', (data) =>{
-          if (data == 4){
-            this.error = true
-            this.errorMessage= "Usuario o contraseña incorrecta"
+          if (data.code == 4){
+            this.loginError = true
           }
         })
       }//hay q hacer un else??
@@ -447,10 +464,10 @@ export default {
       //
     }
 
-  },
-  mounted() {
-    this.$store.dispatch("getAllUsernames");
   }
+  /*mounted() {
+    this.$store.dispatch("getAllUsernames");
+  }*/
 }
 
 </script>

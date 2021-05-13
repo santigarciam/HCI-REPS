@@ -13,10 +13,10 @@ export const SET_FAVOURITES = (state, rutinas) => {
 export const SET_OTHERS = (state, rutinas) => {
     state.otrasRutinas = rutinas;
 }
-
+/*
 export const SET_USERS = (state, usernames) => {
     state.allUsernames = usernames;
-}
+}*/
 
 
 export const SET_EXERCISES = (state, ejercicios) => {

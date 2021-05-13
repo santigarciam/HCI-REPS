@@ -34,7 +34,7 @@ class Api {
 
       return result;
     } catch (error) {
-      bus2.$emit('error', error.code)
+      bus2.$emit('error', error)
       if (!error.code) {
         // eslint-disable-next-line no-ex-assign
         error = { "code": 99, "description": error.message.toLowerCase() };
