@@ -7,6 +7,7 @@ export default {
     cardID: 0,
     otrasRutinas: [],
     rutinasFavoritas: [],
+    idFavoritas:[],
     cyclesOfRutine: [],
     exersisesOfRoutineOnCycle:[],
     allUsernames: [],
