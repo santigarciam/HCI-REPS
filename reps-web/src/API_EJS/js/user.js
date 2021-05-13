@@ -48,9 +48,10 @@ class UserApi {
         const result = await Api.post(`${UserApi.url}/verify_email`, false, credentials, controller);
         if(result.code){
             console.log("Error");
+            return "failed"
         }else{
-
-            // await router.push('/MisRutinas');
+            console.log("else")
+            return "verified"
         }
     }
 

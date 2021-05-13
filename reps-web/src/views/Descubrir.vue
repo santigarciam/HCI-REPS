@@ -72,18 +72,6 @@ export default {
       bus.$off('ordenar/Descubrir');
       bus.$off('busqueda/Descubrir');
       }
-    /*buscar: function (){
-      if (this.busqueda=="" || this.busqueda == null ){
-        this.$store.dispatch("getRoutines");
-      }
-      else {
-        this.$store.dispatch("searchRoutines", this.busqueda);
-      }
-    },
-
-    ordenar: function (){
-      this.$store.dispatch("sortRoutines", this.orden);
-    }*/
 
   },
   mounted() {

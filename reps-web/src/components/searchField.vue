@@ -34,6 +34,9 @@ export default {
         this.error = true;
       }
       else {
+        if (this.busqueda == null){
+          this.busqueda = ""
+        }
         bus.$emit('busqueda' + this.$router.currentRoute.fullPath , this.busqueda)
       }
     }

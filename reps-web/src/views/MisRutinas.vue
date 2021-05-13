@@ -55,11 +55,16 @@ export default {
     }
   },
   created(){
-   bus.$on('busqueda/MisRutinas', (data) =>{
-     this.busqueda = data;
-     console.log(this.busqueda)
-     this.buscar()
-   })
+    bus.$on('busqueda/MisRutinas', (data) =>{
+      this.busqueda = data;
+      console.log(this.busqueda)
+      this.filtrar()
+    })
+    bus.$on('ordenar/MisRutinas', (data) =>{
+      this.orden = data;
+      console.log(this.orden)
+      this.filtrar()
+    })
  },
  methods: {
    filtrar: function (){
@@ -77,18 +82,17 @@ export default {
        this.params += "orderBy=" + this.orden
      }
      console.log(this.params)
-     this.$store.dispatch("getRoutines", this.params);
+     this.$store.dispatch("getUserRoutines", this.params);
      this.params=""
    },
-   /*buscar: function (){
-     if (this.busqueda=="" || this.busqueda == null ){
-       this.$store.dispatch("getUserRoutines");
-     }
-     else {
-       this.$store.dispatch("searchUserRoutines", this.busqueda);
-     }
-   }*/
-  }
+   removeListeners: function (){
+     bus.$off('ordenar/MisRutinas');
+     bus.$off('busqueda/MisRutinas');
+   }
+  },
+  beforeDestroy() {
+    this.removeListeners();
+  },
 };
 </script>
 

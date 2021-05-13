@@ -32,8 +32,8 @@ export const sortRoutines = async ({ commit }, orden) => {
 }
 
 
-export const getUserRoutines = async ({ commit }) => {
-    const response = await UserApi.getRoutines( '',null);
+export const getUserRoutines = async ({ commit }, parameters) => {
+    const response = await UserApi.getRoutines( parameters,null);
     if (!response.code){
         // console.log("ENTRO");
         // console.log(response);

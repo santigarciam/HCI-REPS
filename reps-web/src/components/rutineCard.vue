@@ -138,6 +138,7 @@
 
                   <v-btn
                       icon
+                      plain
                       color="grey"
                       v-model="boton"
                       class="mt-4 mr-2"
@@ -182,7 +183,7 @@
 
             <v-row class="text-left">
 <!--              <v-card-subtitle v-model="autorRut">Autor: {{ HACERFUNCIONDECURRENTUSER }} </v-card-subtitle>-->
-              <v-card-subtitle class="mr-0 pr-0 font-weight-bold">Descripcion: </v-card-subtitle>
+              <v-card-subtitle class="mr-0 pr-0 font-weight-bold">Descripción: </v-card-subtitle>
               <v-card-subtitle class="ml-0 pl-1" v-model="descripcionRut">{{ rutina.detail }}</v-card-subtitle>
 <!--              <v-card-subtitle v-model="durRut">Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
             </v-row>
@@ -198,8 +199,8 @@
 <!--        <v-btn v-on:click="getCiclosInID(parseInt(rutina.id))">BOTON</v-btn>-->
         <v-divider></v-divider>
         <v-card-subtitle></v-card-subtitle>
-        <v-card-subtitle>Descripcion: {{ rutina.detail }}</v-card-subtitle>
-<!--        <v-card-subtitle>Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
+        <v-card-subtitle>Descripción: {{ rutina.detail }}</v-card-subtitle>
+<!--        <v-card-subtitle>Duración: {{ rutina.durRut }}</v-card-subtitle>-->
         <h4 class="pl-6 mb-4">Ciclos:</h4>
 
         <v-expansion-panels  v-for="(ciclo,i) in cyclesOfRutine" :key="ciclo.id">

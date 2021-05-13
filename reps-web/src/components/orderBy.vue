@@ -50,7 +50,6 @@ export default {
   data: () => ({
     selected: "",
     orderBy: [
-      {show: '', value: ''},
       {show:'Nombre', value:'name' },
       {show:'Descripción', value: 'detail' },
       {show:'Autor', value:'userId' },
