@@ -49,7 +49,7 @@
               <v-col>
                 <v-row>
                   <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                  <v-btn plain color="grey" class="mx-0" @click="cancelAction">Cancelar</v-btn>
+                  <v-btn color="grey lighten-1 white--text mx-0" @click="cancelAction">Cancelar</v-btn>
                   <v-btn flat class="primary mx-10" @click="modifyExercise(excercise)">Guardar</v-btn>
                 </v-row>
               </v-col>
@@ -74,7 +74,7 @@
                   <v-row>
                     <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
                     <v-btn dark flat class="primary mx-0" @click="cancelAction">No</v-btn>
-                    <v-btn plain color="grey" class="mx-10" @click="deleteEj(excercise.id)">Si</v-btn>
+                    <v-btn color="grey lighten-1 white--text" class="mx-10" @click="deleteEj(excercise.id)">Si</v-btn>
 
                   </v-row>
                 </v-col>

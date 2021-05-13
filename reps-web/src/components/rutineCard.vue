@@ -163,7 +163,7 @@
                         <v-row>
                           <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
                           <v-btn flat class="primary mx-0" @click="cancelActionRut">No</v-btn>
-                          <v-btn :loading="loading" plain color="grey" class="mx-10" @click="deleteRut(rutina.id)">Si</v-btn>
+                          <v-btn :loading="loading" color="grey lighten-1 white--text mx-10" @click="deleteRut(rutina.id)">Si</v-btn>
 
                         </v-row>
                       </v-col>

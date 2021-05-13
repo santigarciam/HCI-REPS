@@ -123,7 +123,7 @@
                                class="mx-0"
                                color="primary"
                                @click="funToCancel">No</v-btn>
-                        <v-btn plain :loading="loading" color="grey" class="mx-10" @click="logOut()">Si</v-btn>
+                        <v-btn :loading="loading" color="grey lighten-1 white--text mx-10" @click="logOut()">Si</v-btn>
                       </v-row>
                     </v-col>
 
