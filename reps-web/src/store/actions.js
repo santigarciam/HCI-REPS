@@ -42,18 +42,17 @@ export const getFavourites = async ({ commit }) => {
     }
 }
 
-export const addFavourites = async ({ commit }, id) => {
+export const addFavourites = async ({ commit },id) => {
     const response = await FavApi.add(id,null);
     if (!response.code){
-        console.log("agregó")
-        commit('ADD_ID_FAVOURITES', id);
+        commit('UPDATE_ID_FAVOURITES');
     }
 }
 
-export const deleteFavourites = async ({ commit }, id) => {
+export const deleteFavourites = async ( {commit}, id) => {
     const response = await FavApi.delete(id,null);
     if (!response.code){
-        commit('DELETE_ID_FAVOURITES', id);
+        commit('UPDATE_ID_FAVOURITES');
     }
 }
 

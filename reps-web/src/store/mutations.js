@@ -13,11 +13,8 @@ export const SET_FAVOURITES = (state, rutinas) => {
 export const SET_ID_FAVOURITES = (state, ids) => {
     state.idFavoritas = ids;
 }
-export const ADD_ID_FAVOURITES = (state, id) => {
-    state.idFavoritas.push(id);
-}
-export const DELETE_ID_FAVOURITES = (state, id) => {
-    state.idFavoritas.delete(id);
+export const UPDATE_ID_FAVOURITES = (state) => {
+   console.log(state.idFavoritas)
 }
 
 export const SET_OTHERS = (state, rutinas) => {

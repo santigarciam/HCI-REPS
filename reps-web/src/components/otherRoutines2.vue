@@ -151,12 +151,11 @@ export default {
     changeFav: function (id) {
       console.log("entra")
       console.log("le manda" + id)
-      console.log(this.idFavoritas.includes(id))
       if (this.idFavoritas.includes(id)){
-        this.$store.dispatch("deleteFavourites", id.toString());
+        this.$store.dispatch("deleteFavourites", id);
       }
       else {
-        this.$store.dispatch("addFavourites", id.toString());
+        this.$store.dispatch("addFavourites", id);
       }
       //para actualizar los valores
       this.$store.dispatch('changeCardID');
