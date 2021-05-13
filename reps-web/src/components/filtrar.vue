@@ -1,24 +1,66 @@
 <template>
   <v-col cols="2">
-    <v-select
-        v-model="value"
-        label="Filtrar"
-        multiple
+    <v-btn
         outlined
-        dense
-        :items="filters"
-        deletable-chips
-        :menu-props="{ maxHeight: '400' }"
+        depressed
+        color="grey darken-2"
+        @click.stop="drawer = !drawer"
     >
-    </v-select>
+      Filtrar<v-icon class="ml-1" color="grey darken-2">mdi-menu-down</v-icon>
+    </v-btn>
+    <v-navigation-drawer
+        floating
+        class="mr-0 pr-0"
+        v-model="drawer"
+    >
+      <v-list
+          dense
+          rounded
+      >
+        <v-list-item>
+          <v-select
+              v-model="value"
+              :items="categorias"
+              label="Categoria"
+              outlined
+              dense
+              item-text="show"
+              item-value="value"
+              :menu-props="{ maxHeight: '400' }"
+          ></v-select> </v-list-item>
+         <v-list-item> <v-select
+              v-model="value"
+              :items="dificultad"
+              label="Dificultad"
+              outlined
+              item-text="show"
+              item-value="value"
+              dense
+              :menu-props="{ maxHeight: '400' }"
+          ></v-select></v-list-item>
+
+      </v-list>
+    </v-navigation-drawer>
   </v-col>
 </template>
 
 <script>
 export default {
   data: () => ({
-    filters: ['Foo', 'Bar', 'Fizz', 'Buzz', 'Otro'],
-    categorias:['1', '2', '3']
+    drawer:false,
+    dificultad: [
+      {show:'', value:'rookie' },
+      {show:'Novato', value:'rookie' },
+      {show:'Principiante', value: 'beginner' },
+      {show:'Intermedio', value:'intermediate' },
+      {show:'Avanzado', value:'advanced'},
+      {show:'Experto', value:'expert'},],
+    categorias: [
+      {show:'Novato', value:'rookie' },
+      {show:'Principiante', value: 'beginner' },
+      {show:'Intermedio', value:'intermediate' },
+      {show:'Avanzado', value:'advanced'},
+      {show:'Experto', value:'expert'},]
   }),
 }
 </script>

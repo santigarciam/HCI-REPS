@@ -16,7 +16,7 @@
 <script>
 
 
-import Filtrar from "@/components/filtrar";
+import Filtrar from "@/components/filtrarPor";
 import OrderBy from "@/components/orderBy";
 import SearchField from "@/components/searchField";
 import OtherRoutines from "../components/otherRoutines";
