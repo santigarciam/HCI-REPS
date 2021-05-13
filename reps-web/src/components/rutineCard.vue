@@ -179,12 +179,11 @@
 
               </v-row>
 
-
+<!--INFORMACION RUTINE CARD-->
             <v-row class="text-left">
 <!--              <v-card-subtitle v-model="autorRut">Autor: {{ HACERFUNCIONDECURRENTUSER }} </v-card-subtitle>-->
               <v-card-subtitle class="mr-0 pr-0 font-weight-bold">Descripcion: </v-card-subtitle>
               <v-card-subtitle class="ml-0 pl-1" v-model="descripcionRut">{{ rutina.detail }}</v-card-subtitle>
-<!--              <v-card-subtitle v-model="durRut">Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
             </v-row>
             </v-col>
 
@@ -199,12 +198,11 @@
         <v-divider></v-divider>
         <v-card-subtitle></v-card-subtitle>
         <v-card-subtitle>Descripcion: {{ rutina.detail }}</v-card-subtitle>
-<!--        <v-card-subtitle>Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
         <h4 class="pl-6 mb-4">Ciclos:</h4>
 
         <v-expansion-panels  v-for="(ciclo,i) in cyclesOfRutine" :key="ciclo.id">
                 <v-expansion-panel >
-                  <v-expansion-panel-header>{{ciclo.name}}</v-expansion-panel-header>
+                  <v-expansion-panel-header>{{ciclo.name}} Repetir {{ciclo.repetitions}} veces</v-expansion-panel-header>
                   <v-expansion-panel-content>
                 <template v-for="ejs in exercisesOfCycle[i]">
 <!--                <v-card :key="ejs">-->

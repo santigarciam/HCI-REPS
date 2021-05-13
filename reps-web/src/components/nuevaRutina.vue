@@ -251,17 +251,19 @@
                         <v-card-title>Repeticiones y Descansos</v-card-title>
                         <h4 class="pt-6 pl-6 mb-4">Ciclos:</h4>
                         <v-card-text>
-                        <v-expansion-panels class="mb-2" v-for="(ciclo,i) in cyclesOfRutine" :key="ciclo.id">
+                        <v-expansion-panels class="mb-2" v-for="i in steps + 2"  :key="i">
                           <v-expansion-panel>
                             <v-row>
                               <v-col>
-                            <v-expansion-panel-header>{{ciclo.name}}</v-expansion-panel-header>
+                            <v-expansion-panel-header v-if="i===1">Calentamiento </v-expansion-panel-header>
+                            <v-expansion-panel-header v-else-if="i=== steps + 2">Enfriamiento</v-expansion-panel-header>
+                            <v-expansion-panel-header v-else> Ciclo {{i -1}}</v-expansion-panel-header>
                               </v-col>
                             <v-col align="center">
 
                               <v-text-field
                                   prepend-icon="mdi-counter"
-                                  v-model="repsCiclo[i]"
+                                  v-model="repsCiclo[i -1]"
                                   class="mt-0 pt-0"
                                   hide-details
                                   single-line
@@ -272,8 +274,9 @@
                             </v-col>
                             </v-row>
                             <v-expansion-panel-content>
-                              <template v-for="(ejs,j) in ejsCycleAux[i]">
+                              <template v-for="(ejs,j) in ejsCycleAux[i-1]">
                                 <v-card small class="mt-1 mb-1" :key="ejs.id">
+
                                   <v-row>
                                     <v-col>
                                       <v-card-text>{{ejs.ej.name}}</v-card-text>
@@ -284,7 +287,7 @@
                                     <v-col>
                                       <v-text-field
                                           prepend-icon="mdi-order-numeric-ascending"
-                                          v-model="ejsCycleAux[i][j].orden"
+                                          v-model="ejsCycleAux[i-1][j].orden"
                                           class="mt-0 pt-0"
                                           hide-details
                                           single-line
@@ -296,7 +299,7 @@
                                     <v-col>
                                       <v-text-field
                                           prepend-icon="mdi-counter"
-                                          v-model="ejsCycleAux[i][j].reps"
+                                          v-model="ejsCycleAux[i-1][j].reps"
                                           class="mt-0 pt-0"
                                           hide-details
                                           single-line
@@ -308,7 +311,7 @@
                                     <v-col>
                                       <v-text-field
                                           prepend-icon="mdi-clock-outline"
-                                          v-model="ejsCycleAux[i][j].desc"
+                                          v-model="ejsCycleAux[i-1][j].desc"
                                           class="mt-0 pt-0"
                                           hide-details
                                           min = "1"
@@ -514,7 +517,7 @@ export default {
       this.categoryRut='';
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     },
-    loadNextStepNewRut: function (){
+    loadNextStepNewRut: async function () {
       let order = 1;
       let ejsArr;
       ejsArr = [];
@@ -522,14 +525,16 @@ export default {
         let auxArr;
         auxArr = [];
         for (const k of this.selected[i]) {
-          auxArr.push({orden: order++, ej: this.ejercicios[k], reps: 0, desc:0, sets:0});
+          auxArr.push({orden: order++, ej: this.ejercicios[k], reps: 0, desc: 0, sets: 0});
         }
         order = 1;
-          //this.ejsCycleAux[i].push(this.ejercicios[k]);
+        //this.ejsCycleAux[i].push(this.ejercicios[k]);
         ejsArr[i] = auxArr;
         //}
       }
       console.log("Siguiente en ADD RUT");
+      let cycloOf = await this.$store.state.cyclesOfRutine;
+      console.log(cycloOf)
       console.log(ejsArr);
       this.$store.dispatch("setSelectedExercisesInCycles", ejsArr);
     },
