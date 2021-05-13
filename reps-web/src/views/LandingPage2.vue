@@ -182,7 +182,7 @@
                                           @click:append="show1 = !show1"
                                       ></v-text-field>
                                     </v-row>
-                                   <p v-if="this.loginError" class="mb-5 red--text">Usuario o contraseña incorrecta</p>
+                                    <p v-if="this.loginError" class="mb-5 red--text">{{this.loginErrorMessage}}</p>
                                     <v-row>
                                       <v-btn
                                           block
@@ -248,6 +248,7 @@ export default {
       emailError: "",
       usernameError: "",
       loginError: false,
+      loginErrorMessage: "",
       valid: false,
       dialogRegist: false,
       verificationCode: "",
@@ -266,7 +267,8 @@ export default {
         v => v.length >= 8 || "Mínimo 8 caracteres"
       ],
       confirmRules: [
-        v => this.check(v)|| 'La contraseña no es igual',
+        v => !!v || 'Debe confirmar su contraseña',
+        // v => this.check(v)|| 'La contraseña no es igual',
       ],
 
       //reglas login
@@ -314,6 +316,16 @@ export default {
       console.log(this.$store.state.userRegisteredMail);
       // console.log({userRegisteredMail,code:this.verificationCode});
       UserApi.verifyCode({email:this.$store.state.userRegisteredMail,code:this.verificationCode},null);
+      var aux = UserApi.verifyCode({email:this.$store.state.userRegisteredMail,code:this.verificationCode},null);
+      bus2.$on('error', (data) =>{
+        if (data.details[0] == "Invalid verification code"){
+          //mostrar el error
+        }
+      })
+      if (aux == "verified"){
+        console.log("whyy")
+        UserApi.login({username: this.newUsername, password: this.newPassword},null);
+      }
     },
     resendCode(){
       console.log("reenviado");
@@ -356,6 +368,9 @@ export default {
         bus2.$on('error', (data) =>{
           this.dialogRegist = false;
           this.dialog = true;
+          if (data.code == 1){
+            this.emailError = "El correo electrónico ingresado no es válido"
+          }
           if (data.details[0] == "UNIQUE constraint failed: User.email"){
             this.emailError = "El correo electrónico ingresado ya se encuentra registrado"
           }
@@ -371,6 +386,11 @@ export default {
         this.loginUser()
         bus2.$on('error', (data) =>{
           if (data.code == 4){
+            this.loginErrorMessage = "Usuario o contraseña incorrecta"
+            this.loginError = true
+          }
+          if (data.description == "Email verification error"){
+            this.loginErrorMessage = "Su correo electrónico no ha sido verificado"
             this.loginError = true
           }
         })
