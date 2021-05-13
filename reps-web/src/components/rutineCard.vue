@@ -361,6 +361,9 @@ export default {
 
     mounted() {
       this.$store.dispatch("getUserRoutines");
+      // if(this.$store.state.listaRutinas.length !==0){
+      //    this.$store.dispatch("getCyclesOfID", this.$store.state.listaRutinas[0].id);
+      // }
      // console.log(this.$store.state.listaRutinas)
     },
 }

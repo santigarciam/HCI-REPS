@@ -250,7 +250,7 @@
                         <v-btn  class="primary mx-10" slot="activator" v-bind="attrs" v-on="on" @click="addNewRoutine" outlined>Guardar</v-btn>
                       </template>
 
-                      <v-card flat>
+                      <v-card >
 <!--                        <v-card-title>{{ rutina.name }}</v-card-title>-->
 <!--                        &lt;!&ndash;        <v-btn v-on:click="getCiclosInID(parseInt(rutina.id))">BOTON</v-btn>&ndash;&gt;-->
 <!--                        <v-divider></v-divider>-->
@@ -503,6 +503,9 @@ export default {
     ejercicios(){
       return this.$store.state.listaEjercicios;
     },
+    rutinas(){
+      return this.$store.state.listaRutinas;
+    },
     cardID(){
       return this.$store.state.cardID;
     },
@@ -516,6 +519,10 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getExercises");
+    // if(this.$store.state.listaRutinas.length !==0){
+    //   this.$store.dispatch("getCyclesOfID", this.$store.state.listaRutinas[0].id);
+    // }
+    this.$store.dispatch("getCyclesOfID",1); /// VER DE DESSHAR
   }
 }
 </script>
