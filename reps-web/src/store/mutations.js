@@ -10,6 +10,16 @@ export const SET_FAVOURITES = (state, rutinas) => {
     state.rutinasFavoritas = rutinas;
 }
 
+export const SET_ID_FAVOURITES = (state, ids) => {
+    state.idFavoritas = ids;
+}
+export const ADD_ID_FAVOURITES = (state, id) => {
+    state.idFavoritas.push(id);
+}
+export const DELETE_ID_FAVOURITES = (state, id) => {
+    state.idFavoritas.delete(id);
+}
+
 export const SET_OTHERS = (state, rutinas) => {
     state.otrasRutinas = rutinas;
 }
@@ -56,7 +66,7 @@ export const GET_USER_INFO = async (state) => {
     state.user= result.username;
     state.userFirstName = result.firstName;
     state.userLastName = result.lastName;
-    state.userAvatar = result.avatarUrl;
+    state.userAvatar = (result.avatarUrl === 'https://flic.kr/p/3ntH2u')? state.userAvatar : result.avatarUrl;
     state.userDate = result.birthdate;
 }
 

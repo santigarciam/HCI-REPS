@@ -43,7 +43,7 @@
 
 
                 </div>
-                <v-btn class="mt-4 mr-3" plain icon>
+                <v-btn class="mt-4 mr-3" plain icon v-on:click="changeFav(rutina.id)" :color="getColour(rutina.id)">
                   <v-icon>mdi-heart</v-icon>
                 </v-btn>
               </v-row>
@@ -105,6 +105,14 @@ export default {
       }
     },
 
+    getColour: function (id){
+      if (this.$store.state.idFavoritas.includes(id)){
+        return "red"
+      }
+      else {
+        return "grey"
+      }
+    },
     mostrarSnack: function (event) {
       event.stopPropagation();
       console.log(this);
@@ -113,6 +121,19 @@ export default {
       setTimeout(() => {
         this.$emit("yourEvent");
       }, this.timeout);
+    },
+
+    changeFav: function (event) {
+      event.stopPropagation();
+      console.log(this);
+      this.$store.dispatch('changeCardID');
+      if (this.$store.state.idFavoritas.includes(this)){
+        this.$store.dispatch("deleteFavourite", this);
+      }
+      else {
+        this.$store.dispatch("addFavourite", this);
+      }
+
     },
 
     cancelActionRut: function (){
@@ -143,6 +164,7 @@ export default {
 
   mounted() {
     this.$store.dispatch("getRoutines", "");
+    this.$store.dispatch("getFavourites", "");
     console.log("1")
   },
 }

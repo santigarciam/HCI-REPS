@@ -43,7 +43,7 @@
 
 
                 </div>
-                <v-btn class="mt-4 mr-3" plain icon>
+                <v-btn class="mt-4 mr-3" plain color="red" icon>
                   <v-icon>mdi-heart</v-icon>
                 </v-btn>
               </v-row>

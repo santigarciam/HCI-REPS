@@ -3,7 +3,7 @@ import {ExerciseApi} from '../API_EJS/js/exercises';
 import {UserApi} from "../API_EJS/js/user";
 import {FavApi} from "../API_EJS/js/favourites";
 
-//si le agrego lo del userID le tengo q pasar state ademas del commit pero ahora como lo comente lo saco
+
 export const getRoutines = async ({ commit}, parameters) => {
     const response = await routineApi.getAll(parameters, null);
     if (!response.code){
@@ -12,25 +12,6 @@ export const getRoutines = async ({ commit}, parameters) => {
         console.log(response.content)
     }
 }
-
-export const searchRoutines = async ({ commit }, busqueda) => {
-    const response = await routineApi.getAll("search=" + busqueda, null);
-    if (!response.code){
-        // console.log("ENTRO");
-        // console.log(response);
-        commit('SET_OTHERS', response.content);
-    }
-}
-
-export const sortRoutines = async ({ commit }, orden) => {
-    const response = await routineApi.getAll("orderBy=" + orden, null);
-    if (!response.code){
-        // console.log("ENTRO");
-        //console.log(response);
-        commit('SET_OTHERS', response.content);
-    }
-}
-
 
 export const getUserRoutines = async ({ commit }, parameters) => {
     const response = await UserApi.getRoutines( parameters,null);
@@ -56,6 +37,24 @@ export const getFavourites = async ({ commit }) => {
         // console.log("ENTRO");
         console.log(response);
         commit('SET_FAVOURITES', response.content);
+        var aux = [];
+        response.content.forEach(e => aux.push(e.id));
+        console.log(aux)
+        commit('SET_ID_FAVOURITES', aux);
+    }
+}
+
+export const addFavourites = async ({ commit }, id) => {
+    const response = await FavApi.add(id,null);
+    if (!response.code){
+        commit('ADD_ID_FAVOURITES', id);
+    }
+}
+
+export const deleteFavourites = async ({ commit }, id) => {
+    const response = await FavApi.add(id,null);
+    if (!response.code){
+        commit('DELETE_ID_FAVOURITES', id);
     }
 }
 
@@ -89,18 +88,6 @@ export const changeCardID = ({ commit }) => {
 export const getUserInformation = ({ commit }) => {
     commit('GET_USER_INFO');
 }
-
 export const setSelectedExercisesInCycles = ({ commit }, arr) => {
     commit('SET_EX_IN_CYCLE', arr);
 }
-
-/*
-export const getAllUsernames = async ({ commit}) => {
-    const response = await UserApi.getAllUsers( null);
-    if (!response.code){
-        var aux = [];
-        response.content.forEach(e => aux.push(e.username));
-        commit('SET_USERS', aux);
-
-    }
-}*/

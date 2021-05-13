@@ -74,6 +74,9 @@ export default {
       }
 
   },
+  beforeUpdate() {
+    this.$store.dispatch("changeCardID");
+  },
   mounted() {
     this.$store.dispatch("changeCardID");
   },
