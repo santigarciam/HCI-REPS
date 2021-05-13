@@ -11,7 +11,7 @@
           <v-card v-bind="attrs" v-on="on" hover @click.stop="dialog = true; + funcionAUX(rutina.id)" >
             <v-col>
               <v-row>
-                <v-card-title v-model="tituloRut">{{ rutina.name }} <v-rating
+                <v-card-title class="mb-0 pb-0" v-model="tituloRut">{{ rutina.name }} <v-rating
                     v-model="rutina.rating"
                     half-increments
                     readonly
@@ -47,11 +47,12 @@
                 </v-btn>
               </v-row>
 
-            </v-col>
-            <v-col class="text-left">
-              <v-card-subtitle v-model="autorRut">Autor: {{ rutina.user.username }} </v-card-subtitle>
-              <v-card-subtitle v-model="descripcionRut">Descripcion: {{ rutina.detail }}</v-card-subtitle>
-              <!--              <v-card-subtitle v-model="durRut">Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
+
+            <v-row class="text-left">
+             <v-icon small class="align-center mr-0 ml-3" color="blue">mdi-account</v-icon> <v-card-subtitle class="blue--text ml-0 pl-1 mt-0 pt-0 pb-0 font-weight-bold" v-model="autorRut">{{ rutina.user.username }} </v-card-subtitle>
+            </v-row>
+              <v-row><v-card-subtitle v-model="descripcionRut">Descripcion: {{ rutina.detail }}</v-card-subtitle>
+              </v-row> <!--              <v-card-subtitle v-model="durRut">Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
             </v-col>
 
 

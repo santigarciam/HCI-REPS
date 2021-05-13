@@ -182,7 +182,7 @@
             </v-col>
             <v-col class="text-left">
 <!--              <v-card-subtitle v-model="autorRut">Autor: {{ HACERFUNCIONDECURRENTUSER }} </v-card-subtitle>-->
-              <v-card-subtitle v-model="descripcionRut">Descripcion: {{ rutina.detail }}</v-card-subtitle>
+              <v-card-text v-model="descripcionRut">Descripcion: {{ rutina.detail }}</v-card-text>
 <!--              <v-card-subtitle v-model="durRut">Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
             </v-col>
 
