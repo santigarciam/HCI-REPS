@@ -1,6 +1,6 @@
 <template>
 <v-app>
-    <AppBar v-if="isNotLoged || isNotHome" ></AppBar>
+    <AppBar v-if="showAppBar" ></AppBar>
   <v-main>
     <router-view></router-view>
   </v-main>
@@ -12,7 +12,7 @@
 
 import AppBar from "./components/AppBar";
 //import state from "./store/state";
-import {Api} from "./API_EJS/js/api"
+//import {Api} from "./API_EJS/js/api"
 
 export default {
   name: 'App',
@@ -24,11 +24,11 @@ export default {
     isNotHome() {
       return this.$route.path != '/'
     },
-    isNotLoged(){
-      return ! Api.getToken() ;
+    isNotConfirm(){
+      return this.$route.path != '/ConfirmacionMail'
     },
     showAppBar(){
-      return this.isNotLoged() | this.$route.path !== '/ConfirmacionMail'
+      return this.isNotHome && this.isNotConfirm
     }
   },
 
