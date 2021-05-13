@@ -8,7 +8,6 @@
           <v-row>
             <v-card-title>{{ excercise.name }}</v-card-title>
             <v-spacer></v-spacer>
-
 <!--            EDITAR EJERCICIO-->
 <!--            <v-dialog v-model="dialog[excersise.id]" width="800px" :retain-focus="false" >-->
             <v-dialog v-model="dialog[excercise.id]" width="800px" :retain-focus="false" >
@@ -97,8 +96,14 @@
 
     <v-card>
       <v-card-title>
-        <h2>{{ excercise.name }}</h2>
+        {{ excercise.name }}
+        <v-spacer></v-spacer>
+        <v-btn plain v-on:click="cancelAction"><v-icon dark>
+        mdi-close
+      </v-icon></v-btn>
+
       </v-card-title>
+      <v-divider></v-divider>
 
       <v-card-text>
         <v-card-title v-model="descripcionEj">Descripcion: {{ excercise.detail }}</v-card-title>

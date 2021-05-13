@@ -8,7 +8,7 @@ export default {
     otrasRutinas: [],
     rutinasFavoritas: [],
     cyclesOfRutine: [],
-    //exersisesOfRoutineOnCycle:[],
+    exersisesOfRoutineOnCycle:[],
     allUsernames: [],
     user: 'USER_ID',
     userFirstName:'USER_FIRST_NAME',
@@ -16,4 +16,5 @@ export default {
     userDate: null,
     userAvatar: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
     userRegisteredMail: '',
+    ejsCycleAux: [],
 }

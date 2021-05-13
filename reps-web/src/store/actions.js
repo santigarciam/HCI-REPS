@@ -89,6 +89,11 @@ export const changeCardID = ({ commit }) => {
 export const getUserInformation = ({ commit }) => {
     commit('GET_USER_INFO');
 }
+
+export const setSelectedExercisesInCycles = ({ commit }, arr) => {
+    commit('SET_EX_IN_CYCLE', arr);
+}
+
 /*
 export const getAllUsernames = async ({ commit}) => {
     const response = await UserApi.getAllUsers( null);

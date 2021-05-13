@@ -15,8 +15,6 @@
               <v-row>
                 <v-card-title class="mb-0 pb-0">{{ rutina.name }} </v-card-title>
                 <v-spacer></v-spacer>
-
-
 <!-- EDITAR RUTINAA-->
                   <v-dialog v-model="dialog[rutina.id]" width="800px" :retain-focus="false" >
                     <template  v-slot:activator="{ on, attrs }">
@@ -138,7 +136,6 @@
 
                   <v-btn
                       icon
-                      plain
                       color="grey"
                       v-model="boton"
                       class="mt-4 mr-2"
@@ -165,8 +162,8 @@
                       <v-col text--center>
                         <v-row>
                           <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                          <v-btn plain color="grey" class="mx-0" @click="cancelActionRut">No</v-btn>
-                          <v-btn :loading="loading" flat class="primary mx-10" @click="deleteRut(rutina.id)">Si</v-btn>
+                          <v-btn flat class="primary mx-0" @click="cancelActionRut">No</v-btn>
+                          <v-btn :loading="loading" plain color="grey" class="mx-10" @click="deleteRut(rutina.id)">Si</v-btn>
 
                         </v-row>
                       </v-col>
@@ -180,12 +177,11 @@
 
               </v-row>
 
-
+<!--INFORMACION RUTINE CARD-->
             <v-row class="text-left">
 <!--              <v-card-subtitle v-model="autorRut">Autor: {{ HACERFUNCIONDECURRENTUSER }} </v-card-subtitle>-->
-              <v-card-subtitle class="mr-0 pr-0 font-weight-bold">Descripción: </v-card-subtitle>
+              <v-card-subtitle class="mr-0 pr-0 font-weight-bold">Descripcion: </v-card-subtitle>
               <v-card-subtitle class="ml-0 pl-1" v-model="descripcionRut">{{ rutina.detail }}</v-card-subtitle>
-<!--              <v-card-subtitle v-model="durRut">Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
             </v-row>
             </v-col>
 
@@ -195,18 +191,22 @@
       </template>
 
       <v-card flat>
-        <v-card-title>{{ rutina.name }}</v-card-title>
+        <v-card-title>{{ rutina.name }}<v-spacer></v-spacer><v-btn plain v-on:click="cancelActionRut"><v-icon dark>
+          mdi-close
+        </v-icon></v-btn></v-card-title>
 <!--        <v-btn v-on:click="getCiclosInID(parseInt(rutina.id))">BOTON</v-btn>-->
         <v-divider></v-divider>
         <v-card-subtitle></v-card-subtitle>
-        <v-card-subtitle>Descripción: {{ rutina.detail }}</v-card-subtitle>
-<!--        <v-card-subtitle>Duración: {{ rutina.durRut }}</v-card-subtitle>-->
+        <v-card-subtitle>Descripcion: {{ rutina.detail }}</v-card-subtitle>
         <h4 class="pl-6 mb-4">Ciclos:</h4>
 
         <v-expansion-panels  v-for="(ciclo,i) in cyclesOfRutine" :key="ciclo.id">
-                <v-expansion-panel >
-                  <v-expansion-panel-header>{{ciclo.name}}</v-expansion-panel-header>
+                <v-expansion-panel>
+                  <v-expansion-panel-header>
+                    {{ciclo.name}}
+                  </v-expansion-panel-header>
                   <v-expansion-panel-content>
+                    <v-chip class="mb-4 ma-2" small color="primary">x{{ciclo.repetitions}}</v-chip>
                 <template v-for="ejs in exercisesOfCycle[i]">
 <!--                <v-card :key="ejs">-->
 <!--                  <v-card-title>ENTRO</v-card-title>-->
@@ -296,7 +296,7 @@ export default {
       }
       await routineApi.delete(id);
       this.loading = false;
-      await this.$store.dispatch("changeCardID");//es como un flag que avisa un cambio de estado
+      this.cancelActionRut();
     },
     cancelActionRut: function (){
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado

@@ -206,19 +206,16 @@
                             <template v-slot:default="{ active }">
                               <v-list-item-content>
                                 <v-list-item-title v-text="excersise.name"></v-list-item-title>
-
                               </v-list-item-content>
 
                               <v-list-item-action>
                                 <v-list-item-action-text v-text="excersise.action"></v-list-item-action-text>
-
                                 <v-icon
                                     v-if="active"
                                     color="grey lighten-1"
                                 >
                                   mdi-check
                                 </v-icon>
-
                               </v-list-item-action>
                             </template>
                           </v-list-item>
@@ -247,39 +244,51 @@
 <!--                      <v-btn flat class="primary mx-10" v-on:click="addNewRoutine">Guardar</v-btn>&ndash;&gt;-->
                       <v-dialog>
                       <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-                        <v-btn  class="primary mx-10" slot="activator" v-bind="attrs" v-on="on" @click="addNewRoutine" outlined>Guardar</v-btn>
+                        <v-btn class="primary mx-10 white--text"  slot="activator" v-bind="attrs" v-on="on" @click="loadNextStepNewRut" outlined>Siguiente</v-btn>
                       </template>
 
-                      <v-card >
-<!--                        <v-card-title>{{ rutina.name }}</v-card-title>-->
-<!--                        &lt;!&ndash;        <v-btn v-on:click="getCiclosInID(parseInt(rutina.id))">BOTON</v-btn>&ndash;&gt;-->
-<!--                        <v-divider></v-divider>-->
-<!--                        <v-card-subtitle></v-card-subtitle>-->
-<!--                        <v-card-subtitle>Descripcion: {{ rutina.detail }}</v-card-subtitle>-->
-                        <!--        <v-card-subtitle>Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
-                        <h4 class="pl-6 mb-4">Ciclos:</h4>
+                      <v-card>
+                        <v-card-title>Repeticiones y Descansos</v-card-title>
+                        <h4 class="pt-6 pl-6 mb-4">Ciclos:</h4>
+                        <v-card-text>
+                        <v-expansion-panels class="mb-2" v-for="i in steps + 2"  :key="i">
+                          <v-expansion-panel>
+                            <v-row>
+                              <v-col>
+                            <v-expansion-panel-header v-if="i===1">Calentamiento </v-expansion-panel-header>
+                            <v-expansion-panel-header v-else-if="i=== steps + 2">Enfriamiento</v-expansion-panel-header>
+                            <v-expansion-panel-header v-else> Ciclo {{i -1}}</v-expansion-panel-header>
+                              </v-col>
+                            <v-col align="center">
 
-                        <v-expansion-panels  v-for="(ciclo,i) in cyclesOfRutine" :key="ciclo.id">
-                          <v-expansion-panel >
-                            <v-expansion-panel-header>{{ciclo.name}}</v-expansion-panel-header>
+                              <v-text-field
+                                  prepend-icon="mdi-counter"
+                                  v-model="repsCiclo[i -1]"
+                                  class="mt-0 pt-0"
+                                  hide-details
+                                  single-line
+                                  min = "1"
+                                  type="number"
+                                  style="width: 80px"
+                              ></v-text-field>
+                            </v-col>
+                            </v-row>
                             <v-expansion-panel-content>
-                              <template v-for="ejs in exercisesOfCycle[i]">
-                                <!--                <v-card :key="ejs">-->
-                                <!--                  <v-card-title>ENTRO</v-card-title>-->
-                                <!--                  <template v-for="ej in ejs">-->
-                                <v-card small  class="mt-1" :key="ejs.exercise.id">
+                              <template v-for="(ejs,j) in ejsCycleAux[i-1]">
+                                <v-card small class="mt-1 mb-1" :key="ejs.id">
 
                                   <v-row>
                                     <v-col>
-                                      <v-card-text>{{ejs.exercise.name}}</v-card-text>
-                                    </v-col> <v-col>
-                                  </v-col>
+                                      <v-card-text>{{ejs.ej.name}}</v-card-text>
+                                    </v-col>
                                     <v-spacer></v-spacer>
+
+<!--                                    <v-col><v-subheader>Orden</v-subheader></v-col>-->
                                     <v-col>
                                       <v-text-field
-                                          v-model="slider"
+                                          prepend-icon="mdi-order-numeric-ascending"
+                                          v-model="ejsCycleAux[i-1][j].orden"
                                           class="mt-0 pt-0"
-                                          label="Duracion:"
                                           hide-details
                                           single-line
                                           min = "1"
@@ -289,9 +298,21 @@
                                     </v-col>
                                     <v-col>
                                       <v-text-field
-                                          v-model="slider"
+                                          prepend-icon="mdi-counter"
+                                          v-model="ejsCycleAux[i-1][j].reps"
                                           class="mt-0 pt-0"
-                                          label="Duracion:"
+                                          hide-details
+                                          single-line
+                                          min = "1"
+                                          type="number"
+                                          style="width: 60px"
+                                      ></v-text-field>
+                                    </v-col>
+                                    <v-col>
+                                      <v-text-field
+                                          prepend-icon="mdi-clock-outline"
+                                          v-model="ejsCycleAux[i-1][j].desc"
+                                          class="mt-0 pt-0"
                                           hide-details
                                           min = "1"
                                           single-line
@@ -300,7 +321,6 @@
                                       ></v-text-field>
                                     </v-col>
                                   </v-row>
-
                                 </v-card>
                                 <!--                  </template>-->
                                 <!--                </v-card>-->
@@ -308,6 +328,16 @@
                             </v-expansion-panel-content>
                           </v-expansion-panel>
                         </v-expansion-panels>
+                        <v-col></v-col>
+                        <v-col>
+                          <v-row>
+                            <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
+                            <v-btn plain color="grey" class="mx-0" v-on:click="cancelActionNewRut">Cancelar</v-btn>
+                            <v-btn class="primary mx-10 white--text" v-on:click="addNewRoutine">Finalizar</v-btn>
+                          </v-row>
+                        </v-col>
+                        <v-col></v-col>
+                        </v-card-text>
                       </v-card>
 
                       </v-dialog>
@@ -350,6 +380,7 @@ export default {
       steps: 1,
       durRut:'',
       ciclos: ['Entrada en calor', 'Entrenamiento', 'Enfriamiento'],
+      repsCiclo:{},
     }
   },
   watch: {
@@ -393,7 +424,6 @@ export default {
           console.log(respRut);
           if(respRut.id) {
             for (var i = 0; i < this.steps + 2; i++) {
-              let t = 1;
               switch (i) {
                 case 0:
                   // eslint-disable-next-line no-case-declarations
@@ -402,16 +432,12 @@ export default {
                     detail: "N/A",
                     type: "warmup",
                     order: 1,
-                    repetitions: 1,
+                    repetitions:  parseInt(this.repsCiclo[i]),
                     metadata: null
                   }, null);
                   if (respCal.id) {
-                    for (const k of this.selected[i]) {
-                      await cycleExercisesApi.add(respCal.id, this.ejercicios[k].id, {
-                        order: t++,
-                        duration: 1,
-                        repetitions: 1
-                      }, null);
+                    for (const ejercicio of this.ejsCycleAux[i]) {
+                      await cycleExercisesApi.add(respCal.id, ejercicio.ej.id, { order: parseInt(ejercicio.orden), duration: parseInt(ejercicio.desc), repetitions: parseInt(ejercicio.reps)}, null);
                     }
                     console.log(await cycleApi.get(respRut.id,respCal,null));
                   } else {
@@ -428,16 +454,12 @@ export default {
                     detail: "N/A",
                     type: "cooldown",
                     order: i + 1,
-                    repetitions: 1,
+                    repetitions:  parseInt(this.repsCiclo[i]),
                     metadata: null
                   }, null);
                   if (respEnfri.id) {
-                    for (const k of this.selected[i]) {
-                      await cycleExercisesApi.add(respEnfri.id, this.ejercicios[k].id, {
-                        order: t++,
-                        duration: 1,
-                        repetitions: 1
-                      }, null);
+                    for (const ejercicio of this.ejsCycleAux[i]) {
+                      await cycleExercisesApi.add(respEnfri.id, ejercicio.ej.id, { order: parseInt(ejercicio.orden), duration: parseInt(ejercicio.desc), repetitions: parseInt(ejercicio.reps)}, null);
                     }
                   } else {
                     console.log("ERROR ENFRI"); //ERROR
@@ -450,16 +472,12 @@ export default {
                     detail: "N/A",
                     type: "exercise",
                     order: i + 1,
-                    repetitions: 1,
+                    repetitions: parseInt(this.repsCiclo[i]),
                     metadata: null
                   }, null);
                   if (respCiclo.id) {
-                    for (const k of this.selected[i]) {
-                      await cycleExercisesApi.add(respCiclo.id, this.ejercicios[k].id, {
-                        order: t++,
-                        duration: 1,
-                        repetitions: 1
-                      }, null);
+                    for (const ejercicio of this.ejsCycleAux[i]) {
+                      await cycleExercisesApi.add(respCiclo.id, ejercicio.ej.id, { order: parseInt(ejercicio.orden), duration: parseInt(ejercicio.desc), repetitions: parseInt(ejercicio.reps)}, null);
                     }
                     console.log(await cycleApi.get(respRut.id,respCiclo,null));
                   } else {
@@ -477,6 +495,7 @@ export default {
       const rutinaAux = await routineApi.get(respRut.id,null);
       console.log(rutinaAux);
       const ciclosAux = await cycleApi.getAll(respRut.id, null);
+      console.log("CILCOS");
       console.log(ciclosAux);
       for (const h of ciclosAux.content) {
         console.log(h.id);
@@ -485,7 +504,7 @@ export default {
       }
     this.loading = false;
       await this.$store.dispatch("getCyclesOfID", rutinaAux.id);
-    // this.cancelActionNewRut();
+     this.cancelActionNewRut();
     },
     cancelActionNewRut: function (){
       console.log("CANCEL");
@@ -498,6 +517,31 @@ export default {
       this.categoryRut='';
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     },
+    loadNextStepNewRut: async function () {
+      let order = 1;
+      let ejsArr;
+      ejsArr = [];
+      for (let i = 0; i < this.steps + 2; i++) {
+        let auxArr;
+        auxArr = [];
+        for (const k of this.selected[i]) {
+          auxArr.push({orden: order++, ej: this.ejercicios[k], reps: 0, desc: 0, sets: 0});
+        }
+        order = 1;
+        //this.ejsCycleAux[i].push(this.ejercicios[k]);
+        ejsArr[i] = auxArr;
+        //}
+      }
+      console.log("Siguiente en ADD RUT");
+      let cycloOf = await this.$store.state.cyclesOfRutine;
+      console.log(cycloOf)
+      console.log(ejsArr);
+      this.$store.dispatch("setSelectedExercisesInCycles", ejsArr);
+    },
+    // cancelAUX: function (){
+    //   console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    //   console.log(this.$store.state.ejsCycleAux);
+    // }
     },
   computed: {
     ejercicios(){
@@ -515,7 +559,10 @@ export default {
     },
     exercisesOfCycle(){
       return this.$store.state.exersisesOfRoutineOnCycle;
-    } ////// DESCOMENTAR CUANDO EL API FUNCIONE
+    }, ////// DESCOMENTAR CUANDO EL API FUNCIONE
+    ejsCycleAux(){
+      return this.$store.state.ejsCycleAux;
+    }
   },
   mounted() {
     this.$store.dispatch("getExercises");
