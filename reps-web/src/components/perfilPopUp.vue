@@ -73,9 +73,8 @@
             <v-row>
               <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
               <v-btn :disabled="loading"
-                     class="mx-0"
-                     color="grey"
-                     plain @click="cancelActionEditProfile">Cancelar</v-btn>
+                     color="grey lighten-1 white--text mx-0"
+                     @click="cancelActionEditProfile">Cancelar</v-btn>
               <v-btn :loading="loading" flat class="primary mx-10" @click="submit">Guardar</v-btn>
 
             </v-row>

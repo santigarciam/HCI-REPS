@@ -109,6 +109,7 @@
                               <!--REGISTRARSEEEEEEEEEEEEEEEEEEEEeeee-->
                                       <v-row>
                                           <v-btn
+                                              :loading="loading"
                                             block
                                             elevation="2"
                                             color="#2679CC"
@@ -190,6 +191,7 @@
                                           color="#00B2EB"
                                           dark
                                           rounded
+                                          :loading="loading"
                                           @click="validarLogIn()"
                                       >INICIAR SESION
                                       </v-btn>
@@ -236,7 +238,7 @@
 <script>
 //import router from 'vue-router';
 import { UserApi } from "../API_EJS/js/user";
-// import { Api } from "../API_EJS/js/api";
+import { Api } from "../API_EJS/js/api";
 // import state from "../store/state";
 import {bus2, router} from "../main"
 //import {changeCardID} from "../store/actions";
@@ -245,6 +247,7 @@ export default {
   name: "LandingPage",
   data() {
     return {
+      loading: false,
       emailError: "",
       usernameError: "",
       loginError: false,
@@ -362,6 +365,7 @@ export default {
       }
     },
     validar: function (){
+      this.loading = true;
       if (this.$refs.form.validate() == true){
         this.resetErrors()
         this.registerUser()
@@ -379,11 +383,11 @@ export default {
           }
         })
       }//hay q hacer un else??
-
     },
     validarLogIn: function (){
+      this.loading=true;
       if (this.$refs.form2.validate() == true){
-        this.loginUser()
+        this.loginUser();
         bus2.$on('error', (data) =>{
           if (data.code == 4){
             this.loginErrorMessage = "Usuario o contraseña incorrecta"
@@ -393,15 +397,13 @@ export default {
             this.loginErrorMessage = "Su correo electrónico no ha sido verificado"
             this.loginError = true
           }
-        })
+        });
       }//hay q hacer un else??
-
     },
     registerUser: async function () {
       console.log("ACAAA");
       // this.dialogRegist =true;
       // this.dialog = false;
-      await this.$store.dispatch('changeCardID');
       if (this.newUsername === "") {
         console.log("Usuario vacio");
         console.log(this.newUsername);
@@ -409,19 +411,28 @@ export default {
       const resp = await UserApi.register({
         username: this.newUsername, password: this.newPassword, firstName: "leonel",
         lastName: 'parisian', gender: 'male', birthdate: 29021990, email: this.email, phone: '234532123',
-        avatarUrl: 'https://flic.kr/p/3ntH2u', metadata: null
+        avatarUrl: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png', metadata: null
       }, null);
       if (resp.id){
             console.log("Se registro:");
             console.log(resp);
         await this.$store.dispatch('saveUserInfo', {username: this.username, password: this.password,email: this.email});
-        router.push('/ConfirmacionMail');
+        this.loading = false;
+        await router.push('/ConfirmacionMail');
       }
     },
-    loginUser: function(){
+    loginUser: async function(){
+      console.log("LLEGO A LOGIN USER");
+      //this.loading = true;
+      console.log(this.loading);
       console.log(this.username);
-
-      UserApi.login({username: this.username, password: this.password},null);
+      await UserApi.login({username: this.username, password: this.password}, null);
+      if (Api.getToken()){
+        this.loading = false;
+        await router.push('/MisRutinas');
+      }
+      console.log(this.loading);
+      console.log("SALGO A LOGIN USER");
       this.dialogRegist = true;
       //console.log(JSON.stringify(UserApi.constructor(this.username, this.password)));
       //

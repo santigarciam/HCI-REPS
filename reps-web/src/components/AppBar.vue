@@ -96,9 +96,12 @@
             </v-btn>
           </template>
           <v-list>
-            <v-list-item>
+            <v-list-item disabled>
 
-              <v-btn plain style="color:black !important;" block :key="cardID" disabled>
+              <v-btn color="primary"  :key="cardID">
+                <v-icon left>
+                  mdi-account
+                </v-icon>
                 {{userName + " " + userLastName}}
               </v-btn>
             </v-list-item>
@@ -123,7 +126,7 @@
                                class="mx-0"
                                color="primary"
                                @click="funToCancel">No</v-btn>
-                        <v-btn plain :loading="loading" color="grey" class="mx-10" @click="logOut()">Si</v-btn>
+                        <v-btn :loading="loading" color="grey lighten-1 white--text mx-10" @click="logOut()">Si</v-btn>
                       </v-row>
                     </v-col>
 

@@ -240,7 +240,7 @@
                   <v-col>
                     <v-row>
                       <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                      <v-btn plain color="grey" class="mx-0" v-on:click="cancelActionNewRut">Cancelar</v-btn>
+                      <v-btn color="grey lighten-1 white--text" class="mx-0" v-on:click="cancelActionNewRut">Cancelar</v-btn>
 <!--                      <v-btn flat class="primary mx-10" v-on:click="addNewRoutine">Guardar</v-btn>&ndash;&gt;-->
                       <v-dialog>
                       <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
@@ -332,7 +332,7 @@
                         <v-col>
                           <v-row>
                             <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                            <v-btn plain color="grey" class="mx-0" v-on:click="cancelActionNewRut">Cancelar</v-btn>
+                            <v-btn color="grey lighten-1 white--text" class="mx-0" v-on:click="cancelActionNewRut">Cancelar</v-btn>
                             <v-btn :loading="loading" class="primary mx-10 white--text" v-on:click="addNewRoutine">Finalizar</v-btn>
                           </v-row>
                         </v-col>
