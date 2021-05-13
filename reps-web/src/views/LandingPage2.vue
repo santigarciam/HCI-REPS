@@ -416,7 +416,7 @@ export default {
       if (resp.id){
             console.log("Se registro:");
             console.log(resp);
-        await this.$store.dispatch('saveUserInfo', {username: this.username, password: this.password,email: this.email});
+        await this.$store.dispatch('saveUserInfo', {username: this.newUsername, password: this.newPassword,email: this.email});
         this.loading = false;
         await router.push('/ConfirmacionMail');
       }
