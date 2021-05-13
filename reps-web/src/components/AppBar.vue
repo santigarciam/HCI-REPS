@@ -169,15 +169,13 @@ export default {
     //   this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     // },
     toLanding: async function (){
-      state.token = null;
       await this.loadingAnimation();
+      state.token = null;
       await router.push('/');
     },
     async loadingAnimation () {
       this.loading = true;
-      console.log("Antes del promise");
       await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log("Despues del promise");
       this.loading = false;
     },
     getUserInformation: async function (){
