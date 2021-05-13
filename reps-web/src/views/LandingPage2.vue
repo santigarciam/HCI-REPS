@@ -427,7 +427,7 @@ export default {
       console.log(this.loading);
       console.log(this.username);
       await UserApi.login({username: this.username, password: this.password}, null);
-      if (Api.token){
+      if (Api.getToken()){
         this.loading = false;
         await router.push('/MisRutinas');
       }
