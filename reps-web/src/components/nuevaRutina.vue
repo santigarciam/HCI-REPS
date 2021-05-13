@@ -253,7 +253,24 @@
                         <v-card-text>
                         <v-expansion-panels class="mb-2" v-for="(ciclo,i) in cyclesOfRutine" :key="ciclo.id">
                           <v-expansion-panel>
+                            <v-row>
+                              <v-col>
                             <v-expansion-panel-header>{{ciclo.name}}</v-expansion-panel-header>
+                              </v-col>
+                            <v-col align="center">
+
+                              <v-text-field
+                                  prepend-icon="mdi-counter"
+                                  v-model="repsCiclo[i]"
+                                  class="mt-0 pt-0"
+                                  hide-details
+                                  single-line
+                                  min = "1"
+                                  type="number"
+                                  style="width: 80px"
+                              ></v-text-field>
+                            </v-col>
+                            </v-row>
                             <v-expansion-panel-content>
                               <template v-for="(ejs,j) in ejsCycleAux[i]">
                                 <v-card small class="mt-1 mb-1" :key="ejs.id">
@@ -360,6 +377,7 @@ export default {
       steps: 1,
       durRut:'',
       ciclos: ['Entrada en calor', 'Entrenamiento', 'Enfriamiento'],
+      repsCiclo:{},
     }
   },
   watch: {
@@ -411,12 +429,12 @@ export default {
                     detail: "N/A",
                     type: "warmup",
                     order: 1,
-                    repetitions: 1,
+                    repetitions:  parseInt(this.repsCiclo[i]),
                     metadata: null
                   }, null);
                   if (respCal.id) {
                     for (const ejercicio of this.ejsCycleAux[i]) {
-                      await cycleExercisesApi.add(respCal.id, ejercicio.ej.id, { order: ejercicio.orden, duration: ejercicio.desc, repetitions: ejercicio.reps}, null);
+                      await cycleExercisesApi.add(respCal.id, ejercicio.ej.id, { order: parseInt(ejercicio.orden), duration: parseInt(ejercicio.desc), repetitions: parseInt(ejercicio.reps)}, null);
                     }
                     console.log(await cycleApi.get(respRut.id,respCal,null));
                   } else {
@@ -433,12 +451,12 @@ export default {
                     detail: "N/A",
                     type: "cooldown",
                     order: i + 1,
-                    repetitions: 1,
+                    repetitions:  parseInt(this.repsCiclo[i]),
                     metadata: null
                   }, null);
                   if (respEnfri.id) {
                     for (const ejercicio of this.ejsCycleAux[i]) {
-                      await cycleExercisesApi.add(respEnfri.id, ejercicio.ej.id, { order: ejercicio.orden, duration: ejercicio.desc, repetitions: ejercicio.reps}, null);
+                      await cycleExercisesApi.add(respEnfri.id, ejercicio.ej.id, { order: parseInt(ejercicio.orden), duration: parseInt(ejercicio.desc), repetitions: parseInt(ejercicio.reps)}, null);
                     }
                   } else {
                     console.log("ERROR ENFRI"); //ERROR
@@ -451,12 +469,12 @@ export default {
                     detail: "N/A",
                     type: "exercise",
                     order: i + 1,
-                    repetitions: 1,
+                    repetitions: parseInt(this.repsCiclo[i]),
                     metadata: null
                   }, null);
                   if (respCiclo.id) {
                     for (const ejercicio of this.ejsCycleAux[i]) {
-                      await cycleExercisesApi.add(respCiclo.id, ejercicio.ej.id, { order: ejercicio.orden, duration: ejercicio.desc, repetitions: ejercicio.reps}, null);
+                      await cycleExercisesApi.add(respCiclo.id, ejercicio.ej.id, { order: parseInt(ejercicio.orden), duration: parseInt(ejercicio.desc), repetitions: parseInt(ejercicio.reps)}, null);
                     }
                     console.log(await cycleApi.get(respRut.id,respCiclo,null));
                   } else {
@@ -474,6 +492,7 @@ export default {
       const rutinaAux = await routineApi.get(respRut.id,null);
       console.log(rutinaAux);
       const ciclosAux = await cycleApi.getAll(respRut.id, null);
+      console.log("CILCOS");
       console.log(ciclosAux);
       for (const h of ciclosAux.content) {
         console.log(h.id);
@@ -482,7 +501,7 @@ export default {
       }
     this.loading = false;
       await this.$store.dispatch("getCyclesOfID", rutinaAux.id);
-    // this.cancelActionNewRut();
+     this.cancelActionNewRut();
     },
     cancelActionNewRut: function (){
       console.log("CANCEL");
@@ -503,7 +522,7 @@ export default {
         let auxArr;
         auxArr = [];
         for (const k of this.selected[i]) {
-          auxArr.push({orden: order++, ej: this.ejercicios[k], reps: 0, desc:0});
+          auxArr.push({orden: order++, ej: this.ejercicios[k], reps: 0, desc:0, sets:0});
         }
         order = 1;
           //this.ejsCycleAux[i].push(this.ejercicios[k]);
