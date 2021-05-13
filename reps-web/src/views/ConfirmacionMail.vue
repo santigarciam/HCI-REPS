@@ -1,6 +1,5 @@
 <template>
   <div class="bg">
-
     <v-container fluid class="fill-height pa-0 ma-0">
       <v-row>
         <v-col>
@@ -125,13 +124,6 @@ export default {
   }
 }
 </script>
-
-
-
-
-
-
-
 
 <style scoped>
 .bg {
