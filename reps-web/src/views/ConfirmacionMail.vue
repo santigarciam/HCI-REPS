@@ -76,6 +76,9 @@
 
 <script>
 import { UserApi } from "@/API_EJS/js/user";
+//import state from "../store/state";
+import {Api} from "../API_EJS/js/api";
+import {router} from "../main";
 
 
 export default {
@@ -88,13 +91,21 @@ export default {
   },
 
     methods:{
-      verificarCodigo(){
+      async verificarCodigo() {
         console.log("ACAAA");
         // eslint-disable-next-line no-undef
         console.log(this.$store.state.userRegisteredMail);
         // console.log({userRegisteredMail,code:this.verificationCode});
-         UserApi.verifyCode({email:this.$store.state.userRegisteredMail,code:this.verificationCode},null);
-      },
+        const resp = await UserApi.verifyCode({
+          email: this.$store.state.userRegisteredMail,
+          code: this.verificationCode
+        }, null);
+        console.log(resp);
+        if (resp){
+          this.$store.state.token = Api.token;
+          await router.push('/MisRutinas');
+        }
+            },
       resendCode(){
         console.log("reenviado" + this.$store.state.userRegisteredMail);
         UserApi.resendCode({email:this.$store.state.userRegisteredMail},null);
