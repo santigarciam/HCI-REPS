@@ -394,12 +394,13 @@ export default {
       if (resp.id){
             console.log("Se registro:");
             console.log(resp);
-        await this.$store.dispatch('saveRegisteredMail', this.email);
+        await this.$store.dispatch('saveUserInfo', {username: this.username, password: this.password,email: this.email});
         router.push('/ConfirmacionMail');
       }
     },
     loginUser: function(){
       console.log(this.username);
+
       UserApi.login({username: this.username, password: this.password},null);
       this.dialogRegist = true;
       //console.log(JSON.stringify(UserApi.constructor(this.username, this.password)));

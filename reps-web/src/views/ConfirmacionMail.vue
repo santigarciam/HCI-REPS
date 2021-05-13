@@ -79,6 +79,7 @@ import { UserApi } from "@/API_EJS/js/user";
 //import state from "../store/state";
 import {Api} from "../API_EJS/js/api";
 import {router} from "../main";
+//import {router} from "../main";
 
 
 export default {
@@ -97,18 +98,20 @@ export default {
         console.log(this.$store.state.userRegisteredMail);
         // console.log({userRegisteredMail,code:this.verificationCode});
         const resp = await UserApi.verifyCode({
-          email: this.$store.state.userRegisteredMail,
+          email: this.$store.state.userInfo.email,
           code: this.verificationCode
         }, null);
         console.log(resp);
         if (resp){
           this.$store.state.token = Api.token;
+        await UserApi.login({username: this.$store.state.userInfo.username, password:this.$store.state.userInfo.password},null);
           await router.push('/MisRutinas');
+
         }
             },
       resendCode(){
         console.log("reenviado" + this.$store.state.userRegisteredMail);
-        UserApi.resendCode({email:this.$store.state.userRegisteredMail},null);
+        UserApi.resendCode({email:this.$store.state.userInfo.email},null);
         this.snackbar = true;
         setTimeout(() => {
           this.$emit("yourEvent");

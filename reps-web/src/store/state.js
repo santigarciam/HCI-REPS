@@ -15,6 +15,6 @@ export default {
     userLastName:'USER_LAST_NAME',
     userDate: null,
     userAvatar: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
-    userRegisteredMail: '',
+    userInfo: {username:'',password:'',email:''},
     ejsCycleAux: [],
 }

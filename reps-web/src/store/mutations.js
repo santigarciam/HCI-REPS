@@ -67,3 +67,7 @@ export const SAVE_REGISTERED_MAIL = (state,mail) =>{
 export const SET_EX_IN_CYCLE = (state,arr) =>{
     state.ejsCycleAux = arr;
 }
+
+export const SAVE_USER_INFO = (state,info)=>{
+    state.userInfo = info;
+}
