@@ -206,19 +206,23 @@
                             <template v-slot:default="{ active }">
                               <v-list-item-content>
                                 <v-list-item-title v-text="excersise.name"></v-list-item-title>
-
                               </v-list-item-content>
+                              <v-spacer></v-spacer>
+                              <v-list-item-content><h1>HOLA</h1></v-list-item-content>
 
                               <v-list-item-action>
                                 <v-list-item-action-text v-text="excersise.action"></v-list-item-action-text>
-
                                 <v-icon
                                     v-if="active"
                                     color="grey lighten-1"
                                 >
                                   mdi-check
                                 </v-icon>
-
+                                <h1 v-if="active">HOLA</h1>
+<!--                                <v-dialog-->
+<!--                                  v-if="active">-->
+<!--                                  <v-card><h1>HOLA</h1></v-card>-->
+<!--                                </v-dialog>-->
                               </v-list-item-action>
                             </template>
                           </v-list-item>
@@ -247,37 +251,27 @@
 <!--                      <v-btn flat class="primary mx-10" v-on:click="addNewRoutine">Guardar</v-btn>&ndash;&gt;-->
                       <v-dialog>
                       <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-                        <v-btn  class="primary mx-10" slot="activator" v-bind="attrs" v-on="on" @click="addNewRoutine" outlined>Guardar</v-btn>
+                        <v-btn class="primary mx-10" slot="activator" v-bind="attrs" v-on="on" @click="loadNextStepNewRut" outlined>Siguiente</v-btn>
                       </template>
 
-                      <v-card >
-<!--                        <v-card-title>{{ rutina.name }}</v-card-title>-->
-<!--                        &lt;!&ndash;        <v-btn v-on:click="getCiclosInID(parseInt(rutina.id))">BOTON</v-btn>&ndash;&gt;-->
-<!--                        <v-divider></v-divider>-->
-<!--                        <v-card-subtitle></v-card-subtitle>-->
-<!--                        <v-card-subtitle>Descripcion: {{ rutina.detail }}</v-card-subtitle>-->
-                        <!--        <v-card-subtitle>Duracion: {{ rutina.durRut }}</v-card-subtitle>-->
-                        <h4 class="pl-6 mb-4">Ciclos:</h4>
-
-                        <v-expansion-panels  v-for="(ciclo,i) in cyclesOfRutine" :key="ciclo.id">
-                          <v-expansion-panel >
+                      <v-card>
+                        <v-card-title>Repeticiones y Descansos</v-card-title>
+                        <h4 class="pt-6 pl-6 mb-4">Ciclos:</h4>
+                        <v-card-text>
+                        <v-expansion-panels class="mb-2" v-for="(ciclo,i) in cyclesOfRutine" :key="ciclo.id">
+                          <v-expansion-panel>
                             <v-expansion-panel-header>{{ciclo.name}}</v-expansion-panel-header>
                             <v-expansion-panel-content>
-                              <template v-for="ejs in exercisesOfCycle[i]">
-                                <!--                <v-card :key="ejs">-->
-                                <!--                  <v-card-title>ENTRO</v-card-title>-->
-                                <!--                  <template v-for="ej in ejs">-->
-                                <v-card small  class="mt-1" :key="ejs.exercise.id">
-
+                              <template v-for="ejs in ejsCycleAux[i]">
+                                <v-card small class="mt-1 mb-1" :key="ejs.id">
                                   <v-row>
                                     <v-col>
-                                      <v-card-text>{{ejs.exercise.name}}</v-card-text>
+                                      <v-card-text>{{ejs.name}}</v-card-text>
                                     </v-col> <v-col>
                                   </v-col>
                                     <v-spacer></v-spacer>
                                     <v-col>
                                       <v-text-field
-                                          v-model="slider"
                                           class="mt-0 pt-0"
                                           label="Duracion:"
                                           hide-details
@@ -289,7 +283,6 @@
                                     </v-col>
                                     <v-col>
                                       <v-text-field
-                                          v-model="slider"
                                           class="mt-0 pt-0"
                                           label="Duracion:"
                                           hide-details
@@ -300,7 +293,6 @@
                                       ></v-text-field>
                                     </v-col>
                                   </v-row>
-
                                 </v-card>
                                 <!--                  </template>-->
                                 <!--                </v-card>-->
@@ -308,6 +300,16 @@
                             </v-expansion-panel-content>
                           </v-expansion-panel>
                         </v-expansion-panels>
+                        <v-col></v-col>
+                        <v-col>
+                          <v-row>
+                            <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
+                            <v-btn plain color="grey" class="mx-0" v-on:click="cancelActionNewRut">Cancelar</v-btn>
+                            <v-btn plain class="primary mx-0" v-on:click="addNewRoutine">Finalizar</v-btn>
+                          </v-row>
+                        </v-col>
+                        <v-col></v-col>
+                        </v-card-text>
                       </v-card>
 
                       </v-dialog>
@@ -350,6 +352,7 @@ export default {
       steps: 1,
       durRut:'',
       ciclos: ['Entrada en calor', 'Entrenamiento', 'Enfriamiento'],
+      ejsCycleAux: [],
     }
   },
   watch: {
@@ -498,6 +501,21 @@ export default {
       this.categoryRut='';
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     },
+    loadNextStepNewRut: function (){
+
+      for (let i = 0; i < this.steps + 2; i++) {
+        let auxArr;
+        auxArr = []
+        for (const k of this.selected[i]) {
+          auxArr.push(this.ejercicios[k]);
+        }
+          //this.ejsCycleAux[i].push(this.ejercicios[k]);
+        this.ejsCycleAux[i] = auxArr;
+        //}
+      }
+      console.log("Siguiente en ADD RUT");
+      console.log(this.ejsCycleAux);
+    }
     },
   computed: {
     ejercicios(){

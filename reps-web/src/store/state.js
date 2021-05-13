@@ -8,7 +8,7 @@ export default {
     otrasRutinas: [],
     rutinasFavoritas: [],
     cyclesOfRutine: [],
-    //exersisesOfRoutineOnCycle:[],
+    exersisesOfRoutineOnCycle:[],
     allUsernames: [],
     user: 'USER_ID',
     userFirstName:'USER_FIRST_NAME',
