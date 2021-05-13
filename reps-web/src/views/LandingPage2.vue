@@ -108,10 +108,7 @@
                                       </v-row>
                               <!--REGISTRARSEEEEEEEEEEEEEEEEEEEEeeee-->
                                       <v-row>
-                                        <v-dialog v-model="dialogRegist" width="900px">
-                                          <template v-slot:activator="{ on, attrs }">
                                           <v-btn
-                                              slot="activator" v-bind="attrs" v-on="on"
                                             block
                                             elevation="2"
                                             color="#2679CC"
@@ -121,65 +118,7 @@
                                             @keyup.enter="validar()"
                                         >REGISTRARSE
                                         </v-btn>
-                                          </template>
-                                          <v-card  rounded color="grey lighten-1" elevation="0" >
-                                            <v-card-text>
-                                              <v-card-title align="center">Ingrese el codigo de verificacion</v-card-title>
-                                              <v-row>
-                                                <v-col cols="12">
 
-                                                  <!--Input registro usuario -->
-                                                  <v-container>
-                                                    <v-row>
-                                                      <v-text-field
-
-                                                          label="Codigo"
-                                                          filled
-                                                          class= "mt-6"
-                                                          rounded
-                                                          dense
-                                                          v-model="verificationCode"
-                                                          @keyup.enter="verifyCode"
-                                                      ></v-text-field>
-                                                    </v-row>
-
-                                                    <v-row  justify="center" align="center">
-
-                                                      <v-btn
-                                                          elevation="2"
-                                                          color="#00B2EB"
-                                                          dark
-                                                          rounded
-                                                          center
-                                                          class="text-center"
-                                                          v-on:click="verificarCodigo"
-                                                          @keyup.enter="verificarCodigo"
-                                                      >CONFIRMAR
-                                                      </v-btn>
-                                                      <v-btn
-                                                          elevation="2"
-                                                          color="#00B2EB"
-                                                          dark
-                                                          class="text-center"
-                                                          rounded
-                                                          @click="resendCode"
-                                                          @keyup.enter="resendCode"
-                                                      >REENVIAR CODIGO
-                                                      </v-btn>
-
-                                                    </v-row>
-                                                    <v-snackbar
-                                                        v-model="snackbar"
-
-                                                    >Se reenvio el codigo de verificacion a su mail {{this.$store.state.userRegisteredMail}}</v-snackbar>
-                                                  </v-container>
-
-
-                                                </v-col>
-                                              </v-row>
-                                            </v-card-text>
-                                          </v-card>
-                                        </v-dialog>
 <!--                                          FIN REGISTRARSE-->
                                       </v-row>
                                     </v-container>
@@ -299,7 +238,8 @@
 import { UserApi } from "../API_EJS/js/user";
 // import { Api } from "../API_EJS/js/api";
 // import state from "../store/state";
-import {bus2} from "../main"
+import {bus2, router} from "../main"
+//import {changeCardID} from "../store/actions";
 
 export default {
   name: "LandingPage",
@@ -439,8 +379,8 @@ export default {
     },
     registerUser: async function () {
       console.log("ACAAA");
-      this.dialogRegist =true;
-      this.dialog = false;
+      // this.dialogRegist =true;
+      // this.dialog = false;
       await this.$store.dispatch('changeCardID');
       if (this.newUsername === "") {
         console.log("Usuario vacio");
@@ -452,14 +392,16 @@ export default {
         avatarUrl: 'https://flic.kr/p/3ntH2u', metadata: null
       }, null);
       if (resp.id){
-
+            console.log("Se registro:");
+            console.log(resp);
         await this.$store.dispatch('saveRegisteredMail', this.email);
+        router.push('/ConfirmacionMail');
       }
-
     },
     loginUser: function(){
       console.log(this.username);
       UserApi.login({username: this.username, password: this.password},null);
+      this.dialogRegist = true;
       //console.log(JSON.stringify(UserApi.constructor(this.username, this.password)));
       //
     }

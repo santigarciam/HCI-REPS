@@ -25,6 +25,9 @@ export default {
     },
     isNotLoged(){
       return state.token != null;
+    },
+    showAppBar(){
+      return this.isNotLoged() | this.$route.path !== '/ConfirmacionMail'
     }
   },
 

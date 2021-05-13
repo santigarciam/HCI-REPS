@@ -1,60 +1,77 @@
 <template>
-  <v-card >
-    <v-card-text>
-      <v-card-title>PONER QUE SE LE ENVIO UN MAIL BLA BLA BLA. VER COMO CENTRAR LAS COSAS </v-card-title>
+  <div class="bg">
+
+    <v-container fluid class="fill-height pa-0 ma-0">
       <v-row>
-        <v-col cols="12">
+        <v-col>
+          <v-row justify="center" align="end" style="height: 550px">
+            <v-card   rounded color="rgb(0, 0, 0, 0.8)" elevation="0">
+            <v-card-text>
+              <v-card-title class="white--text">Ingrese el codigo de verificacion enviado a su casilla de correos </v-card-title>
+              <v-row>
+                <v-col cols="12">
 
-          <!--Input registro usuario -->
-          <v-container>
-            <v-row>
-              <v-text-field
-                  label="Codigo"
-                  filled
-                  class= "mt-6"
-                  rounded
-                  dense
-                  v-model="verificationCode"
-                  @keyup.enter="verifyCode"
-              ></v-text-field>
-            </v-row>
+                  <!--Input registro usuario -->
+                  <v-container>
+                    <v-row>
+                      <v-text-field
+                          label="Codigo"
+                          elevation="2"
+                          color="grey"
+                          dense
+                          required
+                          filled
+                          dark
+                          x-large
+                          rounded
+                          class="mr-3"
+                          v-model="verificationCode"
+                          @keyup.enter="verifyCode"
+                      ></v-text-field>
+                    </v-row>
 
-            <v-row class="text-center">
+                    <v-row class="text-center" justify="center">
 
-              <v-btn
-                  elevation="2"
-                  color="#00B2EB"
-                  dark
-                  rounded
-                  center
-                  class="text-center"
-                  v-on:click="verificarCodigo"
-                  @keyup.enter="verificarCodigo"
-              >CONFIRMAR
-              </v-btn>
-            <v-btn
-                elevation="2"
-                color="#00B2EB"
-                dark
-                class="text-center"
-                rounded
-                @click="resendCode"
-                @keyup.enter="resendCode"
-            >REENVIAR CODIGO
-            </v-btn>
+                      <v-btn
+                          elevation="2"
+                          color="#2679CC"
+                          dark
+                          x-large
+                          rounded
+                          class="mr-3"
+                          v-on:click="verificarCodigo"
+                          @keyup.enter="verificarCodigo"
+                      >CONFIRMAR
+                      </v-btn>
+                    <v-btn
+                        elevation="2"
+                        color="#2679CC"
+                        dark
+                        x-large
+                        rounded
+                        class="mr-3"
+                        @click="resendCode"
+                        @keyup.enter="resendCode"
+                    >REENVIAR CODIGO
+                    </v-btn>
 
-      </v-row>
-            <v-snackbar
-                v-model="snackbar"
+              </v-row>
+                    <v-snackbar
+                        v-model="snackbar"
 
-            >Se reenvio el codigo de verificacion a su mail {{this.$store.state.userRegisteredMail}}</v-snackbar>
-          </v-container>
+                    >Se reenvio el codigo de verificacion a su mail {{this.$store.state.userRegisteredMail}}</v-snackbar>
+                  </v-container>
 
 
-        </v-col>
-      </v-row>
+                </v-col>
+              </v-row>
     </v-card-text>
   </v-card>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -79,7 +96,7 @@ export default {
          UserApi.verifyCode({email:this.$store.state.userRegisteredMail,code:this.verificationCode},null);
       },
       resendCode(){
-        console.log("reenviado");
+        console.log("reenviado" + this.$store.state.userRegisteredMail);
         UserApi.resendCode({email:this.$store.state.userRegisteredMail},null);
         this.snackbar = true;
         setTimeout(() => {
@@ -103,5 +120,11 @@ export default {
 
 
 <style scoped>
-
+.bg {
+  background-image: url("../assets/principal2.png");
+  height: 100%;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 </style>
