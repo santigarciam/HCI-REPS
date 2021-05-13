@@ -272,6 +272,7 @@ export default {
     data: function ()  {
       return {
       modalData: null,
+        loading: false,
       }
     },
     showSnackbar: function (event) {
