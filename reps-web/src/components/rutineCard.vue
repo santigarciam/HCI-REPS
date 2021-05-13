@@ -136,6 +136,7 @@
 
                   <v-btn
                       icon
+                      plain
                       color="grey"
                       v-model="boton"
                       class="mt-4 mr-2"
@@ -150,7 +151,7 @@
                   <!--       Boton de borrar   -->
                   <v-dialog v-model="deleteConfi"  width="800px">
                     <template  v-slot:activator="{ on, attrs }">
-                      <v-btn icon class="mt-4 mr-3" plain color = "red" slot="activator" small  v-bind="attrs" v-on="on">
+                      <v-btn icon plain class="mt-4 mr-3" color = "red" slot="activator" small  v-bind="attrs" v-on="on">
                         <v-icon>
                           mdi-delete
                         </v-icon>

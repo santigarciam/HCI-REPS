@@ -8,10 +8,8 @@
     >
       Filtrar<v-icon class="ml-1" color="grey darken-2">mdi-menu-down</v-icon>
     </v-btn>
-    <v-navigation-drawer
-        floating
-        class="mr-0 pr-0"
-        v-model="drawer"
+    <v-menu
+
     >
       <v-list
           dense
@@ -40,7 +38,7 @@
           ></v-select></v-list-item>
 
       </v-list>
-    </v-navigation-drawer>
+    </v-menu>
   </v-col>
 </template>
 

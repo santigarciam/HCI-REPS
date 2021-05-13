@@ -34,8 +34,6 @@ export const searchUserRoutines = async ({ commit },busqueda) => {
 export const getFavourites = async ({ commit }) => {
     const response = await FavApi.getFavourites(null);
     if (!response.code){
-        // console.log("ENTRO");
-        console.log(response);
         commit('SET_FAVOURITES', response.content);
         var aux = [];
         response.content.forEach(e => aux.push(e.id));
@@ -47,12 +45,13 @@ export const getFavourites = async ({ commit }) => {
 export const addFavourites = async ({ commit }, id) => {
     const response = await FavApi.add(id,null);
     if (!response.code){
+        console.log("agregó")
         commit('ADD_ID_FAVOURITES', id);
     }
 }
 
 export const deleteFavourites = async ({ commit }, id) => {
-    const response = await FavApi.add(id,null);
+    const response = await FavApi.delete(id,null);
     if (!response.code){
         commit('DELETE_ID_FAVOURITES', id);
     }

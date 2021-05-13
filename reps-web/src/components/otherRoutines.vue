@@ -24,8 +24,6 @@
 
                 <div>
 
-
-
                   <v-btn
                       icon
                       plain
@@ -42,10 +40,11 @@
                   >Se copio al clipboard el link de la rutina!</v-snackbar>
 
 
-                </div>
+
                 <v-btn class="mt-4 mr-3" plain icon v-on:click="changeFav(rutina.id)" :color="getColour(rutina.id)">
                   <v-icon>mdi-heart</v-icon>
                 </v-btn>
+                </div>
               </v-row>
 
 
