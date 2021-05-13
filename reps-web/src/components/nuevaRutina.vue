@@ -312,7 +312,7 @@
                         <v-col>
                           <v-row>
                             <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                            <v-btn plain color="grey" class="mx-0" v-on:click="cancelAUX">Cancelar</v-btn>
+                            <v-btn plain color="grey" class="mx-0" v-on:click="cancelActionNewRut">Cancelar</v-btn>
                             <v-btn plain class="primary mx-0" v-on:click="addNewRoutine">Finalizar</v-btn>
                           </v-row>
                         </v-col>
@@ -360,8 +360,6 @@ export default {
       steps: 1,
       durRut:'',
       ciclos: ['Entrada en calor', 'Entrenamiento', 'Enfriamiento'],
-      reps: {},
-      descanso: {},
     }
   },
   watch: {
@@ -405,7 +403,6 @@ export default {
           console.log(respRut);
           if(respRut.id) {
             for (var i = 0; i < this.steps + 2; i++) {
-              let t = 1;
               switch (i) {
                 case 0:
                   // eslint-disable-next-line no-case-declarations
@@ -418,12 +415,8 @@ export default {
                     metadata: null
                   }, null);
                   if (respCal.id) {
-                    for (const k of this.selected[i]) {
-                      await cycleExercisesApi.add(respCal.id, this.ejercicios[k].id, {
-                        order: t++,
-                        duration: 1,
-                        repetitions: 1
-                      }, null);
+                    for (const ejercicio of this.ejsCycleAux[i]) {
+                      await cycleExercisesApi.add(respCal.id, ejercicio.ej.id, { order: ejercicio.orden, duration: ejercicio.desc, repetitions: ejercicio.reps}, null);
                     }
                     console.log(await cycleApi.get(respRut.id,respCal,null));
                   } else {
@@ -444,12 +437,8 @@ export default {
                     metadata: null
                   }, null);
                   if (respEnfri.id) {
-                    for (const k of this.selected[i]) {
-                      await cycleExercisesApi.add(respEnfri.id, this.ejercicios[k].id, {
-                        order: t++,
-                        duration: 1,
-                        repetitions: 1
-                      }, null);
+                    for (const ejercicio of this.ejsCycleAux[i]) {
+                      await cycleExercisesApi.add(respEnfri.id, ejercicio.ej.id, { order: ejercicio.orden, duration: ejercicio.desc, repetitions: ejercicio.reps}, null);
                     }
                   } else {
                     console.log("ERROR ENFRI"); //ERROR
@@ -466,12 +455,8 @@ export default {
                     metadata: null
                   }, null);
                   if (respCiclo.id) {
-                    for (const k of this.selected[i]) {
-                      await cycleExercisesApi.add(respCiclo.id, this.ejercicios[k].id, {
-                        order: t++,
-                        duration: 1,
-                        repetitions: 1
-                      }, null);
+                    for (const ejercicio of this.ejsCycleAux[i]) {
+                      await cycleExercisesApi.add(respCiclo.id, ejercicio.ej.id, { order: ejercicio.orden, duration: ejercicio.desc, repetitions: ejercicio.reps}, null);
                     }
                     console.log(await cycleApi.get(respRut.id,respCiclo,null));
                   } else {
@@ -529,10 +514,10 @@ export default {
       console.log(ejsArr);
       this.$store.dispatch("setSelectedExercisesInCycles", ejsArr);
     },
-    cancelAUX: function (){
-      console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-      console.log(this.$store.state.ejsCycleAux);
-    }
+    // cancelAUX: function (){
+    //   console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    //   console.log(this.$store.state.ejsCycleAux);
+    // }
     },
   computed: {
     ejercicios(){
