@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog[rutina.id]" width="900px" :retain-focus="false" >
 <template  v-slot:activator="{ on, attrs }">
-  <v-btn  icon class="mt-4 mr-2" plain color = "grey" slot="activator" small  v-on:click.prevent="editarRutina(rutina.id)" v-bind="attrs" v-on="on">
+  <v-btn  icon class="mt-4 mr-2" plain color = "grey" slot="activator" small  v-on:click.prevent="editarRutina(rutina)" v-bind="attrs" v-on="on">
     <v-icon>
       mdi-pencil
     </v-icon>
@@ -32,16 +32,19 @@
         </v-col>
         <v-col align="center">
 
-          <v-text-field
-              prepend-icon="mdi-counter"
-              v-model="ciclo.repetitions"
-              class="mt-0 pt-0"
-              hide-details
-              single-line
-              min = "1"
-              type="number"
-              style="width: 80px"
-          ></v-text-field>
+          <v-col><v-subheader>Repeticiones del ciclo:
+            <v-text-field
+                append-icon="mdi-counter"
+                v-model="ciclo.repetitions"
+                class="mt-0 pt-0"
+                hide-details
+                single-line
+                min = "1"
+                type="number"
+                style="width: 80px"
+            ></v-text-field>
+          </v-subheader>
+          </v-col>
         </v-col>
       </v-row>
       <v-expansion-panel-content>
@@ -49,42 +52,41 @@
         <template v-for="ejs in excercisesOfCycleAUX[i]">
           <v-card small  class="mt-1" :key="ejs.exercise.id">
 
-            <v-row>
-              <v-col>
-                <v-card-text>{{ejs.exercise.name}}</v-card-text>
-              </v-col> <v-col>
-            </v-col>
-              <v-spacer></v-spacer>
-              <v-col>
-              </v-col>
-              <v-col>
+            <v-container>
+              <v-row>
+                <v-col>
+                  <v-card-text>{{ejs.exercise.name}} </v-card-text>
+                </v-col>
+                <v-col><v-subheader>Repeteciones:
+                  <v-text-field
+                      append-icon="mdi-counter"
+                      v-model="ejs.repetitions"
+                      class="mt-0 pt-0"
+                      hide-details
+                      single-line
+                      min = "1"
+                      type="number"
+                      style="width: 80px"
+                  ></v-text-field>
+                </v-subheader>
+                </v-col>
+                <v-col><v-subheader>Duracion:
+                  <v-text-field
+                      append-icon="mdi-clock-outline"
+                      v-model="ejs.duration"
+                      class="mt-0 pt-0"
+                      hide-details
+                      single-line
 
-                <v-text-field
-                    prepend-icon="mdi-counter"
-                    v-model="ejs.duration"
-                    class="mt-0 pt-0"
-                    hide-details
-                    single-line
-                    min = "1"
-                    type="number"
-                    style="width: 60px"
-                ></v-text-field>
+                      min = "1"
+                      type="number"
+                      style="width: 80px"
+                  ></v-text-field>
+                </v-subheader>
+                </v-col>
 
-              </v-col>
-              <v-col>
-                <v-text-field
-                    prepend-icon="mdi-clock-outline"
-                    v-model="ejs.repetitions"
-                    class="mt-0 pt-0"
-                    hide-details
-                    single-line
-                    min = "1"
-                    type="number"
-                    style="width: 60px"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-
+              </v-row>
+            </v-container>
           </v-card>
         </template>
       </v-expansion-panel-content>
@@ -97,7 +99,7 @@
     <v-row>
       <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
       <v-btn plain color="grey" class="mx-0" @click="cancelActionRut">Cancelar</v-btn>
-      <v-btn :loading="loading" flat class="primary mx-10" @click="saveChanges()">Guardar</v-btn>
+      <v-btn :loading="loading" text class="primary mx-10" @click="saveChanges">Guardar</v-btn>
 
     </v-row>
   </v-col>
@@ -138,25 +140,16 @@ export default {
     cancelActionRut: function (){
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     },
-    editarRutina: async function(rutID){
-      const resp = await routineApi.get(parseInt(rutID),null);
-      if(resp.id){
-        this.titleRut = resp.name;
-        this.rutAux = resp;
-        await this.$store.dispatch("getCyclesOfID", resp.id);
-        this.cyclesAux = await this.$store.state.cyclesOfRutine;
-        this.excercisesOfCycleAUX =  this.$store.state.exersisesOfRoutineOnCycle;
-        console.log("ANTES")
-        console.log(this.excercisesOfCycleAUX)
-        // for(var i=0;i<this.excercisesOfCycleAUX.length;i++){
-        //   this.excercisesOfCycleAUX[i].orderBy(ej => ej.id);
-        // }
+    editarRutina: async function(rutina){
+         this.titleRut = rutina.name;
+        this.rutAux = rutina;
 
-        console.log("DESPUESS")
-        console.log(this.excercisesOfCycleAUX)
-      }
-    },
-
+        this.cyclesAux =rutina.ciclosRut;
+        let i =0;
+        for(const ciclo of this.cyclesAux) {
+          this.excercisesOfCycleAUX[i++] = ciclo.ciclosEjs;
+        }
+      },
     saveChanges: async function () {
       console.log(this.rutAux);
       let respExCycle;
@@ -179,6 +172,7 @@ export default {
 
       }
       await routineApi.modify(this.rutAux, null);
+      this.cancelActionRut();
 
     }
   }
