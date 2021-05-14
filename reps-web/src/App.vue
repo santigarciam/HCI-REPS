@@ -1,6 +1,6 @@
 <template>
 <v-app>
-    <AppBar v-if="showAppBar" ></AppBar>
+    <AppBar v-if="showAppBar"></AppBar>
   <v-main>
     <router-view></router-view>
   </v-main>
@@ -11,8 +11,6 @@
 <script>
 
 import AppBar from "./components/AppBar";
-//import state from "./store/state";
-//import {Api} from "./API_EJS/js/api"
 
 export default {
   name: 'App',
@@ -21,18 +19,13 @@ export default {
     AppBar,
   },
   computed: {
-    isNotHome() {
-      return this.$route.path != '/'
-    },
-    isNotConfirm(){
-      return this.$route.path != '/ConfirmacionMail'
+    isInPageToShowAppBar(){
+      return this.$route.path === '/MisRutinas' || this.$route.path === '/MisEjercicios' || this.$route.path === '/Descubrir' || this.$route.path === '/Favoritos';
     },
     showAppBar(){
-      return this.isNotHome && this.isNotConfirm
+      return this.isInPageToShowAppBar;
     }
   },
-
-
 };
 
 </script>
