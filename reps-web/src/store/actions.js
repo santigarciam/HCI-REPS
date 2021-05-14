@@ -33,6 +33,22 @@ export const getRoutines = async ({ commit}, parameters) => {
     const response = await routineApi.getAll(parameters, null);
     if (!response.code){
        // var aux = response.content.filter(n => n.user.id != state.userID)
+        for (const rutina of response.content) {
+            const result = await cycleApi.getAll(rutina.id, null);
+            if (result.content) {
+                rutina.ciclosRut = result.content;
+                for (const ciclo of rutina.ciclosRut) {
+                    const resp = await cycleExercisesApi.getAll(ciclo.id, null);
+                    if (resp.totalCount) {
+                        ciclo.ciclosEjs = resp.content;
+                    } else {
+                        console.log("error al traer los ejs"); /// ERROR
+                    }
+                }
+            } else {
+                console.log("error al traer los ciclos")
+            }
+        }
         commit('SET_OTHERS', response.content);
         // console.log(response.content)
     }
@@ -78,9 +94,26 @@ export const searchUserRoutines = async ({ commit },busqueda) => {
 export const getFavourites = async ({ commit }) => {
     const response = await FavApi.getFavourites(null);
     if (!response.code){
-        commit('SET_FAVOURITES', response.content);
         var aux = [];
-        response.content.forEach(e => aux.push(e.id));
+        for (const rutina of response.content) {
+            aux.push(rutina.id)
+            const result = await cycleApi.getAll(rutina.id, null);
+            if (result.content) {
+                rutina.ciclosRut = result.content;
+                for (const ciclo of rutina.ciclosRut) {
+                    const resp = await cycleExercisesApi.getAll(ciclo.id, null);
+                    if (resp.totalCount) {
+                        ciclo.ciclosEjs = resp.content;
+                    } else {
+                        console.log("error al traer los ejs"); /// ERROR
+                    }
+                }
+            } else {
+                console.log("error al traer los ciclos")
+            }
+        }
+        console.log(response.content)
+        commit('SET_FAVOURITES', response.content);
         console.log(aux)
         commit('SET_ID_FAVOURITES', aux);
     }
