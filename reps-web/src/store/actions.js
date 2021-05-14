@@ -9,7 +9,7 @@ export const getRoutines = async ({ commit}, parameters) => {
     if (!response.code){
        // var aux = response.content.filter(n => n.user.id != state.userID)
         commit('SET_OTHERS', response.content);
-        console.log(response.content)
+        // console.log(response.content)
     }
 }
 
@@ -70,7 +70,7 @@ export const searchExercises = async ({ commit }, busqueda) => {
     }
 }
 export const getCyclesOfID = ({ commit }, id) => {
-    console.log("En actions: " + id);
+    // console.log("En actions: " + id);
     commit('GET_CYCLES_OF_ID', id);
 }
 
