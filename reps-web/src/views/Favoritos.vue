@@ -43,12 +43,6 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col class="text-center"
-                   cols="24">
-              <nuevo-ejercicio></nuevo-ejercicio>
-            </v-col>
-          </v-row>
-          <v-row>
             <v-col></v-col>
             <v-progress-linear
                 color="primary lighten-2"
