@@ -169,6 +169,7 @@ export default {
           let ejAux;
           ejAux = {id:parseInt(this.excercisesOfCycleAUX[i][j].exercise.id),order: parseInt(this.excercisesOfCycleAUX[i][j].order),duration: parseInt(this.excercisesOfCycleAUX[i][j].duration),repetitions:parseInt(this.excercisesOfCycleAUX[i][j].repetitions)};
           console.log("Ejercicio a mod");
+          //respExCycle = await  cycleExercisesApi.modify(cycleAux.id,parseInt(this.excercisesOfCycleAUX[i][j].exercise.id),ejAux,null); NO LOGRAMOS HACERLO FUNCIONAR ASI
           respExCycle = await cycleExercisesApi.delete(parseInt(this.cyclesAux[i].id), parseInt(ejAux.id), null);
           respExCycle = await cycleExercisesApi.add(parseInt(this.cyclesAux[i].id),parseInt(ejAux.id),{order:ejAux.order,duration:ejAux.duration,repetitions:ejAux.repetitions},null);
           if (!respExCycle.order) {

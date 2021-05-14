@@ -47,7 +47,7 @@ export default {
   props: ['rutina'],
   computed: {
     cyclesOfRutine(){
-      console.log(this.$store.state.cyclesOfRutine);
+      //console.log(this.$store.state.cyclesOfRutine);
       return this.$store.state.cyclesOfRutine;
     },
     exercisesOfCycle(){
@@ -58,6 +58,13 @@ export default {
     cancelActionRut: function (){
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     }
+  },
+  async mounted() {
+    await this.$store.dispatch("getCyclesOfID", this.rutina.id);
+  },
+  async created() {
+    await this.$store.dispatch("getCyclesOfID", this.rutina.id);
   }
+
 }
 </script>

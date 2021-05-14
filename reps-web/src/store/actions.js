@@ -28,7 +28,7 @@ export const getUserRoutines = async ({ commit }, parameters) => {
         // console.log("ENTRO");
         // console.log(response);
         commit('SET_ROUTINES', response.content);
-        return response.content
+        return response.content;
     }
 }
 export const searchUserRoutines = async ({ commit },busqueda) => {
@@ -46,7 +46,7 @@ export const getFavourites = async ({ commit }) => {
         commit('SET_FAVOURITES', response.content);
         var aux = [];
         response.content.forEach(e => aux.push(e.id));
-        console.log(aux)
+        //console.log(aux)
         commit('SET_ID_FAVOURITES', aux);
     }
 }

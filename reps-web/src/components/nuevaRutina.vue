@@ -421,8 +421,6 @@ export default {
       // Lo de arriba es para agregar/usar una categoria dependiendo si esta o no creada.
 
           const respRut =  await routineApi.add({name:this.nameRut,detail:this.detailRut,isPublic:true,difficulty:"rookie",category:{ id: catID},metadata:null},null);
-      console.log("Resprut : ");
-          console.log(respRut);
           if(respRut.id) {
             for (var i = 0; i < this.steps + 2; i++) {
               switch (i) {
@@ -440,7 +438,6 @@ export default {
                     for (const ejercicio of this.ejsCycleAux[i]) {
                       await cycleExercisesApi.add(respCal.id, ejercicio.ej.id, { order: parseInt(ejercicio.orden), duration: parseInt(ejercicio.desc), repetitions: parseInt(ejercicio.reps)}, null);
                     }
-                    console.log(await cycleApi.get(respRut.id,respCal,null));
                   } else {
                     console.log("Error calentamiento");
                     return;
@@ -494,15 +491,15 @@ export default {
 
 
       const rutinaAux = await routineApi.get(respRut.id,null);
-      console.log(rutinaAux);
-      const ciclosAux = await cycleApi.getAll(respRut.id, null);
-      console.log("CILCOS");
-      console.log(ciclosAux);
-      for (const h of ciclosAux.content) {
-        console.log(h.id);
-        var ejerCiclo = await cycleExercisesApi.getAll(h.id, null);
-        console.log(ejerCiclo);
-      }
+      //
+      // const ciclosAux = await cycleApi.getAll(respRut.id, null);
+      //
+      //
+      // for (const h of ciclosAux.content) {
+      //   console.log(h.id);
+      //   var ejerCiclo = await cycleExercisesApi.getAll(h.id, null);
+      //   console.log(ejerCiclo);
+      // }
     this.loading = false;
       await this.$store.dispatch("getCyclesOfID", rutinaAux.id);
      this.cancelActionNewRut();

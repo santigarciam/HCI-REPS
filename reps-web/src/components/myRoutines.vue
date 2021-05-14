@@ -10,7 +10,7 @@
 
       <template v-slot:activator="{ on, attrs }">
         <v-container class ="container_v_card pb-4">
-          <v-card v-bind="attrs" v-on="on"  @click.stop="funcionAUX(rutina.id,rutina)"  :data="modalData" scrollable>
+          <v-card v-bind="attrs"  v-on="on"  @click.stop="funcionAUX(rutina.id,rutina)"  :data="modalData" scrollable>
             <v-col>
               <v-row>
                 <v-card-title prepend-icon="mdi-counter" class="mb-0 pb-0">{{ rutina.name }}</v-card-title>
@@ -79,20 +79,21 @@ export default {
         modalData: null,
       }
     },
-
-
     cancelActionRut: function (){
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     },
     //////////////////////////////////////////////////////////////////////////////////
-    funcionAUX: async function (id,item){
-      this.data.modalData = item;
-      this.data.modalVisible = true;
+    funcionAUX: async function (id){
       // ver de hacer el dispatch aca
-
+      console.log("FUNCION AUX")
       await this.$store.dispatch("getCyclesOfID", id);
+      this.excercisesOfCycleAUX = this.$store.state.exersisesOfRoutineOnCycle;
+      // setTimeout(() => { this.data.modalData = item;
+      //   this.data.modalVisible = true;}, 2000);
+
 
     },
+
 
 
     /////////////////////////////////////////////////////////////////////////////////
@@ -116,7 +117,7 @@ export default {
       return this.$store.state.listaEjercicios;
     },
     cyclesOfRutine(){
-      console.log(this.$store.state.cyclesOfRutine);
+     // console.log(this.$store.state.cyclesOfRutine);
       return this.$store.state.cyclesOfRutine;
     },
     exercisesOfCycle(){
@@ -128,6 +129,7 @@ export default {
   },
 
   async mounted() {
+
     await this.$store.dispatch("getUserRoutines");
     // if (this.$store.state.listaRutinas.length !== 0) {
     //   await this.$store.dispatch("getCyclesOfID", this.$store.state.listaRutinas[0].id);

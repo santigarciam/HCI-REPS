@@ -58,16 +58,16 @@ export default {
     },
     deleteRut: async function (id) {
       this.loading = true;
-      const cyclesIDaux = await cycleApi.getAll(id, null);
+      const cyclesIDaux = await cycleApi.getAll(parseInt(id), null);
       for (const ciclo of cyclesIDaux.content) {
-        const ejercicios = await cycleExercisesApi.getAll(ciclo.id,null);
+        const ejercicios = await cycleExercisesApi.getAll(parseInt(ciclo.id),null);
         let ejs = ejercicios.content.exercise;
         for (const ej in ejs){
-          await cycleExercisesApi.delete(ciclo.id, ej.id, null);
+          await cycleExercisesApi.delete(parseInt(ciclo.id), parseInt(ej.id), null);
         }
         // DESCOMENTAR CUANDO LA API FUNCIONE BIEN  !!!!!!!!!!!!!!!!!!
       }
-      await routineApi.delete(id);
+      await routineApi.delete(parseInt(id));
       this.loading = false;
       this.cancelActionRut();
     },
