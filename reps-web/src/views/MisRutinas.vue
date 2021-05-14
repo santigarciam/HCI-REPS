@@ -63,7 +63,7 @@
 
 <script>
 
-import RutineCard from "@/components/rutineCard";
+import RutineCard from "@/components/myRoutines";
 import NuevaRutina from "@/components/nuevaRutina";
 import FiltrarPor from "@/components/filtrarPor";
 import OrderBy from "@/components/orderBy";

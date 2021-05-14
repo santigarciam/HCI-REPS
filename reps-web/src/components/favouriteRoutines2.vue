@@ -10,7 +10,7 @@
 
       <template v-slot:activator="{ on, attrs }">
         <v-container class ="container_v_card pb-4">
-          <v-card v-bind="attrs" hover v-on="on"  @click.stop="funcionAUX(rutina.id,rutina)"  :data="modalData" scrollable>
+          <v-card v-bind="attrs" v-on="on"  @click.stop="funcionAUX(rutina.id,rutina)"  :data="modalData" scrollable>
             <v-col>
               <v-row>
                 <v-card-title class="mb-0 pb-0">{{ rutina.name }}
@@ -25,32 +25,32 @@
                   ></v-rating></v-card-title>
                 <v-spacer></v-spacer>
                 <div>
-                <v-btn
-                    icon
-                    color="grey"
-                    v-model="boton"
-                    plain
-                    class="mt-4 mr-2"
-                    v-on:click="showSnackbar"
-                >
-                  <v-icon>mdi-share</v-icon>
-                </v-btn>
+                  <v-btn
+                      icon
+                      color="grey"
+                      v-model="boton"
+                      plain
+                      class="mt-4 mr-2"
+                      v-on:click="showSnackbar"
+                  >
+                    <v-icon>mdi-share</v-icon>
+                  </v-btn>
 
-                <v-snackbar
-                    v-model="snackbar"
-                >¡Se ha copiado al clipboard el link de la rutina!</v-snackbar>
+                  <v-snackbar
+                      v-model="snackbar"
+                  >¡Se ha copiado al clipboard el link de la rutina!</v-snackbar>
 
-                <v-btn class="mt-4 mr-3" plain icon v-on:click="changeFav(rutina.id)" :color="getColour(rutina.id)">
-                  <v-icon>mdi-heart</v-icon>
-                </v-btn>
+                  <v-btn class="mt-4 mr-3" plain icon v-on:click="changeFav(rutina.id)" color="red">
+                    <v-icon>mdi-heart</v-icon>
+                  </v-btn>
 
-  </div>
+                </div>
               </v-row>
 
               <!--INFORMACION RUTINE CARD-->
               <v-row class="text-left">
                 <v-icon small class="align-center mr-0 ml-3" color="blue">mdi-account</v-icon>
-                <v-card-subtitle class="blue--text ml-0 pl-1 mt-0 pt-0 pb-0 font-weight-bold" v-model="autorRut">{{ rutina.user.username }} </v-card-subtitle>
+                <v-card-subtitle class="blue--text ml-0 pl-1 mt-0 pt-0 pb-0 font-weight-bold" v-model="autorRut">{{ rutina.id }} </v-card-subtitle>
               </v-row>
               <v-row><v-card-subtitle class="mr-0 pr-0 font-weight-bold">Descripción: </v-card-subtitle>
                 <v-card-subtitle class="ml-0 pl-1" v-model="descripcionRut">{{ rutina.detail }}</v-card-subtitle>
@@ -139,14 +139,7 @@ export default {
         loading: false,
       }
     },
-    getColour: function (id){
-      if (this.idFavoritas.includes(id)){
-        return "red"
-      }
-      else {
-        return "grey"
-      }
-    },
+
     showSnackbar: function (event) {
       event.stopPropagation();
       console.log(this);
@@ -191,7 +184,8 @@ export default {
 
   computed: {
     rutinas(){
-      return this.$store.state.otrasRutinas;
+      return this.$store.state.rutinasFavoritas;
+
     },
     idFavoritas(){
       return this.$store.state.idFavoritas;
@@ -211,10 +205,9 @@ export default {
     } ////// DESCOMENTAR CUANDO EL API FUNCIONE
   },
 
-  mounted() {
-    this.$store.dispatch("getRoutines", "");
+  beforeCreate() {
     this.$store.dispatch("getFavourites", "");
-   // console.log("1")
+    // console.log("1")
   },
 }
 </script>
