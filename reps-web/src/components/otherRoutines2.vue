@@ -24,27 +24,11 @@
                       class="ml-2"
                   ></v-rating></v-card-title>
                 <v-spacer></v-spacer>
-                <div>
-                <v-btn
-                    icon
-                    color="grey"
-                    v-model="boton"
-                    plain
-                    class="mt-4 mr-2"
-                    v-on:click="showSnackbar"
-                >
-                  <v-icon>mdi-share</v-icon>
-                </v-btn>
 
-                <v-snackbar
-                    v-model="snackbar"
-                >¡Se ha copiado al clipboard el link de la rutina!</v-snackbar>
+                  <share-routine></share-routine>
 
-                <v-btn class="mt-4 mr-3" plain icon v-on:click="changeFav(rutina.id)" :color="getColour(rutina.id)">
-                  <v-icon>mdi-heart</v-icon>
-                </v-btn>
+                  <fav-routine v-bind:rutina="rutina" ></fav-routine>
 
-  </div>
               </v-row>
 
               <!--INFORMACION RUTINE CARD-->
@@ -62,51 +46,7 @@
 
       </template>
 
-      <v-card flat>
-        <v-card-title>{{ rutina.name }}<v-spacer></v-spacer><v-btn icon plain v-on:click="cancelActionRut"><v-icon dark>
-          mdi-close
-        </v-icon></v-btn></v-card-title>
-        <!--        <v-btn v-on:click="getCiclosInID(parseInt(rutina.id))">BOTON</v-btn>-->
-        <v-divider></v-divider>
-        <v-card-subtitle></v-card-subtitle>
-        <v-card-subtitle>Descripcion: {{ rutina.detail }}</v-card-subtitle>
-        <h4 class="pl-6 mb-4">Ciclos:</h4>
-
-        <v-expansion-panels  v-for="(ciclo,i) in cyclesOfRutine" :key="ciclo.id">
-          <v-expansion-panel>
-            <v-expansion-panel-header>
-              {{ciclo.name}}
-            </v-expansion-panel-header>
-            <v-expansion-panel-content>
-              <v-chip class="mb-4 ma-2" small color="primary">x{{ciclo.repetitions}}</v-chip>
-              <template v-for="ejs in exercisesOfCycle[i]">
-                <!--                <v-card :key="ejs">-->
-                <!--                  <v-card-title>ENTRO</v-card-title>-->
-                <!--                  <template v-for="ej in ejs">-->
-                <v-card small  class="mt-1" :key="ejs.exercise.id">
-
-                  <v-row>
-                    <v-col>
-                      <v-card-text>{{ejs.exercise.name}}</v-card-text>
-                    </v-col> <v-col>
-                  </v-col>
-                    <v-spacer></v-spacer>
-                    <v-col>
-                      <v-card-text> Duracion: {{ejs.duration}}</v-card-text>
-                    </v-col>
-                    <v-col>
-                      <v-card-text> REPS: {{ejs.repetitions}}</v-card-text>
-                    </v-col>
-                  </v-row>
-
-                </v-card>
-                <!--                  </template>-->
-                <!--                </v-card>-->
-              </template>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-expansion-panels>
-      </v-card>
+      <detailed-routine v-bind:rutina="rutina"></detailed-routine>
 
     </v-dialog>
   </div>
@@ -117,8 +57,11 @@
 
 <script>
 
+import DetailedRoutine from "./detailedRoutine";
+import FavRoutine from "./favRoutine";
+import ShareRoutine from "./shareRoutine";
 export default {
-
+  components: {ShareRoutine, FavRoutine, DetailedRoutine},
   data() {
     return {
       loading: false,
@@ -139,14 +82,7 @@ export default {
         loading: false,
       }
     },
-    getColour: function (id){
-      if (this.idFavoritas.includes(id)){
-        return "red"
-      }
-      else {
-        return "grey"
-      }
-    },
+
     showSnackbar: function (event) {
       event.stopPropagation();
       console.log(this);
@@ -157,18 +93,7 @@ export default {
       }, this.timeout);
     },
 
-    changeFav: function (id) {
-      console.log("entra")
-      console.log("le manda" + id)
-      if (this.idFavoritas.includes(id)){
-        this.$store.dispatch("deleteFavourites", id);
-      }
-      else {
-        this.$store.dispatch("addFavourites", id);
-      }
-      //para actualizar los valores
-      this.$store.dispatch('changeCardID');
-    },
+
 
     cancelActionRut: function (){
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
@@ -212,9 +137,9 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch("getRoutines", "");
+    //this.$store.dispatch("getRoutines", "");
     this.$store.dispatch("getFavourites", "");
-   // console.log("1")
+   console.log("1")
   },
 }
 </script>

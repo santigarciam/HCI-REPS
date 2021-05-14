@@ -50,7 +50,7 @@
               <!--INFORMACION RUTINE CARD-->
               <v-row class="text-left">
                 <v-icon small class="align-center mr-0 ml-3" color="blue">mdi-account</v-icon>
-                <v-card-subtitle class="blue--text ml-0 pl-1 mt-0 pt-0 pb-0 font-weight-bold" v-model="autorRut">{{ rutina.id }} </v-card-subtitle>
+                <v-card-subtitle class="blue--text ml-0 pl-1 mt-0 pt-0 pb-0 font-weight-bold" v-model="autorRut">{{ rutina.user.username }} </v-card-subtitle>
               </v-row>
               <v-row><v-card-subtitle class="mr-0 pr-0 font-weight-bold">Descripción: </v-card-subtitle>
                 <v-card-subtitle class="ml-0 pl-1" v-model="descripcionRut">{{ rutina.detail }}</v-card-subtitle>

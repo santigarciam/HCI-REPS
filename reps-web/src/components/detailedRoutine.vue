@@ -8,14 +8,14 @@
       <v-card-subtitle>Descripcion: {{ rutina.detail }}</v-card-subtitle>
       <h4 class="pl-6 mb-4">Ciclos:</h4>
 
-      <v-expansion-panels  v-for="(ciclo,i) in cyclesOfRutine" :key="ciclo.id">
+      <v-expansion-panels  v-for="ciclo in rutina.ciclosRut" :key="ciclo.id">
         <v-expansion-panel>
           <v-expansion-panel-header>
             {{ciclo.name}}
           </v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-chip class="mb-4 ma-2" small color="primary">x{{ciclo.repetitions}}</v-chip>
-            <template v-for="ejs in exercisesOfCycle[i]">
+            <template v-for="ejs in ciclo.ciclosEjs">
 
               <v-card small  class="mt-1" :key="ejs.exercise.id">
 
@@ -45,15 +45,15 @@
 <script>
 export default {
   props: ['rutina'],
-  computed: {
-    cyclesOfRutine(){
+  /*computed: {
+   cyclesOfRutine(){
       console.log(this.$store.state.cyclesOfRutine);
       return this.$store.state.cyclesOfRutine;
     },
     exercisesOfCycle(){
       return this.$store.state.exersisesOfRoutineOnCycle;
     },
-  },
+  },*/
   methods:{
     cancelActionRut: function (){
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
