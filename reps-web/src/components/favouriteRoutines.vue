@@ -214,9 +214,8 @@ export default {
       return this.$store.state.exersisesOfRoutineOnCycle;
     } ////// DESCOMENTAR CUANDO EL API FUNCIONE
   },
-  mounted() {
-    //this.$store.dispatch("getFavourites", "");
-    console.log("1")
+  beforeCreate() {
+    this.$store.dispatch("getFavourites", "");
   }
 }
 </script>
