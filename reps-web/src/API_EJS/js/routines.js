@@ -43,6 +43,7 @@ class routineApi {
     static async getAll(parameters, controller) {
         return await Api.get(`${routineApi.url}?${parameters}`, true, controller);
     }
+
 }
 
 // class Exercise {

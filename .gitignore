@@ -45,3 +45,4 @@ API/service/ImageService.js
 API/service/RoutineService.js
 API/service/ModelMapper.js
 API/service/VideoService.js
+*.sqlite3

@@ -1,17 +1,9 @@
 <template>
   <div class=" bg v-application--wrap inspire" >
-    <v-container fluid class=" pa-0 ma-0">
-      <v-row>
-        <v-col>
-          <v-row justify="center" align="end" style="height: 550px">
+    <v-dialog persistent width="800px" v-model="dialog">
 
-            <v-card scrolleable max-height="800px" width="900px"   justify="center">
-              <DetailedRoutine v-bind:rutina="sharedRut"></DetailedRoutine>
-            </v-card>
-          </v-row>
-        </v-col>
-      </v-row>
-    </v-container>
+      <DetailedRoutine v-bind:rutina="sharedRut"></DetailedRoutine>
+    </v-dialog>
   </div>
 </template>
 
@@ -25,6 +17,7 @@ export default {
   data(){
     return{
       currentURL: "",
+      dialog : true,
     }
   },
   async beforeCreate() {

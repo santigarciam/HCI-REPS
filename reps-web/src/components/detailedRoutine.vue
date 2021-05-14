@@ -7,7 +7,7 @@
       <v-divider></v-divider>
       <v-card-subtitle></v-card-subtitle>
       <v-row class="text-left" v-if="this.$route.fullPath.includes('/routines/')" >
-        <v-icon small class="align-center pb-4 ml-0" color="blue">mdi-account</v-icon>
+        <v-icon small class="align-center pb-5 ml-8" color="blue">mdi-account</v-icon>
         <v-card-subtitle class="blue--text ml-0 pl-1 mt-0 pt-0 pb-0 font-weight-bold" v-model="autorRut">{{ rutina.user.username }} </v-card-subtitle>
       </v-row>
       <v-card-subtitle>Descripcion: {{ rutina.detail }}</v-card-subtitle>
