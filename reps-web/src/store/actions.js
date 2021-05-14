@@ -16,14 +16,29 @@ import {cycleExercisesApi} from "../API_EJS/js/cycleExercises";
 // }
 
 export const getRoutineByID = async ({ commit}, urlRut) => {
-    console.log("actions: LLEGO");
-    // console.log("actions: ");
-    // console.log(urlRut);
-    const response = await routineApi.getByURL(urlRut.path, null);
-    console.log("actions: Hago el get");
+    // console.log("actions: LLEGO");
+    // // console.log("actions: ");
+    //  console.log(urlRut);
+    const response = await routineApi.getByURL(urlRut, null);
+
     if (!response.code){
-        // var aux = response.content.filter(n => n.user.id != state.userID)
-        commit('SET_SHARED_RUT', response.content);
+        const rutina = response;
+        const result = await cycleApi.getAll(rutina.id, null);
+        if (result.content) {
+            rutina.ciclosRut = result.content;
+            for (const ciclo of rutina.ciclosRut) {
+                const resp = await cycleExercisesApi.getAll(ciclo.id, null);
+                if (resp.totalCount) {
+                    ciclo.ciclosEjs = resp.content;
+                } else {
+                    console.log("error al traer los ejs"); /// ERROR
+                }
+            }
+        } else {
+            console.log("error al traer los ciclos")
+        }
+        console.log(rutina)
+        commit('SET_SHARED_RUT', rutina);
         // console.log(response.content)
     }
     //console.log(response);

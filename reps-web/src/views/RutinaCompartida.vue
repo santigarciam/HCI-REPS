@@ -1,6 +1,17 @@
 <template>
-  <div class="bg">
-      <DetailedRoutine v-bind:rutina="sharedRut"></DetailedRoutine>
+  <div class=" bg v-application--wrap inspire" >
+    <v-container fluid class=" pa-0 ma-0">
+      <v-row>
+        <v-col>
+          <v-row justify="center" align="end" style="height: 550px">
+
+            <v-card scrolleable max-height="800px" width="900px"   justify="center">
+              <DetailedRoutine v-bind:rutina="sharedRut"></DetailedRoutine>
+            </v-card>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -17,11 +28,9 @@ export default {
     }
   },
   async beforeCreate() {
-    this.currentURL = router.currentRoute;
-    await this.$store.dispatch("getRoutineByID", this.currentURL);
-    //while (this.$store.state.rutinaCompartida === undefined);
-    console.log(this.sharedRut);
-    console.log("rutinaCompartida: listo beforeCreate");
+    this.currentURL = router.currentRoute.fullPath;
+    console.log( this.currentURL);
+    await this.$store.dispatch("getRoutineByID", router.currentRoute.fullPath);
   },
   computed:{
     sharedRut(){
@@ -44,4 +53,11 @@ a { text-decoration: none; }
 .botonVolver{
 
 }
+#inspire img {
+  height: 100%
+}
+.v-application--wrap {
+  height: 100vh !important;
+}
+
 </style>

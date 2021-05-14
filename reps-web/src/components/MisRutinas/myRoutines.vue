@@ -18,7 +18,7 @@
                 <!-- EDITAR RUTINAA-->
                 <edit-routine :rutina="rutina"></edit-routine>
                 <!--                  EDITAR RUTINA FIN-->
-                <share-routine></share-routine>
+                <share-routine v-bind:rutina="rutina"></share-routine>
                 <delete-routine v-bind:rutina="rutina"></delete-routine>
              </v-row>
 
