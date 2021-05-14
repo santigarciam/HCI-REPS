@@ -91,7 +91,7 @@
               <v-avatar>
                 <img :key="cardID"
                     v-bind:src="userAvatar"
-                    v-bind:alt="userName"
+                    v-bind:alt="userName + userLastName"
                 >
               </v-avatar>
             </v-btn>
@@ -103,7 +103,7 @@
                 <v-icon left>
                   mdi-account
                 </v-icon>
-                {{userName + " " + userLastName}}
+                {{user}}
               </v-btn>
             </v-list-item>
             <v-list-item>
