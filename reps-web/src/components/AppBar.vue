@@ -87,6 +87,7 @@
                 dark
                 v-bind="attrs"
                 v-on="on"
+                   class="mr-4"
             >
               <v-avatar>
                 <img :key="cardID"

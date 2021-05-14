@@ -109,9 +109,9 @@
 
 
 <script>
-import {cycleExercisesApi} from "../API_EJS/js/cycleExercises";
-import {cycleApi} from "../API_EJS/js/cycles";
-import {routineApi} from "../API_EJS/js/routines";
+import {cycleExercisesApi} from "../../API_EJS/js/cycleExercises";
+import {cycleApi} from "../../API_EJS/js/cycles";
+import {routineApi} from "../../API_EJS/js/routines";
 
 export default {
   props: ['rutina'],

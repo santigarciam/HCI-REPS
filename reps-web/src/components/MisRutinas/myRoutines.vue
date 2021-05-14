@@ -43,16 +43,16 @@
 
 
 <script>
-import NuevaRutina from "@/components/nuevoEjercicio";
-import  EditRutina from "@/components/editRoutine"
+import NuevaRutina from "@/components/MisRutinas/nuevaRutina";
+import  EditRutina from "@/components/MisRutinas/editRoutine"
 /*
 import { routineApi } from "../API_EJS/js/routines";
 import { cycleApi } from "../API_EJS/js/cycles";
 import {cycleExercisesApi} from "../API_EJS/js/cycleExercises";*/
-import DetailedRoutine from "./detailedRoutine";
+import DetailedRoutine from "../detailedRoutine";
 import EditRoutine from "./editRoutine";
 import DeleteRoutine from "./deleteRoutine";
-import ShareRoutine from "./shareRoutine";
+import ShareRoutine from "../shareRoutine";
 
 
 export default {

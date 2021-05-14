@@ -474,9 +474,9 @@
 
 <script>
   import  { routineApi } from "@/API_EJS/js/routines"
-import  { categoryApi} from "../API_EJS/js/category";
-import {cycleApi} from "../API_EJS/js/cycles";
-import  {cycleExercisesApi} from "../API_EJS/js/cycleExercises";
+import  { categoryApi} from "../../API_EJS/js/category";
+import {cycleApi} from "../../API_EJS/js/cycles";
+import  {cycleExercisesApi} from "../../API_EJS/js/cycleExercises";
 //import state from "/"
 
 export default {

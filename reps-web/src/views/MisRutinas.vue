@@ -63,11 +63,11 @@
 
 <script>
 
-import RutineCard from "@/components/myRoutines";
-import NuevaRutina from "@/components/nuevaRutina";
-import FiltrarPor from "@/components/filtrarPor";
-import OrderBy from "@/components/orderBy";
-import SearchField from "@/components/searchField";
+import RutineCard from "@/components/MisRutinas/myRoutines";
+import NuevaRutina from "@/components/MisRutinas/nuevaRutina";
+import FiltrarPor from "@/components/filtrado/filtrarPor";
+import OrderBy from "@/components/filtrado/orderBy";
+import SearchField from "@/components/filtrado/searchField";
 import {bus} from "../main";
 
 export default {

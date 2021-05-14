@@ -25,9 +25,9 @@
                   ></v-rating></v-card-title>
                 <v-spacer></v-spacer>
 
-                  <share-routine></share-routine>
+                <share-routine></share-routine>
 
-                  <fav-routine v-bind:rutina="rutina" ></fav-routine>
+                <fav-routine v-bind:rutina="rutina" ></fav-routine>
 
               </v-row>
 
@@ -57,9 +57,9 @@
 
 <script>
 
-import DetailedRoutine from "./detailedRoutine";
-import FavRoutine from "./favRoutine";
-import ShareRoutine from "./shareRoutine";
+import DetailedRoutine from "../detailedRoutine";
+import FavRoutine from "../favRoutine";
+import ShareRoutine from "../shareRoutine";
 export default {
   components: {ShareRoutine, FavRoutine, DetailedRoutine},
   data() {
@@ -88,7 +88,6 @@ export default {
       // ver de hacer el dispatch aca
 
       await this.$store.dispatch("getCyclesOfID", id);
-
     },
     funcionAUX2: function (){
       console.log("llegooooooooooooooooooooo");
@@ -99,7 +98,7 @@ export default {
 
   computed: {
     rutinas(){
-      return this.$store.state.otrasRutinas;
+      return this.$store.state.rutinasFavoritas;
     },
     cardID(){
       return this.$store.state.cardID;
@@ -108,8 +107,8 @@ export default {
 
   mounted() {
     //this.$store.dispatch("getRoutines", "");
-    this.$store.dispatch("getFavourites", "");
-   console.log("1")
+   // this.$store.dispatch("getFavourites", "");
+    console.log("1")
   },
 }
 </script>

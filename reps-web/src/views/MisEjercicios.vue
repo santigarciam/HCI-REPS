@@ -59,9 +59,9 @@
 </template>
 
 <script>
-import NuevoEjercicio from "@/components/nuevoEjercicio";
-import SearchField from "@/components/searchField";
-import EjerciceCard from "@/components/ejerciceCard";
+import NuevoEjercicio from "@/components/MisEjercicios/nuevoEjercicio";
+import SearchField from "@/components/filtrado/searchField";
+import EjerciceCard from "@/components/MisEjercicios/ejerciceCard";
 import {bus} from '../main'
 
 export default {

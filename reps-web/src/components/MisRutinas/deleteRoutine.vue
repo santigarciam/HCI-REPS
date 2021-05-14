@@ -29,9 +29,9 @@
 </template>
 
 <script>
-import {cycleApi} from "../API_EJS/js/cycles";
-import {cycleExercisesApi} from "../API_EJS/js/cycleExercises";
-import {routineApi} from "../API_EJS/js/routines";
+import {cycleApi} from "../../API_EJS/js/cycles";
+import {cycleExercisesApi} from "../../API_EJS/js/cycleExercises";
+import {routineApi} from "../../API_EJS/js/routines";
 
 export default {
   props: ['rutina'],

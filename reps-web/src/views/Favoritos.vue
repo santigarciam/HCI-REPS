@@ -63,7 +63,7 @@
 //import filtrarPor from "@/components/filtrarPor";
 //import OrderBy from "@/components/orderBy";
 //import SearchField from "@/components/searchField";
-import FavouriteRoutines from "../components/favouriteRoutines3";
+import FavouriteRoutines from "../components/Favoritos/favouriteRoutines3";
 export default {
   name: "Favoritos",
   components: {FavouriteRoutines,/* SearchField, OrderBy, filtrarPor*/},

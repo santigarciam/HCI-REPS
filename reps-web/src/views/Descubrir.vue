@@ -58,10 +58,10 @@
 <script>
 
 
-import Filtrar from "@/components/filtrarPor";
-import OrderBy from "@/components/orderBy";
-import SearchField from "@/components/searchField";
-import OtherRoutines from "../components/otherRoutines2";
+import Filtrar from "@/components/filtrado/filtrarPor";
+import OrderBy from "@/components/filtrado/orderBy";
+import SearchField from "@/components/filtrado/searchField";
+import OtherRoutines from "../components/Descubrir/otherRoutines2";
 import {bus} from "../main";
 export default {
   name: "Descubrir",
