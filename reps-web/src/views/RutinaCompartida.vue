@@ -4,6 +4,7 @@
 
       <DetailedRoutine v-bind:rutina="sharedRut"></DetailedRoutine>
     </v-dialog>
+
   </div>
 </template>
 
@@ -22,7 +23,7 @@ export default {
   },
   async beforeCreate() {
     this.currentURL = router.currentRoute.fullPath;
-    console.log( this.currentURL);
+    // console.log( this.currentURL);
     await this.$store.dispatch("getRoutineByID", router.currentRoute.fullPath);
   },
   computed:{

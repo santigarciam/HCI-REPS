@@ -20,7 +20,7 @@ export const getRoutineByID = async ({ commit}, urlRut) => {
     // // console.log("actions: ");
     //  console.log(urlRut);
     const response = await routineApi.getByURL(urlRut, null);
-
+    console.log(response);
     if (!response.code){
         const rutina = response;
         const result = await cycleApi.getAll(rutina.id, null);

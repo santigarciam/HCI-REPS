@@ -3,7 +3,7 @@
       <v-card-title>{{ rutina.name }}<v-spacer></v-spacer>
         <v-btn v-if="!this.$route.fullPath.includes('/routines/')" plain icon v-on:click="cancelActionRut"><v-icon dark>
         mdi-close
-      </v-icon></v-btn></v-card-title>
+      </v-icon></v-btn><v-btn  plain  class="primary text--white" to="/Descubrir"  v-if="this.$route.fullPath.includes('/routines/')">Descubre más rutinas <v-icon>mdi-arrow-right</v-icon></v-btn></v-card-title>
       <v-divider></v-divider>
       <v-card-subtitle></v-card-subtitle>
       <v-row class="text-left" v-if="this.$route.fullPath.includes('/routines/')" >

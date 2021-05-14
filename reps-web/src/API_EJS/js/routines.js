@@ -37,9 +37,23 @@ class routineApi {
     }
 
     static async getByURL(url, controller) {
-        return await Api.get(`${Api.baseUrl}${url}`,true,  controller);
+        const id= parseInt(url.split('/')[2]);
+        console.log(id);
+        const respAux = await this.getAllNoParameters(controller);
+        console.log(respAux);
+
+        for(const rut of respAux.content){
+            if(rut.id === id){
+                return rut;
+            }
+        }
+        return null;
+
     }
 
+    static async getAllNoParameters(controller) {
+        return await Api.get(`${routineApi.url}`, true, controller);
+    }
     static async getAll(parameters, controller) {
         return await Api.get(`${routineApi.url}?${parameters}`, true, controller);
     }
