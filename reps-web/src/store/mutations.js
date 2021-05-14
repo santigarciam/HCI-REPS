@@ -19,6 +19,7 @@ export const UPDATE_ID_FAVOURITES = (state) => {
 
 export const SET_OTHERS = (state, rutinas) => {
     state.otrasRutinas = rutinas;
+    state.lengthAuxOtrasRutinas = state.otrasRutinas.length;
 }
 
 export const SET_EXERCISES = (state, ejercicios) => {
