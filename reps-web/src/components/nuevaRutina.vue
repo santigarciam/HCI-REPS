@@ -1,6 +1,6 @@
 <template>
 
-  <v-dialog v-model="dialog" width="900px" :key="cardID">
+  <v-dialog persistent v-model="dialog" width="900px" :key="cardID">
     <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
     <v-btn depressed class="ma-2 mr-4" slot="activator" v-bind="attrs" v-on="on" outlined>+Anadir</v-btn>
     </template>
@@ -243,7 +243,7 @@
                       <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
                       <v-btn color="grey lighten-1 white--text" class="mx-0" v-on:click="cancelActionNewRut">Cancelar</v-btn>
 <!--                      <v-btn flat class="primary mx-10" v-on:click="addNewRoutine">Guardar</v-btn>&ndash;&gt;-->
-                      <v-dialog>
+                      <v-dialog persistent width="900px" :key="cardID">
                       <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
                         <v-btn class="primary mx-10 white--text"  slot="activator" v-bind="attrs" v-on="on" @click="loadNextStepNewRut" outlined>Siguiente</v-btn>
                       </template>

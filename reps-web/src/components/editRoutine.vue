@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog[this.rutina]" width="900px" :retain-focus="false" >
+  <v-dialog persistent v-model="dialog[this.rutina]" width="900px" :retain-focus="false" >
 <template  v-slot:activator="{ on, attrs }">
   <v-btn  @click.stop="editarRutina(this.rutina)"  icon class="mt-4 mr-2" plain color = "grey" slot="activator" small  v-on:click.prevent="editarRutina(rutina.id)" v-bind="attrs" v-on="on">
     <v-icon>

@@ -1,18 +1,19 @@
 <template>
   <v-container fluid id="Favoritos">
-    <!-- <v-row class="mt-2">
-     <v-col>
-       <v-row>
-     <filtrar-por></filtrar-por>
-       <order-by></order-by>
-         <search-field></search-field>
-         <v-spacer></v-spacer>
-       </v-row>
-       <v-row></v-row>
-     </v-col>
-   </v-row>-->
+<!--    <v-row class="mt-2">-->
+<!--     <v-col>-->
+<!--       <v-row>-->
+<!--&lt;!&ndash;     <filtrar-por></filtrar-por>&ndash;&gt;-->
+<!--&lt;!&ndash;       <order-by></order-by>&ndash;&gt;-->
+<!--&lt;!&ndash;         <search-field></search-field>&ndash;&gt;-->
+<!--         <v-spacer></v-spacer>-->
+<!--       </v-row>-->
+<!--       <v-row></v-row>-->
+<!--     </v-col>-->
+<!--   </v-row>-->
     <favourite-routines class="mt-2"></favourite-routines>
 
+    <v-col></v-col>
     <div class="noRut mt-16" v-if="this.favoritos.length === 0">
       <template>
         <v-container>
