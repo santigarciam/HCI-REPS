@@ -35,7 +35,7 @@ export default {
       setTimeout(() => {
         this.$emit("yourEvent");
       }, this.timeout);
-    }
+    },
   }
 }
 </script>

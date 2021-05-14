@@ -1,6 +1,7 @@
 <template>
     <v-card flat>
-      <v-card-title>{{ rutina.name }}<v-spacer></v-spacer><v-btn plain icon v-on:click="cancelActionRut"><v-icon dark>
+      <v-card-title>{{ rutina.name }}<v-spacer></v-spacer><v-btn plain icon v-on:click="cancelActionRut">
+        <v-icon dark>
         mdi-close
       </v-icon></v-btn></v-card-title>
       <v-divider></v-divider>

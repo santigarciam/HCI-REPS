@@ -3,15 +3,16 @@
     <v-container fluid class="fill-height pa-0 ma-0">
       <v-row>
         <v-col>
-          <v-row justify="center" align="end" style="height: 550px">
-            <v-card   rounded color="rgb(0, 0, 0, 0.8)" elevation="0">
-            <v-card-text>
-              <v-card-title class="white--text">Ingrese el codigo de verificacion enviado a su casilla de correos </v-card-title>
-              <v-row>
-                <v-col cols="12">
-
-                  <!--Input registro usuario -->
-                  <v-container>
+          <v-row justify="center" align="center" style="height: 550px">
+            <v-card rounded color="rgb(0, 0, 0, 0.8)" elevation="0">
+              <v-card-title class="ml-4 white--text">Ingrese el codigo de verificacion enviado a su casilla de correos
+                <v-btn class="ml-4" plain icon dark v-on:click="$router.push('/')">
+                  <v-icon >
+                    mdi-close
+                  </v-icon></v-btn>
+              </v-card-title>
+              <v-card-text>
+                <v-container>
                     <v-row>
                       <v-text-field
                           label="Codigo"
@@ -53,23 +54,19 @@
                         @keyup.enter="resendCode"
                     >REENVIAR CODIGO
                     </v-btn>
-
               </v-row>
-                    <v-snackbar
-                        v-model="snackbar"
-
-                    >Se reenvio el codigo de verificacion a su mail {{this.$store.state.userRegisteredMail}}</v-snackbar>
                   </v-container>
 
 
-                </v-col>
-              </v-row>
     </v-card-text>
-  </v-card>
+    </v-card>
           </v-row>
         </v-col>
       </v-row>
     </v-container>
+    <v-snackbar
+      v-model="snackbar"
+    >Se reenvio el codigo de verificacion a su mail {{this.$store.state.userRegisteredMail}}</v-snackbar>
   </div>
 </template>
 
