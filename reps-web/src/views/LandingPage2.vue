@@ -429,6 +429,7 @@ export default {
       await UserApi.login({username: this.username, password: this.password}, null);
       if (Api.getToken()){
         this.loading = false;
+        //await this.$store.dispatch('loadResources');
         await router.push('/MisRutinas');
       }
       console.log(this.loading);

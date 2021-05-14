@@ -13,7 +13,7 @@
     </v-row>
     <favourite-routines></favourite-routines>
 
-    <div class="noRut mt-16" v-if="this.empty">
+    <div class="noRut mt-16" v-if="this.favoritos.length === 0">
       <template>
         <v-container>
           <v-row>
