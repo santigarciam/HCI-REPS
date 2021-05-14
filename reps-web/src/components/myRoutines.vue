@@ -13,10 +13,10 @@
           <v-card v-bind="attrs" v-on="on"  @click.stop="funcionAUX(rutina.id,rutina)"  :data="modalData" scrollable>
             <v-col>
               <v-row>
-                <v-card-title prepend-icon="mdi-counter" class="mb-0 pb-0">{{ rutina.name }} </v-card-title>
+                <v-card-title prepend-icon="mdi-counter" class="mb-0 pb-0">{{ rutina.name }}</v-card-title>
                 <v-spacer></v-spacer>
                 <!-- EDITAR RUTINAA-->
-                <edit-routine v-bind:rutina="rutina"></edit-routine>
+                <edit-routine :rutina="rutina"></edit-routine>
                 <!--                  EDITAR RUTINA FIN-->
                 <share-routine></share-routine>
                 <delete-routine v-bind:rutina="rutina"></delete-routine>

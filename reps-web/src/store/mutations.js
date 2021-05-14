@@ -41,15 +41,10 @@ export const GET_CYCLES_OF_ID = async (state, id) => {
             respExercises = await cycleExercisesApi.getAll(ciclo.id,null);
             if(respExercises.totalCount){
             state.exersisesOfRoutineOnCycle[i++] = respExercises.content;
-                // console.log(" AL TRAER LOS EJS"); /// ERROR
-            // console.log(state.exersisesOfRoutineOnCycle);
             }else{
                 console.log("ERROR AL TRAER LOS EJS"); /// ERROR
             }
         }
-        for(let j=0;j< state.exersisesOfRoutineOnCycle.length;j++){
-            state.exersisesOfRoutineOnCycle[j].orderBy(ej => ej.id);
-        }//////DESCOMENTAR CUANDO EL API FUNCIONE
     }else{
         console.log("ERROR"); //ERROR
     }
