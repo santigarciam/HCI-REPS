@@ -66,11 +66,16 @@ import FavouriteRoutines from "../components/favouriteRoutines";
 export default {
   name: "Favoritos",
   components: {FavouriteRoutines, SearchField, OrderBy, filtrarPor},
+  beforeUpdate() {
+    this.$store.dispatch("changeCardID");
+  },
+  mounted() {
+    this.$store.dispatch("changeCardID");
+  },
   computed: {
     favoritos(){
       return this.$store.state.rutinasFavoritas;
     }
-  }
 }
 </script>
 

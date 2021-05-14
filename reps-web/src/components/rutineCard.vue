@@ -138,7 +138,7 @@
                   </v-btn>
                   <v-snackbar
                       v-model="snackbar"
-                  >Se copio al clipboard el link de la rutina!</v-snackbar>
+                  >¡Se ha copiado al clipboard el link de la rutina!</v-snackbar>
 
                   <!--       Boton de borrar   -->
                   <v-dialog v-model="deleteConfi"  width="800px">
@@ -183,7 +183,7 @@
       </template>
 
       <v-card flat>
-        <v-card-title>{{ rutina.name }}<v-spacer></v-spacer><v-btn plain v-on:click="cancelActionRut"><v-icon dark>
+        <v-card-title>{{ rutina.name }}<v-spacer></v-spacer><v-btn plain icon v-on:click="cancelActionRut"><v-icon dark>
           mdi-close
         </v-icon></v-btn></v-card-title>
         <v-divider></v-divider>
