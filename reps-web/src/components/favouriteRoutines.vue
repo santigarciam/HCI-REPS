@@ -38,7 +38,7 @@
 
                   <v-snackbar
                       v-model="snackbar"
-                  >Se copio al clipboard el link de la rutina!</v-snackbar>
+                  >¡Se ha copiado al clipboard el link de la rutina!</v-snackbar>
 
                   <v-btn class="mt-4 mr-3" plain icon v-on:click="changeFav(rutina.id)" :color="getColour(rutina.id)">
                     <v-icon>mdi-heart</v-icon>
@@ -63,10 +63,10 @@
       </template>
 
       <v-card flat>
-        <v-card-title>{{ rutina.name }}<v-spacer></v-spacer><v-btn plain v-on:click="cancelActionRut"><v-icon dark>
+        <v-card-title>{{ rutina.name }}<v-spacer></v-spacer><v-btn plain icon v-on:click="cancelActionRut"><v-icon dark>
           mdi-close
         </v-icon></v-btn></v-card-title>
-        <!--        <v-btn v-on:click="getCiclosInID(parseInt(rutina.id))">BOTON</v-btn>-->
+        <!--     ACA   <v-btn v-on:click="getCiclosInID(parseInt(rutina.id))">BOTON</v-btn>-->
         <v-divider></v-divider>
         <v-card-subtitle></v-card-subtitle>
         <v-card-subtitle>Descripcion: {{ rutina.detail }}</v-card-subtitle>
@@ -168,6 +168,10 @@ export default {
       }
       //para actualizar los valores
       this.$store.dispatch('changeCardID');
+    },
+
+    beforeUpdate() {
+      this.$store.dispatch("getFavourites", "");
     },
 
     cancelActionRut: function (){

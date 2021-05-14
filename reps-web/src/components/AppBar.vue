@@ -75,10 +75,11 @@
       <!--  -------  -->
       <v-spacer></v-spacer>
 <!--   MENU DE PERFIL   -->
-      <div class="text-center">
+
         <v-menu offset-y
             transition="slide-y-transition"
             bottom
+            clas="ma-0 pt-0"
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn icon
@@ -95,10 +96,10 @@
               </v-avatar>
             </v-btn>
           </template>
-          <v-list>
-            <v-list-item disabled>
+          <v-list clas="mt-0 pt-0">
+            <v-list-item  disabled>
 
-              <v-btn color="primary"  :key="cardID">
+              <v-btn block class="elevation-0" color="#2679CC" dark :key="cardID">
                 <v-icon left>
                   mdi-account
                 </v-icon>
@@ -138,7 +139,7 @@
             </v-list-item>
           </v-list>
         </v-menu>
-      </div>
+
 <!--      -->
     </v-app-bar>
     </nav>
