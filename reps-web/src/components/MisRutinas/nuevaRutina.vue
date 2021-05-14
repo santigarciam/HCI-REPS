@@ -6,7 +6,7 @@
     </template>
 
     <v-card flat>
-      <v-card-title class="white--text primary">
+      <v-card-title class="justify-center white--text primary">
         AGREGAR NUEVA RUTINA
       </v-card-title>
       <v-card-text>

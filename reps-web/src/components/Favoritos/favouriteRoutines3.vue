@@ -106,8 +106,8 @@ export default {
   },
 
   mounted() {
-    //this.$store.dispatch("getRoutines", "");
-   // this.$store.dispatch("getFavourites", "");
+    this.$store.dispatch("getRoutines", "");
+   this.$store.dispatch("getFavourites", "");
     console.log("1")
   },
 }
