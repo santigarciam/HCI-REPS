@@ -27,6 +27,7 @@ class cycleApi {
             console.log("Se logro moficar el ciclo ");
             console.log(cycle);
         }
+        return result;
     }
 
     static async delete(routineId,cycle, controller){

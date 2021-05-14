@@ -13,118 +13,125 @@
           <v-card v-bind="attrs" v-on="on"  @click.stop="funcionAUX(rutina.id,rutina)"  :data="modalData" scrollable>
             <v-col>
               <v-row>
-                <v-card-title class="mb-0 pb-0">{{ rutina.name }} </v-card-title>
+                <v-card-title prepend-icon="mdi-counter" class="mb-0 pb-0">{{ rutina.name }} </v-card-title>
                 <v-spacer></v-spacer>
 <!-- EDITAR RUTINAA-->
                   <v-dialog v-model="dialog[rutina.id]" width="800px" :retain-focus="false" >
                     <template  v-slot:activator="{ on, attrs }">
-                      <v-btn icon class="mt-4 mr-2" plain color = "grey" slot="activator" small  v-on:click.prevent="editarRutina(rutina.id)" v-bind="attrs" v-on="on">
+                      <v-btn  @click.stop="editarRutina(rutina.id)"  icon class="mt-4 mr-2" plain color = "grey" slot="activator" small  v-on:click.prevent="editarRutina(rutina.id)" v-bind="attrs" v-on="on">
                         <v-icon>
                           mdi-pencil
                         </v-icon>
                       </v-btn>
                     </template>
 
-                    <v-card>
-                      <v-card-title>Editar Rutina {{rutina.id}}</v-card-title>
+                    <v-card flat>
 
+                      <v-card-title> EDITAR RUTINA: {{  rutAux.name }}<v-spacer></v-spacer><v-btn plain v-on:click="cancelActionRut"><v-icon dark>
+                        mdi-close
+                      </v-icon></v-btn></v-card-title>
+                      <!--        <v-btn v-on:click="getCiclosInID(parseInt(rutina.id))">BOTON</v-btn>-->
+                      <v-divider></v-divider>
+                      <v-col></v-col>
+                      <v-card-subtitle>
+                        <v-text-field  outlined label="Nombre:" v-model="rutAux.name"></v-text-field>
+                      </v-card-subtitle>
+                      <v-card-subtitle>
+                      <v-text-field outlined label="Descripcion:" v-model="rutAux.detail"></v-text-field>
+                      </v-card-subtitle>
+                      <h4 class="pl-6 mb-4">Ciclos:</h4>
 
-                      <v-card-text>
+                      <v-expansion-panels  v-for="(ciclo,i) in cyclesAux" :key="ciclo.id">
+                        <v-expansion-panel>
+                          <v-row>
+                            <v-col>
+                              <v-expansion-panel-header v-if="i===0">Calentamiento </v-expansion-panel-header>
+                              <v-expansion-panel-header v-else-if="i=== cyclesAux.length -1">Enfriamiento</v-expansion-panel-header>
+                              <v-expansion-panel-header v-else> Ciclo {{i}}</v-expansion-panel-header>
+                            </v-col>
+                            <v-col align="center">
 
-                        <v-form class="px-3">
-                          <v-text-field outlined label="Nombre*" v-model="rutAux.name"></v-text-field>
-                          <v-textarea  outlined label="Descripcion*" v-model="rutAux.detail" ></v-textarea>
-                          <v-text-field outlined label="Categoría" v-model="rutAux.category.name"></v-text-field>
+                              <v-text-field
+                                  prepend-icon="mdi-counter"
+                                  v-model="ciclo.repetitions"
+                                  class="mt-0 pt-0"
+                                  hide-details
+                                  single-line
+                                  min = "1"
+                                  type="number"
+                                  style="width: 80px"
+                              ></v-text-field>
+                            </v-col>
+                          </v-row>
+                          <v-expansion-panel-content>
+<!--                            <v-chip class="mb-4 ma-2" small color="primary">x{{ciclo.repetitions}}</v-chip>-->
+                            <template v-for="ejs in excercisesOfCycleAUX[i]">
+                              <v-card small  class="mt-1" :key="ejs.exercise.id">
 
-                        </v-form>
-<!--                        Ciclos en EDITAR RUT-->
+                                <v-row>
+                                  <v-col>
+                                    <v-card-text>{{ejs.exercise.name}}</v-card-text>
+                                  </v-col> <v-col>
+                                </v-col>
+                                  <v-spacer></v-spacer>
+                                  <v-col>
 
+                                    <v-text-field
+                                        prepend-icon="mdi-order-numeric-ascending"
+                                        v-model="ejs.order"
+                                        class="mt-0 pt-0"
+                                        hide-details
+                                        single-line
+                                        min = "1"
+                                        type="number"
+                                        style="width: 60px"
+                                    ></v-text-field>
+                                    <!--                                    <v-card-text> Duracion: {{ejs.duration}}</v-card-text>-->
+                                  </v-col>
+                                  <v-col>
 
+                                    <v-text-field
+                                        prepend-icon="mdi-counter"
+                                        v-model="ejs.duration"
+                                        class="mt-0 pt-0"
+                                        hide-details
+                                        single-line
+                                        min = "1"
+                                        type="number"
+                                        style="width: 60px"
+                                    ></v-text-field>
+<!--                                    <v-card-text> Duracion: {{ejs.duration}}</v-card-text>-->
+                                  </v-col>
+                                  <v-col>
+                                    <v-text-field
+                                        prepend-icon="mdi-clock-outline"
+                                        v-model="ejs.repetitions"
+                                        class="mt-0 pt-0"
+                                        hide-details
+                                        single-line
+                                        min = "1"
+                                        type="number"
+                                        style="width: 60px"
+                                    ></v-text-field>
+<!--                                    <v-card-text> REPS: {{ejs.repetitions}}</v-card-text>-->
+                                  </v-col>
+                                </v-row>
 
-                        <v-stepper v-model="e1">
-                          <v-stepper-header>
-                            <template v-for="(ciclo,n) in cyclesOfRutine">
-                              <v-divider
-                                  v-if="n !== steps"
-                                  :key="ciclo.id"
-                              ></v-divider>
-                              <v-stepper-step
-                                  :key="ciclo.id"
-                                  :step="n"
-                                  editable
-                              >
-                              {{ciclo.name}}
-                              </v-stepper-step>
-                              <v-divider
-                                  v-if="n !== steps"
-                                  :key="ciclo.id"
-                              ></v-divider>
+                              </v-card>
+                              <!--                  </template>-->
+                              <!--                </v-card>-->
                             </template>
-                          </v-stepper-header>
-                        </v-stepper>
+                          </v-expansion-panel-content>
+                        </v-expansion-panel>
+                      </v-expansion-panels>
 
 
-                        <!--                          <v-stepper-items>-->
-<!--                            <v-stepper-content-->
-<!--                                v-for="(ciclo,n) in cyclesOfRutine"-->
-<!--                                :key="ciclo.id"-->
-<!--                                :step="n"-->
-<!--                            >-->
-<!--                              <v-card-->
-<!--                                  class="mb-12"-->
-<!--                                  color="grey lighten-1"-->
-<!--                                  height="200px"-->
-<!--                              >-->
-<!--                                <v-list two-line  style="max-height:250px"-->
-<!--                                        class="overflow-y-auto">-->
-<!--                                  <v-list-item-group-->
-<!--                                      v-model="selected[n]"-->
-<!--                                      active-class="grey&#45;&#45;text"-->
-<!--                                      multiple-->
-<!--                                  >-->
-<!--                                    <template v-for="(excersise, index) in exercisesOfCycle(n) ">-->
-<!--                                      <v-list-item :key="excersise.id">-->
-<!--                                        <template v-slot:default="{ active }">-->
-<!--                                          <v-list-item-content>-->
-<!--                                            <v-list-item-title v-text="excersise.name"></v-list-item-title>-->
-
-<!--                                          </v-list-item-content>-->
-
-<!--                                          <v-list-item-action>-->
-
-<!--                                            <v-icon-->
-<!--                                                v-if="active"-->
-<!--                                                color="grey lighten-1"-->
-<!--                                            >-->
-<!--                                              mdi-check-->
-<!--                                            </v-icon>-->
-
-<!--                                          </v-list-item-action>-->
-<!--                                        </template>-->
-<!--                                      </v-list-item>-->
-
-<!--                                      <v-divider-->
-<!--                                          v-if="index < excersise.length - 1"-->
-<!--                                          :key="index"-->
-<!--                                      ></v-divider>-->
-<!--                                    </template>-->
-<!--                                  </v-list-item-group>-->
-
-<!--                                </v-list>-->
-
-
-<!--                              </v-card>-->
-<!--                            </v-stepper-content>-->
-<!--                          </v-stepper-items>-->
-
-
-<!--                        CICLO EDITAR RUT FIN-->
-                      </v-card-text>
-                      <v-col>
+                    <v-col>
+                      <v-col></v-col>
                         <v-row>
                           <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
                           <v-btn plain color="grey" class="mx-0" @click="cancelActionRut">Cancelar</v-btn>
-                          <v-btn :loading="loading" flat class="primary mx-10" @click="modifyRut(rutina)">Guardar</v-btn>
+                          <v-btn :loading="loading" flat class="primary mx-10" @click="saveChanges()">Guardar</v-btn>
 
                         </v-row>
                       </v-col>
@@ -250,7 +257,7 @@ import  EditRutina from "@/components/editRut"
 import { routineApi } from "../API_EJS/js/routines";
 import { cycleApi } from "../API_EJS/js/cycles";
 import {cycleExercisesApi} from "../API_EJS/js/cycleExercises";
-import {categoryApi} from "../API_EJS/js/category";
+// import {categoryApi} from "../API_EJS/js/category";
 //import {cycleExercisesApi } from "../API_EJS/js/cycleExercises";
 
 export default {
@@ -266,6 +273,8 @@ export default {
       e1: 0,
       steps: 1,
       rutAux:{id:0,name:'',detail:'',category:{name:'',id:0}},
+      cyclesAux:[],
+      excercisesOfCycleAUX:[],
     }
   },
   methods: {
@@ -310,28 +319,54 @@ export default {
       await this.$store.dispatch("getCyclesOfID", id);
 
     },
-    funcionAUX2: function (){
-      console.log("llegooooooooooooooooooooo");
-      return this.cyclesOfRutine;
-    },
-
     editarRutina: async function(rutID){
       console.log('entrooooooo');
-      console.log(this);
-
-
+      console.log(rutID);
       const resp = await routineApi.get(rutID,null);
+      // console.log(resp);
       if(resp.id){
-        this.rutAux.id = resp.id;
-        this.rutAux.name = resp.name;
-        this.rutAux.detail = resp.detail;
-        const respCat = await categoryApi.get(resp.category.id,null);
+        this.rutAux = resp;
+        // this.rutAux.id = resp.id;
+        // this.rutAux.name = resp.name;
+        // this.rutAux.detail = resp.detail;
+        // this.rutAux.category.name = resp.name;
+        // const respCat = await categoryApi.get(resp.category.id,null);
         await this.$store.dispatch("getCyclesOfID", resp.id);
+        this.cyclesAux = await this.$store.state.cyclesOfRutine;
+        this.excercisesOfCycleAUX =  this.$store.state.exersisesOfRoutineOnCycle;
 
-        console.log(respCat);
-        this.rutAux.category.name = respCat.name;
+        // console.log(this.excercisesOfCycleAUX)
+        // console.log(respCat);
       }
-    }
+    },
+    saveChanges: async function () {
+      console.log('Editandoo');
+      console.log(this.rutAux);
+        let respExCycle;
+        console.log('Editandoo');
+          for(var i=0;i<this.cyclesAux.length ; i++){
+            let cycleAux;
+            cycleAux = {id:parseInt(this.cyclesAux[i].id),name:this.cyclesAux[i].name,detail:this.cyclesAux[i].detail,type:this.cyclesAux[i].type,order:parseInt(this.cyclesAux[i].order),repetitions: parseInt(this.cyclesAux[i].repetitions) ,metadata:this.cyclesAux[i].metadata};
+            console.log("ciclo a mod")
+              // console.log(respCycles);
+              // for(const ej in this.excercisesOfCycleAUX[i]) {
+              for(var j=0; j< this.excercisesOfCycleAUX[i].length;j++) {
+                let ejAux;
+                ejAux = {id:parseInt(this.excercisesOfCycleAUX[i][j].exercise.id),order: parseInt(this.excercisesOfCycleAUX[i][j].order),duration: parseInt(this.excercisesOfCycleAUX[i][j].duration),repetitions:parseInt(this.excercisesOfCycleAUX[i][j].repetitions)};
+               console.log("Ejercicio a mod");
+                // console.log(ejAux);
+                // console.log(this.excercisesOfCycleAUX[i][j]);
+                respExCycle = await cycleExercisesApi.modify(parseInt(this.cyclesAux[i].id), parseInt(ejAux.id), ejAux, null);
+                if (!respExCycle.order) {
+                  console.log("ERROR");
+                }
+              }
+            await cycleApi.modify(this.rutAux.id,cycleAux,null);
+
+        }
+      await routineApi.modify(this.rutAux, null);
+
+      }
     /////////////////////////////////////////////////////////////////////////////////
     },
   watch: {
@@ -358,7 +393,10 @@ export default {
       },
       exercisesOfCycle(){
         return this.$store.state.exersisesOfRoutineOnCycle;
-      } ////// DESCOMENTAR CUANDO EL API FUNCIONE
+      }, ////// DESCOMENTAR CUANDO EL API FUNCIONE
+      ejsCycleAux(){
+        return this.$store.state.ejsCycleAux;
+      }
     },
 
     mounted() {

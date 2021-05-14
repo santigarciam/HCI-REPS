@@ -27,7 +27,7 @@ export const INCREMENT_ID = (state) => {
     state.cardID += 1;
 }
 export const GET_CYCLES_OF_ID = async (state, id) => {
-    console.log("En mutations: " + id);
+    // console.log("En mutations: " + id);
     const result = await cycleApi.getAll(id, null);
     if (result.content){
         state.cyclesOfRutine = result.content;
@@ -38,8 +38,8 @@ export const GET_CYCLES_OF_ID = async (state, id) => {
             respExercises = await cycleExercisesApi.getAll(ciclo.id,null);
             if(respExercises.totalCount){
             state.exersisesOfRoutineOnCycle[i++] = respExercises.content;
-                console.log(" AL TRAER LOS EJS"); /// ERROR
-            console.log(state.exersisesOfRoutineOnCycle);
+                // console.log(" AL TRAER LOS EJS"); /// ERROR
+            // console.log(state.exersisesOfRoutineOnCycle);
             }else{
                 console.log("ERROR AL TRAER LOS EJS"); /// ERROR
             }
