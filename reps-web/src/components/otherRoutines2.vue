@@ -202,10 +202,10 @@ export default {
     ejercicios(){
       return this.$store.state.listaEjercicios;
     },
-    cyclesOfRutine(){
-      console.log(this.$store.state.cyclesOfRutine);
-      return this.$store.state.cyclesOfRutine;
-    },
+    // cyclesOfRutine(){
+    //   console.log(this.$store.state.cyclesOfRutine);
+    //   return this.$store.state.cyclesOfRutine;
+    // },
     exercisesOfCycle(){
       return this.$store.state.exersisesOfRoutineOnCycle;
     } ////// DESCOMENTAR CUANDO EL API FUNCIONE

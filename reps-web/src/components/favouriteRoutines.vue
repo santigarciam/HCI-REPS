@@ -211,7 +211,7 @@ export default {
     } ////// DESCOMENTAR CUANDO EL API FUNCIONE
   },
   mounted() {
-    this.$store.dispatch("getFavourites", "");
+    //this.$store.dispatch("getFavourites", "");
     console.log("1")
   }
 }

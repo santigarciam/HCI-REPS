@@ -12,7 +12,7 @@
     </v-row>
     <other-routines :key="cardID"></other-routines>
 
-    <div class="noRut mt-16" v-if="otherRoutines.length === 0">
+    <div class="noRut mt-16" v-if="this.otherRoutinesLength === 0">
       <template>
         <v-container>
           <v-row>
@@ -32,12 +32,12 @@
                 cols="24"
             >
               <h1 class="display-1 font-weight-thin mb-4">
-                <span>... Comienza a </span>
-                <span class="blue--text boldText">explorar rutinas</span>
+                <span>... Se el primero en </span>
+                <span class="blue--text boldText">compartir rutinas con tus colegas</span>
                 <span> ...</span>
               </h1>
               <h4 class="subheading">
-                Encuentra rutinas de colegas en la seccion "Descubrir"
+                Aqui apareceran rutinas creadas por otros usuarios
               </h4>
             </v-col>
           </v-row>
@@ -69,7 +69,7 @@ export default {
   data(){
     return {
       params: "",
-
+      lengthAtStart: this.$store.state.otrasRutinas,
       categoria: "",
       dificultad:"",
       rating: "",
@@ -129,8 +129,8 @@ export default {
     cardID(){
       return this.$store.state.cardID;
     },
-    otherRoutines(){
-      return this.$store.state.otrasRutinas;
+    otherRoutinesLength(){
+      return this.$store.state.lengthAuxOtrasRutinas;
     }
   }
 }
