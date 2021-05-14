@@ -11,7 +11,7 @@
 <!--       <v-row></v-row>-->
 <!--     </v-col>-->
 <!--   </v-row>-->
-    <favourite-routines class="mt-2"></favourite-routines>
+    <favourite-routines :key="cardID" class="mt-2"></favourite-routines>
 
     <v-col></v-col>
     <div class="noRut mt-16" v-if="this.favoritos.length === 0">
@@ -63,7 +63,7 @@
 //import filtrarPor from "@/components/filtrarPor";
 //import OrderBy from "@/components/orderBy";
 //import SearchField from "@/components/searchField";
-import FavouriteRoutines from "../components/favouriteRoutines2";
+import FavouriteRoutines from "../components/favouriteRoutines3";
 export default {
   name: "Favoritos",
   components: {FavouriteRoutines,/* SearchField, OrderBy, filtrarPor*/},
@@ -73,28 +73,32 @@ export default {
 
     }
   },
-  beforeUpdate() {
+  /*updated() {
     this.$store.dispatch("changeCardID");
-  },
+  },*/
   mounted() {
     this.$store.dispatch("changeCardID");
+    this.$store.dispatch("getFavourites", "");
   },
   computed: {
     favoritos() {
       return this.$store.state.rutinasFavoritas;
-    }
+    },
+    cardID(){
+      return this.$store.state.cardID;
+    },
   },
-  beforeCreate() {
+  /*  beforeCreate() {
     this.$store.dispatch("getFavourites", "");
   },
-  created() {
+created() {
     console.log(this.favoritos)
     console.log(this.$store.state.rutinasFavoritas)
     if (this.favoritos.length == 0){
       console.log(this.favoritos.length)
       this.empty = true
     }
-  }
+  }*/
 }
 </script>
 

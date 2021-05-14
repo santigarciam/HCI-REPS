@@ -25,9 +25,9 @@
                   ></v-rating></v-card-title>
                 <v-spacer></v-spacer>
 
-                  <share-routine></share-routine>
+                <share-routine></share-routine>
 
-                  <fav-routine v-bind:rutina="rutina" ></fav-routine>
+                <fav-routine v-bind:rutina="rutina" ></fav-routine>
 
               </v-row>
 
@@ -99,7 +99,7 @@ export default {
 
   computed: {
     rutinas(){
-      return this.$store.state.otrasRutinas;
+      return this.$store.state.rutinasFavoritas;
     },
     cardID(){
       return this.$store.state.cardID;
@@ -108,8 +108,8 @@ export default {
 
   mounted() {
     //this.$store.dispatch("getRoutines", "");
-    this.$store.dispatch("getFavourites", "");
-   console.log("1")
+   // this.$store.dispatch("getFavourites", "");
+    console.log("1")
   },
 }
 </script>

@@ -44,7 +44,7 @@
 
 <script>
 import NuevaRutina from "@/components/nuevoEjercicio";
-import  EditRutina from "@/components/editRut"
+import  EditRutina from "@/components/editRoutine"
 /*
 import { routineApi } from "../API_EJS/js/routines";
 import { cycleApi } from "../API_EJS/js/cycles";
