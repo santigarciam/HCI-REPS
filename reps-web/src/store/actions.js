@@ -2,6 +2,8 @@ import {routineApi} from '../API_EJS/js/routines';
 import {ExerciseApi} from '../API_EJS/js/exercises';
 import {UserApi} from "../API_EJS/js/user";
 import {FavApi} from "../API_EJS/js/favourites";
+import {cycleApi} from "../API_EJS/js/cycles";
+import {cycleExercisesApi} from "../API_EJS/js/cycleExercises";
 
 // export const loadResources = async ({ commit }) => {
 //     console.log("EMPIEZO loadResources");
@@ -23,14 +25,33 @@ export const getRoutines = async ({ commit}, parameters) => {
 }
 
 export const getUserRoutines = async ({ commit }, parameters) => {
-    const response = await UserApi.getRoutines( parameters,null);
-    if (!response.code){
+    const response = await UserApi.getRoutines(parameters, null);
+    if (!response.code) {
         // console.log("ENTRO");
         // console.log(response);
+        for (const rutina of response.content) {
+            const result = await cycleApi.getAll(rutina.id, null);
+            if (result.content) {
+                rutina.ciclosRut = result.content;
+                for (const ciclo of rutina.ciclosRut) {
+                    const resp = await cycleExercisesApi.getAll(ciclo.id, null);
+                    if (resp.totalCount) {
+                        ciclo.ciclosEjs = resp.content;
+                    } else {
+                        console.log("error al traer los ejs"); /// ERROR
+                    }
+                }
+            } else {
+                console.log("error al traer los ciclos")
+            }
+        }
         commit('SET_ROUTINES', response.content);
+        console.log(response.content)
         return response.content
+
     }
 }
+
 export const searchUserRoutines = async ({ commit },busqueda) => {
     const response = await UserApi.getRoutines( "search=" + busqueda,null);
     if (!response.code){
