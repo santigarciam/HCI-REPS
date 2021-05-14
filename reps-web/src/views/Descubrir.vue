@@ -11,7 +11,7 @@
       </v-col>
     </v-row>
     <other-routines :key="cardID"></other-routines>
-
+<!--
     <div class="noRut mt-16" v-if="this.otherRoutinesLength === 0">
       <template>
         <v-container>
@@ -51,7 +51,7 @@
           </v-row>
         </v-container>
       </template>
-    </div>
+    </div>-->
 
   </v-container>
 </template>
@@ -61,7 +61,7 @@
 import Filtrar from "@/components/filtrarPor";
 import OrderBy from "@/components/orderBy";
 import SearchField from "@/components/searchField";
-import OtherRoutines from "../components/otherRoutines2";
+import OtherRoutines from "../components/otherRoutines3";
 import {bus} from "../main";
 export default {
   name: "Descubrir",

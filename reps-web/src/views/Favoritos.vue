@@ -1,17 +1,17 @@
 <template>
   <v-container fluid id="Favoritos">
-    <v-row class="mt-2">
-      <v-col>
-        <v-row>
-        <filtrar-por></filtrar-por>
-        <order-by></order-by>
-          <search-field></search-field>
-          <v-spacer></v-spacer>
-        </v-row>
-        <v-row></v-row>
-      </v-col>
-    </v-row>
-    <favourite-routines></favourite-routines>
+    <!-- <v-row class="mt-2">
+     <v-col>
+       <v-row>
+     <filtrar-por></filtrar-por>
+       <order-by></order-by>
+         <search-field></search-field>
+         <v-spacer></v-spacer>
+       </v-row>
+       <v-row></v-row>
+     </v-col>
+   </v-row>-->
+    <favourite-routines class="mt-2"></favourite-routines>
 
     <div class="noRut mt-16" v-if="this.favoritos.length === 0">
       <template>
@@ -59,16 +59,17 @@
 
 
 <script>
-import filtrarPor from "@/components/filtrarPor";
-import OrderBy from "@/components/orderBy";
-import SearchField from "@/components/searchField";
-import FavouriteRoutines from "../components/favouriteRoutines";
+//import filtrarPor from "@/components/filtrarPor";
+//import OrderBy from "@/components/orderBy";
+//import SearchField from "@/components/searchField";
+import FavouriteRoutines from "../components/favouriteRoutines2";
 export default {
   name: "Favoritos",
-  components: {FavouriteRoutines, SearchField, OrderBy, filtrarPor},
+  components: {FavouriteRoutines,/* SearchField, OrderBy, filtrarPor*/},
   data(){
     return{
       empty: false
+
     }
   },
   beforeUpdate() {
