@@ -473,8 +473,6 @@
 </template>
 
 <script>
-
-// import rutineCard from "./rutineCard.vue";
   import  { routineApi } from "@/API_EJS/js/routines"
 import  { categoryApi} from "../API_EJS/js/category";
 import {cycleApi} from "../API_EJS/js/cycles";
