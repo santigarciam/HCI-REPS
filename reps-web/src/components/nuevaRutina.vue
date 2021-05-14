@@ -78,6 +78,7 @@
                         class="mb-12"
                         color="grey lighten-1"
                         height="200px"
+                        elevation="0"
                     >
                       <v-list two-line  style="max-height:250px"
 
@@ -93,7 +94,6 @@
                               <template v-slot:default="{ active }">
                                 <v-list-item-content>
                                   <v-list-item-title v-text="excersise.name"></v-list-item-title>
-
                                 </v-list-item-content>
 
                                 <v-list-item-action>
@@ -119,6 +119,39 @@
 
                       </v-list>
 
+                      <!--            Si no tiene ejercicios cargados          -->
+
+                      <v-card
+                          v-if="ejercicios.length === 0"
+                          class="mb-12"
+                          color="white lighten-1"
+                          height="200px"
+                          elevation="0"
+                      >
+                        <v-col></v-col>
+                        <v-col></v-col>
+                        <v-row
+                            align="center"
+                            justify="center"
+                        >
+                          <v-col
+                              class="text-center"
+                              cols="24"
+                          >
+                            <h1 class="display-1 font-weight-thin mb-4">
+                              <span>... Debes </span>
+                              <span class="blue--text boldText">crear ejercicios</span>
+                              <span> antes de crear rutinas ...</span>
+                            </h1>
+                            <h4 class="subheading">
+                              Aqui apareceran tus ejercicios creados
+                            </h4>
+                          </v-col>
+                        </v-row>
+                      </v-card>
+
+                      <!--                      -->
+
 
                     </v-card>
                   </v-stepper-content>
@@ -134,6 +167,7 @@
                       class="mb-12"
                       color="grey lighten-1"
                       height="200px"
+                      elevation="0"
                   >
                     <v-list two-line  style="max-height:250px"
 
@@ -176,6 +210,39 @@
 
                     </v-list>
 
+                    <!--            Si no tiene ejercicios cargados          -->
+
+                    <v-card
+                        v-if="ejercicios.length === 0"
+                        class="mb-12"
+                        color="white lighten-1"
+                        height="200px"
+                        elevation="0"
+                    >
+                      <v-col></v-col>
+                      <v-col></v-col>
+                      <v-row
+                          align="center"
+                          justify="center"
+                      >
+                        <v-col
+                            class="text-center"
+                            cols="24"
+                        >
+                          <h1 class="display-1 font-weight-thin mb-4">
+                            <span>... Debes </span>
+                            <span class="blue--text boldText">crear ejercicios</span>
+                            <span> antes de crear rutinas ...</span>
+                          </h1>
+                          <h4 class="subheading">
+                            Aqui apareceran tus ejercicios creados
+                          </h4>
+                        </v-col>
+                      </v-row>
+                    </v-card>
+
+                    <!--                      -->
+
                   </v-card>
 
                 </v-stepper-content>
@@ -189,6 +256,7 @@
                     :step="n"
                 >
                   <v-card
+                      elevation="0"
                       class="mb-12"
                       color="grey lighten-1"
                       height="200px"
@@ -227,8 +295,41 @@
                           ></v-divider>
                         </template>
                       </v-list-item-group>
-
                     </v-list>
+
+                    <!--            Si no tiene ejercicios cargados          -->
+
+                    <v-card
+                        v-if="ejercicios.length === 0"
+                        class="mb-12"
+                        color="white lighten-1"
+                        height="200px"
+                        elevation="0"
+                    >
+                      <v-col></v-col>
+                      <v-col></v-col>
+                      <v-row
+                          align="center"
+                          justify="center"
+                      >
+                        <v-col
+                            class="text-center"
+                            cols="24"
+                        >
+                          <h1 class="display-1 font-weight-thin mb-4">
+                            <span>... Debes </span>
+                            <span class="blue--text boldText">crear ejercicios</span>
+                            <span> antes de crear rutinas ...</span>
+                          </h1>
+                          <h4 class="subheading">
+                            Aqui apareceran tus ejercicios creados
+                          </h4>
+                        </v-col>
+                      </v-row>
+                    </v-card>
+
+                    <!--                      -->
+
                   </v-card>
 
                 </v-stepper-content>

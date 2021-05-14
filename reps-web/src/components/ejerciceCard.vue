@@ -89,9 +89,10 @@
       <v-divider></v-divider>
 
       <v-card-text>
-        <v-card-title v-model="descripcionEj">Descripcion: {{ excercise.detail }}</v-card-title>
-        <v-card-title v-model="multEj">Multimedia:</v-card-title>
-        <v-card-title v-model="equipEj">Equipamiento:</v-card-title>
+        <v-card-title v-model="descripcionEj">Descripcion:</v-card-title>
+        <v-card-text>{{ excercise.detail }}</v-card-text>
+<!--        <v-card-title v-model="multEj">Multimedia:</v-card-title>-->
+<!--        <v-card-title v-model="equipEj">Equipamiento:</v-card-title>-->
       </v-card-text>
 
 
