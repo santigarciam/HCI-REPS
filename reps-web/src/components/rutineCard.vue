@@ -376,12 +376,12 @@ export default {
       }
     },
 
-    mounted() {
-      this.$store.dispatch("getUserRoutines");
-      // if(this.$store.state.listaRutinas.length !==0){
-      //    this.$store.dispatch("getCyclesOfID", this.$store.state.listaRutinas[0].id);
+    async mounted() {
+      await this.$store.dispatch("getUserRoutines");
+      // if (this.$store.state.listaRutinas.length !== 0) {
+      //   await this.$store.dispatch("getCyclesOfID", this.$store.state.listaRutinas[0].id);
       // }
-     // console.log(this.$store.state.listaRutinas)
+      // console.log(this.$store.state.listaRutinas)
     },
 }
 </script>

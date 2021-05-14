@@ -46,8 +46,8 @@ export const GET_CYCLES_OF_ID = async (state, id) => {
                 console.log("ERROR AL TRAER LOS EJS"); /// ERROR
             }
         }
-        for(var j=0;j< state.exersisesOfRoutineOnCycle.length;j++){
-            this.state.exersisesOfRoutineOnCycle[j].orderBy(ej => ej.id);
+        for(let j=0;j< state.exersisesOfRoutineOnCycle.length;j++){
+            state.exersisesOfRoutineOnCycle[j].orderBy(ej => ej.id);
         }//////DESCOMENTAR CUANDO EL API FUNCIONE
     }else{
         console.log("ERROR"); //ERROR
