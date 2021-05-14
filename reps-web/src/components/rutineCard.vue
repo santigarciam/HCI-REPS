@@ -16,7 +16,7 @@
                 <v-card-title prepend-icon="mdi-counter" class="mb-0 pb-0">{{ rutina.name }} </v-card-title>
                 <v-spacer></v-spacer>
 <!-- EDITAR RUTINAA-->
-                  <v-dialog v-model="dialog[rutina.id]" width="800px" :retain-focus="false" >
+                  <v-dialog v-model="dialog[rutina.id]" width="900px" :retain-focus="false" >
                     <template  v-slot:activator="{ on, attrs }">
                       <v-btn  @click.stop="editarRutina(rutina.id)"  icon class="mt-4 mr-2" plain color = "grey" slot="activator" small  v-on:click.prevent="editarRutina(rutina.id)" v-bind="attrs" v-on="on">
                         <v-icon>
@@ -25,9 +25,9 @@
                       </v-btn>
                     </template>
 
-                    <v-card flat>
+                    <v-card>
 
-                      <v-card-title> EDITAR RUTINA: {{  rutAux.name }}<v-spacer></v-spacer><v-btn plain v-on:click="cancelActionRut"><v-icon dark>
+                      <v-card-title   class="white--text primary" > EDITAR RUTINA: {{  titleRut }}<v-spacer></v-spacer><v-btn plain v-on:click="cancelActionRut"><v-icon dark>
                         mdi-close
                       </v-icon></v-btn></v-card-title>
                       <!--        <v-btn v-on:click="getCiclosInID(parseInt(rutina.id))">BOTON</v-btn>-->
@@ -75,18 +75,6 @@
                                 </v-col>
                                   <v-spacer></v-spacer>
                                   <v-col>
-
-                                    <v-text-field
-                                        prepend-icon="mdi-order-numeric-ascending"
-                                        v-model="ejs.order"
-                                        class="mt-0 pt-0"
-                                        hide-details
-                                        single-line
-                                        min = "1"
-                                        type="number"
-                                        style="width: 60px"
-                                    ></v-text-field>
-                                    <!--                                    <v-card-text> Duracion: {{ejs.duration}}</v-card-text>-->
                                   </v-col>
                                   <v-col>
 
@@ -100,7 +88,7 @@
                                         type="number"
                                         style="width: 60px"
                                     ></v-text-field>
-<!--                                    <v-card-text> Duracion: {{ejs.duration}}</v-card-text>-->
+
                                   </v-col>
                                   <v-col>
                                     <v-text-field
@@ -113,13 +101,10 @@
                                         type="number"
                                         style="width: 60px"
                                     ></v-text-field>
-<!--                                    <v-card-text> REPS: {{ejs.repetitions}}</v-card-text>-->
                                   </v-col>
                                 </v-row>
 
                               </v-card>
-                              <!--                  </template>-->
-                              <!--                </v-card>-->
                             </template>
                           </v-expansion-panel-content>
                         </v-expansion-panel>
@@ -186,7 +171,6 @@
 
 <!--INFORMACION RUTINE CARD-->
             <v-row class="text-left">
-<!--              <v-card-subtitle v-model="autorRut">Autor: {{ HACERFUNCIONDECURRENTUSER }} </v-card-subtitle>-->
               <v-card-subtitle class="mr-0 pr-0 font-weight-bold">Descripcion: </v-card-subtitle>
               <v-card-subtitle class="ml-0 pl-1" v-model="descripcionRut">{{ rutina.detail }}</v-card-subtitle>
             </v-row>
@@ -201,7 +185,6 @@
         <v-card-title>{{ rutina.name }}<v-spacer></v-spacer><v-btn plain v-on:click="cancelActionRut"><v-icon dark>
           mdi-close
         </v-icon></v-btn></v-card-title>
-<!--        <v-btn v-on:click="getCiclosInID(parseInt(rutina.id))">BOTON</v-btn>-->
         <v-divider></v-divider>
         <v-card-subtitle></v-card-subtitle>
         <v-card-subtitle>Descripcion: {{ rutina.detail }}</v-card-subtitle>
@@ -215,9 +198,7 @@
                   <v-expansion-panel-content>
                     <v-chip class="mb-4 ma-2" small color="primary">x{{ciclo.repetitions}}</v-chip>
                 <template v-for="ejs in exercisesOfCycle[i]">
-<!--                <v-card :key="ejs">-->
-<!--                  <v-card-title>ENTRO</v-card-title>-->
-<!--                  <template v-for="ej in ejs">-->
+
                           <v-card small  class="mt-1" :key="ejs.exercise.id">
 
                               <v-row>
@@ -235,8 +216,7 @@
                               </v-row>
 
                           </v-card>
-<!--                  </template>-->
-<!--                </v-card>-->
+
                 </template>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -253,12 +233,11 @@
 <script>
 import NuevaRutina from "@/components/nuevoEjercicio";
 import  EditRutina from "@/components/editRut"
-// import EditRut from "@/components/editRut";
+
 import { routineApi } from "../API_EJS/js/routines";
 import { cycleApi } from "../API_EJS/js/cycles";
 import {cycleExercisesApi} from "../API_EJS/js/cycleExercises";
-// import {categoryApi} from "../API_EJS/js/category";
-//import {cycleExercisesApi } from "../API_EJS/js/cycleExercises";
+
 
 export default {
   componets: {NuevaRutina, EditRutina},
@@ -273,6 +252,7 @@ export default {
       e1: 0,
       steps: 1,
       rutAux:{id:0,name:'',detail:'',category:{name:'',id:0}},
+      titleRut:'',
       cyclesAux:[],
       excercisesOfCycleAUX:[],
     }
@@ -320,27 +300,25 @@ export default {
 
     },
     editarRutina: async function(rutID){
-      console.log('entrooooooo');
-      console.log(rutID);
       const resp = await routineApi.get(rutID,null);
-      // console.log(resp);
       if(resp.id){
+        this.titleRut = resp.name;
         this.rutAux = resp;
-        // this.rutAux.id = resp.id;
-        // this.rutAux.name = resp.name;
-        // this.rutAux.detail = resp.detail;
-        // this.rutAux.category.name = resp.name;
-        // const respCat = await categoryApi.get(resp.category.id,null);
         await this.$store.dispatch("getCyclesOfID", resp.id);
         this.cyclesAux = await this.$store.state.cyclesOfRutine;
         this.excercisesOfCycleAUX =  this.$store.state.exersisesOfRoutineOnCycle;
+        console.log("ANTES")
+        console.log(this.excercisesOfCycleAUX)
+        for(var i=0;i<this.excercisesOfCycleAUX.length;i++){
+          this.excercisesOfCycleAUX[i].orderBy(ej => ej.id);
+        }
 
-        // console.log(this.excercisesOfCycleAUX)
-        // console.log(respCat);
+        console.log("DESPUESS")
+        console.log(this.excercisesOfCycleAUX)
       }
     },
     saveChanges: async function () {
-      console.log('Editandoo');
+
       console.log(this.rutAux);
         let respExCycle;
         console.log('Editandoo');
@@ -348,15 +326,12 @@ export default {
             let cycleAux;
             cycleAux = {id:parseInt(this.cyclesAux[i].id),name:this.cyclesAux[i].name,detail:this.cyclesAux[i].detail,type:this.cyclesAux[i].type,order:parseInt(this.cyclesAux[i].order),repetitions: parseInt(this.cyclesAux[i].repetitions) ,metadata:this.cyclesAux[i].metadata};
             console.log("ciclo a mod")
-              // console.log(respCycles);
-              // for(const ej in this.excercisesOfCycleAUX[i]) {
               for(var j=0; j< this.excercisesOfCycleAUX[i].length;j++) {
                 let ejAux;
                 ejAux = {id:parseInt(this.excercisesOfCycleAUX[i][j].exercise.id),order: parseInt(this.excercisesOfCycleAUX[i][j].order),duration: parseInt(this.excercisesOfCycleAUX[i][j].duration),repetitions:parseInt(this.excercisesOfCycleAUX[i][j].repetitions)};
                console.log("Ejercicio a mod");
-                // console.log(ejAux);
-                // console.log(this.excercisesOfCycleAUX[i][j]);
-                respExCycle = await cycleExercisesApi.modify(parseInt(this.cyclesAux[i].id), parseInt(ejAux.id), ejAux, null);
+                respExCycle = await cycleExercisesApi.delete(parseInt(this.cyclesAux[i].id), parseInt(ejAux.id), null);
+                respExCycle = await cycleExercisesApi.add(parseInt(this.cyclesAux[i].id),parseInt(ejAux.id),{order:ejAux.order,duration:ejAux.duration,repetitions:ejAux.repetitions},null);
                 if (!respExCycle.order) {
                   console.log("ERROR");
                 }
