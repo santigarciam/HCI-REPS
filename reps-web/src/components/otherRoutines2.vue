@@ -13,7 +13,16 @@
           <v-card v-bind="attrs" v-on="on"  @click.stop="funcionAUX(rutina.id,rutina)"  :data="modalData" scrollable>
             <v-col>
               <v-row>
-                <v-card-title class="mb-0 pb-0">{{ rutina.name }} </v-card-title>
+                <v-card-title class="mb-0 pb-0">{{ rutina.name }}
+                  <v-rating
+                      v-model="rutina.rating"
+                      half-increments
+                      readonly
+                      background-color="grey"
+                      color="orange"
+                      medium
+                      class="ml-2"
+                  ></v-rating></v-card-title>
                 <v-spacer></v-spacer>
                 <div>
                 <v-btn
