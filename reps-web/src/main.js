@@ -13,6 +13,7 @@ import store from "./store";
 
 //import state from "./store/state";
 import {Api} from "./API_EJS/js/api";
+import RutinaCompartida from "./views/RutinaCompartida";
 
 export const bus = new Vue();
 export const bus2 = new Vue();
@@ -30,6 +31,7 @@ export const router = new VueRouter({
     {path:'/Favoritos', component: Favoritos, meta: {requiresAuth: true}},
     {path:'/Descubrir', component: Descubrir, meta: {requiresAuth: true}},
     {path:'/ConfirmacionMail',component: ConfirmacionMail},
+    {path:'/routines/:id',component: RutinaCompartida},
     {path:'*', component: NotFound}
   ]
 })

@@ -19,4 +19,5 @@ export default {
     userAvatar: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
     userInfo: {username:'',password:'',email:''},
     ejsCycleAux: [],
+    rutinaCompartida: {},
 }

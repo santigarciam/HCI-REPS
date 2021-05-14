@@ -15,6 +15,20 @@ import {cycleExercisesApi} from "../API_EJS/js/cycleExercises";
 //     console.log("TERMINO loadResources");
 // }
 
+export const getRoutineByID = async ({ commit}, urlRut) => {
+    console.log("actions: LLEGO");
+    // console.log("actions: ");
+    // console.log(urlRut);
+    const response = await routineApi.getByURL(urlRut.path, null);
+    console.log("actions: Hago el get");
+    if (!response.code){
+        // var aux = response.content.filter(n => n.user.id != state.userID)
+        commit('SET_SHARED_RUT', response.content);
+        // console.log(response.content)
+    }
+    //console.log(response);
+}
+
 export const getRoutines = async ({ commit}, parameters) => {
     const response = await routineApi.getAll(parameters, null);
     if (!response.code){

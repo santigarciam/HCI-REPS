@@ -36,6 +36,10 @@ class routineApi {
         return await Api.get(`${routineApi.url}/${routineID}`,true,  controller);
     }
 
+    static async getByURL(url, controller) {
+        return await Api.get(`${Api.baseUrl}${url}`,true,  controller);
+    }
+
     static async getAll(parameters, controller) {
         return await Api.get(`${routineApi.url}?${parameters}`, true, controller);
     }

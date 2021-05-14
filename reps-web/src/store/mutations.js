@@ -6,6 +6,10 @@ export const SET_ROUTINES = (state, rutinas) => {
     state.listaRutinas = rutinas;
 }
 
+export const SET_SHARED_RUT = (state, rutinaCompartida) => {
+    state.rutinaCompartida =rutinaCompartida;
+}
+
 export const SET_FAVOURITES = (state, rutinas) => {
     state.rutinasFavoritas = rutinas;
 }
