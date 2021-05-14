@@ -21,10 +21,11 @@ class routineApi {
 
     static async modify(routine, controller) {
         const result= await Api.put(`${routineApi.url}/${routine.id}`, true, routine, controller);
-        if(result.id){
-            console.log("Se logro moficar la rutina ");
-            console.log(routine);
+        if(!result.id){
+            console.log("NO se logro moficar la rutina ");
+            console.log(result);
         }
+        return result;
     }
 
     static async delete(routineID, controller) {

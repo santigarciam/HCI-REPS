@@ -22,9 +22,11 @@ class cycleExercisesApi {
     }
 
     static async modify(cycleID,exerciseID,data, controller){
-        const result= await Api.put(`${cycleExercisesApi.url}/${cycleID}/exercises/${exerciseID}`, true, data, controller);
-        if(result.id){
-            // console.log("Se logro moficar el ciclo ");
+        const result= await Api.put(`${cycleExercisesApi.url}/${cycleID}/exercises/${parseInt(exerciseID)}`, true, data, controller);
+        if(!result.id){
+            console.log("NO se logro moficar ej del ciclo ");
+            console.log(result);
+
             // console.log(cycle);
         }
     }
