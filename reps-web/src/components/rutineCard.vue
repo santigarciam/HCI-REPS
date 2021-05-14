@@ -27,9 +27,7 @@
 
                     <v-card>
 
-                      <v-card-title   class="white--text primary" > EDITAR RUTINA: {{  titleRut }}<v-spacer></v-spacer><v-btn plain v-on:click="cancelActionRut"><v-icon dark>
-                        mdi-close
-                      </v-icon></v-btn></v-card-title>
+                      <v-card-title   class="white--text primary" > EDITAR RUTINA: {{  titleRut }}</v-card-title>
                       <!--        <v-btn v-on:click="getCiclosInID(parseInt(rutina.id))">BOTON</v-btn>-->
                       <v-divider></v-divider>
                       <v-col></v-col>

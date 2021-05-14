@@ -5,11 +5,12 @@
     <v-btn depressed class="ma-2 mr-4" slot="activator" v-bind="attrs" v-on="on" outlined>+Anadir</v-btn>
     </template>
 
-    <v-card>
-      <v-card-title>
-        <h2>Agregar nueva rutina</h2>
+    <v-card flat>
+      <v-card-title class="white--text primary">
+        AGREGAR NUEVA RUTINA
       </v-card-title>
       <v-card-text>
+        <v-col></v-col>
           <v-text-field outlined label="Nombre" v-model="nameRut"></v-text-field>
           <v-textarea outlined auto-grow label="Descripcion" v-model="detailRut" ></v-textarea>
           <v-text-field outlined label="Categoría" v-model="categoryRut"></v-text-field>
