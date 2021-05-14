@@ -18,7 +18,7 @@
 <!-- EDITAR RUTINAA-->
                   <v-dialog v-model="dialog[rutina.id]" width="800px" :retain-focus="false" >
                     <template  v-slot:activator="{ on, attrs }">
-                      <v-btn  @click.stop="editarRutina(rutina.id)"  icon class="mt-4 mr-2" plain color = "grey" slot="activator" small  v-on:click.prevent="editarRutina(rutina.id)" v-bind="attrs" v-on="on">
+                      <v-btn  icon class="mt-4 mr-2" plain color = "grey" slot="activator" small  v-on:click="editarRutina(rutina.id)" v-bind="attrs" v-on="on">
                         <v-icon>
                           mdi-pencil
                         </v-icon>
@@ -74,20 +74,6 @@
                                   </v-col> <v-col>
                                 </v-col>
                                   <v-spacer></v-spacer>
-                                  <v-col>
-
-                                    <v-text-field
-                                        prepend-icon="mdi-order-numeric-ascending"
-                                        v-model="ejs.order"
-                                        class="mt-0 pt-0"
-                                        hide-details
-                                        single-line
-                                        min = "1"
-                                        type="number"
-                                        style="width: 60px"
-                                    ></v-text-field>
-                                    <!--                                    <v-card-text> Duracion: {{ejs.duration}}</v-card-text>-->
-                                  </v-col>
                                   <v-col>
 
                                     <v-text-field
@@ -340,23 +326,25 @@ export default {
       }
     },
     saveChanges: async function () {
-      console.log('Editandoo');
-      console.log(this.rutAux);
+      // console.log('Editandoo');
+      // console.log(this.rutAux);
         let respExCycle;
-        console.log('Editandoo');
+        // console.log('Editandoo');
           for(var i=0;i<this.cyclesAux.length ; i++){
             let cycleAux;
             cycleAux = {id:parseInt(this.cyclesAux[i].id),name:this.cyclesAux[i].name,detail:this.cyclesAux[i].detail,type:this.cyclesAux[i].type,order:parseInt(this.cyclesAux[i].order),repetitions: parseInt(this.cyclesAux[i].repetitions) ,metadata:this.cyclesAux[i].metadata};
-            console.log("ciclo a mod")
+            // console.log("ciclo a mod")
               // console.log(respCycles);
               // for(const ej in this.excercisesOfCycleAUX[i]) {
               for(var j=0; j< this.excercisesOfCycleAUX[i].length;j++) {
                 let ejAux;
                 ejAux = {id:parseInt(this.excercisesOfCycleAUX[i][j].exercise.id),order: parseInt(this.excercisesOfCycleAUX[i][j].order),duration: parseInt(this.excercisesOfCycleAUX[i][j].duration),repetitions:parseInt(this.excercisesOfCycleAUX[i][j].repetitions)};
                console.log("Ejercicio a mod");
+                console.log(ejAux);
                 // console.log(ejAux);
                 // console.log(this.excercisesOfCycleAUX[i][j]);
-                respExCycle = await cycleExercisesApi.modify(parseInt(this.cyclesAux[i].id), parseInt(ejAux.id), ejAux, null);
+                respExCycle = await cycleExercisesApi.delete(parseInt(this.cyclesAux[i].id), parseInt(ejAux.id), null);
+                respExCycle = await cycleExercisesApi.add(parseInt(this.cyclesAux[i].id), parseInt(ejAux.id),{order:parseInt(ejAux.order),duration: parseInt(ejAux.duration),repetitions:parseInt(ejAux.repetitions)} ,null);
                 if (!respExCycle.order) {
                   console.log("ERROR");
                 }
@@ -365,6 +353,7 @@ export default {
 
         }
       await routineApi.modify(this.rutAux, null);
+      this.cancelActionRut();
 
       }
     /////////////////////////////////////////////////////////////////////////////////
