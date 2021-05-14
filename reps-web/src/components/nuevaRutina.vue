@@ -362,67 +362,80 @@
                             <v-expansion-panel-header v-else> Ciclo {{i -1}}</v-expansion-panel-header>
                               </v-col>
                             <v-col align="center">
-
-                              <v-text-field
-                                  prepend-icon="mdi-counter"
-                                  v-model="repsCiclo[i -1]"
-                                  class="mt-0 pt-0"
-                                  hide-details
-                                  single-line
-                                  min = "1"
-                                  type="number"
-                                  style="width: 80px"
-                              ></v-text-field>
+                              <v-col><v-subheader>Repeticiones del ciclo:
+                                <v-text-field
+                                    append-icon="mdi-counter"
+                                    v-model="repsCiclo[i -1]"
+                                    class="mt-0 pt-0"
+                                    hide-details
+                                    single-line
+                                    min = "1"
+                                    type="number"
+                                    style="width: 80px"
+                                ></v-text-field>
+                              </v-subheader>
+                              </v-col>
                             </v-col>
                             </v-row>
                             <v-expansion-panel-content>
                               <template v-for="(ejs,j) in ejsCycleAux[i-1]">
                                 <v-card small class="mt-1 mb-1" :key="ejs.id">
 
-                                  <v-row>
-                                    <v-col>
-                                      <v-card-text>{{ejs.ej.name}}</v-card-text>
-                                    </v-col>
-                                    <v-spacer></v-spacer>
 
-<!--                                    <v-col><v-subheader>Orden</v-subheader></v-col>-->
-                                    <v-col>
+<!--                                    <v-col>-->
+<!--                                      <v-card-text>{{ejs.ej.name}}</v-card-text>-->
+<!--                                    </v-col>-->
+<!--                                    <v-spacer></v-spacer>-->
+
+                                    <v-container>
+                                      <v-row>
+                                        <v-col>
+                                        <v-card-text>{{ejs.ej.name}} </v-card-text>
+                                        </v-col>
+                                      <v-col><v-subheader>Orden:
                                       <v-text-field
-                                          prepend-icon="mdi-order-numeric-ascending"
+                                          append-icon="mdi-order-numeric-ascending"
                                           v-model="ejsCycleAux[i-1][j].orden"
                                           class="mt-0 pt-0"
                                           hide-details
                                           single-line
                                           min = "1"
                                           type="number"
-                                          style="width: 60px"
+                                          style="width: 80px"
                                       ></v-text-field>
-                                    </v-col>
-                                    <v-col>
+                                      </v-subheader>
+                                      </v-col>
+                                      <v-col><v-subheader>Repeteciones:
                                       <v-text-field
-                                          prepend-icon="mdi-counter"
+                                          append-icon="mdi-counter"
                                           v-model="ejsCycleAux[i-1][j].reps"
                                           class="mt-0 pt-0"
                                           hide-details
                                           single-line
                                           min = "1"
                                           type="number"
-                                          style="width: 60px"
+                                          style="width: 80px"
                                       ></v-text-field>
-                                    </v-col>
-                                    <v-col>
+                                      </v-subheader>
+                                      </v-col>
+                                      <v-col><v-subheader>Duracion:
                                       <v-text-field
-                                          prepend-icon="mdi-clock-outline"
+                                          append-icon="mdi-clock-outline"
                                           v-model="ejsCycleAux[i-1][j].desc"
                                           class="mt-0 pt-0"
                                           hide-details
-                                          min = "1"
                                           single-line
+
+                                          min = "1"
                                           type="number"
-                                          style="width: 60px"
+                                          style="width: 80px"
                                       ></v-text-field>
-                                    </v-col>
-                                  </v-row>
+                                    </v-subheader>
+                                      </v-col>
+
+                                      </v-row>
+                                    </v-container>
+
                                 </v-card>
                                 <!--                  </template>-->
                                 <!--                </v-card>-->
@@ -482,7 +495,7 @@ export default {
       steps: 1,
       durRut:'',
       ciclos: ['Entrada en calor', 'Entrenamiento', 'Enfriamiento'],
-      repsCiclo:{},
+      repsCiclo:[1,1,1,1,1,1,1,1,1],
     }
   },
   watch: {
