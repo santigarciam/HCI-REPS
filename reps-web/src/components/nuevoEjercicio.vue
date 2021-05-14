@@ -5,32 +5,15 @@
     </template>
 
     <v-card>
-      <v-card-title>
-        <h2>Agregar nuevo ejercicio</h2>
+      <v-card-title  class="white--text primary">
+       AGREGAR NUEVO EJERCICIO
       </v-card-title>
 
       <v-card-text>
+        <v-col></v-col>
         <v-form class="px-3">
-          <v-text-field label="Nombre" v-model="nameEj"></v-text-field>
-          <v-textarea label="Descripcion" v-model="detailEj" ></v-textarea>
-          <v-text-field label="Materiales" v-model="matEj"></v-text-field>
-          <v-file-input
-              v-model="files"
-              placeholder="Subi tu demostracion"
-              label="Demostracion"
-              multiple
-              prepend-icon="mdi-paperclip"
-          >
-            <template v-slot:selection="{ text }">
-              <v-chip
-                  small
-                  label
-                  color="primary"
-              >
-                {{ text }}
-              </v-chip>
-            </template>
-          </v-file-input>
+          <v-text-field outlined label="Nombre" v-model="nameEj"></v-text-field>
+          <v-textarea outlined label="Descripcion" v-model="detailEj" ></v-textarea>
         </v-form>
       </v-card-text>
 

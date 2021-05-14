@@ -5,12 +5,11 @@
     </template>
 
     <v-card>
-      <v-card-title>
-        <h2>Editar Perfil</h2>
-      </v-card-title>
+      <v-card-title class="white--text primary"> EDITAR PERFIL
+         </v-card-title>
 
       <v-card-text>
-
+          <v-col></v-col>
         <v-form class="px-3">
           <v-container>
             <v-row>
