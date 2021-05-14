@@ -13,7 +13,7 @@
     </v-row>
     <favourite-routines></favourite-routines>
 
-    <div class="noRut mt-16" v-if="favoritos.length === 0">
+    <div class="noRut mt-16" v-if="this.empty">
       <template>
         <v-container>
           <v-row>
@@ -66,6 +66,11 @@ import FavouriteRoutines from "../components/favouriteRoutines";
 export default {
   name: "Favoritos",
   components: {FavouriteRoutines, SearchField, OrderBy, filtrarPor},
+  data(){
+    return{
+      empty: false
+    }
+  },
   beforeUpdate() {
     this.$store.dispatch("changeCardID");
   },
@@ -73,9 +78,21 @@ export default {
     this.$store.dispatch("changeCardID");
   },
   computed: {
-    favoritos(){
+    favoritos() {
       return this.$store.state.rutinasFavoritas;
     }
+  },
+  beforeCreate() {
+    this.$store.dispatch("getFavourites", "");
+  },
+  created() {
+    console.log(this.favoritos)
+    console.log(this.$store.state.rutinasFavoritas)
+    if (this.favoritos.length == 0){
+      console.log(this.favoritos.length)
+      this.empty = true
+    }
+  }
 }
 </script>
 

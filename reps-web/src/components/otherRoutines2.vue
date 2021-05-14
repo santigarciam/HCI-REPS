@@ -211,7 +211,7 @@ export default {
     } ////// DESCOMENTAR CUANDO EL API FUNCIONE
   },
 
-  mounted() {
+  beforeCreate() {
     this.$store.dispatch("getRoutines", "");
     this.$store.dispatch("getFavourites", "");
    // console.log("1")

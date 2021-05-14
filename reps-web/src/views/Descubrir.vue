@@ -132,6 +132,9 @@ export default {
     otherRoutinesLength(){
       return this.$store.state.lengthAuxOtrasRutinas;
     }
+  },
+  beforeCreate() {
+    this.$store.dispatch("getRoutines", "");
   }
 }
 </script>
