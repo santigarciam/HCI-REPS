@@ -1,7 +1,7 @@
 <template>
-  <v-dialog v-model="dialog[this.rutina]" width="900px" :retain-focus="false" >
+  <v-dialog v-model="dialog[rutina.id]" width="900px" :retain-focus="false" >
 <template  v-slot:activator="{ on, attrs }">
-  <v-btn  @click.stop="editarRutina(this.rutina)"  icon class="mt-4 mr-2" plain color = "grey" slot="activator" small  v-on:click.prevent="editarRutina(rutina.id)" v-bind="attrs" v-on="on">
+  <v-btn  icon class="mt-4 mr-2" plain color = "grey" slot="activator" small  v-on:click.prevent="editarRutina(rutina.id)" v-bind="attrs" v-on="on">
     <v-icon>
       mdi-pencil
     </v-icon>
@@ -115,6 +115,16 @@ import {routineApi} from "../API_EJS/js/routines";
 
 export default {
   props: ['rutina'],
+  data(){
+    return{
+      dialog:{id:0},
+      rutAux:{id:0,name:'',detail:'',category:{name:'',id:0}},
+      titleRut:'',
+      cyclesAux:[],
+      excercisesOfCycleAUX:[],
+
+    }
+  },
   computed: {
     cyclesOfRutine(){
       console.log(this.$store.state.cyclesOfRutine);
@@ -129,7 +139,7 @@ export default {
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     },
     editarRutina: async function(rutID){
-      const resp = await routineApi.get(rutID,null);
+      const resp = await routineApi.get(parseInt(rutID),null);
       if(resp.id){
         this.titleRut = resp.name;
         this.rutAux = resp;
@@ -138,9 +148,9 @@ export default {
         this.excercisesOfCycleAUX =  this.$store.state.exersisesOfRoutineOnCycle;
         console.log("ANTES")
         console.log(this.excercisesOfCycleAUX)
-        for(var i=0;i<this.excercisesOfCycleAUX.length;i++){
-          this.excercisesOfCycleAUX[i].orderBy(ej => ej.id);
-        }
+        // for(var i=0;i<this.excercisesOfCycleAUX.length;i++){
+        //   this.excercisesOfCycleAUX[i].orderBy(ej => ej.id);
+        // }
 
         console.log("DESPUESS")
         console.log(this.excercisesOfCycleAUX)
