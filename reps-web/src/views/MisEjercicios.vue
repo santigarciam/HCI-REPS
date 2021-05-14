@@ -1,16 +1,3 @@
-<!--<template>-->
-<!--  <v-container fluid id="Mis Ejercicios">-->
-<!--    <v-col>-->
-<!--    <v-row class="mt-2">-->
-<!--       <search-field></search-field>-->
-<!--        <v-spacer></v-spacer>-->
-<!--        <nuevo-ejercicio></nuevo-ejercicio>-->
-<!--    </v-row>-->
-<!--    </v-col>-->
-<!--  <ejercice-card :key="cardID"></ejercice-card>-->
-<!--  </v-container>-->
-<!--</template>-->
-
 <template>
   <div class="MisEjercicios">
     <v-divider></v-divider>
@@ -18,11 +5,56 @@
       <v-row class="mt-2">
         <search-field class="ml-3"></search-field>
         <v-spacer></v-spacer>
-        <nuevo-ejercicio></nuevo-ejercicio>
+        <nuevo-ejercicio v-if="ejercicios.length !== 0"></nuevo-ejercicio>
       </v-row>
     </v-col>
-
     <ejercice-card :key="cardID"></ejercice-card>
+    <div class="noRut mt-16" v-if="ejercicios.length === 0">
+      <template>
+        <v-container>
+          <v-row>
+            <v-progress-linear
+                color="primary lighten-2"
+                buffer-value="0"
+                stream
+            ></v-progress-linear>
+            <v-col></v-col>
+          </v-row>
+          <v-row
+              align="center"
+              justify="center"
+          >
+            <v-col
+                class="text-center"
+                cols="24"
+            >
+              <h1 class="display-1 font-weight-thin mb-4">
+                <span>... Comienza a </span>
+                <span class="blue--text boldText">crear ejercicios</span>
+                <span> ...</span>
+              </h1>
+              <h4 class="subheading">
+                No tienes ninguno creado
+              </h4>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col class="text-center"
+                   cols="24">
+              <nuevo-ejercicio></nuevo-ejercicio>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col></v-col>
+            <v-progress-linear
+                color="primary lighten-2"
+                buffer-value="0"
+                stream
+            ></v-progress-linear>
+          </v-row>
+        </v-container>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -38,6 +70,9 @@ export default {
   computed: {
     cardID(){
       return this.$store.state.cardID;
+    },
+    ejercicios(){
+      return this.$store.state.listaEjercicios;
     }
   },
 
@@ -73,5 +108,7 @@ export default {
 </script>
 
 <style scoped>
-
+.boldText{
+  font-weight:bold
+}
 </style>
