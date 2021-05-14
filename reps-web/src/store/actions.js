@@ -3,6 +3,15 @@ import {ExerciseApi} from '../API_EJS/js/exercises';
 import {UserApi} from "../API_EJS/js/user";
 import {FavApi} from "../API_EJS/js/favourites";
 
+// export const loadResources = async ({ commit }) => {
+//     console.log("EMPIEZO loadResources");
+//     //await this.getRoutines(commit, "");
+//     //await this.getUserRoutines(commit, "");
+//     await this.getFavourites(commit);
+//     await this.getExercises(commit);
+//     await this.getUserInformation(commit);
+//     console.log("TERMINO loadResources");
+// }
 
 export const getRoutines = async ({ commit}, parameters) => {
     const response = await routineApi.getAll(parameters, null);
