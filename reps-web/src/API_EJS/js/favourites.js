@@ -12,7 +12,7 @@ class FavApi {
     }
 
     static async add(id, controller) {
-        console.log("hola")
+        console.log(id)
         return await Api.post(`${FavApi.url}/${id}/`, true, controller);
     }
     static async delete(id, controller) {
