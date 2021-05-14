@@ -25,9 +25,11 @@
                       </v-btn>
                     </template>
 
-                    <v-card >
+                    <v-card>
 
-                      <v-card-title   class="white--text primary" > EDITAR RUTINA: {{  titleRut }}</v-card-title>
+                      <v-card-title   class="white--text primary" > EDITAR RUTINA: {{  titleRut }}<v-spacer></v-spacer><v-btn plain v-on:click="cancelActionRut"><v-icon dark>
+                        mdi-close
+                      </v-icon></v-btn></v-card-title>
                       <!--        <v-btn v-on:click="getCiclosInID(parseInt(rutina.id))">BOTON</v-btn>-->
                       <v-divider></v-divider>
                       <v-col></v-col>
@@ -113,7 +115,7 @@
                       <v-col></v-col>
                         <v-row>
                           <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                          <v-btn color="grey lighten-1 white--text" class="mx-0" @click="cancelActionRut">Cancelar</v-btn>
+                          <v-btn plain color="grey" class="mx-0" @click="cancelActionRut">Cancelar</v-btn>
                           <v-btn :loading="loading" flat class="primary mx-10" @click="saveChanges()">Guardar</v-btn>
 
                         </v-row>

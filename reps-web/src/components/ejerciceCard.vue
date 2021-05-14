@@ -20,14 +20,30 @@
             </template>
 
             <v-card>
-              <v-card-title class="white--text primary" >EDITAR EJERCICIO: {{nameEdited}}</v-card-title>
+              <v-card-title>Editar Ejercicio {{excerciseAux.id}}</v-card-title>
 
 
               <v-card-text>
-                <v-col></v-col>
                 <v-form class="px-3">
-                  <v-text-field outlined label="Nombre*" v-model.lazy="excerciseAux.name"></v-text-field>
-                  <v-textarea  outlined label="Descripcion*" v-model="excerciseAux.detail" ></v-textarea>
+                  <v-text-field label="Nombre*" v-model.lazy="excerciseAux.name"></v-text-field>
+                  <v-textarea label="Descripcion*" v-model="excerciseAux.detail" ></v-textarea>
+                  <v-file-input
+                      v-model="files"
+                      placeholder="Subi tu demostracion"
+                      label="Demostracion"
+                      multiple
+                      prepend-icon="mdi-paperclip"
+                  >
+                    <template v-slot:selection="{ text }">
+                      <v-chip
+                          small
+                          label
+                          color="primary"
+                      >
+                        {{ text }}
+                      </v-chip>
+                    </template>
+                  </v-file-input>
                 </v-form>
               </v-card-text>
               <v-col>
@@ -147,7 +163,6 @@ export default {
       const resp = await ExerciseApi.get(excersiseID,null);
       if(resp.id){
       console.log(resp);
-      this.nameEdited = resp.name;
       this.excerciseAux.id = resp.id;
       this.excerciseAux.name = resp.name;
       this.excerciseAux.detail = resp.detail;
