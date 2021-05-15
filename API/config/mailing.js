@@ -8,24 +8,30 @@ module.exports = {
         password: 'Z2aVSu4xeCPqvx3hMb'
     },
     registerVerification: {
-        from: 'Exercise <noreply@exercise.com>',
-        subject: 'Email Confirmation',
+        from: 'REPS <noreply@reps.com>',
+        subject: 'Codigo para ingresar a REPS',
         htmlBodyTemplate:
-            `<div>
+            `<div style="background-image: url(principal2.png);">
                 <h1 style="text-align: center;">
-                    <strong>Welcome to <span style="color: #fc987e;">Exercise</span></strong>
+                    <strong>Bienvenido a <span style="color: #258be5;">REPS</span></strong>
                 </h1>
+                <img src="./reps4.png" alt="Logo REPS" >
                 <p>
-                    <span>Valid until <%EXPIRATION_DATE%></span>
+                    <span>Codigo valido hasta <%EXPIRATION_DATE%></span>
                 </p>
                 <div>
-                    <a href="<%CONFIRM_LINK%>">Click para confirmar</a>
+                 <h1 style="text-align: center;">
+                    <strong>¡Ahora eres parte de nuestro equipo!</strong>
+                    <strong>¡Estas a un paso de comenzar a crear tus rutinas!</strong>
+                </div>
+                <div align="center"> 
+                    <a href="<%CONFIRM_LINK%>">  <span style="color: #258be5;">Click para ingresar su codigo</span></a>
                 <div>
                 <h1 style="text-align: center;">
-                    <strong>Your code is <span style="color: #fc987e;"><%CODE%></span></strong>
+                    <strong>Your code is <span style="color: #258be5;"><%CODE%></span></strong>
                 </h1>
             </div>`,
-        confirmationLink: 'http://localhost:8080/verification?user=<%USER_ID%>&code=<%CODE%>',
+        confirmationLink: 'http://localhost:8080/#/ConfirmacionMail',
         codeExpirationInterval: 24 * 60 * 60 * 1000
     }
 }
