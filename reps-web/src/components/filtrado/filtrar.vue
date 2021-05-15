@@ -1,6 +1,6 @@
 <template>
   <v-col cols="2">
-    <v-dialog
+    <!--<v-dialog
         v-model="filterMenu"
         class="v-dialog"
         overlay-opacity="0"
@@ -30,42 +30,45 @@
               item-text="show"
               item-value="value"
               :menu-props="{ maxHeight: '400' }"
-          ></v-select>
+          ></v-select>-->
           <v-select
-              v-model="value"
+              v-model="selected"
               :items="dificultad"
               label="Dificultad"
               outlined
+              @input="filtrarDificultad()"
               item-text="show"
               item-value="value"
               dense
               :menu-props="{ maxHeight: '400' }"
           ></v-select>
 
-        </form></div></v-card>
+       <!-- </form></div></v-card>
 
-    </v-dialog>
+    </v-dialog>-->
   </v-col>
 </template>
 
 <script>
+import {bus} from "../../main";
+
 export default {
   data: () => ({
-    drawer:false,
+    //drawer:false,
+    selected: "",
     dificultad: [
-      {show:'', value:'rookie' },
+      {show:'Todas', value:'' },
       {show:'Novato', value:'rookie' },
       {show:'Principiante', value: 'beginner' },
       {show:'Intermedio', value:'intermediate' },
       {show:'Avanzado', value:'advanced'},
       {show:'Experto', value:'expert'},],
-    categorias: [
-      {show:'Novato', value:'rookie' },
-      {show:'Principiante', value: 'beginner' },
-      {show:'Intermedio', value:'intermediate' },
-      {show:'Avanzado', value:'advanced'},
-      {show:'Experto', value:'expert'},]
   }),
+  methods:{
+    filtrarDificultad: function (){
+      bus.$emit('dificultad' + this.$router.currentRoute.fullPath, this.selected)
+    }
+  }
 }
 </script>
 

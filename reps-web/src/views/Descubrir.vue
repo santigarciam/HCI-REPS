@@ -90,13 +90,16 @@ export default {
       console.log(this.busqueda)
       this.filtrar()
     })
-    console.log("a ver")
     bus.$on('ordenar/Descubrir', (data) =>{
       this.orden = data;
       console.log(this.orden)
       this.filtrar()
     })
-    console.log("despues")
+    bus.$on('dificultad/Descubrir', (data) =>{
+      this.dificultad = data;
+      console.log(this.dificultad)
+      this.filtrar()
+    })
   },
   methods: {
     changeDir: function (){
@@ -111,6 +114,12 @@ export default {
       this.filtrar()
     },
     filtrar: function (){
+      if (this.dificultad!= ""){
+        if (this.params!=""){
+          this.params += "&"
+        }
+        this.params += "difficulty=" + this.dificultad
+      }
       if (this.busqueda!= ""){
         if (this.params!=""){
           this.params += "&"
@@ -128,7 +137,6 @@ export default {
         this.params += "&"
       }
         this.params += "direction=" + this.direc
-
       console.log(this.params)
       this.$store.dispatch("getRoutines", this.params);
       this.params=""
@@ -137,6 +145,7 @@ export default {
     removeListeners: function (){
       bus.$off('ordenar/Descubrir');
       bus.$off('busqueda/Descubrir');
+      bus.$off('dificultad/Descubrir');
       }
 
   },

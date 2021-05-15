@@ -5,6 +5,9 @@
     <v-row class="mt-2">
     <filtrar-por></filtrar-por>
       <order-by></order-by>
+      <v-btn class="mt-3 mr-6" icon outlined @click="changeDir()">
+        <v-icon>{{this.icon}}</v-icon>
+      </v-btn>
       <search-field></search-field>
       <v-spacer></v-spacer>
       <nueva-rutina  v-if="rutinas.length !== 0"></nueva-rutina>
@@ -69,7 +72,7 @@
 
 import RutineCard from "@/components/MisRutinas/myRoutines";
 import NuevaRutina from "@/components/MisRutinas/nuevaRutina";
-import FiltrarPor from "@/components/filtrado/filtrarPor";
+import FiltrarPor from "@/components/filtrado/filtrar";
 import OrderBy from "@/components/filtrado/orderBy";
 import SearchField from "@/components/filtrado/searchField";
 import {bus} from "../main";
@@ -91,7 +94,8 @@ export default {
       rating: "",
       busqueda: "",
       orden: "",
-      direc: "asc"
+      direc: "asc",
+      icon: "mdi-arrow-up"
 
     }
   },
@@ -117,15 +121,36 @@ export default {
       console.log(this.orden)
       this.filtrar()
     })
+    bus.$on('dificultad/MisRutinas', (data) =>{
+      this.dificultad = data;
+      console.log(this.dificultad)
+      this.filtrar()
+    })
  },
  methods: {
+   changeDir: function (){
+     if (this.direc == "asc"){
+       this.direc = "desc"
+       this.icon = "mdi-arrow-down"
+     }
+     else{
+       this.direc = "asc"
+       this.icon = "mdi-arrow-up"
+     }
+     this.filtrar()
+   },
    filtrar: function (){
+     if (this.dificultad!= ""){
+       if (this.params!=""){
+         this.params += "&"
+       }
+       this.params += "difficulty=" + this.dificultad
+     }
      if (this.busqueda!= ""){
        if (this.params!=""){
          this.params += "&"
        }
        this.params += "search=" + this.busqueda
-       console.log("jojo")
      }
      if (this.orden!= ""){
        if (this.params!=""){
@@ -133,6 +158,10 @@ export default {
        }
        this.params += "orderBy=" + this.orden
      }
+     if (this.params!=""){
+       this.params += "&"
+     }
+     this.params += "direction=" + this.direc
      console.log(this.params)
      this.$store.dispatch("getUserRoutines", this.params);
      this.params=""
@@ -140,6 +169,7 @@ export default {
    removeListeners: function (){
      bus.$off('ordenar/MisRutinas');
      bus.$off('busqueda/MisRutinas');
+     bus.$off('dificultad/MisRutinas');
    }
   },
   beforeDestroy() {
