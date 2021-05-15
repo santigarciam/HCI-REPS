@@ -1,5 +1,6 @@
 <template>
-  <v-card @click:outside="resetearCampos()" color="rgb(0, 0, 0, 0.8)">
+  <v-card color="rgb(0, 0, 0, 0.8)">
+
     <v-card-text>
       <v-form ref="form" v-model="valid">
         <v-row>
@@ -61,7 +62,7 @@
               <v-row>
                 <v-text-field
                     v-model="confirmPassword"
-
+                    :error-messages="this.confirmError"
                     filled
                     class= "mt-6"
                     rounded
@@ -109,6 +110,8 @@ export default {
     show2: false,
     emailError: "",
     usernameError: "",
+    confirmError:"",
+    loading: false,
 
     //v-models de registrarse
       newUsername: "",
@@ -139,34 +142,43 @@ export default {
     check: function (password){
       return password == this.newPassword
     },
+    close: function(){
+      this.$store.dispatch("changeCardID")
+    },
     resetearCampos: function (){
       this.$refs.form.reset()
-      this.emailError = ""
-      this.usernameError = ""
+      this.resetErrors()
     },
     resetErrors: function (){
       this.emailError = ""
       this.usernameError = ""
+      this.confirmError= ""
     },
     validar: function (){
       this.loading = true;
-      if (this.$refs.form.validate() == true){
-        this.resetErrors()
-        this.registerUser()
-        bus2.$on('error', (data) =>{
-          this.dialogRegist = false;
-          this.dialog = true;
-          if (data.code == 1){
-            this.emailError = "El correo electrónico ingresado no es válido"
-          }
-          if (data.details[0] == "UNIQUE constraint failed: User.email"){
-            this.emailError = "El correo electrónico ingresado ya se encuentra registrado"
-          }
-          if (data.details[0] == "UNIQUE constraint failed: User.username"){
-            this.usernameError = "El usuario elegido no está disponible"
-          }
-        })
-      }//hay q hacer un else??
+      if (!this.check(this.confirmPassword)){
+        this.confirmError= 'Las contraseñas no coinciden. Vuelve a intentarlo'
+        this.loading = false;
+        this.dialog = true;
+      }else {
+        if (this.$refs.form.validate() == true) {
+          this.resetErrors()
+          this.registerUser()
+          bus2.$on('error', (data) => {
+            this.loading = false;
+            this.dialog = true;
+            if (data.code == 1) {
+              this.emailError = "El correo electrónico ingresado no es válido"
+            }
+            if (data.details[0] == "UNIQUE constraint failed: User.email") {
+              this.emailError = "El correo electrónico ingresado ya se encuentra registrado"
+            }
+            if (data.details[0] == "UNIQUE constraint failed: User.username") {
+              this.usernameError = "El usuario elegido no está disponible"
+            }
+          })
+        }//hay q hacer un else??
+      }
     },
 
     registerUser: async function () {

@@ -1,83 +1,37 @@
 <template>
   <v-container fluid id="Favoritos">
-<!--    <v-row class="mt-2">-->
-<!--     <v-col>-->
-<!--       <v-row>-->
-<!--&lt;!&ndash;     <filtrar-por></filtrar-por>&ndash;&gt;-->
-<!--&lt;!&ndash;       <order-by></order-by>&ndash;&gt;-->
-<!--&lt;!&ndash;         <search-field></search-field>&ndash;&gt;-->
-<!--         <v-spacer></v-spacer>-->
-<!--       </v-row>-->
-<!--       <v-row></v-row>-->
-<!--     </v-col>-->
-<!--   </v-row>-->
-    <favourite-routines :key="cardID" class="mt-2"></favourite-routines>
 
-    <v-col></v-col>
-    <div class="noRut mt-16" v-if="this.favoritos.length === 0">
-      <template>
-        <v-container>
-          <v-row>
-            <v-progress-linear
-                color="primary lighten-2"
-                buffer-value="0"
-                stream
-            ></v-progress-linear>
-            <v-col></v-col>
-          </v-row>
-          <v-row
-              align="center"
-              justify="center"
-          >
-            <v-col
-                class="text-center"
-                cols="24"
-            >
-              <h1 class="display-1 font-weight-thin mb-4">
-                <span>... Comienza a </span>
-                <span class="blue--text boldText">explorar rutinas</span>
-                <span> ...</span>
-              </h1>
-              <h4 class="subheading">
-                Encuentra rutinas de colegas en la seccion "Descubrir"
-              </h4>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col></v-col>
-            <v-progress-linear
-                color="primary lighten-2"
-                buffer-value="0"
-                stream
-            ></v-progress-linear>
-          </v-row>
-        </v-container>
-      </template>
-    </div>
+  <favourite-routines :key="cardID" class="mt-2"></favourite-routines>
+  <v-col></v-col>
+    <empty-message class="mt-12" v-if="favoritos.length === 0" v-bind:mensaje1="this.mensaje1"
+                   v-bind:mensaje2="this.mensaje2"
+                   v-bind:subtitulo="this.subtitulo"
+                   ></empty-message>
+
 
   </v-container>
 </template>
 
 
 <script>
-//import filtrarPor from "@/components/filtrarPor";
-//import OrderBy from "@/components/orderBy";
-//import SearchField from "@/components/searchField";
 import FavouriteRoutines from "../components/Favoritos/favouriteRoutines3";
+import EmptyMessage from "../components/emptyMessage";
 export default {
   name: "Favoritos",
-  components: {FavouriteRoutines,/* SearchField, OrderBy, filtrarPor*/},
+  components: {EmptyMessage, FavouriteRoutines},
   data(){
     return{
-      empty: false
-
+      empty: false,
+      mensaje1: "Agregue rutinas a ",
+      mensaje2: "favoritos",
+      subtitulo: "Encuentre rutinas de otros usuarios en la sección \"Descubrir\""
     }
   },
-  /*updated() {
-    this.$store.dispatch("changeCardID");
-  },*/
   mounted() {
     this.$store.dispatch("changeCardID");
+    this.$store.dispatch("getFavourites", "");
+  },
+  created() {
     this.$store.dispatch("getFavourites", "");
   },
   computed: {
@@ -88,17 +42,6 @@ export default {
       return this.$store.state.cardID;
     },
   },
-  /*  beforeCreate() {
-    this.$store.dispatch("getFavourites", "");
-  },
-created() {
-    console.log(this.favoritos)
-    console.log(this.$store.state.rutinasFavoritas)
-    if (this.favoritos.length == 0){
-      console.log(this.favoritos.length)
-      this.empty = true
-    }
-  }*/
 }
 </script>
 

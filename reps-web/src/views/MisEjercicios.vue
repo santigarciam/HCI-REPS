@@ -14,9 +14,11 @@
         <v-container>
           <v-row>
             <v-progress-linear
-                color="primary lighten-2"
-                buffer-value="0"
-                stream
+                background-color="#00B2EB"
+                color="#2679CC"
+                height="4"
+                indeterminate
+                rounded
             ></v-progress-linear>
             <v-col></v-col>
           </v-row>
@@ -28,13 +30,12 @@
                 class="text-center"
                 cols="24"
             >
-              <h1 class="display-1 font-weight-thin mb-4">
-                <span>... Comienza a </span>
-                <span class="blue--text boldText">crear ejercicios</span>
-                <span> ...</span>
+              <h1 class="display-1 mb-4">
+                <span>Comience a </span>
+                <span class="colorReps boldText">crear ejercicios</span>
               </h1>
-              <h4 class="subheading">
-                No tienes ninguno creado
+              <h4 class="font-weight-regular subheading">
+                No hay ejercicios creados
               </h4>
             </v-col>
           </v-row>
@@ -47,9 +48,11 @@
           <v-row>
             <v-col></v-col>
             <v-progress-linear
-                color="primary lighten-2"
-                buffer-value="0"
-                stream
+                background-color="#00B2EB"
+                color="#2679CC"
+                height="4"
+                indeterminate
+                rounded
             ></v-progress-linear>
           </v-row>
         </v-container>
@@ -110,5 +113,8 @@ export default {
 <style scoped>
 .boldText{
   font-weight:bold
+}
+.colorReps{
+  color: #2679CC ;
 }
 </style>

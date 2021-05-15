@@ -11,14 +11,17 @@
     </v-row>
 </v-col>
     <rutine-card :key="cardID"></rutine-card>
+
     <div class="noRut mt-16" v-if="rutinas.length === 0">
       <template>
         <v-container>
           <v-row>
             <v-progress-linear
-                color="primary lighten-2"
-                buffer-value="0"
-                stream
+                background-color="#00B2EB"
+                color="#2679CC"
+                height="4"
+                indeterminate
+                rounded
             ></v-progress-linear>
             <v-col></v-col>
           </v-row>
@@ -30,13 +33,12 @@
                 class="text-center"
                 cols="24"
             >
-              <h1 class="display-1 font-weight-thin mb-4">
-                <span>... Comienza a </span>
-                <span class="blue--text boldText">crear rutinas</span>
-                <span> ...</span>
+              <h1 class="display-1  mb-4">
+                <span>Comience a </span>
+                <span class="boldText colorReps">crear rutinas</span>
               </h1>
-              <h4 class="subheading">
-                No tienes ninguna creada
+              <h4 class="font-weight-regular subheading">
+                No hay rutinas creadas
               </h4>
             </v-col>
           </v-row>
@@ -50,9 +52,11 @@
           <v-row>
             <v-col></v-col>
             <v-progress-linear
-                color="primary lighten-2"
-                buffer-value="0"
-                stream
+                background-color="#00B2EB"
+                color="#2679CC"
+                height="4"
+                indeterminate
+                rounded
             ></v-progress-linear>
           </v-row>
         </v-container>
@@ -147,6 +151,9 @@ export default {
 <style scoped>
 .boldText{
   font-weight:bold
+}
+.colorReps{
+  color: #2679CC ;
 }
 
 .noRut {
