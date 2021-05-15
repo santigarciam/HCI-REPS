@@ -2,8 +2,8 @@
   <div class="text-center">
     <v-dialog
         width="900px"
-        v-for="rutina in rutinas"
-        :key="rutina.id"
+        v-for="(rutina,index) in rutinas"
+        :key="[index, rutina.id]"
         scrollable
     >
       <!--        v-for="rutina in data().rutinas" :key="rutina.tituloRut"  UNA LINEA MAS ARRIBA -->
@@ -47,7 +47,7 @@
 
       </template>
 
-      <detailed-routine v-bind:rutina="rutina"></detailed-routine>
+      <detailed-routine v-bind:show-username="true" v-bind:username="rutina.user.username" v-bind:rutina="rutina"></detailed-routine>
 
     </v-dialog>
   </div>
@@ -71,22 +71,17 @@ export default {
       selected:[],
       modalVisible:null,
       dialogEdit:false,
+      modalData: null,
     }
   },
   methods: {
-    data: function ()  {
-      return {
-        modalData: null,
-      }
-    },
-
     cancelActionRut: function (){
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     },
     //////////////////////////////////////////////////////////////////////////////////
     funcionAUX: async function (id,item){
-      this.data.modalData = item;
-      this.data.modalVisible = true;
+      this.$data.modalData = item;
+      this.$data.modalVisible = true;
       // ver de hacer el dispatch aca
 
       await this.$store.dispatch("getCyclesOfID", id);
@@ -103,9 +98,18 @@ export default {
       return this.$store.state.cardID;
     }
   },
-
+  created() {
+    console.log("created del other routines")
+  },
+  updated() {
+    console.log("updated del other")
+  },
+  beforeMount() {
+    console.log("before mount del other routines")
+  },
   mounted() {
     //this.$store.dispatch("getRoutines", "");
+    console.log("sera aca")
     this.$store.dispatch("getFavourites", "");
    console.log("1")
   },

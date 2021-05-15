@@ -2,7 +2,7 @@
   <div class=" bg v-application--wrap inspire" >
     <v-dialog persistent width="800px" v-model="dialog">
 
-      <DetailedRoutine v-bind:rutina="sharedRut"></DetailedRoutine>
+      <DetailedRoutine v-bind:show-username="true" v-bind:username="sharedRut.user.username" v-bind:rutina="sharedRut"></DetailedRoutine>
     </v-dialog>
 
   </div>

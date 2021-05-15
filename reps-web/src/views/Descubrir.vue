@@ -5,8 +5,12 @@
         <v-row>
           <filtrar></filtrar>
           <order-by></order-by>
-          <search-field></search-field>
+          <v-btn class="mt-3 mr-6" icon outlined @click="changeDir()">
+            <v-icon>{{this.icon}}</v-icon>
+          </v-btn>
           <v-spacer></v-spacer>
+          <search-field class=" mr-4"></search-field>
+
         </v-row>
       </v-col>
     </v-row>
@@ -58,7 +62,7 @@
 <script>
 
 
-import Filtrar from "@/components/filtrado/filtrarPor";
+import Filtrar from "@/components/filtrado/filtrar";
 import OrderBy from "@/components/filtrado/orderBy";
 import SearchField from "@/components/filtrado/searchField";
 import OtherRoutines from "../components/Descubrir/otherRoutines2";
@@ -75,7 +79,8 @@ export default {
       rating: "",
       busqueda: "",
       orden: "",
-      direc: "asc"
+      direc: "asc",
+      icon: "mdi-arrow-up"
     }
   },
   created(){
@@ -85,13 +90,26 @@ export default {
       console.log(this.busqueda)
       this.filtrar()
     })
+    console.log("a ver")
     bus.$on('ordenar/Descubrir', (data) =>{
       this.orden = data;
       console.log(this.orden)
       this.filtrar()
     })
+    console.log("despues")
   },
   methods: {
+    changeDir: function (){
+      if (this.direc == "asc"){
+        this.direc = "desc"
+        this.icon = "mdi-arrow-down"
+      }
+      else{
+        this.direc = "asc"
+        this.icon = "mdi-arrow-up"
+      }
+      this.filtrar()
+    },
     filtrar: function (){
       if (this.busqueda!= ""){
         if (this.params!=""){
@@ -106,9 +124,15 @@ export default {
         }
         this.params += "orderBy=" + this.orden
       }
+      if (this.params!=""){
+        this.params += "&"
+      }
+        this.params += "direction=" + this.direc
+
       console.log(this.params)
       this.$store.dispatch("getRoutines", this.params);
       this.params=""
+
     },
     removeListeners: function (){
       bus.$off('ordenar/Descubrir');
@@ -116,10 +140,8 @@ export default {
       }
 
   },
-  beforeUpdate() {
-    this.$store.dispatch("changeCardID");
-  },
   mounted() {
+    //console.log("mounted")
     this.$store.dispatch("changeCardID");
   },
   beforeDestroy() {

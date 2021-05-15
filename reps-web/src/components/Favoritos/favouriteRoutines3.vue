@@ -46,7 +46,7 @@
 
       </template>
 
-      <detailed-routine v-bind:rutina="rutina"></detailed-routine>
+      <detailed-routine v-bind:show-username="true" v-bind:username="rutina.user.username" v-bind:rutina="rutina"></detailed-routine>
 
     </v-dialog>
   </div>
@@ -106,7 +106,7 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch("getRoutines", "");
+   // this.$store.dispatch("getRoutines", "");
    this.$store.dispatch("getFavourites", "");
     console.log("1")
   },

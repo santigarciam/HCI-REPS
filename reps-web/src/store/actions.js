@@ -65,7 +65,7 @@ export const getRoutines = async ({ commit}, parameters) => {
             }
         }
         commit('SET_OTHERS', response.content);
-        // console.log(response.content)
+        console.log(response.content)
     }
 }
 
@@ -127,10 +127,8 @@ export const getFavourites = async ({ commit }) => {
                 console.log("error al traer los ciclos")
             }
         }
-        console.log(response.content)
         commit('SET_FAVOURITES', response.content);
-        console.log(aux)
-        commit('SET_ID_FAVOURITES', aux);
+       commit('SET_ID_FAVOURITES', aux);
     }
 }
 
@@ -172,7 +170,9 @@ export const saveUserInfo = ({commit},info) =>{
 
 
 export const changeCardID = ({ commit }) => {
+  // console.log("antes del increment")
     commit('INCREMENT_ID');
+  // console.log("despues del increment")
 }
 
 export const getUserInformation = ({ commit }) => {

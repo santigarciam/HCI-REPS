@@ -33,7 +33,7 @@
         </v-container>
 
       </template>
-    <detailed-routine v-bind:rutina="rutina"></detailed-routine>
+    <detailed-routine v-bind:rutina="rutina" v-bind:show-username="false"></detailed-routine>
 
     </v-dialog>
   </div>

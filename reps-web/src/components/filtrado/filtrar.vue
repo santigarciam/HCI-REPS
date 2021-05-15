@@ -1,21 +1,26 @@
 <template>
   <v-col cols="2">
-    <v-btn
-        outlined
-        depressed
-        color="grey darken-2"
-        @click.stop="drawer = !drawer"
+    <v-dialog
+        v-model="filterMenu"
+        class="v-dialog"
+        overlay-opacity="0"
+        width="500"
+        transition="slide-y-transition"
+        bottom
     >
-      Filtrar<v-icon class="ml-1" color="grey darken-2">mdi-menu-down</v-icon>
-    </v-btn>
-    <v-menu
-
-    >
-      <v-list
-          dense
-          rounded
-      >
-        <v-list-item>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+            outlined
+            v-bind="attrs"
+            v-on="on"
+            depressed
+            color="grey darken-2"
+            @click.stop="drawer = !drawer"
+        >
+          Filtrar<v-icon class="ml-1" color="grey darken-2">mdi-menu-down</v-icon>
+        </v-btn></template>
+        <v-card>
+          <div><form>
           <v-select
               v-model="value"
               :items="categorias"
@@ -25,8 +30,8 @@
               item-text="show"
               item-value="value"
               :menu-props="{ maxHeight: '400' }"
-          ></v-select> </v-list-item>
-         <v-list-item> <v-select
+          ></v-select>
+          <v-select
               v-model="value"
               :items="dificultad"
               label="Dificultad"
@@ -35,10 +40,11 @@
               item-value="value"
               dense
               :menu-props="{ maxHeight: '400' }"
-          ></v-select></v-list-item>
+          ></v-select>
 
-      </v-list>
-    </v-menu>
+        </form></div></v-card>
+
+    </v-dialog>
   </v-col>
 </template>
 
@@ -62,3 +68,11 @@ export default {
   }),
 }
 </script>
+
+<style scoped>
+.v-dialog {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+</style>

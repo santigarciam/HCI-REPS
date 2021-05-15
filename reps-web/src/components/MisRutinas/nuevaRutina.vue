@@ -9,11 +9,19 @@
       <v-card-title class="justify-center white--text primary">
         AGREGAR NUEVA RUTINA
       </v-card-title>
-      <v-card-text>
-        <v-col></v-col>
-          <v-text-field outlined label="Nombre" v-model="nameRut"></v-text-field>
-          <v-textarea outlined auto-grow label="Descripcion" v-model="detailRut" ></v-textarea>
-          <v-text-field outlined label="Categoría" v-model="categoryRut"></v-text-field>
+      <v-card-text class="mt-6">
+        <v-row><v-text-field class="mr-3 ml-3" dense outlined label="Nombre" v-model="nameRut"></v-text-field> <v-btn class="mr-3" text @click="changePrivacy()"><v-icon>{{this.lock}}</v-icon></v-btn></v-row>
+        <v-row ><v-textarea class="mr-3 ml-3" dense outlined auto-grow label="Descripcion" v-model="detailRut" ></v-textarea></v-row>
+        <v-row><v-col><v-text-field dense outlined label="Categoría" v-model="categoryRut"></v-text-field></v-col>
+          <v-col>  <v-select
+            v-model="diff"
+            :items="dificultad"
+            label="Dificultad"
+            outlined dense
+            item-text="show"
+            item-value="value"
+            :menu-props="{ maxHeight: '400' }"
+        ></v-select></v-col></v-row>
 
 
 <!--        STEPPEER-->
@@ -304,16 +312,16 @@
                           <v-expansion-panel>
                             <v-row>
                               <v-col>
-                            <v-expansion-panel-header v-if="i===1">Calentamiento </v-expansion-panel-header>
-                            <v-expansion-panel-header v-else-if="i=== steps + 2">Enfriamiento</v-expansion-panel-header>
-                            <v-expansion-panel-header v-else> Ciclo {{i -1}}</v-expansion-panel-header>
+                            <v-expansion-panel-header class="mt-3" v-if="i===1">Calentamiento </v-expansion-panel-header>
+                            <v-expansion-panel-header class="mt-3" v-else-if="i=== steps + 2">Enfriamiento</v-expansion-panel-header>
+                            <v-expansion-panel-header class="mt-3" v-else> Ciclo {{i -1}}</v-expansion-panel-header>
                               </v-col>
                             <v-col align="center">
-                              <v-col><v-subheader>Repeticiones del ciclo:
+                              <v-col><v-subheader class="ml-8">Repeticiones del ciclo:
                                 <v-text-field
                                     append-icon="mdi-counter"
                                     v-model="repsCiclo[i -1]"
-                                    class="mt-0 pt-0"
+                                    class="mt-0 ml-3 pt-0"
                                     hide-details
                                     single-line
                                     min = "1"
@@ -343,7 +351,7 @@
                                       <v-text-field
                                           append-icon="mdi-order-numeric-ascending"
                                           v-model="ejsCycleAux[i-1][j].orden"
-                                          class="mt-0 pt-0"
+                                          class="mt-0 ml-3 pt-0"
                                           hide-details
                                           single-line
                                           min = "1"
@@ -356,7 +364,7 @@
                                       <v-text-field
                                           append-icon="mdi-counter"
                                           v-model="ejsCycleAux[i-1][j].reps"
-                                          class="mt-0 pt-0"
+                                          class="mt-0 ml-3  pt-0"
                                           hide-details
                                           single-line
                                           min = "1"
@@ -365,11 +373,11 @@
                                       ></v-text-field>
                                       </v-subheader>
                                       </v-col>
-                                      <v-col><v-subheader>Duracion:
+                                      <v-col><v-subheader>Duración:
                                       <v-text-field
                                           append-icon="mdi-clock-outline"
                                           v-model="ejsCycleAux[i-1][j].desc"
-                                          class="mt-0 pt-0"
+                                          class="mt-0 ml-3 pt-0"
                                           hide-details
                                           single-line
 
@@ -431,6 +439,8 @@ export default {
   components: {EmptyMessage},
   data(){
     return{
+      lock: "mdi-lock-open",
+      isPrivate: false,
       loading: false,
       nameRut:'',
       mensaje1: "Antes de crear una rutina debe ",
@@ -444,6 +454,14 @@ export default {
       durRut:'',
       ciclos: ['Entrada en calor', 'Entrenamiento', 'Enfriamiento'],
       repsCiclo:[1,1,1,1,1,1,1,1,1],
+
+      diff: 'rookie',
+      dificultad: [
+        {show:'Novato', value:'rookie' },
+        {show:'Principiante', value: 'beginner' },
+        {show:'Intermedio', value:'intermediate' },
+        {show:'Avanzado', value:'advanced'},
+        {show:'Experto', value:'expert'},],
     }
   },
   watch: {
@@ -454,6 +472,16 @@ export default {
     },
   },
   methods :{
+    changePrivacy: function (){
+      if(this.isPrivate){
+        this.lock="mdi-lock-open"
+        this.isPrivate=false
+      }
+      else{
+        this.lock="mdi-lock"
+        this.isPrivate=true
+      }
+    },
     // generarRutinaNueva(tituloRut, autorRut, descripcionRut, durRut, rating)
     addNewRoutine: async function(){
       this.loading = true;
@@ -482,7 +510,7 @@ export default {
       }
       // Lo de arriba es para agregar/usar una categoria dependiendo si esta o no creada.
 
-          const respRut =  await routineApi.add({name:this.nameRut,detail:this.detailRut,isPublic:true,difficulty:"rookie",category:{ id: catID},metadata:null},null);
+          const respRut =  await routineApi.add({name:this.nameRut,detail:this.detailRut,isPublic:this.isPrivate,difficulty:this.diff,category:{ id: catID},metadata:null},null);
       console.log("Resprut : ");
           console.log(respRut);
           if(respRut.id) {

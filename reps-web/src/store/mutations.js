@@ -26,6 +26,7 @@ export const SET_OTHERS = (state, rutinas) => {
     state.lengthAuxOtrasRutinas = state.otrasRutinas.length;
 }
 
+
 export const SET_EXERCISES = (state, ejercicios) => {
     state.listaEjercicios = ejercicios;
 }

@@ -39,8 +39,6 @@ export default {
     copyAndShowSnackBar: async function (event) {
       event.stopPropagation();
       console.log(router);
-      const a = navigator.appName;
-      console.log(a);
 
       await navigator.clipboard.writeText(`http://localhost:8083/#/routines/${this.rutina.id}`); //// AVISAR QUE CAMBIEN ESTA URL PARA Q FUNCIONEE
 
