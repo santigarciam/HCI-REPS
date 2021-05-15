@@ -2,7 +2,7 @@
   <v-card color="rgb(0, 0, 0, 0.8)">
 
     <v-card-text>
-      <v-form ref="form" lazy-validation v-model="valid">
+      <v-form ref="form" v-model="valid">
         <v-row>
           <v-col cols="12">
 

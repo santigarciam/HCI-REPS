@@ -26,10 +26,10 @@
                           rounded
                           class="mr-3"
                           v-model="verificationCode"
-                          @keyup.enter="verifyCode"
+                          @keyup.enter="verificarCodigo"
                       ></v-text-field>
                     </v-row>
-
+                  <p v-if="this.verifError" class="mb-5 red--text">{{this.verifErrorMessage}}</p>
                     <v-row class="text-center" justify="center">
 
                       <v-btn
@@ -85,6 +85,8 @@ export default {
     return {
       verificationCode: "",
       snackbar:false,
+      verifError: false,
+      verifErrorMessage: ""
     }
   },
 
@@ -104,13 +106,13 @@ export default {
         await UserApi.login({username: this.$store.state.userInfo.username, password:this.$store.state.userInfo.password},null);
           await router.push('/MisRutinas');
         }
-        bus2.$on('error', (data) => {
+        else{bus2.$on('error', (data) => {
           this.loading = false
           if (data.details == "Invalid verification code") {
-            this.loginErrorMessage = "Usuario o contraseña incorrecta"
-            this.loginError = true
+            this.verifErrorMessage = "El código de verificación ingresado no es válido. Intente nuevamente"
+            this.verifError = true
           }
-        })
+        })}
       },
       resendCode(){
         console.log("reenviado" + this.$store.state.userRegisteredMail);
