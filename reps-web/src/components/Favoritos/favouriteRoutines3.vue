@@ -15,11 +15,11 @@
               <v-row>
                 <v-card-title class="mb-0 pb-0">{{ rutina.name }}
                   <v-rating
-                      v-model="rutina.rating"
+                      v-model="rutina.averageRating"
                       half-increments
-                      readonly
+
                       background-color="grey"
-                      color="orange"
+                      color="#00B2EB"
                       medium
                       class="ml-2"
                   ></v-rating></v-card-title>

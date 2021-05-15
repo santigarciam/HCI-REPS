@@ -9,7 +9,7 @@
     </template>
 
     <v-card>
-      <v-card-title>Editar Ejercicio</v-card-title>
+      <v-card-title class="justify-center white--text primary" >Editar Ejercicio</v-card-title>
 
       <v-card-text>
         <v-form class="px-3">

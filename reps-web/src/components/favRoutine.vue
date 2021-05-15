@@ -18,7 +18,7 @@ export default {
   methods: {
     getColour: function (id){
       if (this.idFavoritas.includes(id)){
-        return "red"
+        return "#2679CC"
       }
       else {
         return "grey"

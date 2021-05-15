@@ -5,7 +5,7 @@
     </template>
 
     <v-card>
-      <v-card-title class="white--text primary"> EDITAR PERFIL
+      <v-card-title class="justify-center white--text primary"> EDITAR PERFIL
       </v-card-title>
 
       <v-card-text>

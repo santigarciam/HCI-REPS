@@ -20,7 +20,7 @@
             </template>
 
             <v-card>
-              <v-card-title class="white--text primary" >EDITAR EJERCICIO: {{nameEdited}}</v-card-title>
+              <v-card-title class="justify-center white--text primary" >EDITAR EJERCICIO: {{nameEdited}}</v-card-title>
               <v-card-text>
                 <v-col></v-col>
                 <v-form class="px-3">

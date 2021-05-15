@@ -5,7 +5,7 @@
     </template>
 
     <v-card>
-      <v-card-title  class="white--text primary">
+      <v-card-title class="justify-center white--text primary">
         AGREGAR NUEVO EJERCICIO
       </v-card-title>
 

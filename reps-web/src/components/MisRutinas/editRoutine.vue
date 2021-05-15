@@ -10,7 +10,7 @@
 
 <v-card>
 
-  <v-card-title   class="white--text primary" > EDITAR RUTINA: {{  titleRut }}</v-card-title>
+  <v-card-title class="align-center justify-center white--text primary" >EDITAR RUTINA: {{  titleRut }}</v-card-title>
   <!--        <v-btn v-on:click="getCiclosInID(parseInt(rutina.id))">BOTON</v-btn>-->
   <v-divider></v-divider>
   <v-col></v-col>
@@ -99,7 +99,7 @@
     <v-col></v-col>
     <v-row>
       <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-      <v-btn plain color="grey" class="mx-0" @click="cancelActionRut">Cancelar</v-btn>
+      <v-btn  color="grey lighten-1 white--text mx-0" @click="cancelActionRut">Cancelar</v-btn>
       <v-btn :loading="loading" text class="primary mx-10" @click="saveChanges">Guardar</v-btn>
 
     </v-row>
