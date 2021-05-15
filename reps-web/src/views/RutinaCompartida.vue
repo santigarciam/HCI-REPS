@@ -38,7 +38,7 @@ export default {
 a { text-decoration: none; }
 
 .bg {
-  background-image: url("../assets/principal2.png");
+  background-image: url("../assets/fondoPrueba.jpg");
   height: 100%;
   background-position: top;
   background-repeat: no-repeat;

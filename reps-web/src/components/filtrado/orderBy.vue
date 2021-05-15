@@ -55,7 +55,7 @@ export default {
       {show:'Autor', value:'userId' },
       {show:'Fecha', value:'date'},
       {show:'Categoría', value:'categoryId'},
-      {show:'Rating', value:'averageRating'},
+      {show:'Puntuación', value:'averageRating'},
       {show:'Dificultad', value:'difficulty'}]
   }),
 methods:{

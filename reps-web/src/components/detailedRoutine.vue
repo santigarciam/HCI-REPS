@@ -3,10 +3,10 @@
       <v-card-title>{{ rutina.name }} <v-icon v-if="isPrivate" color="black" class="ml-2">mdi-lock</v-icon><v-spacer></v-spacer>
         <v-btn v-if="!this.$route.fullPath.includes('/routines/')" plain icon v-on:click="cancelActionRut"><v-icon dark>
         mdi-close
-      </v-icon></v-btn><v-btn color="#2679CC" plain class=" text--white" to="/Descubrir"  v-if="this.$route.fullPath.includes('/routines/')">Descubre más rutinas <v-icon class="ml-3">mdi-arrow-right</v-icon></v-btn></v-card-title>
+      </v-icon></v-btn><v-btn color="#2679CC" plain class=" text--white" to="/Descubrir"  v-if="this.$route.fullPath.includes('/routines/')"><img class="mr-3" :src="require('../assets/reps1.png')" height="30"/>Descubre más rutinas <v-icon class="ml-3">mdi-arrow-right</v-icon></v-btn></v-card-title>
       <v-divider></v-divider>
       <v-card-subtitle></v-card-subtitle>
-      <v-row class="text-left" v-if="showUsername" >
+      <v-row class="text-left pb-2" v-if="showUsername" >
         <v-icon small class="align-center pb-5 ml-8" color="blue">mdi-account</v-icon>
         <v-card-subtitle class="blue--text ml-0 pl-1 mt-0 pt-0 pb-0 font-weight-bold" v-model="autorRut">{{ username }} </v-card-subtitle>
       </v-row>
@@ -21,7 +21,7 @@
             {{ciclo.name}}
           </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <v-chip class="mb-4 ma-2" small color="#2679CC">x{{ciclo.repetitions}}</v-chip>
+            <v-chip class="mb-4 ma-2" dark small color="#2679CC">x{{ciclo.repetitions}}</v-chip>
             <template v-for="ejs in ciclo.ciclosEjs">
 
               <v-card small  class="mt-1" :key="ejs.exercise.id">

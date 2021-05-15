@@ -14,12 +14,25 @@
   <!--        <v-btn v-on:click="getCiclosInID(parseInt(rutina.id))">BOTON</v-btn>-->
   <v-divider></v-divider>
   <v-col></v-col>
-  <v-card-subtitle>
-    <v-text-field  outlined label="Nombre:" v-model="rutAux.name"></v-text-field>
-  </v-card-subtitle>
-  <v-card-subtitle>
-    <v-text-field outlined label="Descripcion:" v-model="rutAux.detail"></v-text-field>
-  </v-card-subtitle>
+  <v-card-text class="mt-6">
+  <v-row>
+    <v-text-field dense class="mr-3 ml-3" outlined label="Nombre:" v-model="rutAux.name"></v-text-field>
+    <v-btn outlined class="align-center mr-3" @click="changePrivacy()"><v-icon class="mr-2">{{this.lock}}</v-icon>{{this.privacy}}</v-btn>
+  </v-row>
+  <v-row>
+    <v-textarea outlined dense auto-grow class="mr-3 ml-3" label="Descripcion:" v-model="rutAux.detail"></v-textarea>
+  </v-row><v-row>
+    <!-- <v-col><v-text-field dense outlined label="Categoría" v-model="categoryRut"></v-text-field></v-col>-->
+      <v-col>  <v-select
+          v-model="diff"
+          :items="dificultad"
+          label="Dificultad"
+          outlined dense
+          item-text="show"
+          item-value="value"
+          :menu-props="{ maxHeight: '400' }"
+      ></v-select></v-col></v-row>
+
   <h4 class="pl-6 mb-4">Ciclos:</h4>
 
   <v-expansion-panels  v-for="(ciclo,i) in cyclesAux" :key="ciclo.id">
@@ -100,12 +113,14 @@
     <v-row>
       <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
       <v-btn  color="grey lighten-1 white--text mx-0" @click="cancelActionRut">Cancelar</v-btn>
-      <v-btn :loading="loading" color="#2679CC" text class=" mx-10" @click="saveChanges">Guardar</v-btn>
+      <v-btn :loading="loading" color="#2679CC" dark class=" mx-10" @click="saveChanges">Guardar</v-btn>
 
     </v-row>
   </v-col>
 
   <v-col></v-col>
+
+  </v-card-text>
 </v-card>
 </v-dialog>
 </template>
@@ -120,15 +135,32 @@ export default {
   props: ['rutina'],
   data(){
     return{
+      lock: "",
+      isPublic: '',
       dialog:{id:0},
       rutAux:{id:0,name:'',detail:'',category:{name:'',id:0}},
       titleRut:'',
       cyclesAux:[],
       excercisesOfCycleAUX:[],
+      diff: "",
+      dificultad: [
+        {show:'Novato', value:'rookie' },
+        {show:'Principiante', value: 'beginner' },
+        {show:'Intermedio', value:'intermediate' },
+        {show:'Avanzado', value:'advanced'},
+        {show:'Experto', value:'expert'},],
 
     }
   },
   computed: {
+    privacy() {
+      if(this.isPublic){
+        return "Pública"
+      }
+      else {
+        return "Privada"
+      }
+    }
     // cyclesOfRutine(){
     //   console.log(this.$store.state.cyclesOfRutine);
     //   return this.$store.state.cyclesOfRutine;
@@ -138,13 +170,25 @@ export default {
     // },
   },
   methods:{
+    changePrivacy: function (){
+      if(this.isPublic){
+        this.lock="mdi-lock"
+        this.isPublic=false
+      }
+      else{
+        this.lock="mdi-lock-open"
+        this.isPublic=true
+      }
+    },
     cancelActionRut: function (){
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
     },
     editarRutina: async function(rutina){
          this.titleRut = rutina.name;
         this.rutAux = rutina;
-
+        this.diff = rutina.difficulty;
+        this.isPublic = rutina.isPublic;
+        this.lock = (this.isPublic) ? "mdi-lock-open" : "mdi-lock";
         this.cyclesAux =rutina.ciclosRut;
         let i =0;
         for(const ciclo of this.cyclesAux) {

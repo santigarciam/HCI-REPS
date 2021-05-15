@@ -8,7 +8,7 @@
             <v-container>
               <v-row>
                 <v-text-field
-                    label="Usuario"
+                    label="Usuario*"
                     filled
                     class= "mt-6"
                     rounded
@@ -23,7 +23,7 @@
               <!--Login contraseña -->
               <v-row>
                 <v-text-field
-                    label="Contraseña"
+                    label="Contraseña*"
                     filled
                     rounded
                     required
@@ -47,7 +47,7 @@
                     rounded
                     :loading="loading"
                     @click="validarLogIn()"
-                >INICIAR SESION
+                >INICIAR SESIÓN
                 </v-btn>
               </v-row>
 

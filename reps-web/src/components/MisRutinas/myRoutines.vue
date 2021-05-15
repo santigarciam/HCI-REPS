@@ -2,8 +2,8 @@
   <div class="text-center">
     <v-dialog
         width="900px"
-        v-for="rutina in rutinas"
-        :key="rutina.id"
+        v-for="(rutina, index) in rutinas"
+        :key="[index, rutina.id]"
         scrollable
     >
       <!--        v-for="rutina in data().rutinas" :key="rutina.tituloRut"  UNA LINEA MAS ARRIBA -->
@@ -13,7 +13,7 @@
           <v-card v-bind="attrs" v-on="on"  @click.stop="funcionAUX(rutina.id,rutina)"  :data="modalData" scrollable>
             <v-col>
               <v-row>
-                <v-card-title prepend-icon="mdi-counter" class="mb-0 pb-0">{{ rutina.name }}</v-card-title>
+                <v-card-title prepend-icon="mdi-counter" class="mb-0 pb-0">{{ rutina.name }}<v-icon v-if="! rutina.isPublic" color="black" class="ml-2">mdi-lock</v-icon></v-card-title>
                 <v-spacer></v-spacer>
                 <!-- EDITAR RUTINAA-->
                 <edit-routine :rutina="rutina"></edit-routine>

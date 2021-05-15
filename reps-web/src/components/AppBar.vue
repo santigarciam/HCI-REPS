@@ -127,8 +127,9 @@
                         <v-btn flat :disabled="loading"
                                class="mx-0"
                                color="#2679CC"
+                               dark
                                @click="funToCancel">No</v-btn>
-                        <v-btn :loading="loading" color="grey lighten-1 white--text mx-10" @click="logOut()">Si</v-btn>
+                        <v-btn :loading="loading" dark color="grey lighten-1 white--text mx-10" @click="logOut()">Si</v-btn>
                       </v-row>
                     </v-col>
 

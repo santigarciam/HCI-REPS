@@ -301,7 +301,7 @@
 <!--                      <v-btn flat class="primary mx-10" v-on:click="addNewRoutine">Guardar</v-btn>&ndash;&gt;-->
                       <v-dialog persistent width="900px" :key="cardID">
                       <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-                        <v-btn color="#2679CC" class="mx-10 white--text"  slot="activator" v-bind="attrs" v-on="on" @click="loadNextStepNewRut" outlined>Siguiente</v-btn>
+                        <v-btn color="#2679CC" class="mx-10" dark slot="activator" v-bind="attrs" v-on="on" @click="loadNextStepNewRut">Siguiente</v-btn>
                       </template>
 
                       <v-card>
@@ -347,7 +347,7 @@
                                         <v-col>
                                         <v-card-text>{{ejs.ej.name}} </v-card-text>
                                         </v-col>
-                                      <v-col><v-subheader>Orden:
+                                     <!-- <v-col><v-subheader>Orden:
                                       <v-text-field
                                           append-icon="mdi-order-numeric-ascending"
                                           v-model="ejsCycleAux[i-1][j].orden"
@@ -359,7 +359,7 @@
                                           style="width: 80px"
                                       ></v-text-field>
                                       </v-subheader>
-                                      </v-col>
+                                      </v-col>-->
                                       <v-col><v-subheader>Repeteciones:
                                       <v-text-field
                                           append-icon="mdi-counter"
@@ -407,6 +407,7 @@
                           </v-row>
                         </v-col>
                         <v-col></v-col>
+
                         </v-card-text>
                       </v-card>
 
@@ -440,7 +441,7 @@ export default {
   data(){
     return{
       lock: "mdi-lock-open",
-      isPrivate: false,
+      isPublic: true,
       loading: false,
       nameRut:'',
       mensaje1: "Antes de crear una rutina debe ",
@@ -473,13 +474,13 @@ export default {
   },
   methods :{
     changePrivacy: function (){
-      if(this.isPrivate){
-        this.lock="mdi-lock-open"
-        this.isPrivate=false
+      if(this.isPublic){
+        this.lock="mdi-lock"
+        this.isPublic=false
       }
       else{
-        this.lock="mdi-lock"
-        this.isPrivate=true
+        this.lock="mdi-lock-open"
+        this.isPublic=true
       }
     },
     // generarRutinaNueva(tituloRut, autorRut, descripcionRut, durRut, rating)
@@ -510,7 +511,7 @@ export default {
       }
       // Lo de arriba es para agregar/usar una categoria dependiendo si esta o no creada.
 
-          const respRut =  await routineApi.add({name:this.nameRut,detail:this.detailRut,isPublic:this.isPrivate,difficulty:this.diff,category:{ id: catID},metadata:null},null);
+          const respRut =  await routineApi.add({name:this.nameRut,detail:this.detailRut,isPublic:this.isPublic,difficulty:this.diff,category:{ id: catID},metadata:null},null);
       console.log("Resprut : ");
           console.log(respRut);
           if(respRut.id) {
