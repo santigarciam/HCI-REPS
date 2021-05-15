@@ -6,7 +6,7 @@
       </v-icon></v-btn><v-btn  plain  class="primary text--white" to="/Descubrir"  v-if="this.$route.fullPath.includes('/routines/')">Descubre más rutinas <v-icon>mdi-arrow-right</v-icon></v-btn></v-card-title>
       <v-divider></v-divider>
       <v-card-subtitle></v-card-subtitle>
-      <v-row class="text-left" v-if="this.$route.fullPath.includes('/routines/')" >
+      <v-row class="text-left" v-if="!this.$route.fullPath.includes('/MisRutinas/')" >
         <v-icon small class="align-center pb-5 ml-8" color="blue">mdi-account</v-icon>
         <v-card-subtitle class="blue--text ml-0 pl-1 mt-0 pt-0 pb-0 font-weight-bold" v-model="autorRut">{{ rutina.user.username }} </v-card-subtitle>
       </v-row>
