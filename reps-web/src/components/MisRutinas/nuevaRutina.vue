@@ -6,7 +6,7 @@
     </template>
 
     <v-card flat>
-      <v-card-title class="justify-center white--text primary">
+      <v-card-title class="justify-center  white--text primary">
         AGREGAR NUEVA RUTINA
       </v-card-title>
       <v-card-text class="mt-6">
@@ -445,7 +445,7 @@ export default {
       nameRut:'',
       mensaje1: "Antes de crear una rutina debe ",
       mensaje2: "crear ejercicios",
-      subtitulo: "Aqui apareceran los ejercicios creados",
+      subtitulo: "Aquí apareceran los ejercicios creados",
       selected:{},
       detailRut:'',
       categoryRut:'',

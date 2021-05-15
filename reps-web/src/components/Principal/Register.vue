@@ -2,7 +2,7 @@
   <v-card color="rgb(0, 0, 0, 0.8)">
 
     <v-card-text>
-      <v-form ref="form" v-model="valid">
+      <v-form ref="form" lazy-validation v-model="valid">
         <v-row>
           <v-col cols="12">
 
@@ -155,13 +155,13 @@ export default {
       this.confirmError= ""
     },
     validar: function (){
-      this.loading = true;
-      if (!this.check(this.confirmPassword)){
+      if (this.confirmPassword!="" &&!this.check(this.confirmPassword)){
         this.confirmError= 'Las contraseñas no coinciden. Vuelve a intentarlo'
         this.loading = false;
         this.dialog = true;
-      }else {
-        if (this.$refs.form.validate() == true) {
+      }
+      if (this.$refs.form.validate() == true) {
+          this.loading = true
           this.resetErrors()
           this.registerUser()
           bus2.$on('error', (data) => {
@@ -178,7 +178,6 @@ export default {
             }
           })
         }//hay q hacer un else??
-      }
     },
 
     registerUser: async function () {
@@ -201,8 +200,7 @@ export default {
         this.loading = false;
         await router.push('/ConfirmacionMail');
       }
-    },
-
+    }
   }
 }
 </script>

@@ -14,10 +14,7 @@
             align="center"
             justify="center"
         >
-          <v-col
-              class="text-center"
-              cols="24"
-          >
+          <v-col class="text-center">
             <h1 class="display-1 mb-4">
               <span>{{mensaje1}}</span>
               <span class="colorReps boldText">{{ mensaje2 }}</span>

@@ -30,12 +30,8 @@
           </v-row>
           <v-row
               align="center"
-              justify="center"
-          >
-            <v-col
-                class="text-center"
-                cols="24"
-            >
+              justify="center" >
+            <v-col class="text-center">
               <h1 class="display-1  mb-4">
                 <span>Comience a </span>
                 <span class="boldText colorReps">crear rutinas</span>
@@ -45,12 +41,8 @@
               </h4>
             </v-col>
           </v-row>
-          <v-row>
-            <v-spacer></v-spacer>
-            <v-col class="text-center">
-            <nueva-rutina></nueva-rutina>
-            </v-col>
-            <v-spacer></v-spacer>
+          <v-row class="justify-center align-center">
+            <nueva-rutina class="align-center justify-center"></nueva-rutina>
           </v-row>
           <v-row>
             <v-col></v-col>

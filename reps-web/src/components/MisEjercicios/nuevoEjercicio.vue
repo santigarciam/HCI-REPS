@@ -5,7 +5,7 @@
     </template>
 
     <v-card>
-      <v-card-title class="justify-center white--text primary">
+      <v-card-title class="justify-center heigh font-weight-bold white--text colorReps">
         AGREGAR NUEVO EJERCICIO
       </v-card-title>
 
@@ -71,5 +71,8 @@ export default {
 </script>
 
 <style scoped>
-
+  .colorReps{
+    background-color: #2679CC;
+    font-family: ;
+  }
 </style>
