@@ -46,3 +46,4 @@ API/service/RoutineService.js
 API/service/ModelMapper.js
 API/service/VideoService.js
 *.sqlite3
+API/db/exercise.sqlite3

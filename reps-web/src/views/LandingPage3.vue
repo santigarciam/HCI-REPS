@@ -14,24 +14,6 @@
                   <v-row align="center" justify="center" class="mt-2">
                     <template>
                       <v-row justify="center">
-                        <v-dialog @click:outside="$refs.register.resetearCampos()" overlay-opacity="0" v-model="dialog" dark max-width="400px">
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-btn
-                                elevation="2"
-                                color="#2679CC"
-                                dark
-                                x-large
-                                rounded
-                                class="mr-3"
-                                v-bind="attrs"
-                                v-on="on"
-
-                            >REGISTRARSE</v-btn>
-
-                          </template>
-                          <register ref="register" ></register>
-                        </v-dialog>
-
                         <!--INICIO SESION-->
                         <v-dialog @click:outside="$refs.login.resetearCampos()" v-model="dialog2" overlay-opacity="0" dark max-width="400px">
                           <template v-slot:activator="{ on, attrs }">
@@ -50,6 +32,23 @@
                          <login ref="login"></login>
                         </v-dialog>
 
+                        <v-dialog @click:outside="$refs.register.resetearCampos()" overlay-opacity="0" v-model="dialog" dark max-width="400px">
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-btn
+                                elevation="2"
+                                color="#2679CC"
+                                dark
+                                x-large
+                                rounded
+                                class="mr-3"
+                                v-bind="attrs"
+                                v-on="on"
+
+                            >REGISTRARSE</v-btn>
+
+                          </template>
+                          <register ref="register" ></register>
+                        </v-dialog>
                       </v-row>
                     </template>
                   </v-row>

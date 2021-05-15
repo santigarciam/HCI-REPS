@@ -52,7 +52,7 @@
               </template>
 
               <v-card>
-                <v-card-title>¿Está seguro que desea borrar este ejercicio?</v-card-title>
+                <v-card-title><div><span>¿Está seguro que desea borrar </span><span style="color: #258be5;">"{{excercise.name}}"</span>?</div></v-card-title>
                 <v-col text--center>
                   <v-row>
                     <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
