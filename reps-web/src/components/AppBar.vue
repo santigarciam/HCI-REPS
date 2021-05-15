@@ -126,7 +126,7 @@
                         <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
                         <v-btn flat :disabled="loading"
                                class="mx-0"
-                               color="primary"
+                               color="#2679CC"
                                @click="funToCancel">No</v-btn>
                         <v-btn :loading="loading" color="grey lighten-1 white--text mx-10" @click="logOut()">Si</v-btn>
                       </v-row>

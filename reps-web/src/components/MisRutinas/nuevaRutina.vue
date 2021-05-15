@@ -301,7 +301,7 @@
 <!--                      <v-btn flat class="primary mx-10" v-on:click="addNewRoutine">Guardar</v-btn>&ndash;&gt;-->
                       <v-dialog persistent width="900px" :key="cardID">
                       <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-                        <v-btn class="primary mx-10 white--text"  slot="activator" v-bind="attrs" v-on="on" @click="loadNextStepNewRut" outlined>Siguiente</v-btn>
+                        <v-btn color="#2679CC" class="mx-10 white--text"  slot="activator" v-bind="attrs" v-on="on" @click="loadNextStepNewRut" outlined>Siguiente</v-btn>
                       </template>
 
                       <v-card>
@@ -403,7 +403,7 @@
                           <v-row>
                             <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
                             <v-btn color="grey lighten-1 white--text" class="mx-0" v-on:click="cancelActionNewRut">Cancelar</v-btn>
-                            <v-btn :loading="loading" class="primary mx-10 white--text" v-on:click="addNewRoutine">Finalizar</v-btn>
+                            <v-btn :loading="loading" color="#2679CC" class="mx-10 white--text" v-on:click="addNewRoutine">Finalizar</v-btn>
                           </v-row>
                         </v-col>
                         <v-col></v-col>

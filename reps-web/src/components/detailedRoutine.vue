@@ -3,7 +3,7 @@
       <v-card-title>{{ rutina.name }} <v-icon v-if="isPrivate" color="black" class="ml-2">mdi-lock</v-icon><v-spacer></v-spacer>
         <v-btn v-if="!this.$route.fullPath.includes('/routines/')" plain icon v-on:click="cancelActionRut"><v-icon dark>
         mdi-close
-      </v-icon></v-btn><v-btn  plain  class="primary text--white" to="/Descubrir"  v-if="this.$route.fullPath.includes('/routines/')">Descubre más rutinas <v-icon>mdi-arrow-right</v-icon></v-btn></v-card-title>
+      </v-icon></v-btn><v-btn color="#2679CC" plain class=" text--white" to="/Descubrir"  v-if="this.$route.fullPath.includes('/routines/')">Descubre más rutinas <v-icon class="ml-3">mdi-arrow-right</v-icon></v-btn></v-card-title>
       <v-divider></v-divider>
       <v-card-subtitle></v-card-subtitle>
       <v-row class="text-left" v-if="showUsername" >
@@ -21,7 +21,7 @@
             {{ciclo.name}}
           </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <v-chip class="mb-4 ma-2" small color="primary">x{{ciclo.repetitions}}</v-chip>
+            <v-chip class="mb-4 ma-2" small color="#2679CC">x{{ciclo.repetitions}}</v-chip>
             <template v-for="ejs in ciclo.ciclosEjs">
 
               <v-card small  class="mt-1" :key="ejs.exercise.id">

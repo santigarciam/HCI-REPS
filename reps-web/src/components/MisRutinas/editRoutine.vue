@@ -100,7 +100,7 @@
     <v-row>
       <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
       <v-btn  color="grey lighten-1 white--text mx-0" @click="cancelActionRut">Cancelar</v-btn>
-      <v-btn :loading="loading" text class="primary mx-10" @click="saveChanges">Guardar</v-btn>
+      <v-btn :loading="loading" color="#2679CC" text class=" mx-10" @click="saveChanges">Guardar</v-btn>
 
     </v-row>
   </v-col>

@@ -27,7 +27,7 @@
               <v-chip
                   small
                   label
-                  color="primary"
+                  color="#2679CC"
               >
                 {{ text }}
               </v-chip>

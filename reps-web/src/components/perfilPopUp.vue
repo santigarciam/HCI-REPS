@@ -74,7 +74,7 @@
               <v-btn :disabled="loading"
                      color="grey lighten-1 white--text mx-0"
                      @click="cancelActionEditProfile">Cancelar</v-btn>
-              <v-btn :loading="loading" flat class="primary mx-10" @click="submit">Guardar</v-btn>
+              <v-btn :loading="loading" color="#2679CC" flat class="mx-10" @click="submit">Guardar</v-btn>
 
             </v-row>
           </v-col>
