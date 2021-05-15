@@ -74,7 +74,7 @@
 import { UserApi } from "@/API_EJS/js/user";
 //import state from "../store/state";
 import {Api} from "../API_EJS/js/api";
-import {router} from "../main";
+import {bus2, router} from "../main";
 //import {router} from "../main";
 
 
@@ -102,9 +102,15 @@ export default {
           this.$store.state.token = Api.token;
         await UserApi.login({username: this.$store.state.userInfo.username, password:this.$store.state.userInfo.password},null);
           await router.push('/MisRutinas');
-
         }
-            },
+        bus2.$on('error', (data) => {
+          this.loading = false
+          if (data.details == "Invalid verification code") {
+            this.loginErrorMessage = "Usuario o contraseña incorrecta"
+            this.loginError = true
+          }
+        })
+      },
       resendCode(){
         console.log("reenviado" + this.$store.state.userRegisteredMail);
         UserApi.resendCode({email:this.$store.state.userInfo.email},null);

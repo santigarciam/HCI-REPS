@@ -123,31 +123,14 @@
 
                       <v-card
                           v-if="ejercicios.length === 0"
-                          class="mb-12"
-                          color="white lighten-1"
+                          color="white"
                           height="200px"
                           elevation="0"
-                      >
-                        <v-col></v-col>
-                        <v-col></v-col>
-                        <v-row
-                            align="center"
-                            justify="center"
-                        >
-                          <v-col
-                              class="text-center"
-                              cols="24"
-                          >
-                            <h1 class="display-1 font-weight-thin mb-4">
-                              <span>... Debes </span>
-                              <span class="blue--text boldText">crear ejercicios</span>
-                              <span> antes de crear rutinas ...</span>
-                            </h1>
-                            <h4 class="subheading">
-                              Aqui apareceran tus ejercicios creados
-                            </h4>
-                          </v-col>
-                        </v-row>
+                      ><v-col>
+                        <empty-message class="mt-6" v-bind:mensaje1="$data.mensaje1"
+                                       v-bind:mensaje2="$data.mensaje2"
+                                       v-bind:subtitulo="$data.subtitulo"
+                        ></empty-message></v-col>
                       </v-card>
 
                       <!--                      -->
@@ -211,36 +194,17 @@
                     </v-list>
 
                     <!--            Si no tiene ejercicios cargados          -->
-
                     <v-card
                         v-if="ejercicios.length === 0"
-                        class="mb-12"
-                        color="white lighten-1"
+                        color="white"
                         height="200px"
                         elevation="0"
-                    >
-                      <v-col></v-col>
-                      <v-col></v-col>
-                      <v-row
-                          align="center"
-                          justify="center"
-                      >
-                        <v-col
-                            class="text-center"
-                            cols="24"
-                        >
-                          <h1 class="display-1 font-weight-thin mb-4">
-                            <span>... Debes </span>
-                            <span class="blue--text boldText">crear ejercicios</span>
-                            <span> antes de crear rutinas ...</span>
-                          </h1>
-                          <h4 class="subheading">
-                            Aqui apareceran tus ejercicios creados
-                          </h4>
-                        </v-col>
-                      </v-row>
+                    ><v-col>
+                      <empty-message class="mt-6" v-bind:mensaje1="$data.mensaje1"
+                                     v-bind:mensaje2="$data.mensaje2"
+                                     v-bind:subtitulo="$data.subtitulo"
+                      ></empty-message></v-col>
                     </v-card>
-
                     <!--                      -->
 
                   </v-card>
@@ -301,31 +265,14 @@
 
                     <v-card
                         v-if="ejercicios.length === 0"
-                        class="mb-12"
-                        color="white lighten-1"
+                        color="white"
                         height="200px"
                         elevation="0"
-                    >
-                      <v-col></v-col>
-                      <v-col></v-col>
-                      <v-row
-                          align="center"
-                          justify="center"
-                      >
-                        <v-col
-                            class="text-center"
-                            cols="24"
-                        >
-                          <h1 class="display-1 font-weight-thin mb-4">
-                            <span>... Debes </span>
-                            <span class="blue--text boldText">crear ejercicios</span>
-                            <span> antes de crear rutinas ...</span>
-                          </h1>
-                          <h4 class="subheading">
-                            Aqui apareceran tus ejercicios creados
-                          </h4>
-                        </v-col>
-                      </v-row>
+                    ><v-col>
+                      <empty-message class="mt-6" v-bind:mensaje1="$data.mensaje1"
+                                     v-bind:mensaje2="$data.mensaje2"
+                                     v-bind:subtitulo="$data.subtitulo"
+                      ></empty-message></v-col>
                     </v-card>
 
                     <!--                      -->
@@ -466,26 +413,29 @@
 
 
 
-
 <!--  </v-dialog>-->
 
 
 </template>
 
 <script>
-  import  { routineApi } from "@/API_EJS/js/routines"
+import  { routineApi } from "@/API_EJS/js/routines"
 import  { categoryApi} from "../../API_EJS/js/category";
 import {cycleApi} from "../../API_EJS/js/cycles";
 import  {cycleExercisesApi} from "../../API_EJS/js/cycleExercises";
+import EmptyMessage from "../emptyMessage";
 //import state from "/"
 
 export default {
   name: "nuevaRutina",
-  components: {},
+  components: {EmptyMessage},
   data(){
     return{
       loading: false,
       nameRut:'',
+      mensaje1: "Antes de crear una rutina debe ",
+      mensaje2: "crear ejercicios",
+      subtitulo: "Aqui apareceran los ejercicios creados",
       selected:{},
       detailRut:'',
       categoryRut:'',

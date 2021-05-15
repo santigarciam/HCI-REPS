@@ -29,7 +29,7 @@
                             >REGISTRARSE</v-btn>
 
                           </template>
-                          <register  ref="register" ></register>
+                          <register ref="register" ></register>
                         </v-dialog>
 
                         <!--INICIO SESION-->
