@@ -34,7 +34,8 @@
 
                       <v-btn
                           elevation="2"
-                          color="#2679CC"
+
+                          color="#00B2EB"
                           dark
                           x-large
                           rounded
@@ -45,7 +46,7 @@
                       </v-btn>
                     <v-btn
                         elevation="2"
-                        color="#00B2EB"
+                        color="#2679CC"
                         dark
                         x-large
                         rounded
