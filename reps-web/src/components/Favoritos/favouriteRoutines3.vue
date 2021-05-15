@@ -25,7 +25,7 @@
                   ></v-rating></v-card-title>
                 <v-spacer></v-spacer>
 
-                <share-routine></share-routine>
+                <share-routine v-bind:rutina="rutina"></share-routine>
 
                 <fav-routine v-bind:rutina="rutina" ></fav-routine>
 
