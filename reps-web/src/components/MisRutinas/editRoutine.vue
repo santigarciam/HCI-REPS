@@ -57,19 +57,7 @@
                 <v-col>
                   <v-card-text>{{ejs.exercise.name}} </v-card-text>
                 </v-col>
-                <v-col><v-subheader>Repeteciones:
-                  <v-text-field
-                      append-icon="mdi-counter"
-                      v-model="ejs.repetitions"
-                      class="mt-0 pt-0"
-                      hide-details
-                      single-line
-                      min = "1"
-                      type="number"
-                      style="width: 80px"
-                  ></v-text-field>
-                </v-subheader>
-                </v-col>
+
                 <v-col><v-subheader>Duracion:
                   <v-text-field
                       append-icon="mdi-clock-outline"
@@ -78,6 +66,19 @@
                       hide-details
                       single-line
 
+                      min = "1"
+                      type="number"
+                      style="width: 80px"
+                  ></v-text-field>
+                </v-subheader>
+                </v-col>
+                <v-col><v-subheader>Repeteciones:
+                  <v-text-field
+                      append-icon="mdi-counter"
+                      v-model="ejs.repetitions"
+                      class="mt-0 pt-0"
+                      hide-details
+                      single-line
                       min = "1"
                       type="number"
                       style="width: 80px"
@@ -128,13 +129,13 @@ export default {
     }
   },
   computed: {
-    cyclesOfRutine(){
-      console.log(this.$store.state.cyclesOfRutine);
-      return this.$store.state.cyclesOfRutine;
-    },
-    exercisesOfCycle(){
-      return this.$store.state.exersisesOfRoutineOnCycle;
-    },
+    // cyclesOfRutine(){
+    //   console.log(this.$store.state.cyclesOfRutine);
+    //   return this.$store.state.cyclesOfRutine;
+    // },
+    // exercisesOfCycle(){
+    //   return this.$store.state.exersisesOfRoutineOnCycle;
+    // },
   },
   methods:{
     cancelActionRut: function (){
