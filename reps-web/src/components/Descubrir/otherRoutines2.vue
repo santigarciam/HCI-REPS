@@ -17,10 +17,8 @@
                   <v-rating
                       v-model="rutina.averageRating"
                       half-increments
-                      v-touch="changeRating"
                       background-color="grey"
                       color="#00B2EB"
-
                       medium
                       class="ml-2"
                   ></v-rating></v-card-title>

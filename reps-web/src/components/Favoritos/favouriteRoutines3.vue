@@ -17,7 +17,6 @@
                   <v-rating
                       v-model="rutina.averageRating"
                       half-increments
-
                       background-color="grey"
                       color="#00B2EB"
                       medium

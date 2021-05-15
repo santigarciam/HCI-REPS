@@ -49,8 +49,10 @@ export const getRoutines = async ({ commit}, parameters) => {
     if (!response.code){
        // var aux = response.content.filter(n => n.user.id != state.userID)
         for (const rutina of response.content) {
+            rutina.averageRating = rutina.averageRating/2
             const result = await cycleApi.getAll(rutina.id, null);
             if (result.content) {
+
                 rutina.ciclosRut = result.content;
                 for (const ciclo of rutina.ciclosRut) {
                     const resp = await cycleExercisesApi.getAll(ciclo.id, null);
@@ -111,6 +113,7 @@ export const getFavourites = async ({ commit }) => {
     if (!response.code){
         var aux = [];
         for (const rutina of response.content) {
+            rutina.averageRating = rutina.averageRating/2
             aux.push(rutina.id)
             const result = await cycleApi.getAll(rutina.id, null);
             if (result.content) {
