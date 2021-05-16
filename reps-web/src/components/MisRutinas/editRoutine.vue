@@ -196,6 +196,8 @@ export default {
         }
       },
     saveChanges: async function () {
+      this.rutAux.isPublic=this.isPublic
+      this.rutAux.difficulty=this.diff
       console.log(this.rutAux);
       let respExCycle;
       console.log('Editandoo');

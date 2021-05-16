@@ -115,7 +115,6 @@
                 <v-dialog v-model="dialog" width="800px">
                   <template  v-slot:activator="{ on, attrs }">
                     <v-btn block plain v-bind="attrs" v-on="on">
-                    <!--         slot="activator"             -->
                       Cerrar Sesión
                     </v-btn>
                   </template>
@@ -123,13 +122,14 @@
                     <v-card-title>¿Está seguro que desea cerrar sesión? </v-card-title>
                     <v-col text--center>
                       <v-row>
-                        <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
+                        <v-spacer></v-spacer>
                         <v-btn flat :disabled="loading"
                                class="mx-0"
-                               color="#2679CC"
+
+                               color="grey lighten-1"
                                dark
-                               @click="funToCancel">No</v-btn>
-                        <v-btn :loading="loading" dark color="grey lighten-1 white--text mx-10" @click="logOut()">Si</v-btn>
+                               @click="funToCancel">CANCELAR</v-btn>
+                        <v-btn :loading="loading" dark color="#2679CC" class="mx-10" @click="logOut()">CERRAR SESIÓN</v-btn>
                       </v-row>
                     </v-col>
 

@@ -56,8 +56,8 @@
                 <v-col text--center>
                   <v-row>
                     <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-                    <v-btn dark flat color="#2679CC" class=" mx-0" @click="cancelAction">No</v-btn>
-                    <v-btn color="grey lighten-1 white--text" class="mx-10" @click="deleteEj(excercise.id)">Si</v-btn>
+                    <v-btn dark flat color="grey lighten-1" class=" mx-0" @click="cancelAction">CANCELAR</v-btn>
+                    <v-btn dark color="#2679CC" class="mx-10" @click="deleteEj(excercise.id)">BORRAR</v-btn>
 
                   </v-row>
                 </v-col>

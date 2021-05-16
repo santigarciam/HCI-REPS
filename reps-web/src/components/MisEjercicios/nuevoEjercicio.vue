@@ -20,8 +20,8 @@
       <v-col>
         <v-row>
           <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-          <v-btn  color="grey lighten-1 white--text mx-0" v-on:click="cleanAndCloseDialog">Cancelar</v-btn>
-          <v-btn :loading="loading" color="#2679CC" flat class="mx-10" v-on:click="addNewExcercise">Guardar</v-btn>
+          <v-btn color="#2679CC" dark class="mx-0" v-on:click="cleanAndCloseDialog">Cancelar</v-btn>
+          <v-btn :loading="loading" dark color="grey lighten-1" flat class="mx-10" v-on:click="addNewExcercise">Guardar</v-btn>
 
         </v-row>
       </v-col>

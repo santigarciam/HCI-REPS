@@ -10,7 +10,8 @@
         AGREGAR NUEVA RUTINA
       </v-card-title>
       <v-card-text class="mt-6">
-        <v-row><v-text-field class="mr-3 ml-3" dense outlined label="Nombre" v-model="nameRut"></v-text-field> <v-btn class="mr-3" text @click="changePrivacy()"><v-icon>{{this.lock}}</v-icon></v-btn></v-row>
+        <v-row><v-text-field class="mr-3 ml-3" dense outlined label="Nombre" v-model="nameRut"></v-text-field>
+          <v-btn outlined class="align-center mr-3" @click="changePrivacy()"><v-icon class="mr-2">{{this.lock}}</v-icon>{{this.privacy}}</v-btn></v-row>
         <v-row ><v-textarea class="mr-3 ml-3" dense outlined auto-grow label="Descripcion" v-model="detailRut" ></v-textarea></v-row>
         <v-row><v-col><v-text-field dense outlined label="Categoría" v-model="categoryRut"></v-text-field></v-col>
           <v-col>  <v-select
@@ -636,6 +637,14 @@ export default {
     // }
     },
   computed: {
+    privacy() {
+      if(this.isPublic){
+        return "Pública"
+      }
+      else {
+        return "Privada"
+      }
+    },
     ejercicios(){
       return this.$store.state.listaEjercicios;
     },
