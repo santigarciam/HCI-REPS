@@ -6,22 +6,22 @@
 
     <v-card>
       <v-card-title class="justify-center heigh font-weight-bold white--text colorReps">
-        AGREGAR NUEVO EJERCICIO
+        NUEVO EJERCICIO
       </v-card-title>
 
       <v-card-text>
         <v-col></v-col>
         <v-form class="px-3">
           <v-text-field outlined label="Nombre" v-model="nameEj"></v-text-field>
-          <v-textarea outlined label="Descripcion" v-model="detailEj" ></v-textarea>
+          <v-textarea outlined label="Descripción" v-model="detailEj" ></v-textarea>
         </v-form>
       </v-card-text>
 
       <v-col>
         <v-row>
           <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-          <v-btn color="#2679CC" dark class="mx-0" v-on:click="cleanAndCloseDialog">Cancelar</v-btn>
-          <v-btn :loading="loading" dark color="grey lighten-1" flat class="mx-10" v-on:click="addNewExcercise">Guardar</v-btn>
+          <v-btn  dark color="grey lighten-1" flat class="mx-0" v-on:click="cleanAndCloseDialog">Cancelar</v-btn>
+          <v-btn :loading="loading" color="#2679CC" dark class="mx-10" v-on:click="addNewExcercise">Guardar</v-btn>
 
         </v-row>
       </v-col>
@@ -73,6 +73,6 @@ export default {
 <style scoped>
   .colorReps{
     background-color: #2679CC;
-    font-family: ;
+
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
   <v-dialog v-model="dialogEJ" width="800px" v-for="excercise in ejercicios " :key="excercise.id" >
-    <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
+    <template v-slot:activator="{ on, attrs }">
       <v-container class ="container_v_card">
       <v-card depressed slot="activator" v-bind="attrs" v-on="on">
         <v-col>
@@ -9,7 +9,7 @@
             <v-card-title>{{ excercise.name }}</v-card-title>
             <v-spacer></v-spacer>
 <!--            EDITAR EJERCICIO-->
-<!--            <v-dialog v-model="dialog[excersise.id]" width="800px" :retain-focus="false" >-->
+
             <v-dialog persistent v-model="dialog[excercise.id]" width="800px" :retain-focus="false" >
             <template  v-slot:activator="{ on, attrs }">
               <v-btn icon class="mt-4 mr-2" plain color = "grey" slot="activator" small  v-on:click.prevent="editEj(excercise.id)" v-bind="attrs" v-on="on">
@@ -25,7 +25,7 @@
                 <v-col></v-col>
                 <v-form class="px-3">
                   <v-text-field outlined label="Nombre*" v-model.lazy="excerciseAux.name"></v-text-field>
-                  <v-textarea  outlined label="Descripcion*" v-model="excerciseAux.detail" ></v-textarea>
+                  <v-textarea  outlined label="Descripción*" v-model="excerciseAux.detail" ></v-textarea>
 
                 </v-form>
               </v-card-text>
@@ -33,7 +33,7 @@
                 <v-row>
                   <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
                   <v-btn color="grey lighten-1 white--text mx-0" @click="cancelAction">Cancelar</v-btn>
-                  <v-btn flat color="#2679CC" class=" mx-10" @click="modifyExercise(excercise)">Guardar</v-btn>
+                  <v-btn  color="#2679CC" dark class="mx-10" @click="modifyExercise(excercise)">Guardar</v-btn>
                 </v-row>
               </v-col>
               <v-col></v-col>
@@ -55,7 +55,7 @@
                 <v-card-title><div><span>¿Está seguro que desea borrar el ejercicio </span><span style="color: #258be5;">"{{excercise.name}}"</span>?</div></v-card-title>
                 <v-col text--center>
                   <v-row>
-                    <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
+                    <v-spacer></v-spacer>
                     <v-btn dark flat color="grey lighten-1" class=" mx-0" @click="cancelAction">CANCELAR</v-btn>
                     <v-btn dark color="#2679CC" class="mx-10" @click="deleteEj(excercise.id)">BORRAR</v-btn>
 
@@ -89,10 +89,9 @@
       <v-divider></v-divider>
 
       <v-card-text>
-        <v-card-title v-model="descripcionEj">Descripcion:</v-card-title>
-        <v-card-text>{{ excercise.detail }}</v-card-text>
-<!--        <v-card-title v-model="multEj">Multimedia:</v-card-title>-->
-<!--        <v-card-title v-model="equipEj">Equipamiento:</v-card-title>-->
+        <v-card-title v-model="descripcionEj">Descripción:{{excercise.detail}}</v-card-title>
+
+
       </v-card-text>
 
 
