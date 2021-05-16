@@ -20,7 +20,7 @@
     <v-btn outlined class="align-center mr-3" @click="changePrivacy()"><v-icon class="mr-2">{{this.lock}}</v-icon>{{this.privacy}}</v-btn>
   </v-row>
   <v-row>
-    <v-textarea outlined dense auto-grow class="mr-3 ml-3" label="Descripción:" v-model="rutAux.detail"></v-textarea>
+    <v-textarea outlined dense auto-grow class="mr-3 ml-3" label="Descripcion:" v-model="rutAux.detail"></v-textarea>
   </v-row><v-row>
     <!-- <v-col><v-text-field dense outlined label="Categoría" v-model="categoryRut"></v-text-field></v-col>-->
       <v-col>  <v-select
@@ -39,7 +39,7 @@
     <v-expansion-panel>
       <v-row>
         <v-col>
-          <v-expansion-panel-header v-if="i===0">Calentamiento</v-expansion-panel-header>
+          <v-expansion-panel-header v-if="i===0">Calentamiento </v-expansion-panel-header>
           <v-expansion-panel-header v-else-if="i=== cyclesAux.length -1">Enfriamiento</v-expansion-panel-header>
           <v-expansion-panel-header v-else> Ciclo {{i}}</v-expansion-panel-header>
         </v-col>
@@ -61,6 +61,7 @@
         </v-col>
       </v-row>
       <v-expansion-panel-content>
+        <!--                            <v-chip class="mb-4 ma-2" small color="primary">x{{ciclo.repetitions}}</v-chip>-->
         <template v-for="ejs in excercisesOfCycleAUX[i]">
           <v-card small  class="mt-1" :key="ejs.exercise.id">
 
@@ -70,7 +71,7 @@
                   <v-card-text>{{ejs.exercise.name}} </v-card-text>
                 </v-col>
 
-                <v-col><v-subheader>Duración:
+                <v-col><v-subheader>Duracion:
                   <v-text-field
                       append-icon="mdi-clock-outline"
                       v-model="ejs.duration"
@@ -84,7 +85,7 @@
                   ></v-text-field>
                 </v-subheader>
                 </v-col>
-                <v-col><v-subheader>Repeticiones:
+                <v-col><v-subheader>Repeteciones:
                   <v-text-field
                       append-icon="mdi-counter"
                       v-model="ejs.repetitions"
@@ -160,6 +161,13 @@ export default {
         return "Privada"
       }
     }
+    // cyclesOfRutine(){
+    //   console.log(this.$store.state.cyclesOfRutine);
+    //   return this.$store.state.cyclesOfRutine;
+    // },
+    // exercisesOfCycle(){
+    //   return this.$store.state.exersisesOfRoutineOnCycle;
+    // },
   },
   methods:{
     changePrivacy: function (){
@@ -188,19 +196,24 @@ export default {
         }
       },
     saveChanges: async function () {
+      this.rutAux.isPublic=this.isPublic
+      this.rutAux.difficulty=this.diff
+      console.log(this.rutAux);
       let respExCycle;
+      console.log('Editandoo');
       for(var i=0;i<this.cyclesAux.length ; i++){
         let cycleAux;
         cycleAux = {id:parseInt(this.cyclesAux[i].id),name:this.cyclesAux[i].name,detail:this.cyclesAux[i].detail,type:this.cyclesAux[i].type,order:parseInt(this.cyclesAux[i].order),repetitions: parseInt(this.cyclesAux[i].repetitions) ,metadata:this.cyclesAux[i].metadata};
+        console.log("ciclo a mod")
         for(var j=0; j< this.excercisesOfCycleAUX[i].length;j++) {
           let ejAux;
           ejAux = {id:parseInt(this.excercisesOfCycleAUX[i][j].exercise.id),order: parseInt(this.excercisesOfCycleAUX[i][j].order),duration: parseInt(this.excercisesOfCycleAUX[i][j].duration),repetitions:parseInt(this.excercisesOfCycleAUX[i][j].repetitions)};
+          console.log("Ejercicio a mod");
           respExCycle = await cycleExercisesApi.delete(parseInt(this.cyclesAux[i].id), parseInt(ejAux.id), null);
           respExCycle = await cycleExercisesApi.add(parseInt(this.cyclesAux[i].id),parseInt(ejAux.id),{order:ejAux.order,duration:ejAux.duration,repetitions:ejAux.repetitions},null);
           if (!respExCycle.order) {
-            //console.log("ERROR");
+            console.log("ERROR");
           }
-          // Faltaria validacion de error
         }
         await cycleApi.modify(this.rutAux.id,cycleAux,null);
 

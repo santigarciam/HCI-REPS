@@ -14,8 +14,8 @@
   <v-col text--center>
     <v-row>
       <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
-      <v-btn color="#2679CC" flat class="mx-0" @click="cancelActionRut">No</v-btn>
-      <v-btn :loading="loading" color="grey lighten-1 white--text mx-10" @click="deleteRut(rutina.id)">Si</v-btn>
+      <v-btn color="grey lighten-1" dark flat class="mx-0" @click="cancelActionRut">CANCELAR</v-btn>
+      <v-btn :loading="loading" dark color="#2679CC" class="mx-10" @click="deleteRut(rutina.id)">BORRAR</v-btn>
 
     </v-row>
   </v-col>

@@ -2,16 +2,17 @@
 
   <v-dialog persistent v-model="dialog" width="900px" :key="cardID">
     <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-    <v-btn depressed class="ma-2 mr-4" slot="activator" v-bind="attrs" v-on="on" outlined>+Añadir</v-btn>
+    <v-btn depressed class="ma-2 mr-4" slot="activator" v-bind="attrs" v-on="on" outlined>+Anadir</v-btn>
     </template>
 
     <v-card flat>
       <v-card-title class="justify-center  white--text primary">
-        AÑADIR NUEVA RUTINA
+        AGREGAR NUEVA RUTINA
       </v-card-title>
       <v-card-text class="mt-6">
-        <v-row><v-text-field class="mr-3 ml-3" dense outlined label="Nombre" v-model="nameRut"></v-text-field> <v-btn class="mr-3" text @click="changePrivacy()"><v-icon>{{this.lock}}</v-icon></v-btn></v-row>
-        <v-row ><v-textarea class="mr-3 ml-3" dense outlined auto-grow label="Descripción" v-model="detailRut" ></v-textarea></v-row>
+        <v-row><v-text-field class="mr-3 ml-3" dense outlined label="Nombre" v-model="nameRut"></v-text-field>
+          <v-btn outlined class="align-center mr-3" @click="changePrivacy()"><v-icon class="mr-2">{{this.lock}}</v-icon>{{this.privacy}}</v-btn></v-row>
+        <v-row ><v-textarea class="mr-3 ml-3" dense outlined auto-grow label="Descripcion" v-model="detailRut" ></v-textarea></v-row>
         <v-row><v-col><v-text-field dense outlined label="Categoría" v-model="categoryRut"></v-text-field></v-col>
           <v-col>  <v-select
             v-model="diff"
@@ -31,7 +32,7 @@
                 <v-select
                     v-model="steps"
                     :items="[1,2, 3, 4, 5]"
-                    label="Número de ciclos"
+                    label="Numero de ciclos"
                 ></v-select>
               </v-card-text>
             </v-card>
@@ -105,6 +106,8 @@
                                 </v-list-item-content>
 
                                 <v-list-item-action>
+<!--                                  <v-list-item-action-text v-text="excersise.action"></v-list-item-action-text>-->
+
                                   <v-icon
                                       v-if="active"
                                       color="grey lighten-1"
@@ -296,7 +299,8 @@
                     <v-row>
                       <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
                       <v-btn color="grey lighten-1 white--text" class="mx-0" v-on:click="cancelActionNewRut">Cancelar</v-btn>
-                       <v-dialog persistent width="900px" :key="cardID">
+<!--                      <v-btn flat class="primary mx-10" v-on:click="addNewRoutine">Guardar</v-btn>&ndash;&gt;-->
+                      <v-dialog persistent width="900px" :key="cardID">
                       <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
                         <v-btn color="#2679CC" class="mx-10" dark slot="activator" v-bind="attrs" v-on="on" @click="loadNextStepNewRut">Siguiente</v-btn>
                       </template>
@@ -332,11 +336,31 @@
                             <v-expansion-panel-content>
                               <template v-for="(ejs,j) in ejsCycleAux[i-1]">
                                 <v-card small class="mt-1 mb-1" :key="ejs.id">
+
+
+<!--                                    <v-col>-->
+<!--                                      <v-card-text>{{ejs.ej.name}}</v-card-text>-->
+<!--                                    </v-col>-->
+<!--                                    <v-spacer></v-spacer>-->
+
                                     <v-container>
                                       <v-row>
                                         <v-col>
                                         <v-card-text>{{ejs.ej.name}} </v-card-text>
                                         </v-col>
+                                     <!-- <v-col><v-subheader>Orden:
+                                      <v-text-field
+                                          append-icon="mdi-order-numeric-ascending"
+                                          v-model="ejsCycleAux[i-1][j].orden"
+                                          class="mt-0 ml-3 pt-0"
+                                          hide-details
+                                          single-line
+                                          min = "1"
+                                          type="number"
+                                          style="width: 80px"
+                                      ></v-text-field>
+                                      </v-subheader>
+                                      </v-col>-->
                                       <v-col><v-subheader>Repeteciones:
                                       <v-text-field
                                           append-icon="mdi-counter"
@@ -364,9 +388,13 @@
                                       ></v-text-field>
                                     </v-subheader>
                                       </v-col>
+
                                       </v-row>
                                     </v-container>
+
                                 </v-card>
+                                <!--                  </template>-->
+                                <!--                </v-card>-->
                               </template>
                             </v-expansion-panel-content>
                           </v-expansion-panel>
@@ -392,6 +420,12 @@
               </v-card-text>
             </v-card>
   </v-dialog>
+
+
+
+<!--  </v-dialog>-->
+
+
 </template>
 
 <script>
@@ -400,6 +434,7 @@ import  { categoryApi} from "../../API_EJS/js/category";
 import {cycleApi} from "../../API_EJS/js/cycles";
 import  {cycleExercisesApi} from "../../API_EJS/js/cycleExercises";
 import EmptyMessage from "../emptyMessage";
+//import state from "/"
 
 export default {
   name: "nuevaRutina",
@@ -412,7 +447,7 @@ export default {
       nameRut:'',
       mensaje1: "Antes de crear una rutina debe ",
       mensaje2: "crear ejercicios",
-      subtitulo: "Aquí aparecerán los ejercicios creados",
+      subtitulo: "Aquí apareceran los ejercicios creados",
       selected:{},
       detailRut:'',
       categoryRut:'',
@@ -449,6 +484,7 @@ export default {
         this.isPublic=true
       }
     },
+    // generarRutinaNueva(tituloRut, autorRut, descripcionRut, durRut, rating)
     addNewRoutine: async function(){
       this.loading = true;
       var catID = -1;
@@ -466,18 +502,19 @@ export default {
                }
              }
              if(catID === -1){
-               //console.log("ERROR CATEGORIAS 1");
+               console.log("ERROR CATEGORIAS 1");
                return;
              }
            } else {
-             //console.log("ERROR CATEGORIAS 2" );
+             console.log("ERROR CATEGORIAS 2" );
              return;
            }
-           // Faltaria hacer una validacion un poco mejor de los posibles errores
       }
       // Lo de arriba es para agregar/usar una categoria dependiendo si esta o no creada.
 
           const respRut =  await routineApi.add({name:this.nameRut,detail:this.detailRut,isPublic:this.isPublic,difficulty:this.diff,category:{ id: catID},metadata:null},null);
+      console.log("Resprut : ");
+          console.log(respRut);
           if(respRut.id) {
             for (var i = 0; i < this.steps + 2; i++) {
               switch (i) {
@@ -495,10 +532,12 @@ export default {
                     for (const ejercicio of this.ejsCycleAux[i]) {
                       await cycleExercisesApi.add(respCal.id, ejercicio.ej.id, { order: parseInt(ejercicio.orden), duration: parseInt(ejercicio.desc), repetitions: parseInt(ejercicio.reps)}, null);
                     }
+                    console.log(await cycleApi.get(respRut.id,respCal,null));
                   } else {
-                    //console.log("Error calentamiento"); // Faltaria hacer una validacion un poco mejor de los posibles errores
+                    console.log("Error calentamiento");
                     return;
                   }
+                  console.log("Creo calentamiento");
                   break;
                 case (this.steps + 1):
                   /////
@@ -516,7 +555,7 @@ export default {
                       await cycleExercisesApi.add(respEnfri.id, ejercicio.ej.id, { order: parseInt(ejercicio.orden), duration: parseInt(ejercicio.desc), repetitions: parseInt(ejercicio.reps)}, null);
                     }
                   } else {
-                    //console.log("ERROR ENFRI"); // Faltaria hacer una validacion un poco mejor de los posibles errores
+                    console.log("ERROR ENFRI"); //ERROR
                   }
                   break;
                 default:
@@ -533,19 +572,31 @@ export default {
                     for (const ejercicio of this.ejsCycleAux[i]) {
                       await cycleExercisesApi.add(respCiclo.id, ejercicio.ej.id, { order: parseInt(ejercicio.orden), duration: parseInt(ejercicio.desc), repetitions: parseInt(ejercicio.reps)}, null);
                     }
+                    console.log(await cycleApi.get(respRut.id,respCiclo,null));
                   } else {
-                    //console.log("Error ciclo"); // Faltaria hacer una validacion un poco mejor de los posibles errores
+                    console.log("Error ciclo"); //ERROR
                   }
                   break;
               }
             }
           }else{
-            //console.log("No se pudo crear la rutina"); // Faltaria hacer una validacion un poco mejor de los posibles errores
+            console.log("No se pudo crear la rutina"); //ERROR
           }
           // Lo de arriba es toda la logica de crear una rutina (rutina, ciclos, ejercicios)
 
+
+      const rutinaAux = await routineApi.get(respRut.id,null);
+      console.log(rutinaAux);
+      const ciclosAux = await cycleApi.getAll(respRut.id, null);
+      console.log("CILCOS");
+      console.log(ciclosAux);
+      for (const h of ciclosAux.content) {
+        console.log(h.id);
+        var ejerCiclo = await cycleExercisesApi.getAll(h.id, null);
+        console.log(ejerCiclo);
+      }
     this.loading = false;
-      await this.$store.dispatch("getCyclesOfID", respRut.id);
+      await this.$store.dispatch("getCyclesOfID", rutinaAux.id);
      this.cancelActionNewRut();
     },
     cancelActionNewRut: function (){
@@ -570,12 +621,30 @@ export default {
           auxArr.push({orden: order++, ej: this.ejercicios[k], reps: 0, desc: 0, sets: 0});
         }
         order = 1;
+        //this.ejsCycleAux[i].push(this.ejercicios[k]);
         ejsArr[i] = auxArr;
+        //}
       }
-      await this.$store.dispatch("setSelectedExercisesInCycles", ejsArr);
+      console.log("Siguiente en ADD RUT");
+      let cycloOf = await this.$store.state.cyclesOfRutine;
+      console.log(cycloOf)
+      console.log(ejsArr);
+      this.$store.dispatch("setSelectedExercisesInCycles", ejsArr);
     },
+    // cancelAUX: function (){
+    //   console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    //   console.log(this.$store.state.ejsCycleAux);
+    // }
     },
   computed: {
+    privacy() {
+      if(this.isPublic){
+        return "Pública"
+      }
+      else {
+        return "Privada"
+      }
+    },
     ejercicios(){
       return this.$store.state.listaEjercicios;
     },
@@ -598,6 +667,9 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getExercises");
+    // if(this.$store.state.listaRutinas.length !==0){
+    //   this.$store.dispatch("getCyclesOfID", this.$store.state.listaRutinas[0].id);
+    // }
     this.$store.dispatch("getCyclesOfID",1); /// VER DE DESSHAR
   }
 }
