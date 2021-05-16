@@ -67,7 +67,7 @@
     </v-container>
     <v-snackbar
       v-model="snackbar"
-    >Se reenvío el código de verificación a su mail {{this.$store.state.userRegisteredMail}}</v-snackbar>
+    >Se reenvio el código de verificación a su mail {{this.mail}}</v-snackbar>
   </div>
 </template>
 
@@ -96,7 +96,10 @@ export default {
   beforeMount() {
     this.getCredentials()
   },
-    methods:{
+  beforeDestroy() {
+    this.clearStorage()
+  },
+  methods:{
       getCredentials: function (){
         this.email = localStorage.getItem('email')
         console.log(this.email)
@@ -111,9 +114,6 @@ export default {
       },
       async verificarCodigo() {
         console.log("ACAAA");
-        // eslint-disable-next-line no-undef
-        //console.log(this.$store.state.userRegisteredMail);
-        // console.log({userRegisteredMail,code:this.verificationCode});
         const resp = await UserApi.verifyCode({
           email: this.email,
           code: this.verificationCode
@@ -127,7 +127,8 @@ export default {
         }
         else{bus2.$on('error', (data) => {
           this.loading = false
-          if (data.details == "Invalid verification code") {
+          if (data.details[0] == "Invalid verification code") {
+            console.log("entroooooo")
             this.verifErrorMessage = "El código de verificación ingresado no es válido. Intente nuevamente"
             this.verifError = true
           }

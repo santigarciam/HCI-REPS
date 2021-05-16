@@ -9,11 +9,12 @@
       <v-card-title class="justify-center  white--text primary">
          NUEVA RUTINA
       </v-card-title>
+      <v-form ref="form">
       <v-card-text class="mt-6">
-        <v-row><v-text-field class="mr-3 ml-3" dense outlined label="Nombre" v-model="nameRut"></v-text-field>
+        <v-row><v-text-field :rules="required" class="mr-3 ml-3" dense outlined label="Nombre" v-model="nameRut"></v-text-field>
           <v-btn outlined class="align-center mr-3" @click="changePrivacy()"><v-icon class="mr-2">{{this.lock}}</v-icon>{{this.privacy}}</v-btn></v-row>
-        <v-row ><v-textarea class="mr-3 ml-3" dense outlined auto-grow label="Descripción" v-model="detailRut" ></v-textarea></v-row>
-        <v-row><v-col><v-text-field dense outlined label="Categoría" v-model="categoryRut"></v-text-field></v-col>
+        <v-row ><v-textarea class="mr-3 ml-3" dense outlined auto-grow label="Descripcion" v-model="detailRut" ></v-textarea></v-row>
+        <v-row><v-col><v-text-field :rules="required" dense outlined label="Categoría" v-model="categoryRut"></v-text-field></v-col>
           <v-col>  <v-select
             v-model="diff"
             :items="dificultad"
@@ -300,9 +301,9 @@
                       <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
                       <v-btn color="grey lighten-1 white--text" class="mx-0" v-on:click="cancelActionNewRut">Cancelar</v-btn>
 <!--                      <v-btn flat class="primary mx-10" v-on:click="addNewRoutine">Guardar</v-btn>&ndash;&gt;-->
-                      <v-dialog persistent width="900px" :key="cardID">
-                      <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-                        <v-btn color="#2679CC" class="mx-10" dark slot="activator" v-bind="attrs" v-on="on" @click="loadNextStepNewRut">Siguiente</v-btn>
+                      <v-dialog persistent v-model="siguiente" width="900px" :key="cardID">
+                      <template > <!--v-slot:activator="{ on, attrs }" Por que hace falta esto -->
+                        <v-btn color="#2679CC" class="mx-10" dark slot="activator" v-bind="attrs" v-on="on" @click="next">Siguiente</v-btn>
                       </template>
 
                       <v-card>
@@ -348,7 +349,7 @@
                                         <v-col>
                                         <v-card-text>{{ejs.ej.name}} </v-card-text>
                                         </v-col>
-                                     <!-- <v-col><v-subheader>Orden:
+                                     <v-col><v-subheader>Orden:
                                       <v-text-field
                                           append-icon="mdi-order-numeric-ascending"
                                           v-model="ejsCycleAux[i-1][j].orden"
@@ -360,7 +361,7 @@
                                           style="width: 80px"
                                       ></v-text-field>
                                       </v-subheader>
-                                      </v-col>-->
+                                      </v-col>
                                       <v-col><v-subheader>Repeteciones:
                                       <v-text-field
                                           append-icon="mdi-counter"
@@ -417,7 +418,7 @@
 
                     </v-row>
                   </v-col>
-              </v-card-text>
+              </v-card-text></v-form>
             </v-card>
   </v-dialog>
 
@@ -441,6 +442,12 @@ export default {
   components: {EmptyMessage},
   data(){
     return{
+      required: [
+        v => !!v || 'Este campo es obligatorio',
+      ],
+      siguiente: false,
+
+
       lock: "mdi-lock-open",
       isPublic: true,
       loading: false,
@@ -596,6 +603,14 @@ export default {
       this.detailRut='';
       this.categoryRut='';
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
+    },
+    next: function (){
+      if (this.$refs.form.validate()){
+        this.loadNextStepNewRut()
+        this.siguiente=true
+      }else{
+        this.siguiente = false
+      }
     },
     loadNextStepNewRut: async function () {
       let order = 1;

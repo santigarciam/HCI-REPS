@@ -16,7 +16,7 @@
 <!--    <input  type="text" value="Hello World" id="myInput">-->
   <v-snackbar
       v-model="snackbar"
-  >¡Se ha copiado al portapapeles el link de la rutina!</v-snackbar>
+  >{{mensaje}}</v-snackbar>
   </div>
 </template>
 
@@ -27,31 +27,36 @@ import {router} from "../main";
 export default {
   props: ['rutina'],
 
-  data(){
+  data() {
     return {
       snackbar: false,
-      testingCode:"1234"
+      testingCode: "1234"
     }
   },
 
 
-  methods:{
+  methods: {
     copyAndShowSnackBar: async function (event) {
       event.stopPropagation();
       console.log(router);
-
       await navigator.clipboard.writeText(`http://localhost:8083/#/routines/${this.rutina.id}`); //// AVISAR QUE CAMBIEN ESTA URL PARA Q FUNCIONEE
 
-     //  alert("PRUEBA");
+      //  alert("PRUEBA");
       this.snackbar = true;
       setTimeout(() => {
         this.$emit("yourEvent");
       }, this.timeout);
     },
-
-
   },
+  computed: {
+    mensaje() {
+      if (this.rutina.isPublic) {
+        return "¡Se ha copiado al portapapeles el link de la rutina!"
+      } else {
+        return "Tu rutina debe ser pública para que puedas compartirla"
+      }
+    }
   }
-
+}
 
 </script>
