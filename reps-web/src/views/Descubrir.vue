@@ -15,48 +15,6 @@
       </v-col>
     </v-row>
     <other-routines :key="cardID"></other-routines>
-<!--v-bind:params="this.params"
-    <div class="noRut mt-16" v-if="this.otherRoutinesLength === 0">
-      <template>
-        <v-container>
-          <v-row>
-            <v-progress-linear
-                color="primary lighten-2"
-                buffer-value="0"
-                stream
-            ></v-progress-linear>
-            <v-col></v-col>
-          </v-row>
-          <v-row
-              align="center"
-              justify="center"
-          >
-            <v-col
-                class="text-center"
-                cols="24"
-            >
-              <h1 class="display-1 font-weight-thin mb-4">
-                <span>... Se el primero en </span>
-                <span class="blue--text boldText">compartir rutinas con tus colegas</span>
-                <span> ...</span>
-              </h1>
-              <h4 class="subheading">
-                Aqui apareceran rutinas creadas por otros usuarios
-              </h4>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col></v-col>
-            <v-progress-linear
-                color="primary lighten-2"
-                buffer-value="0"
-                stream
-            ></v-progress-linear>
-          </v-row>
-        </v-container>
-      </template>
-    </div>-->
-
   </v-container>
 </template>
 <script>

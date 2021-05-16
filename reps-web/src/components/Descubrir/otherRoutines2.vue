@@ -46,6 +46,12 @@
       <detailed-routine v-bind:show-username="true" v-bind:username="rutina.user.username" v-bind:rutina="rutina"></detailed-routine>
 
     </v-dialog>
+
+    <empty-message class="mt-12" v-if="rutinas.length === 0" v-bind:mensaje1="this.mensaje1"
+                   v-bind:mensaje2="this.mensaje2"
+                   v-bind:subtitulo="this.subtitulo"
+    ></empty-message>
+
   </div>
 </template>
 
@@ -57,9 +63,10 @@
 import DetailedRoutine from "../detailedRoutine";
 import FavRoutine from "../favRoutine";
 import ShareRoutine from "../shareRoutine";
+import EmptyMessage from "../emptyMessage";
 
 export default {
-  components: {ShareRoutine, FavRoutine, DetailedRoutine},
+  components: {EmptyMessage, ShareRoutine, FavRoutine, DetailedRoutine},
   data() {
     return {
       snackbar: false,
@@ -68,6 +75,9 @@ export default {
       modalVisible:null,
       dialogEdit:false,
       modalData: null,
+      mensaje1: "No se encontraron rutinas para esta búsqueda",
+      mensaje2: "",
+      subtitulo: ""
     }
   },
   methods: {

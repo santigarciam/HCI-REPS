@@ -1,6 +1,6 @@
 <template>
   <v-dialog persistent v-model="dialog" width="800px">
-    <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
+    <template v-slot:activator="{ on, attrs }">
       <v-btn plain block slot="activator" v-bind="attrs" v-on="on">Mi Perfil</v-btn>
     </template>
 
@@ -67,11 +67,11 @@
 
           <v-col>
             <v-row>
-              <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
+              <v-spacer></v-spacer>
               <v-btn :disabled="loading"
                      color="grey lighten-1 white--text mx-0"
                      @click="cancelActionEditProfile">Cancelar</v-btn>
-              <v-btn :loading="loading" color="#2679CC" flat class="mx-10" @click="submit">Guardar</v-btn>
+              <v-btn :loading="loading" color="#2679CC" dark class="mx-10" @click="submit">Guardar</v-btn>
 
             </v-row>
           </v-col>
