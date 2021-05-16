@@ -5,7 +5,7 @@
         <v-col>
           <v-row justify="center" align="center" style="height: 550px">
             <v-card rounded color="rgb(0, 0, 0, 0.8)" elevation="0">
-              <v-card-title class="ml-4 white--text">Ingrese el codigo de verificacion enviado a su casilla de correos
+              <v-card-title class="ml-4 white--text">Ingrese el código de verificación enviado a su casilla de correos
                 <v-btn class="ml-4" plain icon dark v-on:click="$router.push('/')">
                   <v-icon >
                     mdi-close
@@ -15,7 +15,7 @@
                 <v-container>
                     <v-row>
                       <v-text-field
-                          label="Codigo"
+                          label="Código"
                           elevation="2"
                           color="grey"
                           dense
@@ -53,7 +53,7 @@
                         class="mr-3"
                         @click="resendCode"
                         @keyup.enter="resendCode"
-                    >REENVIAR CODIGO
+                    >REENVIAR CÓDIGO
                     </v-btn>
               </v-row>
                   </v-container>
@@ -67,7 +67,7 @@
     </v-container>
     <v-snackbar
       v-model="snackbar"
-    >Se reenvio el codigo de verificacion a su mail {{this.$store.state.userRegisteredMail}}</v-snackbar>
+    >Se reenvío el código de verificación a su mail {{this.$store.state.userRegisteredMail}}</v-snackbar>
   </div>
 </template>
 
