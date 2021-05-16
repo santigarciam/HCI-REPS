@@ -9,7 +9,6 @@
             <v-card-title>{{ excercise.name }}</v-card-title>
             <v-spacer></v-spacer>
 <!--            EDITAR EJERCICIO-->
-<!--            <v-dialog v-model="dialog[excersise.id]" width="800px" :retain-focus="false" >-->
             <v-dialog persistent v-model="dialog[excercise.id]" width="800px" :retain-focus="false" >
             <template  v-slot:activator="{ on, attrs }">
               <v-btn icon class="mt-4 mr-2" plain color = "grey" slot="activator" small  v-on:click.prevent="editEj(excercise.id)" v-bind="attrs" v-on="on">
@@ -25,8 +24,7 @@
                 <v-col></v-col>
                 <v-form class="px-3">
                   <v-text-field outlined label="Nombre*" v-model.lazy="excerciseAux.name"></v-text-field>
-                  <v-textarea  outlined label="Descripcion*" v-model="excerciseAux.detail" ></v-textarea>
-
+                  <v-textarea  outlined label="Descripción*" v-model="excerciseAux.detail" ></v-textarea>
                 </v-form>
               </v-card-text>
               <v-col>
@@ -58,14 +56,11 @@
                     <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
                     <v-btn dark flat color="#2679CC" class=" mx-0" @click="cancelAction">No</v-btn>
                     <v-btn color="grey lighten-1 white--text" class="mx-10" @click="deleteEj(excercise.id)">Si</v-btn>
-
                   </v-row>
                 </v-col>
 
                 <v-col></v-col>
               </v-card>
-
-
             </v-dialog>
             <!--      Boton de borrar      -->
 
@@ -89,12 +84,9 @@
       <v-divider></v-divider>
 
       <v-card-text>
-        <v-card-title v-model="descripcionEj">Descripcion:</v-card-title>
+        <v-card-title v-model="descripcionEj">Descripción:</v-card-title>
         <v-card-text>{{ excercise.detail }}</v-card-text>
-<!--        <v-card-title v-model="multEj">Multimedia:</v-card-title>-->
-<!--        <v-card-title v-model="equipEj">Equipamiento:</v-card-title>-->
       </v-card-text>
-
 
     </v-card>
   </v-dialog>
@@ -113,7 +105,6 @@ export default {
       dialog:{id:0,on:false},
       detailEdited:'',
       currentID:-1,
-      // dialog: false,
       dialogEditRut: false,
       excerciseAux:{id:0,name:'',detail:''},
       loading: false,
@@ -125,11 +116,12 @@ export default {
       excercise.name = this.excerciseAux.name;
       excercise.detail = this.excerciseAux.detail;
      const resp = await ExerciseApi.modify(excercise);
-     if(resp.id){
-       console.log("se logro modificar el ej");
-     }else{
-       console.log(" NO se logro modificar el ej");
-     }
+     // if(resp.id){
+     //   console.log("se logro modificar el ej");
+     // }else{
+     //   console.log(" NO se logro modificar el ej");
+     // }
+      // Faltaria el manejo de error
       this.dialog[excercise.id] = false;
 
       await this.$store.dispatch("changeCardID");

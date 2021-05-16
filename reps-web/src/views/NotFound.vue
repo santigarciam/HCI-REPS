@@ -7,7 +7,7 @@
             <v-card   rounded color="rgb(0, 0, 0, 0.8)" elevation="0">
               <v-card-text>
                 <v-card-title class="white--text justify-center">Oops</v-card-title>
-                <v-card-text class="white--text justify-center">Esta pagina no esta disponible</v-card-text>
+                <v-card-text class="white--text justify-center">Esta página no está disponible</v-card-text>
                 <router-link to="/MisRutinas">
                   <div class="text-center">
                     <v-btn

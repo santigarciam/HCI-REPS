@@ -10,7 +10,6 @@
 
     <v-card>
       <v-card-title class="justify-center white--text primary" >Editar Ejercicio</v-card-title>
-
       <v-card-text>
         <v-form class="px-3">
           <v-text-field label="Nombre*" v-model="nombreRut"></v-text-field>
@@ -35,8 +34,6 @@
           </v-file-input>
         </v-form>
       </v-card-text>
-
-
     </v-card>
   </v-dialog>
 </template>

@@ -84,20 +84,16 @@ export default {
     }
   },
   created(){
-    console.log("created")
     bus.$on('busqueda/Descubrir', (data) =>{
       this.busqueda = data;
-      console.log(this.busqueda)
       this.filtrar()
     })
     bus.$on('ordenar/Descubrir', (data) =>{
       this.orden = data;
-      console.log(this.orden)
       this.filtrar()
     })
     bus.$on('dificultad/Descubrir', (data) =>{
       this.dificultad = data;
-      console.log(this.dificultad)
       this.filtrar()
     })
   },
@@ -125,7 +121,6 @@ export default {
           this.params += "&"
         }
         this.params += "search=" + this.busqueda
-        console.log("jojo")
       }
       if (this.orden!= ""){
         if (this.params!=""){
@@ -137,7 +132,6 @@ export default {
         this.params += "&"
       }
         this.params += "direction=" + this.direc
-      console.log(this.params)
       this.$store.dispatch("getRoutines", this.params);
       this.params=""
 
@@ -150,7 +144,6 @@ export default {
 
   },
   mounted() {
-    //console.log("mounted")
     this.$store.dispatch("changeCardID");
   },
   beforeDestroy() {

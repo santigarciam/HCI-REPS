@@ -81,7 +81,6 @@ export default {
   created(){
     bus.$on('busqueda/MisEjercicios', (data) =>{
       this.busqueda = data;
-      console.log(this.busqueda)
       this.buscar()
     })
   },

@@ -4,10 +4,6 @@
       <router-link to="/MisRutinas">
       <img class="mr-3" :src="require('../assets/reps4.png')" height="40"/>
       </router-link>
-<!--      <router-link to="/Home">-->
-<!--      <v-toolbar-title><span class="titulo1 font-weight-light">RE</span><span class="titulo2">PS</span></v-toolbar-title>-->
-<!--      </router-link>-->
-<!--      <v-spacer></v-spacer>-->
       <v-spacer></v-spacer>
 
       <router-link to="/MisRutinas">
@@ -160,10 +156,6 @@ export default {
   data() {
     return {
       loading: false,
-      // user: '',
-      // userAvatar: '',
-      // userFirstName:'',
-      // userInfoLoaded: false,
     }
   },
   methods:{
@@ -175,9 +167,6 @@ export default {
       this.dialog = false;
       this.$store.dispatch("changeCardID");
     },
-    // notLogOut: function (){
-    //   this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
-    // },
     toLanding: async function (){
       await this.loadingAnimation();
       state.token = null;
@@ -194,7 +183,6 @@ export default {
       this.data.userFirstName = result.firstName;
       this.data.userAvatar = result.avatarUrl;
       this.data.userInfoLoaded = true;
-      console.log(result);
     }
   },
   computed: {

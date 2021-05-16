@@ -105,17 +105,14 @@ export default {
   created(){
     bus.$on('busqueda/MisRutinas', (data) =>{
       this.busqueda = data;
-      console.log(this.busqueda)
       this.filtrar()
     })
     bus.$on('ordenar/MisRutinas', (data) =>{
       this.orden = data;
-      console.log(this.orden)
       this.filtrar()
     })
     bus.$on('dificultad/MisRutinas', (data) =>{
       this.dificultad = data;
-      console.log(this.dificultad)
       this.filtrar()
     })
  },
@@ -154,7 +151,6 @@ export default {
        this.params += "&"
      }
      this.params += "direction=" + this.direc
-     console.log(this.params)
      this.$store.dispatch("getUserRoutines", this.params);
      this.params=""
    },

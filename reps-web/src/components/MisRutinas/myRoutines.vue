@@ -6,8 +6,6 @@
         :key="[index, rutina.id]"
         scrollable
     >
-      <!--        v-for="rutina in data().rutinas" :key="rutina.tituloRut"  UNA LINEA MAS ARRIBA -->
-
       <template v-slot:activator="{ on, attrs }">
         <v-container class ="container_v_card pb-4">
           <v-card v-bind="attrs" v-on="on"  @click.stop="funcionAUX(rutina.id,rutina)"  :data="modalData" scrollable>
@@ -24,7 +22,7 @@
 
               <!--INFORMACION RUTINE CARD-->
               <v-row class="text-left">
-                <v-card-subtitle class="mr-0 pr-0 font-weight-bold">Descripcion: </v-card-subtitle>
+                <v-card-subtitle class="mr-0 pr-0 font-weight-bold">Descripción: </v-card-subtitle>
                 <v-card-subtitle class="ml-0 pl-1" v-model="descripcionRut">{{ rutina.detail }}</v-card-subtitle>
               </v-row>
             </v-col>
@@ -45,10 +43,6 @@
 <script>
 import NuevaRutina from "@/components/MisRutinas/nuevaRutina";
 import  EditRutina from "@/components/MisRutinas/editRoutine"
-/*
-import { routineApi } from "../API_EJS/js/routines";
-import { cycleApi } from "../API_EJS/js/cycles";
-import {cycleExercisesApi} from "../API_EJS/js/cycleExercises";*/
 import DetailedRoutine from "../detailedRoutine";
 import EditRoutine from "./editRoutine";
 import DeleteRoutine from "./deleteRoutine";
@@ -129,10 +123,6 @@ export default {
 
   async mounted() {
     await this.$store.dispatch("getUserRoutines");
-    // if (this.$store.state.listaRutinas.length !== 0) {
-    //   await this.$store.dispatch("getCyclesOfID", this.$store.state.listaRutinas[0].id);
-    // }
-    // console.log(this.$store.state.listaRutinas)
   },
 }
 </script>

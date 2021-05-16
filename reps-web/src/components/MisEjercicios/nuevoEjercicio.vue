@@ -1,7 +1,7 @@
 <template>
   <v-dialog persistent v-model="dialog" width="800px" :key="cardID">
     <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-      <v-btn depressed class="ma-2 mr-4" slot="activator" v-bind="attrs" v-on="on" outlined>+Anadir</v-btn>
+      <v-btn depressed class="ma-2 mr-4" slot="activator" v-bind="attrs" v-on="on" outlined>+Añadir</v-btn>
     </template>
 
     <v-card>
@@ -13,7 +13,7 @@
         <v-col></v-col>
         <v-form class="px-3">
           <v-text-field outlined label="Nombre" v-model="nameEj"></v-text-field>
-          <v-textarea outlined label="Descripcion" v-model="detailEj" ></v-textarea>
+          <v-textarea outlined label="Descripción" v-model="detailEj" ></v-textarea>
         </v-form>
       </v-card-text>
 
@@ -21,8 +21,7 @@
         <v-row>
           <v-spacer></v-spacer> <!-- VER SI SE PUEDE SACAR ESTO Y MOVERLO CON CSS -->
           <v-btn  color="grey lighten-1 white--text mx-0" v-on:click="cleanAndCloseDialog">Cancelar</v-btn>
-          <v-btn :loading="loading" color="#2679CC" flat class="mx-10" v-on:click="addNewExcercise">Guardar</v-btn>
-
+          <v-btn :loading="loading" color="#2679CC" flat class="mx-10 white--text" v-on:click="addNewExcercise">Guardar</v-btn>
         </v-row>
       </v-col>
 <v-col></v-col>
@@ -73,6 +72,5 @@ export default {
 <style scoped>
   .colorReps{
     background-color: #2679CC;
-    font-family: ;
   }
 </style>

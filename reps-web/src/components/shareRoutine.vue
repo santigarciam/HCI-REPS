@@ -16,7 +16,7 @@
 <!--    <input  type="text" value="Hello World" id="myInput">-->
   <v-snackbar
       v-model="snackbar"
-  >¡Se ha copiado al clipboard el link de la rutina!</v-snackbar>
+  >¡Se ha copiado al portapapeles el link de la rutina!</v-snackbar>
   </div>
 </template>
 

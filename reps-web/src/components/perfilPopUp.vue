@@ -37,7 +37,7 @@
                       <v-text-field
                           outlined
                           v-model="date"
-                          label="Fecha de Nacimiento"
+                          label="Fecha de nacimiento"
                           append-icon="mdi-calendar"
                           readonly
                           v-bind="attrs"
@@ -54,14 +54,11 @@
                     ></v-date-picker>
                   </v-menu>
                 </template>
-
-<!--                <v-text-field outlined label="Fecha De Nacimiento" v-model="fechaNacUsuario"></v-text-field>-->
-<!--                -->
               </v-col>
             </v-row>
             <v-row>
               <v-col>
-                <v-text-field outlined label="URL al Avatar" v-model="urlAvatar">URL</v-text-field>
+                <v-text-field outlined label="URL al avatar" v-model="urlAvatar">URL</v-text-field>
               </v-col>
             </v-row>
           </v-container>
@@ -113,7 +110,6 @@ export default {
       this.$refs.menu.save(date)
     },
     cancelActionEditProfile: function (){
-      console.log("CANCEL edit Profile");
       this.dialog = false;
       this.nombreUsuario='';
       this.usuario='';
@@ -132,8 +128,6 @@ export default {
       if (this.urlAvatar !== ''){
         avatarUrlAux = this.urlAvatar;
       }
-
-      //console.log(this.date.replaceAll('-',''));
       const data = {  firstName: this.nombreUsuario,
         lastName: this.apellidoUsuario,
         gender: "male",
@@ -141,7 +135,6 @@ export default {
         phone: "98295822",
         avatarUrl: avatarUrlAux,
         metadata: null};
-      console.log(data);
       await UserApi.modifyUserInformation(data, null);
       this.loading = false;
       //await this.loadingAnimation();
@@ -150,9 +143,7 @@ export default {
     },
     async loadingAnimation () {
       this.loading = true;
-      console.log("Antes del promise");
       await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log("Despues del promise");
       this.loading = false;
     },
   },

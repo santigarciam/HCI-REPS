@@ -54,15 +54,6 @@
 export default {
   props: ['rutina', 'username', 'showUsername'],
 
-  /*computed: {
-   cyclesOfRutine(){
-      console.log(this.$store.state.cyclesOfRutine);
-      return this.$store.state.cyclesOfRutine;
-    },
-    exercisesOfCycle(){
-      return this.$store.state.exersisesOfRoutineOnCycle;
-    },
-  },*/
   methods: {
     cancelActionRut: function () {
       this.$store.dispatch("changeCardID"); //es como un flag que avisa un cambio de estado
@@ -89,8 +80,7 @@ export default {
     isPrivate(){
       if (! this.showUsername){
         return ! this.rutina.isPublic
-      }
-      else{
+      }else{
         return false
       }
     }

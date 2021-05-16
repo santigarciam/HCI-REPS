@@ -6,8 +6,6 @@
         :key="[index, rutina.id]"
         scrollable
     >
-      <!--        v-for="rutina in data().rutinas" :key="rutina.tituloRut"  UNA LINEA MAS ARRIBA -->
-
       <template v-slot:activator="{ on, attrs }">
         <v-container class ="container_v_card pb-4">
           <v-card v-bind="attrs" hover v-on="on"  @click.stop="funcionAUX(rutina.id,rutina)"  :data="modalData" scrollable>
@@ -81,9 +79,7 @@ export default {
       this.$data.modalData = item;
       this.$data.modalVisible = true;
       // ver de hacer el dispatch aca
-
       await this.$store.dispatch("getCyclesOfID", id);
-
     },
      /////////////////////////////////////////////////////////////////////////////////
   },
@@ -96,20 +92,8 @@ export default {
       return this.$store.state.cardID;
     }
   },
-  created() {
-    console.log("created del other routines")
-  },
-  updated() {
-    console.log("updated del other")
-  },
-  beforeMount() {
-    console.log("before mount del other routines")
-  },
   mounted() {
-    //this.$store.dispatch("getRoutines", "");
-    console.log("sera aca")
     this.$store.dispatch("getFavourites", "");
-   console.log("1")
   },
 }
 </script>
