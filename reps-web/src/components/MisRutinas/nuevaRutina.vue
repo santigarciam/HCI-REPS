@@ -7,7 +7,7 @@
 
     <v-card flat>
       <v-card-title class="justify-center  white--text primary">
-        AGREGAR NUEVA RUTINA
+         NUEVA RUTINA
       </v-card-title>
       <v-card-text class="mt-6">
         <v-row><v-text-field class="mr-3 ml-3" dense outlined label="Nombre" v-model="nameRut"></v-text-field>
