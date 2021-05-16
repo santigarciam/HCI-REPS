@@ -26,7 +26,10 @@ Pasos a realizar para instalar y configurar el sitio Web
 Como se mencionó en clase, en el .zip  se encuentra la página web implementada  Para poder correr la web deberá seguir los siguientes pasos:
 
 En el directorio de la API y correr las siguientes instrucciones:
+
 >npm install
+
+
 >npm start
 
 Esto le devolverá la dirección http://localhost:8080/ la cual indica en qué puerto se está corriendo la API. 
@@ -66,6 +69,6 @@ Navegadores Soportados:
 -Firefox 82.0
 
 
-○ Nombres y versiones de los navegadores soportados. 
-○ Secuencia de pasos que deben realizarse para instalar y configurar el sitio Web en un servidor Web.
+- Nombres y versiones de los navegadores soportados. 
+- Secuencia de pasos que deben realizarse para instalar y configurar el sitio Web en un servidor Web.
 
