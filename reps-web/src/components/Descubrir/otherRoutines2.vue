@@ -47,7 +47,7 @@
 
     </v-dialog>
 
-    <empty-message class="mt-12" v-if="rutinas.length === 0" v-bind:mensaje1="this.mensaje1"
+    <empty-message  class="mt-12 display-1 font-weight:bold" v-if="rutinas.length === 0" v-bind:mensaje1="this.mensaje1"
                    v-bind:mensaje2="this.mensaje2"
                    v-bind:subtitulo="this.subtitulo"
     ></empty-message>
