@@ -12,7 +12,7 @@
       <v-card-text class="mt-6">
         <v-row><v-text-field class="mr-3 ml-3" dense outlined label="Nombre" v-model="nameRut"></v-text-field>
           <v-btn outlined class="align-center mr-3" @click="changePrivacy()"><v-icon class="mr-2">{{this.lock}}</v-icon>{{this.privacy}}</v-btn></v-row>
-        <v-row ><v-textarea class="mr-3 ml-3" dense outlined auto-grow label="Descripcion" v-model="detailRut" ></v-textarea></v-row>
+        <v-row ><v-textarea class="mr-3 ml-3" dense outlined auto-grow label="Descripción" v-model="detailRut" ></v-textarea></v-row>
         <v-row><v-col><v-text-field dense outlined label="Categoría" v-model="categoryRut"></v-text-field></v-col>
           <v-col>  <v-select
             v-model="diff"
@@ -434,7 +434,7 @@ import  { categoryApi} from "../../API_EJS/js/category";
 import {cycleApi} from "../../API_EJS/js/cycles";
 import  {cycleExercisesApi} from "../../API_EJS/js/cycleExercises";
 import EmptyMessage from "../emptyMessage";
-//import state from "/"
+
 
 export default {
   name: "nuevaRutina",
@@ -484,7 +484,6 @@ export default {
         this.isPublic=true
       }
     },
-    // generarRutinaNueva(tituloRut, autorRut, descripcionRut, durRut, rating)
     addNewRoutine: async function(){
       this.loading = true;
       var catID = -1;
@@ -513,8 +512,7 @@ export default {
       // Lo de arriba es para agregar/usar una categoria dependiendo si esta o no creada.
 
           const respRut =  await routineApi.add({name:this.nameRut,detail:this.detailRut,isPublic:this.isPublic,difficulty:this.diff,category:{ id: catID},metadata:null},null);
-      console.log("Resprut : ");
-          console.log(respRut);
+
           if(respRut.id) {
             for (var i = 0; i < this.steps + 2; i++) {
               switch (i) {
@@ -532,7 +530,6 @@ export default {
                     for (const ejercicio of this.ejsCycleAux[i]) {
                       await cycleExercisesApi.add(respCal.id, ejercicio.ej.id, { order: parseInt(ejercicio.orden), duration: parseInt(ejercicio.desc), repetitions: parseInt(ejercicio.reps)}, null);
                     }
-                    console.log(await cycleApi.get(respRut.id,respCal,null));
                   } else {
                     console.log("Error calentamiento");
                     return;
@@ -572,7 +569,7 @@ export default {
                     for (const ejercicio of this.ejsCycleAux[i]) {
                       await cycleExercisesApi.add(respCiclo.id, ejercicio.ej.id, { order: parseInt(ejercicio.orden), duration: parseInt(ejercicio.desc), repetitions: parseInt(ejercicio.reps)}, null);
                     }
-                    console.log(await cycleApi.get(respRut.id,respCiclo,null));
+
                   } else {
                     console.log("Error ciclo"); //ERROR
                   }
@@ -585,22 +582,12 @@ export default {
           // Lo de arriba es toda la logica de crear una rutina (rutina, ciclos, ejercicios)
 
 
-      const rutinaAux = await routineApi.get(respRut.id,null);
-      console.log(rutinaAux);
-      const ciclosAux = await cycleApi.getAll(respRut.id, null);
-      console.log("CILCOS");
-      console.log(ciclosAux);
-      for (const h of ciclosAux.content) {
-        console.log(h.id);
-        var ejerCiclo = await cycleExercisesApi.getAll(h.id, null);
-        console.log(ejerCiclo);
-      }
+
     this.loading = false;
-      await this.$store.dispatch("getCyclesOfID", rutinaAux.id);
+      await this.$store.dispatch("getCyclesOfID", respRut.id);
      this.cancelActionNewRut();
     },
     cancelActionNewRut: function (){
-      console.log("CANCEL");
       this.dialog = false;
       this.nameRut='';
       this.e1= 0;
@@ -621,20 +608,12 @@ export default {
           auxArr.push({orden: order++, ej: this.ejercicios[k], reps: 0, desc: 0, sets: 0});
         }
         order = 1;
-        //this.ejsCycleAux[i].push(this.ejercicios[k]);
         ejsArr[i] = auxArr;
         //}
       }
-      console.log("Siguiente en ADD RUT");
-      let cycloOf = await this.$store.state.cyclesOfRutine;
-      console.log(cycloOf)
-      console.log(ejsArr);
-      this.$store.dispatch("setSelectedExercisesInCycles", ejsArr);
+
+      await this.$store.dispatch("setSelectedExercisesInCycles", ejsArr);
     },
-    // cancelAUX: function (){
-    //   console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-    //   console.log(this.$store.state.ejsCycleAux);
-    // }
     },
   computed: {
     privacy() {
@@ -660,16 +639,13 @@ export default {
     },
     exercisesOfCycle(){
       return this.$store.state.exersisesOfRoutineOnCycle;
-    }, ////// DESCOMENTAR CUANDO EL API FUNCIONE
+    },
     ejsCycleAux(){
       return this.$store.state.ejsCycleAux;
     }
   },
   mounted() {
     this.$store.dispatch("getExercises");
-    // if(this.$store.state.listaRutinas.length !==0){
-    //   this.$store.dispatch("getCyclesOfID", this.$store.state.listaRutinas[0].id);
-    // }
     this.$store.dispatch("getCyclesOfID",1); /// VER DE DESSHAR
   }
 }
