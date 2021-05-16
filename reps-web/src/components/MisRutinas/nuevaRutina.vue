@@ -1,7 +1,7 @@
 <template>
 
   <v-dialog persistent v-model="dialog" width="900px" :key="cardID">
-    <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
+    <template v-slot:activator="{ on, attrs }">
     <v-btn depressed class="ma-2 mr-4" slot="activator" v-bind="attrs" v-on="on" outlined>+Añadir</v-btn>
     </template>
 
@@ -414,6 +414,9 @@
                       </v-card>
 
                       </v-dialog>
+                      <v-snackbar color="error"
+                          v-model="snackbar"
+                      >Revise los datos ingresados. Recuerde que debe elegir al menos un ejercicio por ciclo</v-snackbar>
 
 
                     </v-row>
@@ -446,7 +449,8 @@ export default {
         v => !!v || 'Este campo es obligatorio',
       ],
       siguiente: false,
-
+      empty: false,
+      snackbar:false,
 
       lock: "mdi-lock-open",
       isPublic: true,
@@ -606,10 +610,22 @@ export default {
     },
     next: function (){
       if (this.$refs.form.validate()){
-        this.loadNextStepNewRut()
-        this.siguiente=true
+        for (var i = 0; i < this.steps && ! this.empty; i++) {
+          if (this.selected[i].length == 0){
+            this.empty = true
+            this.snackbar = true
+          }
+        }
+        if (this.empty){
+          this.siguiente = false
+        }else{
+          this.loadNextStepNewRut()
+          this.siguiente=true
+          this.snackbar = false
+        }
       }else{
         this.siguiente = false
+        this.snackbar = true
       }
     },
     loadNextStepNewRut: async function () {

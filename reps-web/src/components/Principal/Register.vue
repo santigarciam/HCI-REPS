@@ -14,6 +14,7 @@
                     v-model="newUsername"
                     filled
                     class= "mt-6"
+                    @keyup.enter="validar()"
                     rounded
                     :error-messages= "this.usernameError"
                     dense
@@ -28,6 +29,7 @@
                     label="Correo electrónico *"
                     v-model="email"
                     :rules=emailRules
+                    @keyup.enter="validar()"
                     :error-messages= "this.emailError"
                     filled
                     class= "mt-6"
@@ -52,6 +54,7 @@
                     :rules="passwordRules"
                     name="input-10-1"
                     label="Contraseña *"
+                    @keyup.enter="validar()"
                     hint="Mínimo 8 caracteres"
                     counter
                     @click:append="show1 = !show1"
@@ -68,6 +71,7 @@
                     rounded
                     dense
                     required
+                    @keyup.enter="validar()"
                     :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
                     :type="show2 ? 'text' : 'password'"
                     :rules="confirmRules"
