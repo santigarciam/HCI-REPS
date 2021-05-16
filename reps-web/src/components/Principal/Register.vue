@@ -196,7 +196,10 @@ export default {
       if (resp.id){
         console.log("Se registro:");
         console.log(resp);
-        await this.$store.dispatch('saveUserInfo', {username: this.newUsername, password: this.newPassword,email: this.email});
+        //await this.$store.dispatch('saveUserInfo', {username: this.newUsername, password: this.newPassword,email: this.email});
+        localStorage.setItem('username', this.newUsername)
+        localStorage.setItem('password', this.newPassword)
+        localStorage.setItem('email', this.email)
         this.loading = false;
         await router.push('/ConfirmacionMail');
       }

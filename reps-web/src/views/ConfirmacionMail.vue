@@ -74,7 +74,7 @@
 <script>
 import { UserApi } from "@/API_EJS/js/user";
 //import state from "../store/state";
-import {Api} from "../API_EJS/js/api";
+//import {Api} from "../API_EJS/js/api";
 import {bus2, router} from "../main";
 //import {router} from "../main";
 
@@ -86,25 +86,44 @@ export default {
       verificationCode: "",
       snackbar:false,
       verifError: false,
-      verifErrorMessage: ""
+      verifErrorMessage: "",
+      email: "",
+      username: "",
+      password: ""
     }
   },
 
+  beforeMount() {
+    this.getCredentials()
+  },
     methods:{
+      getCredentials: function (){
+        this.email = localStorage.getItem('email')
+        console.log(this.email)
+        this.username = localStorage.getItem('username')
+        console.log(this.username)
+        this.password = localStorage.getItem('password')
+      },
+      clearStorage: function (){
+        localStorage.removeItem('email')
+        localStorage.removeItem('password')
+        localStorage.removeItem('username')
+      },
       async verificarCodigo() {
         console.log("ACAAA");
         // eslint-disable-next-line no-undef
-        console.log(this.$store.state.userRegisteredMail);
+        //console.log(this.$store.state.userRegisteredMail);
         // console.log({userRegisteredMail,code:this.verificationCode});
         const resp = await UserApi.verifyCode({
-          email: this.$store.state.userInfo.email,
+          email: this.email,
           code: this.verificationCode
         }, null);
         console.log(resp);
         if (resp){
-          this.$store.state.token = Api.token;
-        await UserApi.login({username: this.$store.state.userInfo.username, password:this.$store.state.userInfo.password},null);
-          await router.push('/MisRutinas');
+          //this.$store.state.token = Api.token;
+        await UserApi.login({username: this.username, password:this.password},null);
+        this.clearStorage()
+        await router.push('/MisRutinas');
         }
         else{bus2.$on('error', (data) => {
           this.loading = false
@@ -115,8 +134,8 @@ export default {
         })}
       },
       resendCode(){
-        console.log("reenviado" + this.$store.state.userRegisteredMail);
-        UserApi.resendCode({email:this.$store.state.userInfo.email},null);
+        console.log("reenviado" + this.email);
+        UserApi.resendCode({email:this.email},null);
         this.snackbar = true;
         setTimeout(() => {
           this.$emit("yourEvent");
