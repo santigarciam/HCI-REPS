@@ -1,7 +1,7 @@
 <template>
   <v-dialog persistent v-model="dialog" width="800px" :key="cardID">
     <template v-slot:activator="{ on, attrs }"> <!-- Por que hace falta esto -->
-      <v-btn depressed class="ma-2 mr-4" slot="activator" v-bind="attrs" v-on="on" outlined>+Anadir</v-btn>
+      <v-btn depressed class="ma-2 mr-4" slot="activator" v-bind="attrs" v-on="on" outlined>+Añadir</v-btn>
     </template>
 
     <v-card>
