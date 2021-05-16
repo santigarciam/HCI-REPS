@@ -36,7 +36,9 @@ Esto le devolverá la dirección http://localhost:8080/ la cual indica en qué p
 En el caso de querer correr en otra dirección seguir las instrucciones de cambio de dirección que se encuentran al término de estos pasos.
 
 Desde otra terminal ubicarse dentro del proyecto web y correr:
+
 >npm install
+
 >npm run serve
 
 Esto le devolverá la dirección http://localhost:8081/ la cual indica en qué puerto se está corriendo la web. Debe abrir el enlace en su navegador. 
