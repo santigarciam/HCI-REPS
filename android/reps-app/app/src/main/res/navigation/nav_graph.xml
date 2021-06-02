@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/descubrirFragment2"
-        android:name="com.example.reps.DescubrirFragment"
+        android:name="com.example.reps.ui.notifications.DescubrirFragment"
         android:label="fragment_descubrir"
         tools:layout="@layout/fragment_descubrir" />
     <fragment
