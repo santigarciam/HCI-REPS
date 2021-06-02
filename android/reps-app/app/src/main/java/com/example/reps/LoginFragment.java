@@ -87,16 +87,16 @@ public class LoginFragment extends Fragment {
         });
 
 
-        Button btn_login = view.findViewById(R.id.login_button_register);
-
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(getContext(),LogedActivity.class);
-                startActivity(intent);
-            }
-        });
+//        Button btn_login = view.findViewById(R.id.login_button_register);
+//
+//        btn_login.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent intent = new Intent(getContext(),LogedActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
     }
 }

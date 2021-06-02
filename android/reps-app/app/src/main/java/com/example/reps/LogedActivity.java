@@ -38,7 +38,7 @@ public class LogedActivity extends AppCompatActivity {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_descubrir, R.id.navigation_favoritos,R.id.navigation_perfil)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.mobile_navigation);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_loged);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
