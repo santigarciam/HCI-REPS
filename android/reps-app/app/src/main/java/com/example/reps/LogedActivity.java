@@ -1,6 +1,8 @@
 package com.example.reps;
 
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -19,6 +21,13 @@ public class LogedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ///// Para que no se vea el titel bar
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
+
+        /////
 
         binding = ActivityLogedBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -29,7 +38,7 @@ public class LogedActivity extends AppCompatActivity {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_descubrir, R.id.navigation_favoritos,R.id.navigation_perfil)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_loged);
+        NavController navController = Navigation.findNavController(this, R.id.mobile_navigation);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }

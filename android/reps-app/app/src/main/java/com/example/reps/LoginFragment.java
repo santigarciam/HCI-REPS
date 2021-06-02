@@ -1,5 +1,6 @@
 package com.example.reps;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import com.example.reps.databinding.FragmentLoginBinding;
+import com.example.reps.databinding.FragmentPerfilBinding;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -81,5 +85,18 @@ public class LoginFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.firstFragment);
             }
         });
+
+
+        Button btn_login = view.findViewById(R.id.login_button_register);
+
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getContext(),LogedActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
