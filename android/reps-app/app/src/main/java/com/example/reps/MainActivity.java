@@ -16,9 +16,5 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void clickMeFunc(View view) {
-        value++;
-        final TextView mTextView = (TextView) findViewById(R.id.textViewOnClick);
-        mTextView.setText("Value :" + value);
-    }
+
 }
