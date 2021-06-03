@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -30,7 +31,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
     @NotNull
     @Override
     public RoutineCardAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.routine_card, null);
+        View view = mInflater.inflate(R.layout.routine_card, null,false);
         return new RoutineCardAdapter.ViewHolder(view);
     }
 
@@ -47,13 +48,17 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
     public void setroutines(List<RoutineCard> rut) { routines = rut; }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, owner;
+        TextView name, owner; // AGREGAR LAS VARIABLES DEL ROUTINE CARD QUE FALTAN
 
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.rutine_card_title);
             owner = itemView.findViewById(R.id.rutine_card_user);
+            itemView.setOnClickListener(view -> {
+                int position = getAdapterPosition();
+                Toast.makeText(view.getContext(),"Element " + position + " clicked", Toast.LENGTH_LONG).show();
+            });
         }
 
         void bindData(final RoutineCard item){
