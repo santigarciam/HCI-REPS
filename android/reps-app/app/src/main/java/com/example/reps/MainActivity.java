@@ -5,10 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +15,12 @@ public class MainActivity extends AppCompatActivity {
 
     int value = 0;
     List<RoutineCard> rutinas;
+
+    //////////////////
+    RecyclerView verticalRecyclerView;
+    RoutineSectionAdapter verticalAdapter;
+    RecyclerView horizontalRecyclerView;
+    ArrayList<RoutineSection> arrayList1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +51,29 @@ public class MainActivity extends AppCompatActivity {
         rutinas.add(new RoutineCard("Rut Lu", "Gaston"));
 
         RoutineCardAdapter rAdapter = new RoutineCardAdapter(rutinas, this);
-        RecyclerView recyclerView = findViewById(R.id.list_recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(rAdapter);
-    }
+        //RecyclerView recyclerView = findViewById(R.id.section_rout_recycler_view);
+        //recyclerView.setHasFixedSize(true);
+        //LinearLayoutManager lManager = new LinearLayoutManager(this);
+        //lManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        //recyclerView.setLayoutManager(lManager);
+        //recyclerView.setAdapter(rAdapter);
 
+        ////////////////////////////////
+        verticalRecyclerView = findViewById(R.id.section_rout_recycler_view);
+        verticalRecyclerView.setHasFixedSize(true);
+        verticalRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+
+        arrayList1 = new ArrayList<>();
+        verticalAdapter = new RoutineSectionAdapter(arrayList1,this);
+        verticalRecyclerView.setAdapter(verticalAdapter);
+        RoutineSection verticalModel = new RoutineSection("Prueba 1", rutinas);
+        arrayList1.add(verticalModel);
+        RoutineSection verticalModel2 = new RoutineSection("Prueba 2", rutinas);
+        arrayList1.add(verticalModel2);
+        RoutineSection verticalModel3 = new RoutineSection("Prueba 3", rutinas);
+        arrayList1.add(verticalModel3);
+        verticalAdapter.notifyDataSetChanged();
+    }
 
 
 }
