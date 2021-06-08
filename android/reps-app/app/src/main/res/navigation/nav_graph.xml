@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_loginFragment_to_firstFragment2"
             app:destination="@id/firstFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_logedActivity"
+            app:destination="@id/logedActivity" />
 
     </fragment>
     <fragment
@@ -35,5 +38,9 @@
             android:id="@+id/action_firstFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
     </fragment>
+    <activity
+        android:id="@+id/logedActivity"
+        android:name="com.example.reps.LogedActivity"
+        android:label="LogedActivity" />
 
 </navigation>
