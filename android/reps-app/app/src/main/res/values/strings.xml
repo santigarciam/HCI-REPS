@@ -14,4 +14,7 @@
     <string name="title_descubrir">Descubrir</string>
     <string name="title_favoritos">Favoritos</string>
     <string name="title_perfil">Perfil</string>
+    <string name="progreso">Mi progreso</string>
+    <string name="program_entrenamiento">Programar entrenamiento</string>
+    <string name="edit_perfil">Editar perfil</string>
 </resources>
