@@ -81,5 +81,14 @@ public class RegisterFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.firstFragment);
             }
         });
+
+        Button btn_register = view.findViewById(R.id.register_button_register);
+
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(RegisterFragmentDirections.actionRegisterFragmentToLogedActivity());
+            }
+        });
     }
 }
