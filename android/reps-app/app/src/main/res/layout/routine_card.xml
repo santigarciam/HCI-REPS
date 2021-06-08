@@ -13,7 +13,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="202dp">
 
         <TextView
             android:id="@+id/rutine_card_title"
@@ -48,22 +48,14 @@
             app:layout_constraintTop_toTopOf="@+id/rutine_card_fav"
             app:srcCompat="@drawable/baseline_reply_black_24" />
 
-        <RatingBar
-            android:id="@+id/ratingBar"
-            android:layout_width="242dp"
-            android:layout_height="53dp"
-            android:layout_marginStart="68dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="@+id/rutine_card_title"
-            app:layout_constraintTop_toBottomOf="@+id/rutine_card_title" />
-
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="37dp"
             android:layout_height="26dp"
             android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/myRatingBar"
             app:layout_constraintStart_toStartOf="@+id/rutine_card_title"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
             app:srcCompat="@drawable/baseline_person_black_24dp" />
 
         <TextView
@@ -76,15 +68,30 @@
             app:layout_constraintStart_toEndOf="@+id/imageView4" />
 
         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="326dp"
-            android:layout_height="132dp"
+            android:id="@+id/textView"
+            android:layout_width="365dp"
+            android:layout_height="52dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
             android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/imageView4"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+            app:layout_constraintStart_toStartOf="@+id/rutine_card_title"
+            app:layout_constraintTop_toBottomOf="@+id/rutine_card_title" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+
+        <RatingBar
+            android:id="@+id/myRatingBar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:numStars="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
