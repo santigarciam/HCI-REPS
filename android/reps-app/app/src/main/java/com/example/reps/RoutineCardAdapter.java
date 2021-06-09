@@ -1,8 +1,11 @@
 package com.example.reps;
 
+import android.app.Application;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -91,8 +94,12 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                     Uri myUri = Uri.parse("http://stackoverflow.com"); //cambiar al link de la rutina
                     ClipData clip = ClipData.newRawUri("Rutine Link", myUri);
                     clipboard.setPrimaryClip(clip);
-                    Toast.makeText(view.getContext(),"Link de rutina " + position + " copiado al portapapeles", Toast.LENGTH_LONG).show();
 
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_STREAM, myUri);
+                    context.startActivity(Intent.createChooser(intent, "Compartir"));
+                    //Toast.makeText(view.getContext(),"Link de rutina " + position + " copiado al portapapeles", Toast.LENGTH_LONG).show();
                 }
             });
         }
