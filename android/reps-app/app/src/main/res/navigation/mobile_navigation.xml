@@ -35,11 +35,15 @@
         android:id="@+id/navigation_perfil"
         android:name="com.example.reps.ui.perfil.PerfilFragment"
         android:label="@string/title_perfil"
-        tools:layout="@layout/fragment_perfil" />
+        tools:layout="@layout/fragment_perfil" >
+        <action
+            android:id="@+id/action_navigation_perfil_to_editProfileFragment2"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/vista_rutina"
         android:name="com.example.reps.VistaRutina"
-        android:label="fragment_vista_rutina"
+        android:label="fragment_full_section"
         tools:layout="@layout/fragment_vista_rutina" />
     <fragment
 
@@ -51,5 +55,10 @@
             android:name="SectionTitle"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.reps.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile"/>
 
 </navigation>

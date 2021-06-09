@@ -55,7 +55,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/myRatingBar"
             app:layout_constraintStart_toStartOf="@+id/rutine_card_title"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/profile_nombre_apellido"
             app:srcCompat="@drawable/baseline_person_black_24dp" />
 
         <TextView
@@ -69,7 +69,7 @@
             app:layout_constraintStart_toEndOf="@+id/imageView4" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/profile_nombre_apellido"
             android:layout_width="320dp"
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
@@ -94,7 +94,7 @@
             android:layout_marginEnd="24dp"
             android:numStars="5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/profile_nombre_apellido" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
