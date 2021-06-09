@@ -4,13 +4,17 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.reps.ui.home.HomeFragmentDirections;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -63,12 +67,21 @@ public class RoutineSectionAdapter extends RecyclerView.Adapter<RoutineSectionAd
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView sectionTitle; // AGREGAR LAS VARIABLES DEL ROUTINE CARD QUE FALTAN
         RecyclerView recyclerView;
+        Button moreRoutines;
 
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             sectionTitle = itemView.findViewById(R.id.section_rout_title);
             recyclerView = itemView.findViewById(R.id.section_rout_recycler_view);
+            moreRoutines = itemView.findViewById(R.id.section_rout_button);
+
+            moreRoutines.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Navigation.findNavController(view).navigate(HomeFragmentDirections.actionNavigationHomeToFragmentFullSection(sectionTitle.getText().toString()));
+                }
+            });
         }
 
     }

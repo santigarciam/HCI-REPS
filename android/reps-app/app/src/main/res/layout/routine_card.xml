@@ -12,8 +12,8 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="202dp">
+        android:layout_width="348dp"
+        android:layout_height="187dp">
 
         <TextView
             android:id="@+id/rutine_card_title"
@@ -70,10 +70,12 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="365dp"
-            android:layout_height="52dp"
+            android:layout_width="320dp"
+            android:layout_height="40dp"
             android:layout_marginTop="16dp"
             android:text="@string/descripcion_rutina"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/rutine_card_title"
             app:layout_constraintTop_toBottomOf="@+id/rutine_card_title" />
 

@@ -11,8 +11,13 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
+
             android:id="@+id/action_navigation_home_to_vista_rutina"
             app:destination="@id/vista_rutina" />
+        <action
+
+            android:id="@+id/action_navigation_home_to_fragment_full_section"
+            app:destination="@id/fragment_full_section" />
     </fragment>
 
     <fragment
@@ -36,4 +41,15 @@
         android:name="com.example.reps.VistaRutina"
         android:label="fragment_vista_rutina"
         tools:layout="@layout/fragment_vista_rutina" />
+    <fragment
+
+        android:id="@+id/fragment_full_section"
+        android:name="com.example.reps.FullSection"
+        android:label="fragment_full_section"
+        tools:layout="@layout/fragment_full_section">
+        <argument
+            android:name="SectionTitle"
+            app:argType="string" />
+    </fragment>
+
 </navigation>
