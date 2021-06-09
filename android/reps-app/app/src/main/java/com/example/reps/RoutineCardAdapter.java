@@ -14,7 +14,10 @@ import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.reps.ui.home.HomeFragmentDirections;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -57,6 +60,8 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
 
 
 
+
+
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.rutine_card_title);
@@ -64,6 +69,8 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
             itemView.setOnClickListener(view -> {
                 int position = getAdapterPosition();
                 Toast.makeText(view.getContext(),"Element " + position + " clicked", Toast.LENGTH_LONG).show();
+
+                Navigation.findNavController(view).navigate(HomeFragmentDirections.actionNavigationHomeToVistaRutina());
             });
 
             itemView.findViewById(R.id.rutine_card_fav).setOnClickListener(new View.OnClickListener() {

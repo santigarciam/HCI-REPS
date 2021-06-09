@@ -21,7 +21,7 @@
             android:layout_height="49dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Nombre Rutina"
+            android:text="@string/nombre_rutina"
             android:textSize="28sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,8 @@
             android:id="@+id/rutine_card_user"
             android:layout_width="104dp"
             android:layout_height="19dp"
-            android:text="Paulo Londra"
+            android:text="@string/autor_rutina"
+            android:textColor="@color/our_blue"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
             app:layout_constraintStart_toEndOf="@+id/imageView4" />
@@ -72,7 +73,7 @@
             android:layout_width="365dp"
             android:layout_height="52dp"
             android:layout_marginTop="16dp"
-            android:text="TextView"
+            android:text="@string/descripcion_rutina"
             app:layout_constraintStart_toStartOf="@+id/rutine_card_title"
             app:layout_constraintTop_toBottomOf="@+id/rutine_card_title" />
 
