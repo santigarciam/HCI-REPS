@@ -54,8 +54,6 @@ public class RoutineSectionAdapter extends RecyclerView.Adapter<RoutineSectionAd
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
         holder.recyclerView.setAdapter(routineList);
 
-
-        //holder.bindData(routineSections.get(position));
     }
 
     @Override

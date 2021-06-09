@@ -73,7 +73,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                 int position = getAdapterPosition();
                 Toast.makeText(view.getContext(),"Element " + position + " clicked", Toast.LENGTH_LONG).show();
 
-                Navigation.findNavController(view).navigate(HomeFragmentDirections.actionNavigationHomeToVistaRutina());
+                Navigation.findNavController(view).navigate(HomeFragmentDirections.actionNavigationHomeToVistaRutina(position));
             });
 
             itemView.findViewById(R.id.rutine_card_fav).setOnClickListener(new View.OnClickListener() {

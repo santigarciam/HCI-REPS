@@ -40,7 +40,12 @@
         android:id="@+id/vista_rutina"
         android:name="com.example.reps.VistaRutina"
         android:label="fragment_vista_rutina"
-        tools:layout="@layout/fragment_vista_rutina" />
+        tools:layout="@layout/fragment_vista_rutina">
+    <argument
+        android:name="ID_rutina"
+        app:argType="integer" />
+    </fragment>
+
     <fragment
 
         android:id="@+id/fragment_full_section"
