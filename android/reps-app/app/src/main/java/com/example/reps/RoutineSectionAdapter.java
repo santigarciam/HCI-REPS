@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.reps.ui.home.HomeFragment;
 import com.example.reps.ui.home.HomeFragmentDirections;
 
 import org.jetbrains.annotations.NotNull;
