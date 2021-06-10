@@ -88,12 +88,12 @@ public class RegisterFragment extends Fragment {
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
 
         // Esto sirve para cuando se rota la pantalla
-        TextView mail = getView().findViewById(R.id.register_input_email);
-        registerViewModel.getCurrentMail().setValue(mail.getText().toString());
-        TextView userName = getView().findViewById(R.id.register_input_user);
-        registerViewModel.getUserName().setValue(userName.getText().toString());
-        TextView password = getView().findViewById(R.id.register_input_password);
-        registerViewModel.getPassword().setValue(password.getText().toString());
+//        TextView mail = getView().findViewById(R.id.register_input_email);
+//        registerViewModel.getCurrentMail().setValue(mail.getText().toString());
+//        TextView userName = getView().findViewById(R.id.register_input_user);
+//        registerViewModel.getUserName().setValue(userName.getText().toString());
+//        TextView password = getView().findViewById(R.id.register_input_password);
+//        registerViewModel.getPassword().setValue(password.getText().toString());
 
 
 
