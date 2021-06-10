@@ -11,9 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
+import com.example.reps.R;
 import com.example.reps.databinding.FragmentDescubrirBinding;
 import com.example.reps.databinding.FragmentPerfilBinding;
+import com.example.reps.ui.home.HomeFragmentDirections;
 
 public class PerfilFragment extends Fragment {
 
@@ -35,6 +38,13 @@ public class PerfilFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
+        root.findViewById(R.id.profile_edit_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(PerfilFragmentDirections.actionNavigationPerfilToEditProfileFragment2());
+            }
+        });
+
         return root;
     }
 
