@@ -68,7 +68,7 @@ public class PerfilFragment extends Fragment {
                                 @Override
                                 public void onClick(View view) {
                                     //TODO: borrar el token guardado
-                                    Navigation.findNavController(view).navigate(PerfilFragmentDirections.actionNavigationPerfilToMainActivity());
+                                    Navigation.findNavController(getView()).navigate(PerfilFragmentDirections.actionNavigationPerfilToMainActivity());
 
                                 }
                             });
