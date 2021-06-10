@@ -22,4 +22,6 @@
     <string name="descripcion_rutina">Descripcion rutina</string>
     <string name="favicon">favIcon</string>
     <string name="reps_logo">reps_logo</string>
+    <string name="ordenar">Ordenar</string>
+    <string name="filtrar">Filtrar</string>
 </resources>

@@ -23,11 +23,11 @@ import java.util.List;
 public class HomeViewModel extends ViewModel {
 
     int value = 0;
-    private List<RoutineCard> rutinas;
-      RecyclerView verticalRecyclerView;
-     RoutineSectionAdapter verticalAdapter;
-   // private  RecyclerView horizontalRecyclerView;
-    private ArrayList<RoutineSection> arrayList1;
+        private List<RoutineCard> rutinas;
+          RecyclerView verticalRecyclerView;
+         RoutineSectionAdapter verticalAdapter;
+       // private  RecyclerView horizontalRecyclerView;
+        private ArrayList<RoutineSection> arrayList1;
    // private  LogedActivity lgA;
 
 
