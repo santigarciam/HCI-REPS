@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.reps.databinding.FragmentEditProfileBinding;
 import com.example.reps.ui.perfil.PerfilFragmentDirections;
 
 /**
@@ -17,6 +18,7 @@ import com.example.reps.ui.perfil.PerfilFragmentDirections;
  * create an instance of this fragment.
  */
 public class EditProfileFragment extends Fragment {
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
