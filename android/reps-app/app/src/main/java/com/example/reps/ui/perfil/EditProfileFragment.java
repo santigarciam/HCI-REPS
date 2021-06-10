@@ -1,5 +1,8 @@
 package com.example.reps.ui.perfil;
 
+import android.app.DatePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,13 +14,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.reps.R;
 import com.example.reps.databinding.FragmentEditProfileBinding;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,12 +41,8 @@ public class EditProfileFragment extends Fragment{
     private String mParam1;
     private String mParam2;
 
-    private FragmentEditProfileBinding binding;
-    private TextInputLayout til_genero;
-    private AutoCompleteTextView act_genero;
-
-    private ArrayList<String> arrayListGeneros;
-    private ArrayAdapter<String> arrayAdapterGeneros;
+    TextView tvDate;
+    DatePickerDialog.OnDateSetListener setListener;
 
     public EditProfileFragment() {
         // Required empty public constructor
@@ -86,6 +88,10 @@ public class EditProfileFragment extends Fragment{
 //                textView.setText(s);
 //            }
 //        });
+
+        //////////////////////////////////////////////////////////////////////
+        // onClick boton "Cancelar" dentro del fragmento
+
         root.findViewById(R.id.editProfile_cancelar_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,8 +99,10 @@ public class EditProfileFragment extends Fragment{
             }
         });
 
+        //////////////////////////////////////////////////////////////////////
+        // Para crear el spinner que muestra los distintos generos disponibles
 
-        Spinner spinner = root.findViewById(R.id.editprofile_spinner_generos);
+        Spinner spinner = root.findViewById(R.id.editProfile_spinner_generos);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.generos, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -109,6 +117,34 @@ public class EditProfileFragment extends Fragment{
 
             }
         });
+
+        //////////////////////////////////////////////////////////////////////
+        // DatePicker para fecha de nacimiento
+
+        tvDate = root.findViewById(R.id.editProfile_fecha_input);
+        Calendar calendar = Calendar.getInstance();
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        tvDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, setListener, year, month, day);
+                  datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                  datePickerDialog.show();
+            }
+        });
+
+        setListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month+1;
+                String date = dayOfMonth + "/" + month + "/" + year;
+                tvDate.setText(date);
+            }
+        };
+
         // Inflate the layout for this fragment
         return root;
     }
