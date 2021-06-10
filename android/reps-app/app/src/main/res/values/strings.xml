@@ -22,4 +22,9 @@
     <string name="descripcion_rutina">Descripcion rutina</string>
     <string name="favicon">favIcon</string>
     <string name="reps_logo">reps_logo</string>
+    <string-array name="generos">
+        <item>Masculino</item>
+        <item>Femenino</item>
+        <item>Otro</item>
+    </string-array>
 </resources>

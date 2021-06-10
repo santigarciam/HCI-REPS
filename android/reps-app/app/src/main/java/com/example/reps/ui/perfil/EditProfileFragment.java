@@ -1,4 +1,4 @@
-package com.example.reps;
+package com.example.reps.ui.perfil;
 
 import android.os.Bundle;
 
@@ -8,15 +8,23 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Spinner;
 
-import com.example.reps.ui.perfil.PerfilFragmentDirections;
+import com.example.reps.R;
+import com.example.reps.databinding.FragmentEditProfileBinding;
+import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link EditProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EditProfileFragment extends Fragment {
+public class EditProfileFragment extends Fragment{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +34,13 @@ public class EditProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private FragmentEditProfileBinding binding;
+    private TextInputLayout til_genero;
+    private AutoCompleteTextView act_genero;
+
+    private ArrayList<String> arrayListGeneros;
+    private ArrayAdapter<String> arrayAdapterGeneros;
 
     public EditProfileFragment() {
         // Required empty public constructor
@@ -75,6 +90,23 @@ public class EditProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(EditProfileFragmentDirections.actionEditProfileFragmentToNavigationPerfil2());
+            }
+        });
+
+
+        Spinner spinner = root.findViewById(R.id.editprofile_spinner_generos);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.generos, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String text = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
         // Inflate the layout for this fragment

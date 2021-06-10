@@ -1,6 +1,7 @@
 package com.example.reps.ui.perfil;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -69,7 +70,8 @@ public class PerfilFragment extends Fragment {
                                 public void onClick(View view) {
                                     //TODO: borrar el token guardado
                                     Navigation.findNavController(getView()).navigate(PerfilFragmentDirections.actionNavigationPerfilToMainActivity());
-
+                                    Intent intent = new Intent();
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 }
                             });
                             }
