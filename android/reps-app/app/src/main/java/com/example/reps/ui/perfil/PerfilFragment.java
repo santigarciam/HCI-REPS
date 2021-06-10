@@ -1,10 +1,12 @@
 package com.example.reps.ui.perfil;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -40,12 +42,6 @@ public class PerfilFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
-        root.findViewById(R.id.profile_edit_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(PerfilFragmentDirections.actionNavigationPerfilToEditProfileFragment2());
-            }
-        });
 
         root.findViewById(R.id.profile_config_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +50,29 @@ public class PerfilFragment extends Fragment {
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
+                        if (menuItem.getItemId() == R.id.menu_profile_edit_profile){
+                            Navigation.findNavController(view).navigate(PerfilFragmentDirections.actionNavigationPerfilToEditProfileFragment2());
+                        }else if(menuItem.getItemId() == R.id.menu_profile_help){
+                            //hacer
+                            return false;
+                        }else if(menuItem.getItemId() == R.id.menu_profile_log_out){
+                            AlertDialog dialog = new AlertDialog.Builder(getContext())
+                                    .setTitle("Cerrar Sesion")
+                                    .setMessage("¿Seguro que quieres cerrar sesion?")
+                                    .setPositiveButton("Si", null)
+                                    .setNegativeButton("Cancelar", null)
+                                    .show();
+
+                            Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                            positiveButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    //TODO: borrar el token guardado
+                                    Navigation.findNavController(view).navigate(PerfilFragmentDirections.actionNavigationPerfilToMainActivity());
+
+                                }
+                            });
+                            }
                         return false;
                     }
                 });
