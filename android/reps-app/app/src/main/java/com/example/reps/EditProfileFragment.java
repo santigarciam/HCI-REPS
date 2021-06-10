@@ -3,10 +3,13 @@ package com.example.reps;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.reps.ui.perfil.PerfilFragmentDirections;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +61,23 @@ public class EditProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View root = inflater.inflate(R.layout.fragment_edit_profile, container, false);
+
+        //final TextView textView = binding.textPerfil;
+//        perfilViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
+        root.findViewById(R.id.editProfile_cancelar_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(EditProfileFragmentDirections.actionEditProfileFragmentToNavigationPerfil2());
+            }
+        });
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        return root;
     }
 }
