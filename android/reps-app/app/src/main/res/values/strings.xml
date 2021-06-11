@@ -30,6 +30,9 @@
     <string name="editProfile_cancelar_button">Cancelar</string>
     <string name="editProfile_hint_fecha_input">Fecha de nacimiento</string>
     <string name="editProfile_titulo_generos">Genero:</string>
+    <string name="programarEntrenamiento_titulo">Programar un entrenamiento</string>
+    <string name="programarEntrenamiento_fecha">Fecha</string>
+    <string name="programarEntrenamiento_hora">Hora</string>
     <string-array name="generos">
         <item>Masculino</item>
         <item>Femenino</item>

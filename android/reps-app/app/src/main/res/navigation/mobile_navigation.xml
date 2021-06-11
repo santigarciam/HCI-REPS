@@ -42,6 +42,12 @@
         <action
             android:id="@+id/action_navigation_perfil_to_mainActivity"
             app:destination="@id/mainActivity" />
+        <action
+            android:id="@+id/action_navigation_perfil_to_miProgresoFragment"
+            app:destination="@id/miProgresoFragment" />
+        <action
+            android:id="@+id/action_navigation_perfil_to_programarEntrenamientoFragment"
+            app:destination="@id/programarEntrenamientoFragment" />
     </fragment>
     <fragment
         android:id="@+id/vista_rutina"
@@ -69,7 +75,7 @@
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile">
         <action
-            android:id="@+id/action_editProfileFragment_to_navigation_perfil2"
+            android:id="@+id/action_editProfileFragment_to_navigation_perfil"
             app:destination="@id/navigation_perfil" />
     </fragment>
     <activity
@@ -77,5 +83,19 @@
         android:name="com.example.reps.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/miProgresoFragment"
+        android:name="com.example.reps.ui.perfil.MiProgresoFragment"
+        android:label="fragment_mi_progreso"
+        tools:layout="@layout/fragment_mi_progreso" />
+    <fragment
+        android:id="@+id/programarEntrenamientoFragment"
+        android:name="com.example.reps.ui.perfil.ProgramarEntrenamientoFragment"
+        android:label="fragment_programar_entrenamiento"
+        tools:layout="@layout/fragment_programar_entrenamiento" >
+        <action
+            android:id="@+id/action_programarEntrenamientoFragment_to_navigation_perfil"
+            app:destination="@id/navigation_perfil" />
+    </fragment>
 
 </navigation>
