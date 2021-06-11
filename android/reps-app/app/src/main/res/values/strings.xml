@@ -38,4 +38,13 @@
         <item>Femenino</item>
         <item>Otro</item>
     </string-array>
+    <string name="ordenar">Ordenar</string>
+    <string name="filtrar">Filtrar</string>
+    <string name="filterOptBegginer">Principiante</string>
+    <string name="filterOptInter">Intermedio</string>
+    <string name="filterOptExpert">Experto</string>
+    <string name="orderOptDate">Fecha</string>
+    <string name="orderOptrating">Puntuacion</string>
+    <string name="orderOptSports">Deportes</string>
+    <string name="orderOptCat">Categoria</string>
 </resources>
