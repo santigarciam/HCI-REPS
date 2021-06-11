@@ -50,7 +50,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     RoutineCardAdapter rAdapter;
     ////////////////////
 
-
+    // TODO: remplazar esto por el llamado a la api
     public void init(View rootView, ViewGroup container){
         rutinas = new ArrayList<>();
         rutinas.add(new RoutineCard("Rut Tomas", "Paulo"));
@@ -97,8 +97,12 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
 
-                        if (menuItem.getItemId() == R.id.opcion1) {
+                        if (menuItem.getItemId() == R.id.filterOpt1) {
                             Toast.makeText(view.getContext(), "Opcion 1 seleccionada", Toast.LENGTH_LONG).show();
+                        }else if (menuItem.getItemId() == R.id.filterOpt2) {
+                            Toast.makeText(view.getContext(), "Opcion 2 seleccionada", Toast.LENGTH_LONG).show();
+                        }else  if (menuItem.getItemId() == R.id.filterOpt3) {
+                            Toast.makeText(view.getContext(), "Opcion 2 seleccionada", Toast.LENGTH_LONG).show();
                         }
                         return true;
                     }
@@ -111,22 +115,26 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
         root.findViewById(R.id.ordenarDescubrir).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Animation animation = AnimationUtils.loadAnimation(getContext(),R.anim.filter_order_menu_animation);
+
                 PopupMenu popup = new PopupMenu(getContext(), view);
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
 
-                        if (menuItem.getItemId() == R.id.opcion1) {
+                        if (menuItem.getItemId() == R.id.orderOpt1) {
                             Toast.makeText(view.getContext(), "Opcion 1 order seleccionada", Toast.LENGTH_LONG).show();
-                        }else  if (menuItem.getItemId() == R.id.opcion2) {
+                        }else  if (menuItem.getItemId() == R.id.orderOpt2) {
                             Toast.makeText(view.getContext(), "Opcion 2 order seleccionada", Toast.LENGTH_LONG).show();
+                        }else  if (menuItem.getItemId() == R.id.orderOpt3) {
+                            Toast.makeText(view.getContext(), "Opcion 3 order seleccionada", Toast.LENGTH_LONG).show();
+                        }else  if (menuItem.getItemId() == R.id.orderOpt4) {
+                            Toast.makeText(view.getContext(), "Opcion 4 order seleccionada", Toast.LENGTH_LONG).show();
                         }
                         return true;
                     }
                 });
-                popup.inflate(R.menu.filter_descubrir_menu);
+                popup.inflate(R.menu.order_descubrir_menu);
                 popup.show();
             }
         });
