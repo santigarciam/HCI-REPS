@@ -63,7 +63,14 @@ public class PerfilFragment extends Fragment {
                                 public void onClick(View view) {
                                     //TODO: borrar el token guardado
                                     //Navigation.findNavController(getView()).navigate(PerfilFragmentDirections.actionNavigationPerfilToMainActivity());
-                                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainActivity, new FirstFragment()).commit();
+                                    //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.firstFragment, new FirstFragment()).commit();
+
+                                    Intent intent = new Intent(getContext(), MainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    getActivity().finish();
+                                    dialog.dismiss();
+
                                 }
                             });
                             }
