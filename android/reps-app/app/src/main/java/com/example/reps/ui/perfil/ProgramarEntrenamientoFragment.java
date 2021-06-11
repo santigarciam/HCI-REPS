@@ -29,6 +29,9 @@ import com.example.reps.R;
 import com.example.reps.ReminderBroadcast;
 
 import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 /**
@@ -47,11 +50,13 @@ public class ProgramarEntrenamientoFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    TextView tvDate;
-    DatePickerDialog.OnDateSetListener setDateListener;
+    private TextView tvDate;
+    private DatePickerDialog.OnDateSetListener setDateListener;
 
-    TextView tvTime;
-    TimePickerDialog.OnTimeSetListener setTimeListener;
+    private TextView tvTime;
+    private TimePickerDialog.OnTimeSetListener setTimeListener;
+
+    private Calendar cal = Calendar.getInstance();
 
     public ProgramarEntrenamientoFragment() {
         // Required empty public constructor
@@ -106,6 +111,9 @@ public class ProgramarEntrenamientoFragment extends Fragment {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int yearSet, int monthSet, int daySet) {
+                        cal.set(Calendar.DAY_OF_MONTH, daySet);
+                        cal.set(Calendar.MONTH, monthSet);
+                        cal.set(Calendar.YEAR, yearSet);
                         tvDate.setText((daySet<10?"0"+daySet:daySet) + "/" + (monthSet<10?"0"+monthSet:monthSet) + "/" + yearSet);
                     }
                 }, year, month, day);
@@ -116,14 +124,14 @@ public class ProgramarEntrenamientoFragment extends Fragment {
             }
         });
 
-        setDateListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month = month+1;
-                String date = dayOfMonth + "/" + month + "/" + year;
-                tvDate.setText(date);
-            }
-        };
+//        setDateListener = new DatePickerDialog.OnDateSetListener() {
+//            @Override
+//            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                month = month+1;
+//                String date = dayOfMonth + "/" + month + "/" + year;
+//                tvDate.setText(date);
+//            }
+//        };
 
         //////////////////////////////////////////////////////////////////////
         // TimePicker para hora de notificacion
@@ -137,8 +145,10 @@ public class ProgramarEntrenamientoFragment extends Fragment {
             public void onClick(View view) {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
-                    public void onTimeSet(TimePicker view, int hora, int minuto) {
-                        tvTime.setText(hora + ":" + (minuto<10?"0"+minuto:minuto));
+                    public void onTimeSet(TimePicker view, int horaSet, int minutoSet) {
+                        cal.set(Calendar.HOUR_OF_DAY, horaSet);
+                        cal.set(Calendar.MINUTE, minutoSet);
+                        tvTime.setText(horaSet + ":" + (minutoSet<10?"0"+minutoSet:minutoSet));
                     }
                 }, hora, minutos, true);
                 timePickerDialog.show();
@@ -173,9 +183,13 @@ public class ProgramarEntrenamientoFragment extends Fragment {
                 long timeAtButtonClick = System.currentTimeMillis();
                 long tenSecondsInMillis = 1000 * 10;
 
-                ///
 
-                alarmManager.set(AlarmManager.RTC_WAKEUP, timeAtButtonClick+tenSecondsInMillis, pendingIntent);
+
+                ////
+
+                //alarmManager.set(AlarmManager.RTC_WAKEUP, timeAtButtonClick+tenSecondsInMillis, pendingIntent);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+                Navigation.findNavController(view).navigate(ProgramarEntrenamientoFragmentDirections.actionProgramarEntrenamientoFragmentToNavigationPerfil());
             }
         });
 
