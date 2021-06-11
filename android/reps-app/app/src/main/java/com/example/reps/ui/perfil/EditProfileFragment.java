@@ -4,25 +4,20 @@ import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.reps.R;
-import com.example.reps.databinding.FragmentEditProfileBinding;
-import com.google.android.material.textfield.TextInputLayout;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
-import java.util.ArrayList;
+import com.example.reps.R;
+
 import java.util.Calendar;
 
 /**

@@ -1,7 +1,6 @@
 package com.example.reps.ui.perfil;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -9,21 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.reps.FirstFragment;
-import com.example.reps.MainActivity;
 import com.example.reps.R;
-import com.example.reps.databinding.FragmentDescubrirBinding;
 import com.example.reps.databinding.FragmentPerfilBinding;
-import com.example.reps.ui.home.HomeFragmentDirections;
 
 public class PerfilFragment extends Fragment {
 

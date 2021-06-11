@@ -3,19 +3,15 @@ package com.example.reps.ui.home;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.reps.LogedActivity;
 import com.example.reps.R;
 import com.example.reps.RoutineCard;
 import com.example.reps.RoutineCardAdapter;
 import com.example.reps.RoutineSection;
 import com.example.reps.RoutineSectionAdapter;
-import com.example.reps.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
 import java.util.List;
