@@ -22,6 +22,14 @@
     <string name="descripcion_rutina">Descripcion rutina</string>
     <string name="favicon">favIcon</string>
     <string name="reps_logo">reps_logo</string>
+    <string name="editProfile_titulo">Editar informacion</string>
+    <string name="editProfile_hint_nombre_input">Nombre</string>
+    <string name="editProfile_hint_apellido_input">Apellido</string>
+    <string name="editProfile_hint_avatar_url_input">Avatar URL</string>
+    <string name="editProfile_guardar_button">Guardar</string>
+    <string name="editProfile_cancelar_button">Cancelar</string>
+    <string name="editProfile_hint_fecha_input">Fecha de nacimiento</string>
+    <string name="editProfile_titulo_generos">Genero:</string>
     <string-array name="generos">
         <item>Masculino</item>
         <item>Femenino</item>

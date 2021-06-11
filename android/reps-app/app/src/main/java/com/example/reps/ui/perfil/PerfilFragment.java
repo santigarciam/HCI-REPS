@@ -18,6 +18,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import com.example.reps.FirstFragment;
+import com.example.reps.MainActivity;
 import com.example.reps.R;
 import com.example.reps.databinding.FragmentDescubrirBinding;
 import com.example.reps.databinding.FragmentPerfilBinding;
@@ -69,9 +71,8 @@ public class PerfilFragment extends Fragment {
                                 @Override
                                 public void onClick(View view) {
                                     //TODO: borrar el token guardado
-                                    Navigation.findNavController(getView()).navigate(PerfilFragmentDirections.actionNavigationPerfilToMainActivity());
-                                    Intent intent = new Intent();
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    //Navigation.findNavController(getView()).navigate(PerfilFragmentDirections.actionNavigationPerfilToMainActivity());
+                                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainActivity, new FirstFragment()).commit();
                                 }
                             });
                             }
