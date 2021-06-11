@@ -27,14 +27,15 @@ public class FavoritosFragment extends Fragment {
 
         binding = FragmentFavoritosBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        final TextView textView = binding.textFavoritos;
-        favoritosViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        // Ejemplo de como usar el viewModel
+//        final TextView textView = binding.textFavoritos;
+//        favoritosViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
+//        ////////////////////
         return root;
     }
 
