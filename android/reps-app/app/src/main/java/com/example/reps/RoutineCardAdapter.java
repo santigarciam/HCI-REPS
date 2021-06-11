@@ -24,18 +24,24 @@ import com.example.reps.ui.home.HomeFragmentDirections;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.ViewHolder>{
 
     private List<RoutineCard> routines;
     private LayoutInflater mInflater;
     private Context context;
+    // almacna el estado original y no cambia en toda la busqueda
+    private  List<RoutineCard> originalRoutines;
 
     public RoutineCardAdapter(List<RoutineCard> routines, Context context) {
         this.routines = routines;
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
+        originalRoutines = new ArrayList<>();
+        originalRoutines.addAll(routines);
     }
 
     @NonNull
@@ -54,6 +60,18 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
     @Override
     public int getItemCount() {
         return routines.size();
+    }
+
+    public void filter(String strSearch){
+        if(strSearch.length() ==0){
+            routines.clear();
+            routines.addAll(originalRoutines);
+        }else{
+            List<RoutineCard> searched =routines.stream().filter(r -> r.getName().toLowerCase().contains(strSearch)).collect(Collectors.toList());
+            routines.clear();
+            routines.addAll(searched);
+        }
+        notifyDataSetChanged();
     }
 
     public void setroutines(List<RoutineCard> rut) { routines = rut; }
