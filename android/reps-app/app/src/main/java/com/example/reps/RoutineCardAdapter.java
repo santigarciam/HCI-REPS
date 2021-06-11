@@ -21,6 +21,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.reps.ui.home.HomeFragmentDirections;
+import com.example.reps.ui.notifications.DescubrirFragmentDirections;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -90,8 +91,11 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
             itemView.setOnClickListener(view -> {
                 int position = getAdapterPosition();
                 Toast.makeText(view.getContext(),"Element " + position + " clicked", Toast.LENGTH_LONG).show();
-
-                Navigation.findNavController(view).navigate(HomeFragmentDirections.actionNavigationHomeToVistaRutina(position));
+                if(itemView.getId() == R.id.fragment_home){
+                    Navigation.findNavController(view).navigate(HomeFragmentDirections.actionNavigationHomeToVistaRutina(position));
+                }else if (itemView.getId() == R.id.fragment_descubrir){
+                    Navigation.findNavController(view).navigate(DescubrirFragmentDirections.actionNavigationDescubrirToVistaRutina(position));
+                }
             });
 
             itemView.findViewById(R.id.rutine_card_fav).setOnClickListener(new View.OnClickListener() {
