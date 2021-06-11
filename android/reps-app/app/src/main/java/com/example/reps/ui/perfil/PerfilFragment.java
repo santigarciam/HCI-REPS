@@ -31,13 +31,8 @@ public class PerfilFragment extends Fragment {
         binding = FragmentPerfilBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        //final TextView textView = binding.textPerfil;
-//        perfilViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
+        ///////////////////////////////////////////
+        // SetUp boton de configuracion
 
         root.findViewById(R.id.profile_config_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,8 +44,11 @@ public class PerfilFragment extends Fragment {
                         if (menuItem.getItemId() == R.id.menu_profile_edit_profile){
                             Navigation.findNavController(view).navigate(PerfilFragmentDirections.actionNavigationPerfilToEditProfileFragment2());
                         }else if(menuItem.getItemId() == R.id.menu_profile_help){
-                            //hacer
-                            return false;
+                            AlertDialog dialog = new AlertDialog.Builder(getContext())
+                                    .setTitle("Ayuda")
+                                    .setMessage("TP3 - Grupo 8")
+                                    .setPositiveButton("Ok", null)
+                                    .show();
                         }else if(menuItem.getItemId() == R.id.menu_profile_log_out){
                             AlertDialog dialog = new AlertDialog.Builder(getContext())
                                     .setTitle("Cerrar Sesion")
@@ -74,6 +72,26 @@ public class PerfilFragment extends Fragment {
                 });
                 popup.inflate(R.menu.profile_config_button_menu);
                 popup.show();
+            }
+        });
+
+        ///////////////////////////////////////////
+        // SetUp boton "Mi Progreso"
+
+        root.findViewById(R.id.profile_progress_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(root).navigate(PerfilFragmentDirections.actionNavigationPerfilToMiProgresoFragment());
+            }
+        });
+
+        ///////////////////////////////////////////
+        // SetUp boton "Programar Entrenamiento"
+
+        root.findViewById(R.id.profile_programar_entrenamiento_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(root).navigate(PerfilFragmentDirections.actionNavigationPerfilToProgramarEntrenamientoFragment());
             }
         });
 
