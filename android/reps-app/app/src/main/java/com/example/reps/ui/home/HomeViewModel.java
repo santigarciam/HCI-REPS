@@ -45,7 +45,7 @@ public class HomeViewModel extends ViewModel {
         verticalRecyclerView =(RecyclerView) rootView.findViewById(R.id.section_rout_recycler_view);
 
         verticalRecyclerView.setHasFixedSize(true);
-        verticalRecyclerView.setLayoutManager(new LinearLayoutManager( container.getContext(),LinearLayoutManager.VERTICAL,false));
+        verticalRecyclerView.setLayoutManager(new LinearLayoutManager( container.getContext(),LinearLayoutManager.VERTICAL,true));
 
         arrayList1 = new ArrayList<>();
         verticalAdapter = new RoutineSectionAdapter(arrayList1, container.getContext());

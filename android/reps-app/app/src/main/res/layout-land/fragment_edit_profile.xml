@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.perfil.EditProfileFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/editProfile_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/editProfile_titulo"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editProfile_nombre_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:hint="@string/editProfile_hint_nombre_input"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editProfile_titulo" />
+
+            <EditText
+                android:id="@+id/editProfile_apellido_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="@string/editProfile_hint_apellido_input"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toStartOf="@+id/editProfile_avatar_url_input"
+                app:layout_constraintTop_toBottomOf="@+id/editProfile_nombre_input" />
+
+            <TextView
+                android:id="@+id/editProfile_titulo_generos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="252dp"
+                android:layout_marginTop="8dp"
+                android:hint="@string/editProfile_titulo_generos"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editProfile_apellido_input" />
+
+            <EditText
+                android:id="@+id/editProfile_avatar_url_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/editProfile_hint_avatar_url_input"
+                android:inputType="textUri"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editProfile_fecha_input" />
+
+            <Button
+                android:id="@+id/editProfile_guardar_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="80dp"
+                android:text="@string/editProfile_guardar_button"
+                app:layout_constraintBottom_toBottomOf="@+id/editProfile_cancelar_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editProfile_cancelar_button"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <Button
+                android:id="@+id/editProfile_cancelar_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="#C5C2C2"
+                android:text="@string/editProfile_cancelar_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editProfile_avatar_url_input" />
+
+            <Spinner
+                android:id="@+id/editProfile_spinner_generos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.11"
+                app:layout_constraintStart_toEndOf="@+id/editProfile_titulo_generos"
+                app:layout_constraintTop_toBottomOf="@+id/editProfile_apellido_input" />
+
+            <TextView
+                android:id="@+id/editProfile_fecha_input"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="233dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="16dp"
+                android:hint="@string/editProfile_hint_fecha_input"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editProfile_spinner_generos" />
+
+
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:orientation="vertical" />-->
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+</FrameLayout>

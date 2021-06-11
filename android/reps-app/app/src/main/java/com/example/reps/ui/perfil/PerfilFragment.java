@@ -1,6 +1,7 @@
 package com.example.reps.ui.perfil;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.reps.FirstFragment;
+import com.example.reps.MainActivity;
 import com.example.reps.R;
 import com.example.reps.databinding.FragmentPerfilBinding;
 

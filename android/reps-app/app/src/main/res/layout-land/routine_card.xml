@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:animateLayoutChanges="true"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true"
+    android:id="@+id/rutine_card">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="665dp"
+        android:layout_height="155dp">
+
+        <TextView
+            android:id="@+id/rutine_card_title"
+            android:layout_width="210dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/nombre_rutina"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/rutine_card_fav"
+            android:layout_width="60dp"
+            android:layout_height="58dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/rutine_card_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rutine_card_title"
+            app:srcCompat="@drawable/baseline_favorite_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/rutine_card_share"
+            android:layout_width="71dp"
+            android:layout_height="49dp"
+            android:backgroundTint="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/rutine_card_fav"
+            app:layout_constraintEnd_toStartOf="@+id/rutine_card_fav"
+            app:layout_constraintTop_toTopOf="@+id/rutine_card_fav"
+            app:srcCompat="@drawable/baseline_reply_black_24" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="37dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/myRatingBar"
+            app:layout_constraintStart_toStartOf="@+id/rutine_card_title"
+            app:layout_constraintTop_toBottomOf="@+id/profile_nombre_apellido"
+            app:srcCompat="@drawable/baseline_person_black_24dp" />
+
+        <TextView
+            android:id="@+id/rutine_card_user"
+            android:layout_width="104dp"
+            android:layout_height="19dp"
+            android:text="@string/autor_rutina"
+            android:textColor="@color/our_blue"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+            app:layout_constraintStart_toEndOf="@+id/imageView4" />
+
+        <TextView
+            android:id="@+id/profile_nombre_apellido"
+            android:layout_width="320dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/descripcion_rutina"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/rutine_card_title"
+            app:layout_constraintTop_toBottomOf="@+id/rutine_card_title" />
+
+        <RatingBar
+            android:id="@+id/myRatingBar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="76dp"
+            android:layout_height="17dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:numStars="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_nombre_apellido" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
