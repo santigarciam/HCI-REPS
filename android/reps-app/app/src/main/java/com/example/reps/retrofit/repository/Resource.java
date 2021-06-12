@@ -9,6 +9,8 @@ import static com.example.reps.retrofit.repository.Status.ERROR;
 import static com.example.reps.retrofit.repository.Status.LOADING;
 import static com.example.reps.retrofit.repository.Status.SUCCESS;
 
+import com.example.reps.retrofit.api.model.Error;
+
 
 public class Resource<T> {
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,6 +68,7 @@ public class LoginFragment extends Fragment {
         Button btn_login = view.findViewById(R.id.login_button_register);
         TextView usernameField = view.findViewById(R.id.login_input_user);
         TextView passwordField = view.findViewById(R.id.login_input_password);
+        ProgressBar progressBar = view.findViewById(R.id.login_progress_bar);
 
 
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -80,8 +82,16 @@ public class LoginFragment extends Fragment {
                         if (r.getStatus() == Status.SUCCESS) {
                             Log.d(TAG, "Se logueo correctamente con las siguientes credentials. User: " + username + " Password: " + password);
                             app.getPreferences().setAuthToken(r.getData().getToken());
+                            progressBar.setVisibility(View.INVISIBLE);
                             Navigation.findNavController(view).navigate(LoginFragmentDirections.actionLoginFragmentToLogedActivity());
+                        }else if(r.getStatus() == Status.ERROR){
+                            if (r.getError().getDetails().contains("Password does not match")){
+                                passwordField.setError("Contrasena incorrecta");
+                            }else{
+                                usernameField.setError("Usuario incorrecto");
+                            }
                         } else {
+                            progressBar.setVisibility(View.VISIBLE);
                             Toast.makeText(view.getContext(), "Usuario: " + r.getStatus().name() + username + " o contrasena: " + password + " incorrectos", Toast.LENGTH_LONG).show();
                         }
 
