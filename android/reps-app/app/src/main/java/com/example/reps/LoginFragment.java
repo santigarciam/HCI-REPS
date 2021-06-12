@@ -1,64 +1,41 @@
 package com.example.reps;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.example.reps.databinding.FragmentLoginBinding;
+import com.example.reps.retrofit.App;
+import com.example.reps.retrofit.api.model.Credentials;
+import com.example.reps.retrofit.repository.Status;
+
 import org.jetbrains.annotations.NotNull;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LoginFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.Objects;
+
 public class LoginFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private  App app;
+    public static final String TAG = "LOGIN_FRAG";
+    private FragmentLoginBinding binding;
 
     public LoginFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LoginFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static LoginFragment newInstance(String param1, String param2) {
-        LoginFragment fragment = new LoginFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -73,6 +50,10 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ImageButton btn_back = view.findViewById(R.id.login_back);
+        app = (App) requireActivity().getApplication();
+        if(app == null){
+            Log.d(TAG, "onViewCreated: Error app");
+        }
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,11 +65,30 @@ public class LoginFragment extends Fragment {
 
 
         Button btn_login = view.findViewById(R.id.login_button_register);
+        TextView usernameField = view.findViewById(R.id.login_input_user);
+        TextView passwordField = view.findViewById(R.id.login_input_password);
+
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(LoginFragmentDirections.actionLoginFragmentToLogedActivity());
+                String username = usernameField.getText().toString();
+                String password = passwordField.getText().toString();
+                Credentials credentials = new Credentials(username,password);
+                app.getUserRepository().login(credentials).observe(requireActivity(), r->{
+//                    while(r.getStatus() == Status.LOADING);
+                        if (r.getStatus() == Status.SUCCESS) {
+                            Log.d(TAG, "Se logueo correctamente con las siguientes credentials. User: " + username + " Password: " + password);
+                            app.getPreferences().setAuthToken(r.getData().getToken());
+                            Navigation.findNavController(view).navigate(LoginFragmentDirections.actionLoginFragmentToLogedActivity());
+                        } else {
+                            Toast.makeText(view.getContext(), "Usuario: " + r.getStatus().name() + username + " o contrasena: " + password + " incorrectos", Toast.LENGTH_LONG).show();
+                        }
+
+
+                });
+
+
             }
         });
 
