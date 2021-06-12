@@ -6,11 +6,8 @@ import com.example.reps.App;
 import com.example.reps.api.ApiClient;
 import com.example.reps.api.ApiResponse;
 import com.example.reps.api.ApiRoutineService;
-import com.example.reps.api.model.Credentials;
 import com.example.reps.api.model.PagedList;
 import com.example.reps.api.model.Routine;
-import com.example.reps.api.model.Token;
-import com.example.reps.api.model.User;
 
 
 public class RoutineRepository {
