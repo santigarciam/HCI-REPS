@@ -6,6 +6,7 @@ import com.example.reps.retrofit.api.model.CredentialRegister;
 import com.example.reps.retrofit.api.model.Credentials;
 import com.example.reps.retrofit.api.model.Token;
 import com.example.reps.retrofit.api.model.User;
+import com.example.reps.retrofit.api.model.VerificationCodeModel;
 
 
 import retrofit2.http.Body;
@@ -18,6 +19,12 @@ public interface ApiUserService {
 
     @POST("users/logout")
     LiveData<ApiResponse<Void>> logout();
+
+    @POST("users/verify_email")
+    LiveData<ApiResponse<Token>> verifyCode(@Body VerificationCodeModel verificationCodeModel);
+
+    @POST("users/resend_verification")
+    LiveData<ApiResponse<Token>> resendCode(@Body VerificationCodeModel verificationCodeModel);
 
     @POST("users")
     LiveData<ApiResponse<User>> register(@Body CredentialRegister credentials);

@@ -98,7 +98,7 @@ public class RegisterFragment extends Fragment {
                     if(r.getStatus() == Status.SUCCESS){
                         Log.d(TAG,"Se registro");
                         Toast.makeText(view.getContext(),"Se registro",Toast.LENGTH_LONG).show();
-                        Navigation.findNavController(view).navigate(RegisterFragmentDirections.actionRegisterFragmentToLogedActivity());
+                        Navigation.findNavController(view).navigate(RegisterFragmentDirections.actionRegisterFragmentToVerificationCode(mail));
                     }else if (r.getStatus() == Status.ERROR){
                         Toast.makeText(view.getContext(),"NO Se registro"+r.getError().getDescription(),Toast.LENGTH_LONG).show();
                     }else{
