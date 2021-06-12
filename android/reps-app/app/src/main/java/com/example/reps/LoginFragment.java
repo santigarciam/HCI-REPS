@@ -93,7 +93,6 @@ public class LoginFragment extends Fragment {
                             }
                         } else {
                             progressBar.setVisibility(View.VISIBLE);
-                            Toast.makeText(view.getContext(), "Usuario: " + r.getStatus().name() + username + " o contrasena: " + password + " incorrectos", Toast.LENGTH_LONG).show();
                         }
 
 
