@@ -20,4 +20,6 @@ public interface ApiUserService {
 
     @GET("users/current")
     LiveData<ApiResponse<User>> getCurrentUser();
+
+    //TODO hacer el request para un modify
 }

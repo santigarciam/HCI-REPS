@@ -5,6 +5,7 @@ import android.app.Application;
 import com.example.reps.retrofit.repository.SportRepository;
 import com.example.reps.retrofit.repository.UserRepository;
 
+// Se crea esta clase apenas se corre la aplicacion
 public class App extends Application {
 
     private AppPreferences preferences;

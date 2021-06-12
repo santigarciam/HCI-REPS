@@ -26,5 +26,6 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
         }
         Type bodyType = getParameterUpperBound(0, (ParameterizedType) observableType);
         return new LiveDataCallAdapter<>(bodyType);
+        //Los datos de la API se convierten en LiveData
     }
 }
