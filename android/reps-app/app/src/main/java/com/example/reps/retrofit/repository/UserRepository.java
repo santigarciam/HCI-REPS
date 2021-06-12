@@ -12,6 +12,7 @@ import com.example.reps.retrofit.api.model.Credentials;
 import com.example.reps.retrofit.api.model.Token;
 import com.example.reps.retrofit.api.model.User;
 import com.example.reps.retrofit.api.model.VerificationCodeModel;
+import com.example.reps.retrofit.api.model.UserInformation;
 
 
 public class UserRepository {
@@ -86,6 +87,17 @@ public class UserRepository {
             @Override
             protected LiveData<ApiResponse<User>> createCall() {
                 return apiService.getCurrentUser();
+            }
+        }.asLiveData();
+    }
+
+    public LiveData<Resource<User>> modify(UserInformation newUserInfo) {
+        return new NetworkBoundResource<User, User>()
+        {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<User>> createCall() {
+                return apiService.modifyCurrentUser(newUserInfo);
             }
         }.asLiveData();
     }
