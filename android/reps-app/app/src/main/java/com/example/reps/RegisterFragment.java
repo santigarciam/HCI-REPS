@@ -18,6 +18,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.reps.retrofit.App;
+import com.example.reps.retrofit.api.model.CredentialRegister;
 import com.example.reps.retrofit.api.model.Credentials;
 import com.example.reps.retrofit.api.model.User;
 import com.example.reps.retrofit.repository.Status;
@@ -91,17 +92,17 @@ public class RegisterFragment extends Fragment {
                 String mail = mailField.getText().toString();
                 String username = usernameField.getText().toString();
                 String password = passwordField.getText().toString();
-                Credentials credentials = new Credentials(username,password);
+                CredentialRegister credentials = new CredentialRegister(username,password,"Jhon","Doe","male",03022000, mail,"101010","url",null);
 
                 app.getUserRepository().register(credentials).observe(requireActivity(),r->{
-
                     if(r.getStatus() == Status.SUCCESS){
                         Log.d(TAG,"Se registro");
                         Toast.makeText(view.getContext(),"Se registro",Toast.LENGTH_LONG).show();
                         Navigation.findNavController(view).navigate(RegisterFragmentDirections.actionRegisterFragmentToLogedActivity());
-
+                    }else if (r.getStatus() == Status.ERROR){
+                        Toast.makeText(view.getContext(),"NO Se registro"+r.getError().getDescription(),Toast.LENGTH_LONG).show();
                     }else{
-                        Toast.makeText(view.getContext(),"NO Se registro",Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext(),"NO Se registro"+r.getStatus(),Toast.LENGTH_LONG).show();
                     }
                 });
 
