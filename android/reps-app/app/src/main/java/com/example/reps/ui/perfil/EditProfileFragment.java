@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +18,19 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.example.reps.LoginFragmentDirections;
 import com.example.reps.R;
+import com.example.reps.retrofit.App;
+import com.example.reps.retrofit.api.model.UserInformation;
+import com.example.reps.retrofit.repository.Status;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -144,10 +151,53 @@ public class EditProfileFragment extends Fragment{
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month+1;
-                String date = dayOfMonth + "/" + month + "/" + year;
+                String date = (dayOfMonth<10?"0"+dayOfMonth:dayOfMonth) + "/" + (month<10?"0"+month:month) + "/" + year;
                 tvDate.setText(date);
             }
         };
+
+        //////////////////////////////////////////////////////////////////////
+        // Boton "Guardar" setup
+
+        root.findViewById(R.id.editProfile_guardar_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                App app;
+                app = (App) requireActivity().getApplication();
+                if(app == null){
+                    Log.d("EditProfileFragment", "onViewCreated: Error app");
+                }
+
+                String newName = ((TextView)root.findViewById(R.id.editProfile_nombre_input)).getText().toString();
+                String newLastName = ((TextView)root.findViewById(R.id.editProfile_apellido_input)).getText().toString();
+                String newGenero = ((Spinner)root.findViewById(R.id.editProfile_spinner_generos)).getSelectedItem().toString()=="Masculino"?"male":"female";
+                String auxDate = ((TextView)root.findViewById(R.id.editProfile_fecha_input)).getText().toString();
+                Date newBirthdate = new Date(Integer.parseInt(auxDate.substring(6,7)),Integer.parseInt(auxDate.substring(3,4)),Integer.parseInt(auxDate.substring(0,1)));
+                String newAvatarURL = ((TextView)root.findViewById(R.id.editProfile_avatar_url_input)).getText().toString();
+                app.getUserRepository().modify(new UserInformation(newName,newLastName,newGenero,newBirthdate,"11112222",newAvatarURL)).observe(requireActivity(), r->{
+                    if (r.getStatus() == Status.SUCCESS) {
+                        Log.d("EditPRofileFragment", "Se modifico el usuario");
+                        Navigation.findNavController(view).navigate(EditProfileFragmentDirections.actionEditProfileFragmentToNavigationPerfil());
+                        //app.getPreferences().setAuthToken(r.getData().getToken());
+                        //progressBar.setVisibility(View.INVISIBLE);
+                        //Navigation.findNavController(view).navigate(LoginFragmentDirections.actionLoginFragmentToLogedActivity());
+                    }else if(r.getStatus() == Status.ERROR){
+                        Log.d("EditPRofileFragment", "Se NO se modifico el usuario");
+                        Toast.makeText(getContext(), r.getError().getDescription(), Toast.LENGTH_SHORT);
+                        Log.d("EditPRofileFragment", r.getError().getDescription());
+                        //progressBar.setVisibility(View.INVISIBLE);
+//                        if (r.getError().getDetails().contains("Password does not match")){
+//                            passwordField.setError("Contraseña incorrecta");
+//                        }else{
+//                            usernameField.setError("Usuario incorrecto");
+//                        }
+                    } else {
+                       // progressBar.setVisibility(View.VISIBLE);
+                        Toast.makeText(view.getContext(), "-------", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
 
         // Inflate the layout for this fragment
         return root;
