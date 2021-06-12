@@ -3,12 +3,13 @@ package com.example.reps.retrofit.repository;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
-import ar.edu.itba.example.retrofit.App;
-import ar.edu.itba.example.retrofit.api.ApiClient;
-import ar.edu.itba.example.retrofit.api.ApiResponse;
-import ar.edu.itba.example.retrofit.api.ApiSportService;
-import ar.edu.itba.example.retrofit.api.model.PagedList;
-import ar.edu.itba.example.retrofit.api.model.Sport;
+import com.example.reps.retrofit.App;
+import com.example.reps.retrofit.api.ApiClient;
+import com.example.reps.retrofit.api.ApiResponse;
+import com.example.reps.retrofit.api.ApiSportService;
+import com.example.reps.retrofit.api.model.PagedList;
+import com.example.reps.retrofit.api.model.Sport;
+
 
 public class SportRepository {
 

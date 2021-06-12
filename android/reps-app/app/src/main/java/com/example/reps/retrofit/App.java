@@ -2,8 +2,8 @@ package com.example.reps.retrofit;
 
 import android.app.Application;
 
-import ar.edu.itba.example.retrofit.repository.SportRepository;
-import ar.edu.itba.example.retrofit.repository.UserRepository;
+import com.example.reps.retrofit.repository.SportRepository;
+import com.example.reps.retrofit.repository.UserRepository;
 
 public class App extends Application {
 

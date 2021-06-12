@@ -2,9 +2,11 @@ package com.example.reps.retrofit.api;
 
 import androidx.lifecycle.LiveData;
 
-import ar.edu.itba.example.retrofit.api.model.Credentials;
-import ar.edu.itba.example.retrofit.api.model.Token;
-import ar.edu.itba.example.retrofit.api.model.User;
+import com.example.reps.retrofit.api.model.Credentials;
+import com.example.reps.retrofit.api.model.Token;
+import com.example.reps.retrofit.api.model.User;
+
+
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;

@@ -2,10 +2,10 @@ package com.example.reps.retrofit.api;
 
 import androidx.lifecycle.LiveData;
 
-import ar.edu.itba.example.retrofit.api.model.Credentials;
-import ar.edu.itba.example.retrofit.api.model.PagedList;
-import ar.edu.itba.example.retrofit.api.model.Sport;
-import ar.edu.itba.example.retrofit.api.model.Token;
+
+import com.example.reps.retrofit.api.model.PagedList;
+import com.example.reps.retrofit.api.model.Sport;
+
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;

@@ -3,6 +3,8 @@ package com.example.reps.retrofit;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.reps.R;
+
 public class AppPreferences {
     private final String AUTH_TOKEN = "auth_token";
 

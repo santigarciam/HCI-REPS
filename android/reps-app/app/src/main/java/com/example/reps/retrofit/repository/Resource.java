@@ -5,11 +5,10 @@ import androidx.annotation.Nullable;
 
 import org.jetbrains.annotations.NotNull;
 
-import ar.edu.itba.example.retrofit.api.model.Error;
+import static com.example.reps.retrofit.repository.Status.ERROR;
+import static com.example.reps.retrofit.repository.Status.LOADING;
+import static com.example.reps.retrofit.repository.Status.SUCCESS;
 
-import static ar.edu.itba.example.retrofit.repository.Status.ERROR;
-import static ar.edu.itba.example.retrofit.repository.Status.LOADING;
-import static ar.edu.itba.example.retrofit.repository.Status.SUCCESS;
 
 public class Resource<T> {
 
