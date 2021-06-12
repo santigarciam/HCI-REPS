@@ -7,6 +7,7 @@ import com.example.reps.retrofit.App;
 import com.example.reps.retrofit.api.ApiClient;
 import com.example.reps.retrofit.api.ApiResponse;
 import com.example.reps.retrofit.api.ApiUserService;
+import com.example.reps.retrofit.api.model.CredentialRegister;
 import com.example.reps.retrofit.api.model.Credentials;
 import com.example.reps.retrofit.api.model.Token;
 import com.example.reps.retrofit.api.model.User;
@@ -31,7 +32,7 @@ public class UserRepository {
         }.asLiveData();
     }
 
-    public LiveData<Resource<User>> register(Credentials credentials) {
+    public LiveData<Resource<User>> register(CredentialRegister credentials) {
         return new NetworkBoundResource<User, User>()
         {
             @NonNull
