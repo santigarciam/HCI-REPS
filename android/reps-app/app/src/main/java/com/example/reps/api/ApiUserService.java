@@ -12,6 +12,11 @@ import retrofit2.http.POST;
 
 public interface ApiUserService {
 
+    @POST("users")
+    LiveData<ApiResponse<User>> register(@Body User newUser);
+
+    //ver si hacemos lo del verify email o no si lo hacemos hay q agregar (registrarse es opcional)
+
     @POST("users/login")
     LiveData<ApiResponse<Token>> login(@Body Credentials credentials);
 
