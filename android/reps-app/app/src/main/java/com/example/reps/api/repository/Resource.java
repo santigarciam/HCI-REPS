@@ -40,14 +40,14 @@ public class Resource<T> {
     }
 
     public static <T> Resource<T> success(@Nullable T data) {
-        return new Resource<>(SUCCESS, data, null);
+        return new Resource<>(Status.SUCCESS, data, null);
     }
 
     public static <T> Resource<T> error(Error error, @Nullable T data) {
-        return new Resource<>(ERROR, data, error);
+        return new Resource<>(Status.ERROR, data, error);
     }
 
     public static <T> Resource<T> loading(@Nullable T data) {
-        return new Resource<>(LOADING, data, null);
+        return new Resource<>(Status.LOADING, data, null);
     }
 }
