@@ -8,8 +8,8 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import com.example.reps.retrofit.api.model.Error;
 
-import ar.edu.itba.example.retrofit.api.model.Error;
 import retrofit2.Response;
 
 public class ApiResponse<T> {

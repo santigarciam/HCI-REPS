@@ -3,13 +3,14 @@ package com.example.reps.retrofit.repository;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
-import ar.edu.itba.example.retrofit.App;
-import ar.edu.itba.example.retrofit.api.ApiClient;
-import ar.edu.itba.example.retrofit.api.ApiResponse;
-import ar.edu.itba.example.retrofit.api.ApiUserService;
-import ar.edu.itba.example.retrofit.api.model.Credentials;
-import ar.edu.itba.example.retrofit.api.model.Token;
-import ar.edu.itba.example.retrofit.api.model.User;
+import com.example.reps.retrofit.App;
+import com.example.reps.retrofit.api.ApiClient;
+import com.example.reps.retrofit.api.ApiResponse;
+import com.example.reps.retrofit.api.ApiUserService;
+import com.example.reps.retrofit.api.model.Credentials;
+import com.example.reps.retrofit.api.model.Token;
+import com.example.reps.retrofit.api.model.User;
+
 
 public class UserRepository {
 

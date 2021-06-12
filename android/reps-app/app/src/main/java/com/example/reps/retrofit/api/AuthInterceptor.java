@@ -2,12 +2,13 @@ package com.example.reps.retrofit.api;
 
 import androidx.annotation.NonNull;
 
+import com.example.reps.retrofit.App;
+import com.example.reps.retrofit.AppPreferences;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-import ar.edu.itba.example.retrofit.App;
-import ar.edu.itba.example.retrofit.AppPreferences;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;

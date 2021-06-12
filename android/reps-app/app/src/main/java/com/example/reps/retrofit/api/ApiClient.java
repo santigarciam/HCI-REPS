@@ -1,13 +1,13 @@
 package com.example.reps.retrofit.api;
 
+import com.example.reps.BuildConfig;
+import com.example.reps.retrofit.App;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import ar.edu.itba.example.retrofit.App;
-import ar.edu.itba.example.retrofit.BuildConfig;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

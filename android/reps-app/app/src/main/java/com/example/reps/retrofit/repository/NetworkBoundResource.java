@@ -6,7 +6,8 @@ import androidx.annotation.WorkerThread;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
-import ar.edu.itba.example.retrofit.api.ApiResponse;
+import com.example.reps.retrofit.api.ApiResponse;
+
 
 public abstract class NetworkBoundResource<Model, Domain> {
 
