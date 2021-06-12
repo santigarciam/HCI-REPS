@@ -85,8 +85,9 @@ public class LoginFragment extends Fragment {
                             progressBar.setVisibility(View.INVISIBLE);
                             Navigation.findNavController(view).navigate(LoginFragmentDirections.actionLoginFragmentToLogedActivity());
                         }else if(r.getStatus() == Status.ERROR){
+                            progressBar.setVisibility(View.INVISIBLE);
                             if (r.getError().getDetails().contains("Password does not match")){
-                                passwordField.setError("Contrasena incorrecta");
+                                passwordField.setError("Contraseña incorrecta");
                             }else{
                                 usernameField.setError("Usuario incorrecto");
                             }
