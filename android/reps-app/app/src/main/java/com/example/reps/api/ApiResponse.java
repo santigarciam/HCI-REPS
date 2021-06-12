@@ -2,6 +2,7 @@ package com.example.reps.api;
 
 import android.util.Log;
 
+import com.example.reps.api.model.Error;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -13,13 +14,13 @@ import retrofit2.Response;
 
 public class ApiResponse<T> {
     private T data;
-    private ApiError error;
+    private Error error;
 
     public T getData(){
         return data;
     }
 
-    public ApiError getError(){
+    public Error getError(){
         return error;
     }
 
@@ -56,8 +57,8 @@ public class ApiResponse<T> {
         }
     }
 
-    private ApiError buildError (String message){
-        ApiError error = new ApiError(ApiError.UNEXPECTED_ERROR, "Unexpected Error");
+    private Error buildError (String message){
+        Error error = new Error(Error.LOCAL_UNEXPECTED_ERROR, "Unexpected Error");
         if (message != null){
             List<String> details = new ArrayList<>();
             details.add(message);

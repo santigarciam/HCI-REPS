@@ -2,6 +2,9 @@ package com.example.reps.api.repository;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.reps.api.model.Error;
+
 import org.jetbrains.annotations.NotNull;
 
 public class Resource<T> {

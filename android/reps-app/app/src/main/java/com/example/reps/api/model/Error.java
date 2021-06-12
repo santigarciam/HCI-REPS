@@ -14,7 +14,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Error {
 
-    public static final int LOCAL_UNEXPECTED_ERROR = 10;
+    public final static  int LOCAL_UNEXPECTED_ERROR = 10;
 
     @SerializedName("code")
     @Expose

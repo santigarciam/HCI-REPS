@@ -2,6 +2,7 @@ package com.example.reps.api;
 
 import android.content.Context;
 
+import com.example.reps.App;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -24,14 +25,14 @@ public class ApiClient {
 
     }
 
-    public static <S> S create (Class<S> serviceClass){
+    public static <S> S create (App aplication, Class<S> serviceClass){
 
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor()
                 .setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor)
-                .addInterceptor(new AuthInterceptor())
+                .addInterceptor(new AuthInterceptor(aplication))
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)

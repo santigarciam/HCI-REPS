@@ -14,8 +14,8 @@ import okhttp3.Response;
 public class AuthInterceptor implements Interceptor {
     private final AppPreferences preferences;
 
-    public AuthInterceptor(){
-        preferences = App.getPreferences();
+    public AuthInterceptor(App application){
+        preferences = application.getPreferences();
     }
 
     @NotNull

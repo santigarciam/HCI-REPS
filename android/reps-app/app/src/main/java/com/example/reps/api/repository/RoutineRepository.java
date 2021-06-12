@@ -21,28 +21,8 @@ public class RoutineRepository {
         this.apiService = ApiClient.create(app, ApiRoutineService.class);
     }
 
-    public LiveData<Resource<Token>> login(Credentials credentials) {
-        return new NetworkBoundResource<Token, Token>() {
-            @NonNull
-            @Override
-            protected LiveData<ApiResponse<Token>> createCall() {
-                return apiService.login(credentials);
-            }
-        }.asLiveData();
-    }
-
-    public LiveData<Resource<Void>> logout() {
-        return new NetworkBoundResource<Void, Void>() {
-            @NonNull
-            @Override
-            protected LiveData<ApiResponse<Void>> createCall() {
-                return apiService.logout();
-            }
-        }.asLiveData();
-    }
-
     public LiveData<Resource<PagedList<Routine>>> getAll() {
-        return new NetworkBoundResource<User, User>() {
+        return new NetworkBoundResource<PagedList<Routine>, PagedList<Routine>>() {
             @NonNull
             @Override
             protected LiveData<ApiResponse<PagedList<Routine>>> createCall() {
@@ -50,4 +30,18 @@ public class RoutineRepository {
             }
         }.asLiveData();
     }
+
+    public LiveData<Resource<Routine>> getRoutine(int routineId) {
+        return new NetworkBoundResource<Routine, Routine>()
+        {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<Routine>> createCall() {
+                return apiService.getRoutine(routineId);
+            }
+        }.asLiveData();
+    }
+
+    // no me contestaron que hacer con los ciclos
+
 }
