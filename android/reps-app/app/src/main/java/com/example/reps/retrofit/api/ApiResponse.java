@@ -98,6 +98,10 @@ public class ApiResponse<T> {
         @GET("cycles/{cycleId}/exercises")
         LiveData<ApiResponse<PagedList<CycleExercise>>> getCycle(@Path("cycleId") int cycleId);
 
+        @GET("cycles/{cycleId}/exercises")
+        LiveData<ApiResponse<PagedList<CycleExercise>>> getCycleExercises(@Path("cycleId") int cycleId);
+
+
 
 
 
