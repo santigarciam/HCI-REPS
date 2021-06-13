@@ -1,26 +1,22 @@
-package com.example.reps.api.repository;
+package com.example.reps.retrofit.api.repository;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
-import com.example.reps.App;
-import com.example.reps.api.ApiClient;
-import com.example.reps.api.ApiResponse;
-import com.example.reps.api.ApiRoutineService;
-import com.example.reps.api.model.Cycle;
-import com.example.reps.api.model.CycleExercise;
-import com.example.reps.api.model.PagedList;
-import com.example.reps.api.model.Routine;
+import com.example.reps.retrofit.App;
 
-import retrofit2.http.GET;
-import retrofit2.http.Path;
+import com.example.reps.retrofit.api.ApiClient;
+import com.example.reps.retrofit.api.ApiResponse;
+import com.example.reps.retrofit.api.model.PagedList;
+import com.example.reps.retrofit.api.model.Routine;
 
 
 public class RoutineRepository {
 
-    private final ApiRoutineService apiService;
+    private final ApiResponse.ApiRoutineService apiService;
 
     public RoutineRepository(App app) {
-        this.apiService = ApiClient.create(app, ApiRoutineService.class);
+        this.apiService = ApiClient.create(app, ApiResponse.ApiRoutineService.class);
     }
 
     public LiveData<Resource<PagedList<Routine>>> getAll(String params) {

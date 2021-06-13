@@ -1,7 +1,7 @@
 package com.example.reps.api;
 
-import com.example.reps.App;
-import com.example.reps.AppPreferences;
+import com.example.reps.retrofit.App;
+import com.example.reps.retrofit.AppPreferences;
 
 import org.jetbrains.annotations.NotNull;
 

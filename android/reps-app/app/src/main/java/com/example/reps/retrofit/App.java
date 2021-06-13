@@ -2,24 +2,30 @@ package com.example.reps.retrofit;
 
 import android.app.Application;
 
-import com.example.reps.retrofit.repository.SportRepository;
-import com.example.reps.retrofit.repository.UserRepository;
+import com.example.reps.retrofit.AppPreferences;
+import com.example.reps.retrofit.api.repository.FavouriteRepository;
+import com.example.reps.retrofit.api.repository.RoutineRepository;
+import com.example.reps.retrofit.api.repository.UserRepository;
 
-// Se crea esta clase apenas se corre la aplicacion
 public class App extends Application {
 
-    private AppPreferences preferences;
+    private static AppPreferences preferences;
     private UserRepository userRepository;
-    private SportRepository sportRepository;
-
-    public AppPreferences getPreferences() { return preferences; }
+    private FavouriteRepository favouriteRepository;
+    private RoutineRepository routineRepository;
 
     public UserRepository getUserRepository() {
         return userRepository;
     }
+    public FavouriteRepository getFavouriteRepository() {
+        return favouriteRepository;
+    }
+    public RoutineRepository getRoutineRepository(){
+        return routineRepository;
+    }
 
-    public SportRepository getSportRepository() {
-        return sportRepository;
+    public static AppPreferences getPreferences(){
+        return preferences;
     }
 
     @Override
@@ -27,9 +33,9 @@ public class App extends Application {
         super.onCreate();
 
         preferences = new AppPreferences(this);
-
         userRepository = new UserRepository(this);
+        favouriteRepository = new FavouriteRepository(this);
+        routineRepository = new RoutineRepository(this);
 
-        sportRepository = new SportRepository(this);
     }
 }

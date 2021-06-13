@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 
 
 import com.example.reps.retrofit.api.model.PagedList;
+import com.example.reps.retrofit.api.model.Routine;
 import com.example.reps.retrofit.api.model.Sport;
 
 import retrofit2.http.Body;
@@ -29,4 +30,16 @@ public interface ApiSportService {
 
     @DELETE("sports/{sportId}")
     LiveData<ApiResponse<Void>> deleteSport(@Path("sportId") int sportId);
+
+    interface ApiFavouriteService {
+
+        @POST("favourites/{routineId}")
+        LiveData<ApiResponse<Void>> addFavourite(@Path("routineId") int routineId);
+
+        @DELETE("favourites/{routineId}")
+        LiveData<ApiResponse<Void>> deleteFavourite(@Path("routineId") int routineId);
+
+        @GET("favourites")
+        LiveData<ApiResponse<PagedList<Routine>>> getFavourites();
+    }
 }

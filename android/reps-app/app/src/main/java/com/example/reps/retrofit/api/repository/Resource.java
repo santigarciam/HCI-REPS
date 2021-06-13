@@ -1,11 +1,16 @@
-package com.example.reps.api.repository;
+package com.example.reps.retrofit.api.repository;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.reps.api.model.Error;
-
 import org.jetbrains.annotations.NotNull;
+
+import static com.example.reps.retrofit.api.repository.Status.ERROR;
+import static com.example.reps.retrofit.api.repository.Status.LOADING;
+import static com.example.reps.retrofit.api.repository.Status.SUCCESS;
+
+import com.example.reps.retrofit.api.model.Error;
+
 
 public class Resource<T> {
 
@@ -40,14 +45,14 @@ public class Resource<T> {
     }
 
     public static <T> Resource<T> success(@Nullable T data) {
-        return new Resource<>(Status.SUCCESS, data, null);
+        return new Resource<>(SUCCESS, data, null);
     }
 
     public static <T> Resource<T> error(Error error, @Nullable T data) {
-        return new Resource<>(Status.ERROR, data, error);
+        return new Resource<>(ERROR, data, error);
     }
 
     public static <T> Resource<T> loading(@Nullable T data) {
-        return new Resource<>(Status.LOADING, data, null);
+        return new Resource<>(LOADING, data, null);
     }
 }

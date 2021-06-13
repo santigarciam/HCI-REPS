@@ -19,13 +19,9 @@ import androidx.navigation.Navigation;
 
 import com.example.reps.retrofit.App;
 import com.example.reps.retrofit.api.model.CredentialRegister;
-import com.example.reps.retrofit.api.model.Credentials;
-import com.example.reps.retrofit.api.model.User;
-import com.example.reps.retrofit.repository.Status;
+import com.example.reps.retrofit.api.repository.Status;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
 
 public class RegisterFragment extends Fragment {
     private static final String TAG = "RegisterFragment";

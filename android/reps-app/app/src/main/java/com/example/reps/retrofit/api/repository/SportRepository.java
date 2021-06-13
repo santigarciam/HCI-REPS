@@ -1,4 +1,4 @@
-package com.example.reps.retrofit.repository;
+package com.example.reps.retrofit.api.repository;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;

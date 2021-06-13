@@ -1,20 +1,21 @@
-package com.example.reps.api.repository;
+package com.example.reps.retrofit.api.repository;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
-import com.example.reps.App;
-import com.example.reps.api.ApiClient;
-import com.example.reps.api.ApiFavouriteService;
-import com.example.reps.api.ApiResponse;
-import com.example.reps.api.model.PagedList;
-import com.example.reps.api.model.Routine;
+import com.example.reps.retrofit.App;
+
+import com.example.reps.retrofit.api.ApiClient;
+import com.example.reps.retrofit.api.ApiResponse;
+import com.example.reps.retrofit.api.ApiSportService;
+import com.example.reps.retrofit.api.model.PagedList;
+import com.example.reps.retrofit.api.model.Routine;
 
 public class FavouriteRepository {
-    private final ApiFavouriteService apiService;
+    private final ApiSportService.ApiFavouriteService apiService;
 
     public FavouriteRepository(App app) {
-        this.apiService = ApiClient.create(app, ApiFavouriteService.class);
+        this.apiService = ApiClient.create(app, ApiSportService.ApiFavouriteService.class);
     }
 
     public LiveData<Resource<PagedList<Routine>>> getFavourites() {

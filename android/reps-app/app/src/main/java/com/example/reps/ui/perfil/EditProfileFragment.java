@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
@@ -20,18 +19,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
 import com.example.reps.LoadingDialog;
-import com.example.reps.LoginFragmentDirections;
 import com.example.reps.R;
 import com.example.reps.retrofit.App;
 import com.example.reps.retrofit.api.model.UserInformation;
-import com.example.reps.retrofit.repository.Status;
+import com.example.reps.retrofit.api.repository.Status;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.

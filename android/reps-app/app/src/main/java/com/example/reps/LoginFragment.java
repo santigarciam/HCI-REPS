@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,14 +18,12 @@ import androidx.navigation.Navigation;
 import com.example.reps.databinding.FragmentLoginBinding;
 import com.example.reps.retrofit.App;
 import com.example.reps.retrofit.api.model.Credentials;
-import com.example.reps.retrofit.repository.Status;
+import com.example.reps.retrofit.api.repository.Status;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
 public class LoginFragment extends Fragment {
-    private  App app;
+    private App app;
     public static final String TAG = "LOGIN_FRAG";
     private FragmentLoginBinding binding;
 

@@ -1,11 +1,9 @@
 package com.example.reps.retrofit.api;
 
-import com.example.reps.App;
 import com.example.reps.BuildConfig;
-import com.example.reps.retrofit.App;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
+import com.example.reps.retrofit.App;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -24,9 +22,9 @@ public class ApiClient {
     // del emulador. La forma de salir del emulador para acceder al localhost
     // de host del mismo es usando la IP 10.0.2.2.
     // TODO descomentar segun su uso!
-    public static final String BASE_URL = "http://10.0.2.2:8080/api/";
+    //public static final String BASE_URL = "http://10.0.2.2:8080/api/";
     // para el telefono
-   // public static final String BASE_URL = "http://192.168.1.4:8080/api/";
+    public static final String BASE_URL = "http://192.168.1.4:8080/api/";
 
     private ApiClient() {
     }
@@ -38,7 +36,6 @@ public class ApiClient {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new AuthInterceptor(application))
                 .addInterceptor(httpLoggingInterceptor)
-                .addInterceptor(new AuthInterceptor(aplication))
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)

@@ -1,11 +1,12 @@
-package com.example.reps.api.repository;
+package com.example.reps.retrofit.api.repository;
+
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
-import com.example.reps.api.ApiResponse;
+import com.example.reps.retrofit.api.ApiResponse;
 
 
 public abstract class NetworkBoundResource<Model, Domain> {

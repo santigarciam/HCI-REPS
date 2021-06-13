@@ -1,8 +1,8 @@
-package com.example.reps.api.model;
+package com.example.reps.retrofit.api.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Cycle {
+public class Exercise {
 
     @SerializedName("id")
     @Expose
@@ -16,29 +16,23 @@ public class Cycle {
     @SerializedName("type")
     @Expose
     private String type;
-    @SerializedName("order")
+    @SerializedName("date")
     @Expose
-    private int order;
-    @SerializedName("repetitions")
-    @Expose
-    private int repetitions;
+    private long date;
     @SerializedName("metadata")
     @Expose
     private Object metadata;
 
-    private PagedList<CycleExercise> cycleExercises = null;
-
-    public Cycle() {
+    public Exercise() {
     }
 
-    public Cycle(int id, String name, String detail, String type, int order, int repetitions, Object metadata) {
+    public Exercise(int id, String name, String detail, String type, long date, Object metadata) {
         super();
         this.id = id;
         this.name = name;
         this.detail = detail;
         this.type = type;
-        this.order = order;
-        this.repetitions = repetitions;
+        this.date = date;
         this.metadata = metadata;
     }
 
@@ -74,20 +68,12 @@ public class Cycle {
         this.type = type;
     }
 
-    public int getOrder() {
-        return order;
+    public long getDate() {
+        return date;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
-    }
-
-    public int getRepetitions() {
-        return repetitions;
-    }
-
-    public void setRepetitions(int repetitions) {
-        this.repetitions = repetitions;
+    public void setDate(long date) {
+        this.date = date;
     }
 
     public Object getMetadata() {
@@ -96,14 +82,6 @@ public class Cycle {
 
     public void setMetadata(Object metadata) {
         this.metadata = metadata;
-    }
-
-    public void setCycleExercises (PagedList<CycleExercise> exercises){
-        this.cycleExercises = exercises;
-    }
-
-    public PagedList<CycleExercise> getCycleExercises(){
-        return cycleExercises;
     }
 
 }

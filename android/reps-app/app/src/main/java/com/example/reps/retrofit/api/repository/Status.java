@@ -1,4 +1,4 @@
-package com.example.reps.retrofit.repository;
+package com.example.reps.retrofit.api.repository;
 
 public enum Status {
     SUCCESS,
