@@ -1,9 +1,12 @@
 package com.example.reps;
 
+import android.app.Application;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
@@ -29,7 +33,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
 
     private List<RoutineCard> routines;
     private LayoutInflater mInflater;
-    private final Context context;
+    private Context context;
     // almacna el estado original y no cambia en toda la busqueda
     private  List<RoutineCard> originalRoutines;
 
@@ -87,7 +91,6 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
             itemView.setOnClickListener(view -> {
                 int position = getAdapterPosition();
                 Toast.makeText(view.getContext(),"Element " + position + " clicked", Toast.LENGTH_LONG).show();
-                // Todo: Ver este problema, cuando se toca la rutina y queremos abrirla depende en que fragmento este es el navigator a usa
                 if(itemView.getId() == R.id.fragment_home){
                     Navigation.findNavController(view).navigate(HomeFragmentDirections.actionNavigationHomeToVistaRutina(position));
                 }else if (itemView.getId() == R.id.fragment_descubrir){

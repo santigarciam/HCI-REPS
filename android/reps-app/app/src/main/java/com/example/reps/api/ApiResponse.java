@@ -1,4 +1,4 @@
-package com.example.reps.retrofit.api;
+package com.example.reps.api;
 
 import android.util.Log;
 
@@ -9,16 +9,14 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.example.reps.retrofit.api.model.Error;
 
 import retrofit2.Response;
 
 public class ApiResponse<T> {
-
     private T data;
     private Error error;
 
-    public T getData() {
+    public T getData(){
         return data;
     }
 
@@ -26,38 +24,36 @@ public class ApiResponse<T> {
         return error;
     }
 
-    public ApiResponse(Response<T> response) {
+    public ApiResponse(Response<T> response){
         parseResponse(response);
     }
 
-    public ApiResponse(Throwable throwable) {
-        this.error = buildError(throwable.getMessage());
+    public ApiResponse(Throwable t){
+        this.error = buildError(t.getMessage());
     }
 
-    private void parseResponse(Response<T> response) {
-        if (response.isSuccessful()) {
+    private void parseResponse (Response<T> response){
+        if (response.isSuccessful()){
             this.data = response.body();
             return;
         }
-
-        if (response.errorBody() == null) {
+        if (response.errorBody() == null){
             this.error = buildError("Missing error body");
             return;
         }
 
         String message;
-
         try {
             message = response.errorBody().string();
-        } catch (IOException exception) {
+        } catch (IOException exception){
             Log.e("API", exception.toString());
-            this.error = buildError(exception.getMessage());
+            this.error= buildError(exception.getMessage());
             return;
         }
 
-        if (message != null && message.trim().length() > 0) {
+        if (message != null && message.trim().length() > 0){
             Gson gson = new Gson();
-            this.error =  gson.fromJson(message, new TypeToken<Error>() {}.getType());
+            this.error = gson.fromJson(message, new TypeToken<ApiError>() {}.getType());
         }
     }
 

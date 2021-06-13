@@ -1,24 +1,15 @@
-package com.example.reps.retrofit.api.model;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+package com.example.reps.api;
 import java.util.List;
-import java.util.ListIterator;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Error extends java.lang.Error {
+public class ApiError {
 
-    public static final int LOCAL_UNEXPECTED_ERROR = 10;
+    public final static int UNEXPECTED_ERROR = 99;
 
     @SerializedName("code")
     @Expose
-    private Integer code;
+    private int code;
     @SerializedName("description")
     @Expose
     private String description;
@@ -26,24 +17,27 @@ public class Error extends java.lang.Error {
     @Expose
     private List<String> details = null;
 
-    public Error()  {
+    public ApiError() {
     }
 
-    public Error(Integer code, String description) {
-        this(code, description, null);
+    public ApiError(int code, String description) {
+        super();
+        this.code = code;
+        this.description = description;
     }
 
-    public Error(Integer code, String description, List<String> details) {
+    public ApiError(int code, String description, List<String> details) {
+        super();
         this.code = code;
         this.description = description;
         this.details = details;
     }
 
-    public Integer getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
@@ -62,4 +56,5 @@ public class Error extends java.lang.Error {
     public void setDetails(List<String> details) {
         this.details = details;
     }
+
 }

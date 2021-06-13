@@ -1,8 +1,8 @@
-package com.example.reps.retrofit.api;
+package com.example.reps.api;
+
+import android.content.Context;
 
 import com.example.reps.App;
-import com.example.reps.BuildConfig;
-import com.example.reps.retrofit.App;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -19,24 +19,18 @@ public class ApiClient {
     public static final int CONNECT_TIMEOUT = 60;
     public static final int READ_TIMEOUT = 60;
     public static final int WRITE_TIMEOUT = 60;
+    public static final String BASE_URL = "http://10.0.2.2:8080/api";
 
-    // No usar localhost o la IP 127.0.0.1 porque es la interfaz de loopback
-    // del emulador. La forma de salir del emulador para acceder al localhost
-    // de host del mismo es usando la IP 10.0.2.2.
-    // TODO descomentar segun su uso!
-    public static final String BASE_URL = "http://10.0.2.2:8080/api/";
-    // para el telefono
-   // public static final String BASE_URL = "http://192.168.1.4:8080/api/";
+    private ApiClient(){
 
-    private ApiClient() {
     }
 
-    public static <S> S create(App application, Class<S> serviceClass) {
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor().
-                setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
+    public static <S> S create (App aplication, Class<S> serviceClass){
+
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor()
+                .setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new AuthInterceptor(application))
                 .addInterceptor(httpLoggingInterceptor)
                 .addInterceptor(new AuthInterceptor(aplication))
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
@@ -45,7 +39,7 @@ public class ApiClient {
                 .build();
 
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Date.class, new ApiDateTypeAdapter())
+                .registerTypeAdapter(Date.class, new ApiDateTypeConverter())
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -57,4 +51,5 @@ public class ApiClient {
 
         return retrofit.create(serviceClass);
     }
+
 }

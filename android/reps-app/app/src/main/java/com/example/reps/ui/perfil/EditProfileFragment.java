@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,20 +17,13 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.example.reps.LoadingDialog;
-import com.example.reps.LoginFragmentDirections;
 import com.example.reps.R;
-import com.example.reps.retrofit.App;
-import com.example.reps.retrofit.api.model.UserInformation;
-import com.example.reps.retrofit.repository.Status;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -152,42 +144,10 @@ public class EditProfileFragment extends Fragment{
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month+1;
-                String date = (dayOfMonth<10?"0"+dayOfMonth:dayOfMonth) + "/" + (month<10?"0"+month:month) + "/" + year;
+                String date = dayOfMonth + "/" + month + "/" + year;
                 tvDate.setText(date);
             }
         };
-
-        //////////////////////////////////////////////////////////////////////
-        // Boton "Guardar" setup
-
-        root.findViewById(R.id.editProfile_guardar_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                App app;
-                app = (App) requireActivity().getApplication();
-                if(app == null){
-                    Log.d("EditProfileFragment", "onViewCreated: Error app");
-                }
-                LoadingDialog loadingDialog = new LoadingDialog(getActivity());
-                loadingDialog.startLoadingDialog();
-
-                String newName = ((TextView)root.findViewById(R.id.editProfile_nombre_input)).getText().toString();
-                String newLastName = ((TextView)root.findViewById(R.id.editProfile_apellido_input)).getText().toString();
-                String newGenero = ((Spinner)root.findViewById(R.id.editProfile_spinner_generos)).getSelectedItem().toString().equals("Masculino")?"male":"female";
-                String newDate = ((TextView)root.findViewById(R.id.editProfile_fecha_input)).getText().toString();
-                String newAvatarURL = ((TextView)root.findViewById(R.id.editProfile_avatar_url_input)).getText().toString();
-                app.getUserRepository().modify(new UserInformation(newName,newLastName,newGenero,Integer.parseInt(newDate.replace("/","")),"11112222",newAvatarURL)).observe(requireActivity(), r->{
-                    if (r.getStatus() == Status.SUCCESS) {
-                        loadingDialog.dismissDialog();
-                        Navigation.findNavController(view).navigate(EditProfileFragmentDirections.actionEditProfileFragmentToNavigationPerfil());
-                    }else if(r.getStatus() == Status.ERROR){
-                        Toast.makeText(getContext(), "Ocurrio un error, intentelo nuevamente mas tarde.", Toast.LENGTH_SHORT);
-                        Navigation.findNavController(view).navigate(EditProfileFragmentDirections.actionEditProfileFragmentToNavigationPerfil());
-                    }
-                });
-            }
-        });
 
         // Inflate the layout for this fragment
         return root;

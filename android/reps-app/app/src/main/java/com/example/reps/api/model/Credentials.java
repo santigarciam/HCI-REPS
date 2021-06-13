@@ -1,5 +1,4 @@
-package com.example.reps.retrofit.api.model;
-
+package com.example.reps.api.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -16,9 +15,11 @@ public class Credentials {
     }
 
     public Credentials(String username, String password) {
+        super();
         this.username = username;
         this.password = password;
     }
+
     public String getUsername() {
         return username;
     }
@@ -34,4 +35,5 @@ public class Credentials {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }
