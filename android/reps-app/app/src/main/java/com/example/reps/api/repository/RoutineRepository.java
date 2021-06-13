@@ -6,8 +6,13 @@ import com.example.reps.App;
 import com.example.reps.api.ApiClient;
 import com.example.reps.api.ApiResponse;
 import com.example.reps.api.ApiRoutineService;
+import com.example.reps.api.model.Cycle;
+import com.example.reps.api.model.CycleExercise;
 import com.example.reps.api.model.PagedList;
 import com.example.reps.api.model.Routine;
+
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 
 public class RoutineRepository {
@@ -18,12 +23,12 @@ public class RoutineRepository {
         this.apiService = ApiClient.create(app, ApiRoutineService.class);
     }
 
-    public LiveData<Resource<PagedList<Routine>>> getAll() {
+    public LiveData<Resource<PagedList<Routine>>> getAll(String params) {
         return new NetworkBoundResource<PagedList<Routine>, PagedList<Routine>>() {
             @NonNull
             @Override
             protected LiveData<ApiResponse<PagedList<Routine>>> createCall() {
-                return apiService.getAll();
+                return apiService.getAll(params);
             }
         }.asLiveData();
     }
@@ -39,6 +44,6 @@ public class RoutineRepository {
         }.asLiveData();
     }
 
-    // no me contestaron que hacer con los ciclos
+
 
 }

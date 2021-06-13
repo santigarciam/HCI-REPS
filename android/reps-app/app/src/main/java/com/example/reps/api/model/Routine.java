@@ -35,6 +35,8 @@ public class Routine {
     @Expose
     private User user;
 
+    private PagedList<Cycle> routineCycles = null;
+
     public Routine() {
     }
 
@@ -130,6 +132,14 @@ public class Routine {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setRoutineCycles(PagedList<Cycle> cycles){
+        this.routineCycles = cycles;
+    }
+
+    public PagedList<Cycle> getRoutineCycles(){
+        return routineCycles;
     }
 
 }

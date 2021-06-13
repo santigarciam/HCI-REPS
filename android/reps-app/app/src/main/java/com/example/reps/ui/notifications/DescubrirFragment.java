@@ -5,8 +5,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -33,6 +31,12 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     private DescubrirViewModel descubrirViewModel;
     private FragmentDescubrirBinding binding;
     private SearchView searchView;
+
+    private String params = "";
+    private String order = "";
+    private String search = "";
+    private String difficulty = "";
+    private String direc = "asc";
 
     ////////////////
     private List<RoutineCard> rutinas;
@@ -138,6 +142,8 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     // Se ejecuta cuando presionamos para realizar la busqueda
     @Override
     public boolean onQueryTextSubmit(String s) {
+        this.search = s;
+        filterRoutines();
         return false;
     }
 
@@ -147,5 +153,32 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
         rAdapter.filter(s);
 
         return false;
+    }
+
+    public void filterRoutines(){
+        if (this.difficulty!= ""){
+            if (this.params!=""){
+                this.params += "&";
+            }
+            this.params += "difficulty=" + this.difficulty;
+        }
+        if (this.search!= ""){
+            if (this.params!=""){
+                this.params += "&";
+            }
+            this.params += "search=" + this.search;
+        }
+        if (this.order!= ""){
+            if (this.params!=""){
+                this.params += "&";
+            }
+            this.params += "orderBy=" + this.order;
+        }
+        if (this.params!=""){
+            this.params += "&";
+        }
+        this.params += "direction=" + this.direc;
+        //llamada a la api
+        this.params="";
     }
 }
