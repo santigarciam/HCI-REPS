@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.reps.retrofit.api.model.CycleExercise;
 import com.example.reps.retrofit.api.model.Exercise;
 
 import org.jetbrains.annotations.NotNull;
@@ -17,11 +18,11 @@ import java.util.List;
 
 public class ExerciseCardAdapter extends RecyclerView.Adapter<ExerciseCardAdapter.ViewHolder> {
 
-    private List<Exercise> ejercicios;
+    private List<CycleExercise> ejercicios;
     private LayoutInflater mInflater;
     private final Context context;
 
-    public ExerciseCardAdapter(List<Exercise> ejercicios, Context context) {
+    public ExerciseCardAdapter(List<CycleExercise> ejercicios, Context context) {
         this.ejercicios = ejercicios;
         mInflater = LayoutInflater.from(context);
         this.context = context;
@@ -56,9 +57,10 @@ public class ExerciseCardAdapter extends RecyclerView.Adapter<ExerciseCardAdapte
             name = itemView.findViewById(R.id.exercise_name);
             reps = itemView.findViewById(R.id.repsExercise);
         }
-        void bindData(final Exercise item){
-           name.setText(item.getName());
-           reps.setText(item.getDetail());
+        void bindData(final CycleExercise item){
+           name.setText(item.getExercise().getName());
+                Integer repetitions = item.getRepetitions()==0?item.getDuration():item.getRepetitions();
+              reps.setText(String.valueOf(repetitions));
         }
     }
 }

@@ -13,9 +13,9 @@ import androidx.fragment.app.Fragment;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link FullSection#newInstance} factory method to
- * create an instance of this fragment.
+// * A simple {@link Fragment} subclass.
+// * Use the {@link FullSection#newInstance} factory method to
+// * create an instance of this fragment.
  */
 public class FullSection extends Fragment {
 

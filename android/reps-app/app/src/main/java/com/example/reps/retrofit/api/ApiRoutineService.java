@@ -1,4 +1,4 @@
-package com.example.reps.api;
+package com.example.reps.retrofit.api;
 
 import androidx.lifecycle.LiveData;
 
@@ -28,10 +28,10 @@ public interface ApiRoutineService {
     LiveData<ApiResponse<Cycle>> getCycle(@Path("routineId") int routineId, @Path("cycleId") int cycleId);
 
     @GET("cycles/{cycleId}/exercises")
-    LiveData<ApiResponse<PagedList<CycleExercise>>> getCycle(@Path("cycleId") int cycleId);
+    LiveData<ApiResponse<PagedList<CycleExercise>>> getCycleExercises(@Path("cycleId") int cycleId);
 
 
-
+////////////////? CREO que este archivo no se usa!
 
 
 }
