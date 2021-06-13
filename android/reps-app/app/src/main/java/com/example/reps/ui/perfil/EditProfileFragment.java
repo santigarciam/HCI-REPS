@@ -26,9 +26,13 @@ import com.example.reps.retrofit.api.model.User;
 import com.example.reps.retrofit.api.model.UserInformation;
 import com.example.reps.retrofit.api.repository.Status;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
+import java.util.TimeZone;
 
 public class EditProfileFragment extends Fragment{
 
@@ -37,6 +41,7 @@ public class EditProfileFragment extends Fragment{
    private DatePickerDialog.OnDateSetListener setListener;
    private User user;
    private App app;
+   private long fechaCumpleanosMillis;
 
     public EditProfileFragment() {
         // Required empty public constructor
@@ -66,13 +71,38 @@ public class EditProfileFragment extends Fragment{
 
         View root = inflater.inflate(R.layout.fragment_edit_profile, container, false);
 
-        //final TextView textView = binding.textPerfil;
-//        perfilViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
+        //////////////////////////////////////////////////////////////////////
+        // Busqueda de informacion a la API
+
+        app = (App) requireActivity().getApplication();
+        app.getUserRepository().getCurrentUser().observe(requireActivity(),r->{
+
+            if(r.getStatus() == Status.SUCCESS){
+                user = r.getData();
+                Log.d("EditarPerfil IN ", "onCreateView: "+user);
+                TextView nameField = root.findViewById(R.id.editProfile_nombre_input);
+                nameField.setText(user.getFirstName());
+
+                TextView lastNameField = root.findViewById(R.id.editProfile_apellido_input);
+                lastNameField.setText(user.getLastName());
+
+                Spinner generoField = root.findViewById(R.id.editProfile_spinner_generos);
+                generoField.setSelection(user.getGender().equals("male")?0:1);
+
+
+                TextView dateField = root.findViewById(R.id.editProfile_fecha_input);
+                Calendar c = Calendar.getInstance(TimeZone.getDefault());
+                fechaCumpleanosMillis = user.getBirthdate().getTime();
+                c.setTimeInMillis(fechaCumpleanosMillis);
+                DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+                dateField.setText(df.format(c.getTime()));
+
+                TextView avatarField = root.findViewById(R.id.editProfile_avatar_url_input);
+                avatarField.setText(user.getAvatarUrl());
+            }
+
+        });
+
 
         //////////////////////////////////////////////////////////////////////
         // onClick boton "Cancelar" dentro del fragmento
@@ -127,42 +157,21 @@ public class EditProfileFragment extends Fragment{
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month+1;
-                String date = (dayOfMonth<10?"0"+dayOfMonth:dayOfMonth) + "/" + (month<10?"0"+month:month) + "/" + year;
-                tvDate.setText(date);
+                String dateS = (dayOfMonth<10?"0"+dayOfMonth:dayOfMonth) + "/" + (month<10?"0"+month:month) + "/" + year;
+
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date dateF = new Date(fechaCumpleanosMillis);
+                try {
+                  dateF = dateFormat.parse(dateS);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                fechaCumpleanosMillis = dateF.getTime();
+                tvDate.setText(dateS);
+                //Log.d("DATE", "onDateSet: " + dateF);
+                //Log.d("DATE", "onDateSet: " + fechaCumpleanosMillis);
             }
         };
-
-
-        app = (App) requireActivity().getApplication();
-           app.getUserRepository().getCurrentUser().observe(requireActivity(),r->{
-
-                if(r.getStatus() == Status.SUCCESS){
-                    user = r.getData();
-                    Log.d("EditarPerfil IN ", "onCreateView: "+user);
-                    TextView nameField = root.findViewById(R.id.editProfile_nombre_input);
-                    nameField.setText(user.getFirstName());
-
-                    TextView lastNameField = root.findViewById(R.id.editProfile_apellido_input);
-                    lastNameField.setText(user.getLastName());
-
-                    Spinner generoField = root.findViewById(R.id.editProfile_spinner_generos);
-                    generoField.setSelection(user.getGender().equals("male")?0:1);
-
-
-//                    TextView dateField = root.findViewById(R.id.editProfile_fecha_input);
-//                    Integer dayUser = user.getBirthdate().getDay();
-//                    Integer mothUser = user.getBirthdate().getMonth();
-//                    Integer yearUser = user.getBirthdate().getYear();
-//                    Log.d("DATE", "onCreateView: "+user.getBirthdate().toString()+"aAA"+user.getDate().toString());
-
-//                    dateField.setText(dayUser.toString()+"/"+mothUser.toString()+"/"+yearUser.toString());
-
-                    TextView avatarField = root.findViewById(R.id.editProfile_avatar_url_input);
-                    avatarField.setText(user.getAvatarUrl());
-                }
-
-            });
-
 
 
         //////////////////////////////////////////////////////////////////////
@@ -180,9 +189,9 @@ public class EditProfileFragment extends Fragment{
                 String newName = ((TextView)root.findViewById(R.id.editProfile_nombre_input)).getText().toString();
                 String newLastName = ((TextView)root.findViewById(R.id.editProfile_apellido_input)).getText().toString();
                 String newGenero = ((Spinner)root.findViewById(R.id.editProfile_spinner_generos)).getSelectedItem().toString().equals("Masculino")?"male":"female";
-                String newDate = ((TextView)root.findViewById(R.id.editProfile_fecha_input)).getText().toString();
+                long newDate = fechaCumpleanosMillis;
                 String newAvatarURL = ((TextView)root.findViewById(R.id.editProfile_avatar_url_input)).getText().toString();
-                app.getUserRepository().modify(new UserInformation(newName,newLastName,newGenero,Integer.parseInt(newDate.replace("/","")),"11112222",newAvatarURL)).observe(requireActivity(), r->{
+                app.getUserRepository().modify(new UserInformation(newName,newLastName,newGenero, newDate,"11112222",newAvatarURL)).observe(requireActivity(), r->{
                     if (r.getStatus() == Status.SUCCESS) {
                         loadingDialog.dismissDialog();
                         Navigation.findNavController(view).navigate(EditProfileFragmentDirections.actionEditProfileFragmentToNavigationPerfil());

@@ -18,7 +18,7 @@ public class UserInformation {
     private String gender;
     @SerializedName("birthdate")
     @Expose
-    private Integer birthdate;
+    private long birthdate;
     @SerializedName("email")
     @Expose
     private String email;
@@ -34,7 +34,7 @@ public class UserInformation {
     public UserInformation() {
     }
 
-    public UserInformation(String firstName, String lastName, String gender, Integer birthdate, String phone, String avatarUrl) {
+    public UserInformation(String firstName, String lastName, String gender, long birthdate, String phone, String avatarUrl) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
@@ -69,11 +69,11 @@ public class UserInformation {
         this.gender = gender;
     }
 
-    public Integer getBirthdate() {
+    public long getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Integer birthdate) {
+    public void setBirthdate(long birthdate) {
         this.birthdate = birthdate;
     }
 
