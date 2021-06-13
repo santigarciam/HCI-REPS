@@ -4,11 +4,17 @@ public class RoutineCard {
     public String name;
     public String owner;
     public String description;
+    public Integer id;
 
-    public RoutineCard(String name, String owner,String description) {
+    public RoutineCard(String name, String owner,String description,Integer id) {
         this.name = name;
         this.owner = owner;
         this.description = description;
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {

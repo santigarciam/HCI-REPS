@@ -50,4 +50,6 @@
     <string name="verification_code_text">Ingrese su codigo de verificacion</string>
     <string name="resend_code">Reenviar</string>
     <string name="confirm_code">Confirmar</string>
+    <string name="nombre_ejercicio">Nombre ejercicio</string>
+    <string name="repeticiones">Duracion/Reps</string>
 </resources>

@@ -89,11 +89,11 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                 int position = getAdapterPosition();
                 Toast.makeText(view.getContext(),"Element " + position + " clicked", Toast.LENGTH_LONG).show();
                 // Todo: Ver este problema, cuando se toca la rutina y queremos abrirla depende en que fragmento este es el navigator a usa
-                if(itemView.getId() == R.id.fragment_home){
-                    Navigation.findNavController(view).navigate(HomeFragmentDirections.actionNavigationHomeToVistaRutina(position));
-                }else if (itemView.getId() == R.id.fragment_descubrir){
-                    Navigation.findNavController(view).navigate(DescubrirFragmentDirections.actionNavigationDescubrirToVistaRutina(position));
-                }
+//                if(itemView.getId() == R.id.fragment_home){
+                    Navigation.findNavController(view).navigate(HomeFragmentDirections.actionNavigationHomeToVistaRutina(routines.get(position).getId()));
+//                }else if (itemView.getId() == R.id.fragment_descubrir){
+//                    Navigation.findNavController(view).navigate(DescubrirFragmentDirections.actionNavigationDescubrirToVistaRutina(position));
+//                }
             });
 
             itemView.findViewById(R.id.rutine_card_fav).setOnClickListener(new View.OnClickListener() {

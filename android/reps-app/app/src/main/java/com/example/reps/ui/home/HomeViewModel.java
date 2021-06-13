@@ -46,7 +46,7 @@ public class HomeViewModel extends ViewModel {
                 List<Routine> ruts = r.getData().getContent();
                 Log.d("RUTS", "init: ");
                 for (Routine rut : ruts) {
-                    rutinas.add(new RoutineCard(rut.getName(), rut.getUser().getUsername(),rut.getDetail()));
+                    rutinas.add(new RoutineCard(rut.getName(), rut.getUser().getUsername(),rut.getDetail(),rut.getId()));
                 }
                 RoutineCardAdapter rAdapter = new RoutineCardAdapter(rutinas, container.getContext());
                 verticalRecyclerView = (RecyclerView) rootView.findViewById(R.id.section_rout_recycler_view);
