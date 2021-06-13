@@ -17,12 +17,12 @@
 
         <TextView
             android:id="@+id/rutine_card_title"
-            android:layout_width="210dp"
-            android:layout_height="49dp"
+            android:layout_width="401dp"
+            android:layout_height="44dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@string/nombre_rutina"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -52,24 +52,24 @@
             android:id="@+id/imageView4"
             android:layout_width="37dp"
             android:layout_height="26dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/myRatingBar"
-            app:layout_constraintStart_toStartOf="@+id/rutine_card_title"
-            app:layout_constraintTop_toBottomOf="@+id/profile_nombre_apellido"
+            android:layout_marginStart="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/rutine_card_user"
+            app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/baseline_person_black_24dp" />
 
         <TextView
             android:id="@+id/rutine_card_user"
             android:layout_width="104dp"
             android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/autor_rutina"
             android:textColor="@color/our_blue"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView4" />
 
         <TextView
-            android:id="@+id/profile_nombre_apellido"
+            android:id="@+id/descripcionRut"
             android:layout_width="320dp"
             android:layout_height="40dp"
             android:layout_marginTop="12dp"
@@ -85,11 +85,11 @@
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="76dp"
             android:layout_height="17dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
             android:numStars="5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_nombre_apellido" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
