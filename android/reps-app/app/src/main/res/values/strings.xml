@@ -47,4 +47,7 @@
     <string name="orderOptrating">Puntuacion</string>
     <string name="orderOptSports">Deportes</string>
     <string name="orderOptCat">Categoria</string>
+    <string name="verification_code_text">Ingrese su codigo de verificacion</string>
+    <string name="resend_code">Reenviar</string>
+    <string name="confirm_code">Confirmar</string>
 </resources>

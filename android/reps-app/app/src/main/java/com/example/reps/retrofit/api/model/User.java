@@ -1,13 +1,15 @@
-package com.example.reps.api.model;
+package com.example.reps.retrofit.api.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.Date;
 
 public class User {
 
     @SerializedName("id")
     @Expose
-    private int id;
+    private Integer id;
     @SerializedName("username")
     @Expose
     private String username;
@@ -22,7 +24,7 @@ public class User {
     private String gender;
     @SerializedName("birthdate")
     @Expose
-    private int birthdate;
+    private Date birthdate;
     @SerializedName("email")
     @Expose
     private String email;
@@ -32,44 +34,39 @@ public class User {
     @SerializedName("avatarUrl")
     @Expose
     private String avatarUrl;
-    @SerializedName("metadata")
-    @Expose
-    private Object metadata;
     @SerializedName("date")
     @Expose
-    private long date;
+    private Date date;
     @SerializedName("lastActivity")
     @Expose
-    private long lastActivity;
+    private Date lastActivity;
     @SerializedName("verified")
     @Expose
-    private boolean verified;
+    private Boolean verified;
 
     public User() {
     }
 
-    public User(int id, String username, String firstName, String lastName, String gender, int birthdate, String email, String phone, String avatarUrl, Object metadata, long date, long lastActivity, boolean verified) {
+    public User(Integer id, String username, String firstName, String lastName, String gender, Date birthdate, String email, String phone, String avatarUrl, Date date, Date lastActivity, Boolean verified) {
         super();
         this.id = id;
         this.username = username;
         this.firstName = firstName;
-        this.lastName = lastName;
         this.gender = gender;
         this.birthdate = birthdate;
         this.email = email;
         this.phone = phone;
         this.avatarUrl = avatarUrl;
-        this.metadata = metadata;
         this.date = date;
         this.lastActivity = lastActivity;
         this.verified = verified;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -89,7 +86,7 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
+    public String getFLastName() {
         return lastName;
     }
 
@@ -105,11 +102,11 @@ public class User {
         this.gender = gender;
     }
 
-    public int getBirthdate() {
+    public Date getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(int birthdate) {
+    public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -137,36 +134,27 @@ public class User {
         this.avatarUrl = avatarUrl;
     }
 
-    public Object getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(Object metadata) {
-        this.metadata = metadata;
-    }
-
-    public long getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(long date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public long getLastActivity() {
+    public Date getLastActivity() {
         return lastActivity;
     }
 
-    public void setLastActivity(long lastActivity) {
+    public void setLastActivity(Date lastActivity) {
         this.lastActivity = lastActivity;
     }
 
-    public boolean isVerified() {
+    public Boolean getVerified() {
         return verified;
     }
 
-    public void setVerified(boolean verified) {
+    public void setVerified(Boolean verified) {
         this.verified = verified;
     }
-
 }
