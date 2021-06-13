@@ -24,7 +24,8 @@ public class RoutineRepository {
             @NonNull
             @Override
             protected LiveData<ApiResponse<PagedList<Routine>>> createCall() {
-                return apiService.getAll(params);
+//                return apiService.getAll(params);
+                return apiService.getAll();
             }
         }.asLiveData();
     }

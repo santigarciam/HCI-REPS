@@ -46,23 +46,23 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
 
     // TODO: remplazar esto por el llamado a la api
     public void init(View rootView, ViewGroup container){
-        rutinas = new ArrayList<>();
-        rutinas.add(new RoutineCard("Rut Tomas", "Paulo"));
-        rutinas.add(new RoutineCard("Rut Lu", "Gaston"));
-        rutinas.add(new RoutineCard("Rut Tomas", "Paulo"));
-        rutinas.add(new RoutineCard("Rut Lu", "Gaston"));
-        rutinas.add(new RoutineCard("Rut Tomas", "Paulo"));
-        rutinas.add(new RoutineCard("Rut Lu", "Gaston"));
-        rutinas.add(new RoutineCard("Rut Tomas", "Paulo"));
-        rutinas.add(new RoutineCard("Rut Lu", "Gaston"));
-        //////////////
-         rAdapter = new RoutineCardAdapter(rutinas, container.getContext());
-        verticalRecyclerView =(RecyclerView) rootView.findViewById(R.id.section_rout_recycler_viewDesc);
-
-        verticalRecyclerView.setHasFixedSize(true);
-        verticalRecyclerView.setLayoutManager(new LinearLayoutManager( container.getContext(),LinearLayoutManager.VERTICAL,false));
-
-        verticalRecyclerView.setAdapter(rAdapter);
+//        rutinas = new ArrayList<>();
+//        rutinas.add(new RoutineCard("Rut Tomas", "Paulo"));
+//        rutinas.add(new RoutineCard("Rut Lu", "Gaston"));
+//        rutinas.add(new RoutineCard("Rut Tomas", "Paulo"));
+//        rutinas.add(new RoutineCard("Rut Lu", "Gaston"));
+//        rutinas.add(new RoutineCard("Rut Tomas", "Paulo"));
+//        rutinas.add(new RoutineCard("Rut Lu", "Gaston"));
+//        rutinas.add(new RoutineCard("Rut Tomas", "Paulo"));
+//        rutinas.add(new RoutineCard("Rut Lu", "Gaston"));
+//        //////////////
+//         rAdapter = new RoutineCardAdapter(rutinas, container.getContext());
+//        verticalRecyclerView =(RecyclerView) rootView.findViewById(R.id.section_rout_recycler_viewDesc);
+//
+//        verticalRecyclerView.setHasFixedSize(true);
+//        verticalRecyclerView.setLayoutManager(new LinearLayoutManager( container.getContext(),LinearLayoutManager.VERTICAL,false));
+//
+//        verticalRecyclerView.setAdapter(rAdapter);
 
     }
     /////////////////////

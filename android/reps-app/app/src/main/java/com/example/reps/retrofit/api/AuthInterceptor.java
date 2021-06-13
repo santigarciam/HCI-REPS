@@ -1,5 +1,7 @@
 package com.example.reps.retrofit.api;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.reps.retrofit.App;
@@ -25,6 +27,7 @@ public class AuthInterceptor implements Interceptor {
     public Response intercept(@NonNull Interceptor.Chain chain) throws IOException {
         Request.Builder request = chain.request().newBuilder();
         if (preferences.getAuthToken() != null) {
+            Log.d("AuthInterceptor", "intercept: ");
             request.addHeader("Authorization", "Bearer " + preferences.getAuthToken());
         }
         return chain.proceed(request.build());

@@ -80,8 +80,10 @@ public class ApiResponse<T> {
 
     public static interface ApiRoutineService {
 
-        @GET("routines?{params}")
-        LiveData<ApiResponse<PagedList<Routine>>> getAll(@Path("params") String params);
+//        @GET("routines?{params}")
+//        LiveData<ApiResponse<PagedList<Routine>>> getAll(@Path("params") String params);
+        @GET("routines")
+        LiveData<ApiResponse<PagedList<Routine>>> getAll();
 
         @GET("routines/{routineId}")
         LiveData<ApiResponse<Routine>> getRoutine(@Path("routineId") int routineId);

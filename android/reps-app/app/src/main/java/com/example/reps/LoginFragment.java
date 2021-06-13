@@ -71,8 +71,12 @@ public class LoginFragment extends Fragment {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = usernameField.getText().toString();
-                String password = passwordField.getText().toString();
+
+//                String username = usernameField.getText().toString();
+//                String password = passwordField.getText().toString();
+                //todo: desharcodear con lo comentado arriba
+                String username = "user";
+                String password = "password";
                 Credentials credentials = new Credentials(username,password);
                 app.getUserRepository().login(credentials).observe(requireActivity(), r->{
 //                    while(r.getStatus() == Status.LOADING);

@@ -74,7 +74,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
     public void setroutines(List<RoutineCard> rut) { routines = rut; }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, owner; // AGREGAR LAS VARIABLES DEL ROUTINE CARD QUE FALTAN
+        TextView name, owner,description; // AGREGAR LAS VARIABLES DEL ROUTINE CARD QUE FALTAN
 
 
 
@@ -84,6 +84,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
             super(itemView);
             name = itemView.findViewById(R.id.rutine_card_title);
             owner = itemView.findViewById(R.id.rutine_card_user);
+            description = itemView.findViewById(R.id.descripcionRut);
             itemView.setOnClickListener(view -> {
                 int position = getAdapterPosition();
                 Toast.makeText(view.getContext(),"Element " + position + " clicked", Toast.LENGTH_LONG).show();
@@ -133,6 +134,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
         void bindData(final RoutineCard item){
             name.setText(item.getName());
             owner.setText(item.getOwner());
+            description.setText(item.getDescription());
         }
     }
 }

@@ -22,7 +22,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@string/nombre_rutina"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -48,33 +48,35 @@
             app:layout_constraintTop_toTopOf="@+id/rutine_card_fav"
             app:srcCompat="@drawable/baseline_reply_black_24" />
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="37dp"
-            android:layout_height="26dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/myRatingBar"
-            app:layout_constraintStart_toStartOf="@+id/rutine_card_title"
-            app:layout_constraintTop_toBottomOf="@+id/profile_nombre_apellido"
-            app:srcCompat="@drawable/baseline_person_black_24dp" />
-
         <TextView
             android:id="@+id/rutine_card_user"
             android:layout_width="104dp"
             android:layout_height="19dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="4dp"
             android:text="@string/autor_rutina"
             android:textColor="@color/our_blue"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-            app:layout_constraintStart_toEndOf="@+id/imageView4" />
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toBottomOf="@+id/descripcionRut" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="37dp"
+            android:layout_height="26dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/myRatingBar"
+            app:srcCompat="@drawable/baseline_person_black_24dp"
+            tools:layout_editor_absoluteX="15dp" />
 
         <TextView
-            android:id="@+id/profile_nombre_apellido"
+            android:id="@+id/descripcionRut"
             android:layout_width="320dp"
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
-            android:text="@string/descripcion_rutina"
             android:layout_marginEnd="16dp"
+            android:text="@string/descripcion_rutina"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/rutine_card_title"
             app:layout_constraintTop_toBottomOf="@+id/rutine_card_title" />
@@ -90,11 +92,11 @@
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:numStars="5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_nombre_apellido" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

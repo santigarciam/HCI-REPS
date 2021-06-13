@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.reps.databinding.FragmentHomeBinding;
+import com.example.reps.retrofit.App;
 
 public class HomeFragment extends Fragment {
 
@@ -30,7 +31,7 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        homeViewModel.init(root,container);
+        homeViewModel.init(root,container, requireActivity());
         return root;
     }
 
