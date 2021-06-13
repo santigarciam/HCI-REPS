@@ -22,48 +22,30 @@ import android.widget.Toast;
 import com.example.reps.LoadingDialog;
 import com.example.reps.R;
 import com.example.reps.retrofit.App;
+import com.example.reps.retrofit.api.model.User;
 import com.example.reps.retrofit.api.model.UserInformation;
 import com.example.reps.retrofit.api.repository.Status;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EditProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class EditProfileFragment extends Fragment{
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    TextView tvDate;
-    DatePickerDialog.OnDateSetListener setListener;
+   private TextView tvDate;
+   private DatePickerDialog.OnDateSetListener setListener;
+   private User user;
+   private App app;
 
     public EditProfileFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EditProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static EditProfileFragment newInstance(String param1, String param2) {
         EditProfileFragment fragment = new EditProfileFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -73,8 +55,7 @@ public class EditProfileFragment extends Fragment{
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -151,15 +132,45 @@ public class EditProfileFragment extends Fragment{
             }
         };
 
+
+        app = (App) requireActivity().getApplication();
+           app.getUserRepository().getCurrentUser().observe(requireActivity(),r->{
+
+                if(r.getStatus() == Status.SUCCESS){
+                    user = r.getData();
+                    Log.d("EditarPerfil IN ", "onCreateView: "+user);
+                    TextView nameField = root.findViewById(R.id.editProfile_nombre_input);
+                    nameField.setText(user.getFirstName());
+
+                    TextView lastNameField = root.findViewById(R.id.editProfile_apellido_input);
+                    lastNameField.setText(user.getLastName());
+
+                    Spinner generoField = root.findViewById(R.id.editProfile_spinner_generos);
+                    generoField.setSelection(user.getGender().equals("male")?0:1);
+
+
+//                    TextView dateField = root.findViewById(R.id.editProfile_fecha_input);
+//                    Integer dayUser = user.getBirthdate().getDay();
+//                    Integer mothUser = user.getBirthdate().getMonth();
+//                    Integer yearUser = user.getBirthdate().getYear();
+//                    Log.d("DATE", "onCreateView: "+user.getBirthdate().toString()+"aAA"+user.getDate().toString());
+
+//                    dateField.setText(dayUser.toString()+"/"+mothUser.toString()+"/"+yearUser.toString());
+
+                    TextView avatarField = root.findViewById(R.id.editProfile_avatar_url_input);
+                    avatarField.setText(user.getAvatarUrl());
+                }
+
+            });
+
+
+
         //////////////////////////////////////////////////////////////////////
         // Boton "Guardar" setup
 
         root.findViewById(R.id.editProfile_guardar_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                App app;
-                app = (App) requireActivity().getApplication();
                 if(app == null){
                     Log.d("EditProfileFragment", "onViewCreated: Error app");
                 }
