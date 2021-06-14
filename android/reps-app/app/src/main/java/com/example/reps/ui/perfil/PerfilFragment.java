@@ -23,6 +23,7 @@ import com.example.reps.MainActivity;
 import com.example.reps.R;
 import com.example.reps.databinding.FragmentPerfilBinding;
 import com.example.reps.retrofit.App;
+import com.example.reps.retrofit.AppPreferences;
 import com.example.reps.retrofit.api.model.User;
 import com.example.reps.retrofit.api.repository.Status;
 
@@ -94,6 +95,8 @@ public class PerfilFragment extends Fragment {
                                     //Navigation.findNavController(getView()).navigate(PerfilFragmentDirections.actionNavigationPerfilToMainActivity());
                                     //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.firstFragment, new FirstFragment()).commit();
 
+                                    AppPreferences appPreferences = new AppPreferences(getContext());
+                                    appPreferences.setAuthToken(null);
                                     Intent intent = new Intent(getContext(), MainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
