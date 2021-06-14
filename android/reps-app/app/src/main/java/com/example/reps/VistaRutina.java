@@ -79,7 +79,6 @@ public class VistaRutina extends Fragment {
                                     if (e.getStatus() == Status.SUCCESS) {
                                         ciclo.setCycleExercises(e.getData());
 
-
                                         RecyclerView verticalRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_vista_rutina);
 
                                         verticalRecyclerView.setHasFixedSize(true);
