@@ -82,6 +82,7 @@ public class ApiResponse<T> {
 
 //        @GET("routines?{params}")
 //        LiveData<ApiResponse<PagedList<Routine>>> getAll(@Path("params") String params);
+
         @GET("routines")
         LiveData<ApiResponse<PagedList<Routine>>> getAll();
 

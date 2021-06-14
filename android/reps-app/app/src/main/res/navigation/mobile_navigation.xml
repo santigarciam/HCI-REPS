@@ -65,6 +65,9 @@
     <argument
         android:name="ID_rutina"
         app:argType="integer" />
+        <action
+            android:id="@+id/action_vista_rutina_to_ejecucionRut"
+            app:destination="@id/ejecucionRut" />
     </fragment>
 
     <fragment
@@ -105,5 +108,14 @@
             android:id="@+id/action_programarEntrenamientoFragment_to_navigation_perfil"
             app:destination="@id/navigation_perfil" />
     </fragment>
+    <activity
+        android:id="@+id/ejecucionRut"
+        android:name="com.example.reps.ui.ejecucionRut.ejecucionRut"
+        android:label="activity_ejecucion_rut"
+        tools:layout="@layout/activity_ejecucion_rut" >
+        <argument
+            android:name="idRut"
+            app:argType="integer" />
+    </activity>
 
 </navigation>

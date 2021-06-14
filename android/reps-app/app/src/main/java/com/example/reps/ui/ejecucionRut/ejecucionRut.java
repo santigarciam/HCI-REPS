@@ -1,17 +1,22 @@
 package com.example.reps.ui.ejecucionRut;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.reps.R;
 import com.example.reps.databinding.ActivityLogedBinding;
+import com.example.reps.retrofit.App;
 import com.example.reps.retrofit.api.model.Cycle;
 import com.example.reps.retrofit.api.model.CycleExercise;
 import com.example.reps.retrofit.api.model.Exercise;
 import com.example.reps.retrofit.api.model.PagedList;
+import com.example.reps.retrofit.api.repository.Status;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,10 +28,21 @@ public class ejecucionRut extends AppCompatActivity {
     private CycleExercise next;
     private PagedList<Cycle> routineCycles;
     private Cycle currentCycle;
+    private App app;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState); //routine
+        app = (App) getApplication();
+        ejecucionRutArgs args = ejecucionRutArgs.fromBundle(savedInstanceState);
+        app.getRoutineRepository().getRoutine(args.getIdRut()).observe(this,r->{
+            if(r.getStatus() == Status.SUCCESS){
+                Log.d("BORRAR", "onCreate: ");
+            }
+        });
+
         setContentView(R.layout.activity_ejecucion_rut);
 
         TextView timer = findViewById(R.id.ex_time);
@@ -49,5 +65,6 @@ public class ejecucionRut extends AppCompatActivity {
 
         timeLeft.scheduleAtFixedRate(timerTask, 100, 100);
     }
+
 
 }
