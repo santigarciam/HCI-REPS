@@ -7,6 +7,7 @@ import com.example.reps.retrofit.App;
 
 import com.example.reps.retrofit.api.ApiClient;
 import com.example.reps.retrofit.api.ApiResponse;
+import com.example.reps.retrofit.api.model.Cycle;
 import com.example.reps.retrofit.api.model.PagedList;
 import com.example.reps.retrofit.api.model.Routine;
 
@@ -37,6 +38,17 @@ public class RoutineRepository {
             @Override
             protected LiveData<ApiResponse<Routine>> createCall() {
                 return apiService.getRoutine(routineId);
+            }
+        }.asLiveData();
+    }
+
+    public LiveData<Resource<PagedList<Cycle>>> getRoutineCycles(int routineId) {
+        return new NetworkBoundResource<PagedList<Cycle>, PagedList<Cycle>>()
+        {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<PagedList<Cycle>>> createCall() {
+                return apiService.getRoutineCycles(routineId);
             }
         }.asLiveData();
     }
