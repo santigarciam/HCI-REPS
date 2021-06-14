@@ -7,12 +7,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.reps.retrofit.api.model.Cycle;
+import com.example.reps.retrofit.api.model.CycleExercise;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CycleCardAdapter extends RecyclerView.Adapter<CycleCardAdapter.ViewHolder> {
@@ -39,12 +42,22 @@ public class CycleCardAdapter extends RecyclerView.Adapter<CycleCardAdapter.View
         Cycle cycle = cycles.get(position);
         holder.cycleNameField.setText(cycle.getName());
 
+        List<CycleExercise> exercises=cycle.getCycleExercises().getContent();
+//        if(cycle.getCycleExercises() !=null){
+//            exercises.addAll(cycle.getCycleExercises().getContent());
+//        }
+        ExerciseCardAdapter exerciseCardAdapter = new ExerciseCardAdapter(exercises,context);
+
+        holder.recyclerView.setHasFixedSize(true);
+        holder.recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
+        holder.recyclerView.setAdapter(exerciseCardAdapter);
+
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return cycles.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Reps</string>
+    <string name="app_name">REPS</string>
     <string name="first_button_text_login">INICIAR SESIÓN</string>
     <string name="first_button_text_registrarse">REGISTRARSE</string>
     <string name="hint_nombre_de_usuario">Nombre de usuario</string>
@@ -47,9 +47,13 @@
     <string name="orderOptrating">Puntuacion</string>
     <string name="orderOptSports">Deportes</string>
     <string name="orderOptCat">Categoria</string>
-    <string name="verification_code_text">Ingrese su codigo de verificacion</string>
+    <string name="verification_code_text">Ingrese su código de verificación</string>
     <string name="resend_code">Reenviar</string>
     <string name="confirm_code">Confirmar</string>
     <string name="nombre_ejercicio">Nombre ejercicio</string>
-    <string name="repeticiones">Duracion/Reps</string>
+    <string name="repeticiones">Duración/Reps</string>
+    <string name="nombre_ciclo">Nombre ciclo</string>
+    <string name="next_ex">siguiente</string>
+    <string name="exercise_name">Nombre ejercicio</string>
+    <string name="siguiente_ej">Siguiente ejercicio:</string>
 </resources>

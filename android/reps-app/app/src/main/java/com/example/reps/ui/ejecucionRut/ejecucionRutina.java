@@ -67,7 +67,7 @@ public class ejecucionRutina extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_vista_rutina, container, false);
+        return inflater.inflate(R.layout.ejecucion_rutina, container, false);
     }
 
 }

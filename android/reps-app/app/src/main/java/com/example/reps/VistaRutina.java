@@ -69,30 +69,33 @@ public class VistaRutina extends Fragment {
                         if(c.getStatus() == Status.SUCCESS){
                             ciclos.addAll(c.getData().getContent());
                             int i =0;
+                            List<Cycle> arrayList1 = new ArrayList<>();
+                            CycleCardAdapter verticalAdapter = new CycleCardAdapter(arrayList1,getContext());
+
+
                             for(Cycle ciclo: ciclos) {
                                 int finalI = i;
                                 app.getRoutineRepository().getCycleExercise(ciclo.getId()).observe(requireActivity(), e -> {
                                     if (e.getStatus() == Status.SUCCESS) {
-                                        assert e.getData() != null;
-                                        ejercicios.add(finalI, e.getData().getContent());
+                                        ciclo.setCycleExercises(e.getData());
 
-                                        ExerciseCardAdapter eAdapter = new ExerciseCardAdapter(ejercicios.get(0), getContext());
                                         RecyclerView verticalRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_vista_rutina);
 
                                         verticalRecyclerView.setHasFixedSize(true);
                                         verticalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 //
-                                        List<RoutineSection> arrayList1 = new ArrayList<>();
-                                        RoutineSectionAdapter verticalAdapter = new RoutineSectionAdapter(arrayList1, getContext());
-                                        verticalRecyclerView.setAdapter(eAdapter);
+                                        verticalRecyclerView.setAdapter(verticalAdapter);
 
-                                          verticalAdapter.notifyDataSetChanged();
+                                        arrayList1.add(ciclo);
+
+
 
                                         // TODO: aca adentro llamar para cargar en la vista los ciclos y rutinas
                                     }
                                 });
                                 i++;
                             }
+                            verticalAdapter.notifyDataSetChanged();
                         }
                    });
 

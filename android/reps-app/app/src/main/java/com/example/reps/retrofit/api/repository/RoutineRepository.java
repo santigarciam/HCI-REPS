@@ -56,17 +56,4 @@ public class RoutineRepository {
     }
 
 
-
-    public LiveData<Resource<PagedList<CycleExercise>>> getCycleExercise(int cycleID) {
-        return new NetworkBoundResource<PagedList<CycleExercise>, PagedList<CycleExercise>>()
-        {
-            @NonNull
-            @Override
-            protected LiveData<ApiResponse<PagedList<CycleExercise>>> createCall() {
-                return apiService.getCycleExercises(cycleID);
-            }
-        }.asLiveData();
-    }
-
-
 }

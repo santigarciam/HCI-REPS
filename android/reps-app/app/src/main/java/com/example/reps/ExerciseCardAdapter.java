@@ -60,7 +60,12 @@ public class ExerciseCardAdapter extends RecyclerView.Adapter<ExerciseCardAdapte
         void bindData(final CycleExercise item){
            name.setText(item.getExercise().getName());
                 Integer repetitions = item.getRepetitions()==0?item.getDuration():item.getRepetitions();
-              reps.setText(String.valueOf(repetitions));
+                if(item.getRepetitions()==0){
+                    reps.setText(String.valueOf(item.getDuration()).concat("s"));
+                }else{
+                    reps.setText("x".concat(String.valueOf(item.getRepetitions())));
+                }
+
         }
     }
 }
