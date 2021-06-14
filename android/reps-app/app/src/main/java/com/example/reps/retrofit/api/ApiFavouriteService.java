@@ -12,7 +12,7 @@ import retrofit2.http.Path;
 
 public interface ApiFavouriteService {
 
-    @POST("favourites/{routineId}")
+    @POST("favourites/{routineId}/")
     LiveData<ApiResponse<Void>> addFavourite(@Path("routineId") int routineId);
 
     @DELETE("favourites/{routineId}")

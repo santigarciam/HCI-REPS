@@ -1,5 +1,6 @@
 package com.example.reps;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.reps.retrofit.App;
 import com.example.reps.ui.home.HomeFragmentDirections;
 
 import org.jetbrains.annotations.NotNull;
@@ -23,11 +25,15 @@ public class RoutineSectionAdapter extends RecyclerView.Adapter<RoutineSectionAd
     private List<RoutineSection> routineSections;
     private LayoutInflater mInflater;
     private Context context;
+    private App app;
+    private Activity activity;
 
-    public RoutineSectionAdapter(List<RoutineSection> routineSections, Context context) {
+    public RoutineSectionAdapter(List<RoutineSection> routineSections, Context context, App app, Activity activity) {
         this.routineSections = routineSections;
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
+        this.app = app;
+        this.activity = activity;
     }
 
     @NonNull
@@ -45,7 +51,7 @@ public class RoutineSectionAdapter extends RecyclerView.Adapter<RoutineSectionAd
         List<RoutineCard> singleItem = rSection.getListOfRoutines();
 
         holder.sectionTitle.setText(title);
-        RoutineCardAdapter routineList = new RoutineCardAdapter(singleItem, context);
+        RoutineCardAdapter routineList = new RoutineCardAdapter(singleItem, context, app, activity);
         holder.recyclerView.setHasFixedSize(true);
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
         holder.recyclerView.setAdapter(routineList);

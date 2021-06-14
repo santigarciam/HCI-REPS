@@ -87,7 +87,7 @@ public class MiProgresoFragment extends Fragment {
                 for (ContentExecution rut : ruts) {
                     historialRutinas.add(new RoutineCard(rut.getRoutine()));
                 }
-                RoutineCardAdapter rAdapter = new RoutineCardAdapter(historialRutinas, getContext());
+                RoutineCardAdapter rAdapter = new RoutineCardAdapter(historialRutinas, getContext(), app, getActivity());
                 RecyclerView verticalRecyclerView = (RecyclerView) root.findViewById(R.id.miProgreso_recycler_view);
                 verticalRecyclerView.setHasFixedSize(true);
                 verticalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
