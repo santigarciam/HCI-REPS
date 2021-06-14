@@ -79,10 +79,7 @@ public class VistaRutina extends Fragment {
                                     if (e.getStatus() == Status.SUCCESS) {
                                         ciclo.setCycleExercises(e.getData());
                                         ejercicios.add(finalI,new ArrayList<>());
-                                        if (e.getData() != null)
-                                        ejercicios.get(finalI).addAll(e.getData().getContent());
 
-                                        ExerciseCardAdapter eAdapter = new ExerciseCardAdapter(ejercicios.get(finalI), getContext());
                                         RecyclerView verticalRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_vista_rutina);
 
                                         verticalRecyclerView.setHasFixedSize(true);
