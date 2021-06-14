@@ -78,7 +78,7 @@ public class VistaRutina extends Fragment {
                                 app.getRoutineRepository().getCycleExercise(ciclo.getId()).observe(requireActivity(), e -> {
                                     if (e.getStatus() == Status.SUCCESS) {
                                         ciclo.setCycleExercises(e.getData());
-                                        ejercicios.add(finalI,new ArrayList<>());
+
 
                                         RecyclerView verticalRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_vista_rutina);
 
