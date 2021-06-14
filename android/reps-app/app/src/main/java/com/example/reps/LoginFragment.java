@@ -1,5 +1,6 @@
 package com.example.reps;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -84,7 +85,13 @@ public class LoginFragment extends Fragment {
                             Log.d(TAG, "Se logueo correctamente con las siguientes credentials. User: " + username + " Password: " + password);
                             app.getPreferences().setAuthToken(r.getData().getToken());
                             progressBar.setVisibility(View.INVISIBLE);
-                            Navigation.findNavController(view).navigate(LoginFragmentDirections.actionLoginFragmentToLogedActivity());
+                            ////////////////////////////////////////////////////////
+                            Intent intent = new Intent(getContext(), LogedActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            getActivity().finish();
+                            ///////////////////////////////////////////////////////
+                            //Navigation.findNavController(view).navigate(LoginFragmentDirections.actionLoginFragmentToLogedActivity());
                         }else if(r.getStatus() == Status.ERROR){
                             progressBar.setVisibility(View.INVISIBLE);
                             if (r.getError().getDetails().contains("Password does not match")){
