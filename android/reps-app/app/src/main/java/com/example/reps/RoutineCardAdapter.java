@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,15 +86,19 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
             name = itemView.findViewById(R.id.rutine_card_title);
             owner = itemView.findViewById(R.id.rutine_card_user);
             description = itemView.findViewById(R.id.descripcionRut);
+
             itemView.setOnClickListener(view -> {
                 int position = getAdapterPosition();
-                Toast.makeText(view.getContext(),"Element " + position + " clicked", Toast.LENGTH_LONG).show();
+                View parent = (View)itemView.getParentForAccessibility().getParentForAccessibility()    ;
+                    Log.d("COMPARACION", "ID parent "+parent.getId()+" ID fragment"+ R.id.fragment_home);
                 // Todo: Ver este problema, cuando se toca la rutina y queremos abrirla depende en que fragmento este es el navigator a usa
-//                if(itemView.getId() == R.id.fragment_home){
-                    Navigation.findNavController(view).navigate(HomeFragmentDirections.actionNavigationHomeToVistaRutina(routines.get(position).getId()));
+//               if(parent.getId() == R.id.fragment_home) {
+                   Navigation.findNavController(view).navigate(HomeFragmentDirections.actionNavigationHomeToVistaRutina(routines.get(position).getId()));
+//               }
 //                }else if (itemView.getId() == R.id.fragment_descubrir){
 //                    Navigation.findNavController(view).navigate(DescubrirFragmentDirections.actionNavigationDescubrirToVistaRutina(position));
 //                }
+
             });
 
             itemView.findViewById(R.id.rutine_card_fav).setOnClickListener(new View.OnClickListener() {
