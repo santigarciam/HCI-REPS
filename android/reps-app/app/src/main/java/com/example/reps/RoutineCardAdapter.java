@@ -1,5 +1,6 @@
 package com.example.reps;
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -15,9 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.reps.retrofit.App;
+import com.example.reps.retrofit.api.repository.Status;
 import com.example.reps.ui.home.HomeFragmentDirections;
 import com.example.reps.ui.notifications.DescubrirFragmentDirections;
 
@@ -34,11 +38,15 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
     private final Context context;
     // almacna el estado original y no cambia en toda la busqueda
     private List<RoutineCard> originalRoutines;
+    private App app;
+    private Activity activity;
 
-    public RoutineCardAdapter(List<RoutineCard> routines, Context context) {
+    public RoutineCardAdapter(List<RoutineCard> routines, Context context, App app, Activity activity) {
         this.routines = routines;
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
+        this.app = app;
+        this.activity = activity;
         originalRoutines = new ArrayList<>();
         originalRoutines.addAll(routines);
     }
@@ -108,12 +116,26 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
+                    int routineID = routines.get(position).getId();
+
+                    if(app == null){
+                        Log.d("ROUTINE_CARD_ADAPTER", "onClick: Error app");
+                    }
+
+                    //TODO: TERMINAR!!! si esta en fav, y apreta sacarlo --> ya ponerle el otro corazon a las que estan en fav
+                    app.getFavouriteRepository().addFavourite(routineID).observe((LifecycleOwner) activity, r ->{
+                        if (r.getStatus() == Status.SUCCESS) {
+                            ((ImageButton) itemView.findViewById(R.id.rutine_card_fav))
+                                    .setImageResource(R.drawable.baseline_favorite_black_24dp_pressed);
+                            Toast.makeText(view.getContext(), "Rutina " + position + " agregada a favoritos", Toast.LENGTH_LONG)
+                                    .show();
+                        }else{
+
+                        }
+                    });
 
                     // Si NO esta fav
-                    ((ImageButton) itemView.findViewById(R.id.rutine_card_fav))
-                            .setImageResource(R.drawable.baseline_favorite_black_24dp_pressed);
-                    Toast.makeText(view.getContext(), "Rutina " + position + " agregada a favoritos", Toast.LENGTH_LONG)
-                            .show();
+
                     // FALTA agregar ID a arreglo de FAVORITOS
 
                     // Si ESTA fav

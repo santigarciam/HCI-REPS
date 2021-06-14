@@ -6,16 +6,17 @@ import androidx.lifecycle.LiveData;
 import com.example.reps.retrofit.App;
 
 import com.example.reps.retrofit.api.ApiClient;
+import com.example.reps.retrofit.api.ApiFavouriteService;
 import com.example.reps.retrofit.api.ApiResponse;
 import com.example.reps.retrofit.api.ApiSportService;
 import com.example.reps.retrofit.api.model.PagedList;
 import com.example.reps.retrofit.api.model.Routine;
 
 public class FavouriteRepository {
-    private final ApiSportService.ApiFavouriteService apiService;
+    private final ApiFavouriteService apiService;
 
     public FavouriteRepository(App app) {
-        this.apiService = ApiClient.create(app, ApiSportService.ApiFavouriteService.class);
+        this.apiService = ApiClient.create(app, ApiFavouriteService.class);
     }
 
     public LiveData<Resource<PagedList<Routine>>> getFavourites() {
