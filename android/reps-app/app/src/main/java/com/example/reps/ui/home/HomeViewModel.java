@@ -46,13 +46,13 @@ public class HomeViewModel extends ViewModel {
                 List<Routine> ruts = r.getData().getContent();
                 Log.d("RUTS", "init: ");
                 for (Routine rut : ruts) {
-                    rutinas.add(new RoutineCard(rut.getName(), rut.getUser().getUsername(),rut.getDetail(),rut.getId()));
+                    rutinas.add(new RoutineCard(rut));
                 }
                 RoutineCardAdapter rAdapter = new RoutineCardAdapter(rutinas, container.getContext());
                 verticalRecyclerView = (RecyclerView) rootView.findViewById(R.id.section_rout_recycler_view);
 
                 verticalRecyclerView.setHasFixedSize(true);
-                verticalRecyclerView.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, true));
+                verticalRecyclerView.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false));
 
                 arrayList1 = new ArrayList<>();
                 verticalAdapter = new RoutineSectionAdapter(arrayList1, container.getContext());

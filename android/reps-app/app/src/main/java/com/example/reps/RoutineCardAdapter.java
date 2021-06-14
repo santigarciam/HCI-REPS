@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,16 +76,14 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, owner,description; // AGREGAR LAS VARIABLES DEL ROUTINE CARD QUE FALTAN
-
-
-
-
+        RatingBar ratingBar;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.rutine_card_title);
             owner = itemView.findViewById(R.id.rutine_card_user);
             description = itemView.findViewById(R.id.descripcionRut);
+            ratingBar = itemView.findViewById(R.id.rutine_card_rating);
             itemView.setOnClickListener(view -> {
                 int position = getAdapterPosition();
                 Toast.makeText(view.getContext(),"Element " + position + " clicked", Toast.LENGTH_LONG).show();
@@ -135,6 +134,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
             name.setText(item.getName());
             owner.setText(item.getOwner());
             description.setText(item.getDescription());
+            ratingBar.setRating(item.getRating());
         }
     }
 }
