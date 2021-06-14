@@ -3,12 +3,24 @@ package com.example.reps.ui.perfil;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.reps.R;
+import com.example.reps.RoutineCard;
+import com.example.reps.RoutineCardAdapter;
+import com.example.reps.retrofit.App;
+import com.example.reps.retrofit.api.model.ContentExecution;
+import com.example.reps.retrofit.api.model.Routine;
+import com.example.reps.retrofit.api.repository.Status;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,11 +69,34 @@ public class MiProgresoFragment extends Fragment {
         }
     }
 
+    private App app;
+    private List<RoutineCard> historialRutinas;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mi_progreso, container, false);
+        View root = inflater.inflate(R.layout.fragment_mi_progreso, container, false);
+
+        app = (App) getActivity().getApplication();
+        app.getExecutionRepository().getCurrentUserExecutions(" ").observe(getActivity(), r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                historialRutinas = new ArrayList<>();
+                List<ContentExecution> ruts = r.getData().getContent();
+                Log.d("RUTS", "init: ");
+                for (ContentExecution rut : ruts) {
+                    historialRutinas.add(new RoutineCard(rut.getRoutine()));
+                }
+                RoutineCardAdapter rAdapter = new RoutineCardAdapter(historialRutinas, getContext());
+                RecyclerView verticalRecyclerView = (RecyclerView) root.findViewById(R.id.miProgreso_recycler_view);
+                verticalRecyclerView.setHasFixedSize(true);
+                verticalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                verticalRecyclerView.setAdapter(rAdapter);
+            }else{
+
+            }
+        });
+
+        return root;
     }
 }
