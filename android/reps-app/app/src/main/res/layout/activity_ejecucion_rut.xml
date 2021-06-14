@@ -95,28 +95,40 @@
         android:id="@+id/nombre_ejercicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/exercise_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="113dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+
+
+    <TextView
+        android:id="@+id/nextExField"
+        android:layout_width="110dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/next_ex"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/next_ex"
+        app:layout_constraintStart_toEndOf="@+id/siguiente_ej" />
 
     <TextView
         android:id="@+id/siguiente_ej"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginBottom="8dp"
         android:text="@string/siguiente_ej"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/next_ex"
         app:layout_constraintStart_toStartOf="@+id/next_ex" />
-
-    <TextView
-        android:id="@+id/ex_time"
-        android:layout_width="67dp"
-        android:layout_height="25dp"
-        tools:layout_editor_absoluteX="154dp"
-        tools:layout_editor_absoluteY="188dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
