@@ -12,6 +12,11 @@ public class ExecutionInformation {
     @Expose
     private Boolean wasModified;
 
+    public ExecutionInformation(Integer duration, Boolean wasModified) {
+        this.duration = duration;
+        this.wasModified = wasModified;
+    }
+
     public Integer getDuration() {
         return duration;
     }

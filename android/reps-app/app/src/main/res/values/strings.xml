@@ -20,6 +20,7 @@
     <string name="nombre_rutina">Nombre Rutina</string>
     <string name="autor_rutina">Paulo Londra</string>
     <string name="descripcion_rutina">Descripcion rutina</string>
+    <string name="descripcion_ej">Descripcion </string>
     <string name="favicon">favIcon</string>
     <string name="reps_logo">reps_logo</string>
     <string name="editProfile_titulo">Editar informacion</string>

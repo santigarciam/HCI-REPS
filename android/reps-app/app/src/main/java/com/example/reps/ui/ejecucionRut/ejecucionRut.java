@@ -2,7 +2,10 @@ package com.example.reps.ui.ejecucionRut;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
@@ -10,18 +13,23 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.reps.MainActivity;
 import com.example.reps.R;
 import com.example.reps.databinding.ActivityLogedBinding;
 import com.example.reps.retrofit.App;
+import com.example.reps.retrofit.AppPreferences;
 import com.example.reps.retrofit.api.model.Cycle;
 import com.example.reps.retrofit.api.model.CycleExercise;
+import com.example.reps.retrofit.api.model.ExecutionInformation;
 import com.example.reps.retrofit.api.model.Exercise;
 import com.example.reps.retrofit.api.model.PagedList;
 import com.example.reps.retrofit.api.model.Routine;
 import com.example.reps.retrofit.api.repository.Status;
 import com.example.reps.databinding.ActivityEjecucionRutBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,6 +37,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import kotlin.text.StringsKt;
 
 
@@ -38,9 +47,13 @@ public class ejecucionRut extends AppCompatActivity {
     private Routine routine;
     private CycleExercise current,next;
     private TextView cycleField, currentExField ,nextField ,timeRepsField;
+    ImageButton moreInfo ;
+    TextView descrField ;
     private Iterator<CycleExercise> exerciseIterator;
     private Iterator<Cycle> cycleIterator;
     private List<Cycle> routineCycles;
+    private boolean paused = false;
+    private boolean moreInfoFlag = false;
     private List<List<CycleExercise>> cycleExerciseList = new ArrayList<>();
     private Cycle currentCycle;
     private App app;
@@ -69,6 +82,8 @@ public class ejecucionRut extends AppCompatActivity {
         currentExField = findViewById(R.id.nombre_ejercicio);
         nextField = findViewById(R.id.nextExField);
         timeRepsField = findViewById(R.id.timeExercise);
+         moreInfo = findViewById(R.id.moreInfoBtn);
+         descrField = findViewById(R.id.exercise_description);
 
         app.getRoutineRepository().getRoutine(idRut).observe(this,r->{
             if(r.getStatus() == Status.SUCCESS){
@@ -102,6 +117,8 @@ public class ejecucionRut extends AppCompatActivity {
                                             }
                                             currentExField.setText(current.getExercise().getName());
                                             nextField.setText(next.getExercise().getName());
+                                            String descr = getString(R.string.descripcion_ej);
+                                            descrField.setText(descr.concat(": ").concat(current.getExercise().getDetail()));
                                         }
 
                                     }
@@ -130,9 +147,82 @@ public class ejecucionRut extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                timerMethod();
+                if(!paused){
+                    timerMethod();
+                }
+
             }
         },0,1000);
+
+        //Button pauseBtn = findViewById(R.id.pauseBtn);
+        CircleImageView pauseView = findViewById(R.id.pauseBtnView);
+        pauseView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                paused = !paused;
+                if(paused){
+                    //TODO: cambiar por boton de pausa y mejorar el de play
+                    pauseView.setImageResource(R.drawable.ic_share);
+                }else{
+                    pauseView.setImageResource(R.drawable.ic_play);
+                }
+
+            }
+        });
+
+        moreInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moreInfoFlag = !moreInfoFlag;
+                if(moreInfoFlag){
+                    descrField.setVisibility(View.VISIBLE);
+                }else{
+                    descrField.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        Button endRoutineBtn = findViewById(R.id.endBtn);
+        endRoutineBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mostrarDialogoSalida();
+            }
+        });
+
+    }
+
+    private void mostrarDialogoSalida(){
+        android.app.AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Terminar Rutina")
+                .setMessage("¿Seguro que deseas terminar la rutina: ".concat(routine.getName()).concat(" ?"))
+                .setPositiveButton("Si", null)
+                .setNegativeButton("Cancelar", null)
+                .show();
+
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setBackgroundColor(getColor(R.color.grey));
+        positiveButton.setTextColor(getColor(R.color.white));
+        positiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finishRoutine();
+            }
+        });
+
+        Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        negativeButton.setBackgroundColor(getColor(R.color.our_blue));
+        negativeButton.setTextColor(getColor(R.color.white));
+        negativeButton.setPadding(0,0,5,0);
+        negativeButton
+                .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+
+
+            }
+        });
 
 
     }
@@ -161,6 +251,14 @@ public class ejecucionRut extends AppCompatActivity {
     };
 
 
+    public void finishRoutine(){
+        app.getExecutionRepository().addRoutineExec(routine.getId(),new ExecutionInformation(0,false)).observe(this,r->{
+                if(r.getStatus() == Status.SUCCESS){
+
+                }
+        });
+    }
+
     public void nextExercise(){
 
         if(next.getExercise().getName().equals(changeCycleEx.getExercise().getName())){ // Si es el de cambio
@@ -186,6 +284,8 @@ public class ejecucionRut extends AppCompatActivity {
 
 
         currentExField.setText(current.getExercise().getName());
+        String descr = getString(R.string.descripcion_ej);
+        descrField.setText(descr.concat(": ").concat(current.getExercise().getDetail()));
         timeRepsField.setText(current.getRepetitions()==0?current.getDuration()+"s":"x"+current.getRepetitions());
         nextField.setText(next.getExercise().getName());
         cycleField.setText(currentCycle.getName());
