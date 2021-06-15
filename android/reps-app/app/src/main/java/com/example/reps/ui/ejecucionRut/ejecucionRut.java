@@ -264,6 +264,10 @@ public class ejecucionRut extends AppCompatActivity {
                 Integer size = timeRepsField.length();
                 String time = timeRepsField.getText().toString().substring(0,size-1);
                 Integer t = StringsKt.toIntOrNull(time);
+                if(t==null){
+                    time = timeRepsField.getText().toString().substring(0,1);
+                    t = StringsKt.toIntOrNull(time);
+                }
                 t -=1;
                 if(t<10){
                     timeRepsField.setText("0"+t.toString() + "s");
