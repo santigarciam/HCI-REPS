@@ -37,6 +37,7 @@ import com.example.reps.ui.ejecucionRut.ejecucionRutina;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -107,6 +108,12 @@ public class VistaRutina extends Fragment {
                                 });
                                 i++;
                             }
+                            arrayList1.sort(new Comparator<Cycle>() {
+                                @Override
+                                public int compare(Cycle cycle, Cycle t1) {
+                                    return cycle.getOrder() - t1.getOrder();
+                                }
+                            });
                             verticalAdapter.notifyDataSetChanged();
                         }
                    });
