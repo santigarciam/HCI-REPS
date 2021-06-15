@@ -7,6 +7,7 @@ public class RoutineCard {
     public String owner;
     public String description;
     public Integer id;
+    public boolean isFavourite;
     public float rating = 0;
 
     public RoutineCard(String name, String owner,String description,Integer id) {
@@ -14,6 +15,7 @@ public class RoutineCard {
         this.owner = owner;
         this.description = description;
         this.id = id;
+        this.isFavourite = false;
     }
 
     public RoutineCard(Routine rut) {
@@ -22,6 +24,7 @@ public class RoutineCard {
         this.description = rut.getDetail();
         this.id = rut.getId();
         this.rating = rut.getAverageRating();
+        this.isFavourite = false;
     }
 
     public Integer getId() {
@@ -54,5 +57,13 @@ public class RoutineCard {
 
     public void setterRating(float rating) {
         this.rating = rating;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
     }
 }
