@@ -83,6 +83,7 @@ private AppCompatActivity act;
             @Override
             public void onClick(View view) {
                dismiss();
+                act.finish();
             }
         });
             return builder.create();
