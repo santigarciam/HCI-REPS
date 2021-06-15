@@ -14,6 +14,8 @@ import com.example.reps.retrofit.api.model.User;
 import com.example.reps.retrofit.api.model.VerificationCodeModel;
 import com.example.reps.retrofit.api.model.UserInformation;
 
+import okhttp3.ResponseBody;
+
 
 public class UserRepository {
 
@@ -34,12 +36,12 @@ public class UserRepository {
         }.asLiveData();
     }
 
-    public LiveData<Resource<Token>> verifyCode(VerificationCodeModel credentials) {
-        return new NetworkBoundResource<Token, Token>()
+    public LiveData<Resource<ResponseBody>> verifyCode(VerificationCodeModel credentials) {
+        return new NetworkBoundResource<ResponseBody, ResponseBody>()
         {
             @NonNull
             @Override
-            protected LiveData<ApiResponse<Token>> createCall() {
+            protected LiveData<ApiResponse<ResponseBody>> createCall() {
                 return apiService.verifyCode(credentials);
             }
         }.asLiveData();

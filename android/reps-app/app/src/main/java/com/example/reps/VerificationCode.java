@@ -65,6 +65,7 @@ public class VerificationCode extends Fragment {
                 Log.d("OkHttpClient", "registers: "+code);
                 app.getUserRepository().verifyCode(new VerificationCodeModel(mail,code)).observe(requireActivity(),r->{
                     if(r.getStatus() == Status.SUCCESS){
+                        //TODO: logearse y guardar token
                         Navigation.findNavController(view).navigate(VerificationCodeDirections.actionVerificationCodeToLogedActivity());
                     }else if(r.getStatus() == Status.ERROR){
                         Log.d("OkHttpClient", "registers: DETAIL "+r.getError().getDetails()+"DESCR "+r.getError().getDescription());

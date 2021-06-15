@@ -19,6 +19,7 @@ public interface ApiExecutionService {
     //TODO descomentar y hacer andar con params
     //@GET("users/current/executions?{params}")
     //LiveData<ApiResponse<UserRoutineExecution>> getCurrentUserExecutions(@Path("params") String params);
+    // --------------- QUERY PARAMS!!!
 
     @GET("users/current/executions")
     LiveData<ApiResponse<UserRoutineExecution>> getCurrentUserExecutions();

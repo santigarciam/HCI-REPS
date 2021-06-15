@@ -10,6 +10,7 @@ import com.example.reps.retrofit.api.model.VerificationCodeModel;
 import com.example.reps.retrofit.api.model.UserInformation;
 
 
+import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -23,7 +24,7 @@ public interface ApiUserService {
     LiveData<ApiResponse<Void>> logout();
 
     @POST("users/verify_email")
-    LiveData<ApiResponse<Token>> verifyCode(@Body VerificationCodeModel verificationCodeModel);
+    LiveData<ApiResponse<ResponseBody>> verifyCode(@Body VerificationCodeModel verificationCodeModel);
 
     @POST("users/resend_verification")
     LiveData<ApiResponse<Token>> resendCode(@Body VerificationCodeModel verificationCodeModel);

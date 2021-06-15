@@ -105,6 +105,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                 // if(parent.getId() == R.id.fragment_home) {
                 Navigation.findNavController(view).navigate(
                         HomeFragmentDirections.actionNavigationHomeToVistaRutina(routines.get(position).getId()));
+
                 // }
                 // }else if (itemView.getId() == R.id.fragment_descubrir){
                 // Navigation.findNavController(view).navigate(DescubrirFragmentDirections.actionNavigationDescubrirToVistaRutina(position));
@@ -157,7 +158,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
 
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/plain");
-                    intent.putExtra(Intent.EXTRA_STREAM, myUri);
+                    intent.putExtra(Intent.EXTRA_TEXT, myUri.toString());
                     context.startActivity(Intent.createChooser(intent, "Compartir"));
                     // Toast.makeText(view.getContext(),"Link de rutina " + position + " copiado al
                     // portapapeles", Toast.LENGTH_LONG).show();
