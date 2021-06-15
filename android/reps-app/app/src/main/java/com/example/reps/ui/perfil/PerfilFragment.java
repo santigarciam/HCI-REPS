@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -14,6 +15,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -26,6 +28,7 @@ import com.example.reps.retrofit.App;
 import com.example.reps.retrofit.AppPreferences;
 import com.example.reps.retrofit.api.model.User;
 import com.example.reps.retrofit.api.repository.Status;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -35,13 +38,39 @@ public class PerfilFragment extends Fragment {
     private FragmentPerfilBinding binding;
     private App app;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        perfilViewModel =
-                new ViewModelProvider(this).get(PerfilViewModel.class);
+    private ShimmerFrameLayout shimmerLayout;
+
+    private Handler handler = new Handler();
+
+    @Override
+    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
 
         binding = FragmentPerfilBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        shimmerLayout = root.findViewById(R.id.shimmer_perfil);
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                shimmerLayout.stopShimmer();
+                shimmerLayout.hideShimmer();
+                shimmerLayout.setVisibility(View.GONE);
+
+                root.findViewById(R.id.profile_avatar_image).setVisibility(View.VISIBLE);
+                root.findViewById(R.id.profile_username).setVisibility(View.VISIBLE);
+                root.findViewById(R.id.profile_config_button).setVisibility(View.VISIBLE);
+                root.findViewById(R.id.profile_nombre_apellido).setVisibility(View.VISIBLE);
+                root.findViewById(R.id.profile_programar_entrenamiento_button).setVisibility(View.VISIBLE);
+                root.findViewById(R.id.profile_progress_button).setVisibility(View.VISIBLE);
+                root.findViewById(R.id.divider2).setVisibility(View.VISIBLE);
+            }
+        }, 1000);
 
         ///////////////////////////////////////////
         // SetUp informacion del usuario de la api

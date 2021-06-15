@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.reps.LoadingDialog;
+import com.example.reps.LogedActivity;
 import com.example.reps.R;
 import com.example.reps.RoutineCard;
 import com.example.reps.RoutineCardAdapter;
@@ -32,7 +34,6 @@ public class HomeViewModel extends ViewModel {
     // private  RecyclerView horizontalRecyclerView;
     private ArrayList<RoutineSection> arrayList1;
     // private  LogedActivity lgA;
-
 
     public HomeViewModel() {
     }
@@ -78,10 +79,7 @@ public class HomeViewModel extends ViewModel {
                 });
 
             }
-
         });
-
-
     }
 
 }
