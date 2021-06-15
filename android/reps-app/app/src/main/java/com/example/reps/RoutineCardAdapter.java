@@ -103,6 +103,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                 // Todo: Ver este problema, cuando se toca la rutina y queremos abrirla depende
                 // en que fragmento este es el navigator a usa
                 // if(parent.getId() == R.id.fragment_home) {
+
                 Navigation.findNavController(view).navigate(
                         HomeFragmentDirections.actionNavigationHomeToVistaRutina(routines.get(position).getId()));
 

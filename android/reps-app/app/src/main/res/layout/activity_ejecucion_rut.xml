@@ -26,13 +26,14 @@
         app:srcCompat="@drawable/reps_logo" />
 
     <Button
-        android:id="@+id/next_ex"
+        android:id="@+id/siguiente_ejercico"
         android:layout_width="312dp"
         android:layout_height="41dp"
         android:layout_marginBottom="100dp"
         android:background="@color/grey"
         android:backgroundTint="@color/grey"
         android:text="@string/next_ex"
+        app:cornerRadius="@dimen/cardview_default_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
@@ -42,21 +43,22 @@
         android:id="@+id/button2"
         android:layout_width="104dp"
         android:layout_height="110dp"
-        android:layout_marginTop="236dp"
+        android:layout_marginBottom="128dp"
         app:cornerRadius="50dp"
         app:icon="@android:drawable/ic_media_play"
         app:iconPadding="0dp"
         app:iconSize="75dp"
+        app:layout_constraintBottom_toTopOf="@+id/nextExField"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombre_ejercicio" />
+        app:layout_constraintTop_toBottomOf="@+id/ex_time" />
 
     <TextView
         android:id="@+id/nombreCiclo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/nombre_ciclo"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="24sp"
@@ -76,34 +78,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nombreCiclo" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="109dp"
-        android:layout_height="102dp"
-        android:layout_marginTop="108dp"
-        android:clickable="true"
-        app:backgroundTint="@color/our_light_blue"
-        app:fabSize="auto"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombre_ejercicio"
-        app:rippleColor="@color/white"
-        app:srcCompat="@android:drawable/ic_media_play" />
 
     <TextView
         android:id="@+id/nombre_ejercicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/exercise_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider3" />
-
-
 
     <TextView
         android:id="@+id/nextExField"
@@ -116,7 +103,7 @@
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/next_ex"
+        app:layout_constraintBottom_toTopOf="@+id/siguiente_ejercico"
         app:layout_constraintStart_toEndOf="@+id/siguiente_ej" />
 
     <TextView
@@ -128,7 +115,20 @@
         android:text="@string/siguiente_ej"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/next_ex"
-        app:layout_constraintStart_toStartOf="@+id/next_ex" />
+        app:layout_constraintBottom_toTopOf="@+id/siguiente_ejercico"
+        app:layout_constraintStart_toStartOf="@+id/siguiente_ejercico" />
+
+    <TextView
+        android:id="@+id/timeExercise"
+        android:layout_width="101dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="48dp"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

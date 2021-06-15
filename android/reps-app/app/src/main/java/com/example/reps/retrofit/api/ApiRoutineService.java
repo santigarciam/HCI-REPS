@@ -14,8 +14,8 @@ import retrofit2.http.Path;
 
 public interface ApiRoutineService {
 
-    @GET("routines?{params}")
-    LiveData<ApiResponse<PagedList<Routine>>> getAll(@Path("params") String params);
+//    @GET("routines?{params}")
+//    LiveData<ApiResponse<PagedList<Routine>>> getAll(@Query("params") String params);
 
     @GET("routines/{routineId}")
     LiveData<ApiResponse<Routine>> getRoutine(@Path("routineId") int routineId);

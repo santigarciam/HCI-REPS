@@ -28,6 +28,8 @@ import com.example.reps.retrofit.api.model.CycleExercise;
 import com.example.reps.retrofit.api.model.Exercise;
 import com.example.reps.retrofit.api.model.Routine;
 import com.example.reps.retrofit.api.repository.Status;
+import com.example.reps.ui.ejecucionRut.ejecucionRut;
+import com.example.reps.ui.ejecucionRut.ejecucionRutina;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -89,10 +91,6 @@ public class VistaRutina extends Fragment {
                                         verticalRecyclerView.setAdapter(verticalAdapter);
 
                                         arrayList1.add(ciclo);
-
-
-
-                                        // TODO: aca adentro llamar para cargar en la vista los ciclos y rutinas
                                     }
                                 });
                                 i++;
@@ -131,7 +129,10 @@ public class VistaRutina extends Fragment {
             play_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Navigation.findNavController(view).navigate(VistaRutinaDirections.actionVistaRutinaToEjecucionRut(args.getIDRutina()));
+                    Intent intent = new Intent(getContext(), ejecucionRut.class);
+                    intent.putExtra("RUTINA_ID", args.getIDRutina());
+                    startActivity(intent);
+//                    Navigation.findNavController(view).navigate(VistaRutinaDirections.actionVistaRutinaToEjecucionRut(args.getIDRutina()));
                 }
 
             });
