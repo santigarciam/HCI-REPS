@@ -12,12 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,6 +42,7 @@ import java.util.List;
 
 public class VistaRutina extends Fragment {
     TextView name,owner,descr;
+    RatingBar ratingBar;
 
     public VistaRutina() {
         // Required empty public constructor
@@ -56,11 +60,17 @@ public class VistaRutina extends Fragment {
         name = view.findViewById(R.id.nombreRut);
         owner = view.findViewById(R.id.autorRut);
         descr = view.findViewById(R.id.descripcionRut);
+        ratingBar = view.findViewById(R.id.vista_rutina_rating);
         List<List<CycleExercise>> ejercicios = new ArrayList<>();
         List<Cycle> ciclos = new ArrayList<>();
        // Routine rut;
         VistaRutinaArgs args = VistaRutinaArgs.fromBundle(getArguments());
         if (getArguments() != null) {
+            if (args.getIsFav()){
+                ((ImageButton)view.findViewById(R.id.vista_rutina_fav_button)).setImageResource(R.drawable.baseline_favorite_black_24dp_pressed);
+            }else{
+                ((ImageButton)view.findViewById(R.id.vista_rutina_fav_button)).setImageResource(R.drawable.baseline_favorite_black_24dp);
+            }
             Integer id = args.getIDRutina();
             app.getRoutineRepository().getRoutine(id).observe(requireActivity(),r->{
                 // TODO: Cambiar esto de imprimir por el manejo de la API
@@ -69,6 +79,7 @@ public class VistaRutina extends Fragment {
                    name.setText(r.getData().getName());
                     owner.setText(r.getData().getUser().getUsername());
                    descr.setText(r.getData().getDetail());
+                   ratingBar.setRating((float) (r.getData().getAverageRating()/2));
                    app.getRoutineRepository().getRoutineCycles(id).observe(requireActivity(),c-> {
                         if(c.getStatus() == Status.SUCCESS){
                             ciclos.addAll(c.getData().getContent());
@@ -135,6 +146,38 @@ public class VistaRutina extends Fragment {
 //                    Navigation.findNavController(view).navigate(VistaRutinaDirections.actionVistaRutinaToEjecucionRut(args.getIDRutina()));
                 }
 
+            });
+
+            ImageButton fav_btn = view.findViewById(R.id.vista_rutina_fav_button);
+            fav_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if (!args.getIsFav()){
+                        app.getFavouriteRepository().addFavourite(args.getIDRutina()).observe(requireActivity(), r ->{
+                            if (r.getStatus() == Status.SUCCESS) {
+                                ((ImageButton) fav_btn.findViewById(R.id.vista_rutina_fav_button))
+                                        .setImageResource(R.drawable.baseline_favorite_black_24dp_pressed);
+                                Toast.makeText(view.getContext(), "Esta rutina fue agregada a la lista de favoritos", Toast.LENGTH_LONG)
+                                        .show();
+                            }else{
+
+                            }
+                        });
+                    }else{
+                        app.getFavouriteRepository().deleteFavourite(args.getIDRutina()).observe(requireActivity(), r ->{
+                            if (r.getStatus() == Status.SUCCESS) {
+                                ((ImageButton) fav_btn.findViewById(R.id.vista_rutina_fav_button))
+                                        .setImageResource(R.drawable.baseline_favorite_black_24dp);
+                                Toast.makeText(view.getContext(), "Esta rutina fue borrada de la lista de favoritos", Toast.LENGTH_LONG)
+                                        .show();
+                            }else{
+
+                            }
+                        });
+                    }
+
+                }
             });
 
         }

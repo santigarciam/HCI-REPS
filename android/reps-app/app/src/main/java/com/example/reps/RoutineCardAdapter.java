@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.reps.retrofit.App;
 import com.example.reps.retrofit.api.repository.Status;
 import com.example.reps.ui.home.HomeFragmentDirections;
-import com.example.reps.ui.notifications.DescubrirFragmentDirections;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,9 +32,9 @@ import java.util.stream.Collectors;
 
 public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.ViewHolder> {
 
-    private List<RoutineCard> routines;
+    public List<RoutineCard> routines;
     private LayoutInflater mInflater;
-    private final Context context;
+    private Context context;
     // almacna el estado original y no cambia en toda la busqueda
     private List<RoutineCard> originalRoutines;
     private App app;
@@ -62,6 +61,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
     @Override
     public void onBindViewHolder(@NonNull @NotNull RoutineCardAdapter.ViewHolder holder, int position) {
         holder.bindData(routines.get(position));
+        Log.d("ROUTINE_CARD_ADAPTER", "onBindViewHolder: " + routines.get(position).getId() + " " + routines.get(position).isFavourite());
     }
 
     @Override
@@ -86,9 +86,14 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
         routines = rut;
     }
 
+    public void auxNotify(int position){
+
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, owner, description; // AGREGAR LAS VARIABLES DEL ROUTINE CARD QUE FALTAN
         RatingBar ratingBar;
+        ImageButton favButton;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -96,6 +101,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
             owner = itemView.findViewById(R.id.rutine_card_user);
             description = itemView.findViewById(R.id.descripcionRut);
             ratingBar = itemView.findViewById(R.id.rutine_card_rating);
+            favButton = itemView.findViewById(R.id.vista_rutina_fav_button);
             itemView.setOnClickListener(view -> {
                 int position = getAdapterPosition();
                 View parent = (View) itemView.getParentForAccessibility().getParentForAccessibility();
@@ -105,7 +111,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                 // if(parent.getId() == R.id.fragment_home) {
 
                 Navigation.findNavController(view).navigate(
-                        HomeFragmentDirections.actionNavigationHomeToVistaRutina(routines.get(position).getId()));
+                        HomeFragmentDirections.actionNavigationHomeToVistaRutina(routines.get(position).getId(), routines.get(position).isFavourite()));
 
                 // }
                 // }else if (itemView.getId() == R.id.fragment_descubrir){
@@ -114,7 +120,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
 
             });
 
-            itemView.findViewById(R.id.rutine_card_fav).setOnClickListener(new View.OnClickListener() {
+            itemView.findViewById(R.id.vista_rutina_fav_button).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
@@ -124,27 +130,33 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                         Log.d("ROUTINE_CARD_ADAPTER", "onClick: Error app");
                     }
 
-                    //TODO: TERMINAR!!! si esta en fav, y apreta sacarlo --> ya ponerle el otro corazon a las que estan en fav
-                    app.getFavouriteRepository().addFavourite(routineID).observe((LifecycleOwner) activity, r ->{
-                        if (r.getStatus() == Status.SUCCESS) {
-                            ((ImageButton) itemView.findViewById(R.id.rutine_card_fav))
-                                    .setImageResource(R.drawable.baseline_favorite_black_24dp_pressed);
-                            Toast.makeText(view.getContext(), "Rutina " + position + " agregada a favoritos", Toast.LENGTH_LONG)
-                                    .show();
-                        }else{
+                    if (!routines.get(position).isFavourite()){
+                        app.getFavouriteRepository().addFavourite(routineID).observe((LifecycleOwner) activity, r ->{
+                            if (r.getStatus() == Status.SUCCESS) {
+                                routines.get(position).setFavourite(true);
+                                ((ImageButton) itemView.findViewById(R.id.vista_rutina_fav_button))
+                                        .setImageResource(R.drawable.baseline_favorite_black_24dp_pressed);
+                                Toast.makeText(view.getContext(), "Rutina \"" + routines.get(position).getName() + "\" agregada a favoritos", Toast.LENGTH_LONG)
+                                        .show();
+                            }else{
 
-                        }
-                    });
+                            }
+                        });
+                    }else{
+                        app.getFavouriteRepository().deleteFavourite(routineID).observe((LifecycleOwner) activity, r ->{
+                            if (r.getStatus() == Status.SUCCESS) {
+                                routines.get(position).setFavourite(false);
+                                ((ImageButton) itemView.findViewById(R.id.vista_rutina_fav_button))
+                                        .setImageResource(R.drawable.baseline_favorite_black_24dp);
+                                Toast.makeText(view.getContext(), "Rutina \"" + routines.get(position).getName() + "\" eliminada de favoritos", Toast.LENGTH_LONG)
+                                        .show();
+                                auxNotify(position);
+                            }else{
 
-                    // Si NO esta fav
+                            }
+                        });
+                    }
 
-                    // FALTA agregar ID a arreglo de FAVORITOS
-
-                    // Si ESTA fav
-                    // ((ImageButton)itemView.findViewById(R.id.rutine_card_fav)).setImageResource(R.drawable.baseline_favorite_black_24dp);
-                    // Toast.makeText(view.getContext(),"Rutina " + position + " borrada de
-                    // favoritos", Toast.LENGTH_LONG).show();
-                    // FALTA borrar ID de arreglo de FAVORITOS
                 }
             });
 
@@ -168,10 +180,15 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
         }
 
         void bindData(final RoutineCard item) {
+            if (item.isFavourite()){
+                Log.d("ROUTINE_CARD_ADAPTER", "rut id fav: " + item.getId());
+                favButton.setImageResource(R.drawable.baseline_favorite_black_24dp_pressed);
+            }
             name.setText(item.getName());
             owner.setText(item.getOwner());
             description.setText(item.getDescription());
             ratingBar.setRating(item.getRating());
         }
+
     }
 }

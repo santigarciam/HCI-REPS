@@ -12,6 +12,8 @@ import com.example.reps.retrofit.api.ApiSportService;
 import com.example.reps.retrofit.api.model.PagedList;
 import com.example.reps.retrofit.api.model.Routine;
 
+import okhttp3.ResponseBody;
+
 public class FavouriteRepository {
     private final ApiFavouriteService apiService;
 
@@ -29,22 +31,22 @@ public class FavouriteRepository {
         }.asLiveData();
     }
 
-    public LiveData<Resource<Void>> addFavourite(int routineId) {
-        return new NetworkBoundResource<Void, Void>()
+    public LiveData<Resource<ResponseBody>> addFavourite(int routineId) {
+        return new NetworkBoundResource<ResponseBody, ResponseBody>()
         {
             @NonNull
             @Override
-            protected LiveData<ApiResponse<Void>> createCall() {
+            protected LiveData<ApiResponse<ResponseBody>> createCall() {
                 return apiService.addFavourite(routineId);
             }
         }.asLiveData();
     }
-    public LiveData<Resource<Void>> deleteFavourite(int routineId) {
-        return new NetworkBoundResource<Void, Void>()
+    public LiveData<Resource<ResponseBody>> deleteFavourite(int routineId) {
+        return new NetworkBoundResource<ResponseBody, ResponseBody>()
         {
             @NonNull
             @Override
-            protected LiveData<ApiResponse<Void>> createCall() {
+            protected LiveData<ApiResponse<ResponseBody>> createCall() {
                 return apiService.deleteFavourite(routineId);
             }
         }.asLiveData();

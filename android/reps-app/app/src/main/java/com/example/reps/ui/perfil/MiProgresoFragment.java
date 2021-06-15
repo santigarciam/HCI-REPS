@@ -97,6 +97,7 @@ public class MiProgresoFragment extends Fragment {
             }
         });
 
+
         return root;
     }
 }
