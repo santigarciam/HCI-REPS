@@ -57,4 +57,6 @@
     <string name="next_ex">siguiente</string>
     <string name="exercise_name">Nombre ejercicio</string>
     <string name="siguiente_ej">Siguiente ejercicio:</string>
+    <string name="califica_la_rutina">Califica la rutina</string>
+    <string name="aceptar">Aceptar</string>
 </resources>

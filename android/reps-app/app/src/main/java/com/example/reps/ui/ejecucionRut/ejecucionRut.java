@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.reps.DialogFragmentRate;
 import com.example.reps.MainActivity;
 import com.example.reps.R;
 import com.example.reps.databinding.ActivityLogedBinding;
@@ -175,8 +176,11 @@ public class ejecucionRut extends AppCompatActivity {
             public void onClick(View view) {
                 moreInfoFlag = !moreInfoFlag;
                 if(moreInfoFlag){
+//                    int ident = getResources().getIdentifier("Reference:\t@android:drawable/arrow_down_float","drawable",getPackageName());
+//                    moreInfo.setImageResource(ident);
                     descrField.setVisibility(View.VISIBLE);
                 }else{
+//                    moreInfo.setImageResource(R);
                     descrField.setVisibility(View.INVISIBLE);
                 }
             }
@@ -206,6 +210,7 @@ public class ejecucionRut extends AppCompatActivity {
         positiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.dismiss();
                 finishRoutine();
             }
         });
@@ -219,8 +224,6 @@ public class ejecucionRut extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-
-
             }
         });
 
@@ -253,14 +256,22 @@ public class ejecucionRut extends AppCompatActivity {
 
     public void finishRoutine(){
         app.getExecutionRepository().addRoutineExec(routine.getId(),new ExecutionInformation(0,false)).observe(this,r->{
-                if(r.getStatus() == Status.SUCCESS){
+            if(r.getStatus() == Status.SUCCESS){
 
-                }
+            }
         });
-    }
+        DialogFragmentRate dialog = new DialogFragmentRate(routine.getId(),this);
+        dialog.setApp(app);
+        dialog.show(getSupportFragmentManager(),"rate");
 
+
+    }
+    private  boolean flag=false;
     public void nextExercise(){
 
+        if(flag){
+            finishRoutine();
+        }
         if(next.getExercise().getName().equals(changeCycleEx.getExercise().getName())){ // Si es el de cambio
             if(cycleIterator.hasNext()){
                 currentCycle = cycleIterator.next();
@@ -282,6 +293,10 @@ public class ejecucionRut extends AppCompatActivity {
             }
         }
 
+
+        if(!exerciseIterator.hasNext() && !cycleIterator.hasNext()){
+            flag=true;
+        }
 
         currentExField.setText(current.getExercise().getName());
         String descr = getString(R.string.descripcion_ej);
