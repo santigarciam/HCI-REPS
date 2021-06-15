@@ -68,6 +68,9 @@
         <action
             android:id="@+id/action_vista_rutina_to_ejecucionRut"
             app:destination="@id/ejecucionRut" />
+        <argument
+            android:name="isFav"
+            app:argType="boolean" />
     </fragment>
 
     <fragment

@@ -1,8 +1,6 @@
 package com.example.reps;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -24,9 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.reps.retrofit.App;
 import com.example.reps.retrofit.api.repository.Status;
-import com.example.reps.ui.favoritos.FavoritosFragment;
 import com.example.reps.ui.home.HomeFragmentDirections;
-import com.example.reps.ui.notifications.DescubrirFragmentDirections;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -105,7 +101,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
             owner = itemView.findViewById(R.id.rutine_card_user);
             description = itemView.findViewById(R.id.descripcionRut);
             ratingBar = itemView.findViewById(R.id.rutine_card_rating);
-            favButton = itemView.findViewById(R.id.rutine_card_fav);
+            favButton = itemView.findViewById(R.id.vista_rutina_fav_button);
             itemView.setOnClickListener(view -> {
                 int position = getAdapterPosition();
                 View parent = (View) itemView.getParentForAccessibility().getParentForAccessibility();
@@ -115,7 +111,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                 // if(parent.getId() == R.id.fragment_home) {
 
                 Navigation.findNavController(view).navigate(
-                        HomeFragmentDirections.actionNavigationHomeToVistaRutina(routines.get(position).getId()));
+                        HomeFragmentDirections.actionNavigationHomeToVistaRutina(routines.get(position).getId(), routines.get(position).isFavourite()));
 
                 // }
                 // }else if (itemView.getId() == R.id.fragment_descubrir){
@@ -124,7 +120,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
 
             });
 
-            itemView.findViewById(R.id.rutine_card_fav).setOnClickListener(new View.OnClickListener() {
+            itemView.findViewById(R.id.vista_rutina_fav_button).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
@@ -138,7 +134,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                         app.getFavouriteRepository().addFavourite(routineID).observe((LifecycleOwner) activity, r ->{
                             if (r.getStatus() == Status.SUCCESS) {
                                 routines.get(position).setFavourite(true);
-                                ((ImageButton) itemView.findViewById(R.id.rutine_card_fav))
+                                ((ImageButton) itemView.findViewById(R.id.vista_rutina_fav_button))
                                         .setImageResource(R.drawable.baseline_favorite_black_24dp_pressed);
                                 Toast.makeText(view.getContext(), "Rutina \"" + routines.get(position).getName() + "\" agregada a favoritos", Toast.LENGTH_LONG)
                                         .show();
@@ -150,7 +146,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                         app.getFavouriteRepository().deleteFavourite(routineID).observe((LifecycleOwner) activity, r ->{
                             if (r.getStatus() == Status.SUCCESS) {
                                 routines.get(position).setFavourite(false);
-                                ((ImageButton) itemView.findViewById(R.id.rutine_card_fav))
+                                ((ImageButton) itemView.findViewById(R.id.vista_rutina_fav_button))
                                         .setImageResource(R.drawable.baseline_favorite_black_24dp);
                                 Toast.makeText(view.getContext(), "Rutina \"" + routines.get(position).getName() + "\" eliminada de favoritos", Toast.LENGTH_LONG)
                                         .show();

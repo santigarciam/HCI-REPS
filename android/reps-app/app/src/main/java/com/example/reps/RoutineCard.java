@@ -23,7 +23,7 @@ public class RoutineCard {
         this.owner = rut.getUser().getUsername();
         this.description = rut.getDetail();
         this.id = rut.getId();
-        this.rating = rut.getAverageRating();
+        this.rating = (float) (rut.getAverageRating()/2);
         this.isFavourite = false;
     }
 
