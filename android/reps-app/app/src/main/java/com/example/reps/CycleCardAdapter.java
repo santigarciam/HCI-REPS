@@ -41,6 +41,7 @@ public class CycleCardAdapter extends RecyclerView.Adapter<CycleCardAdapter.View
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
         Cycle cycle = cycles.get(position);
         holder.cycleNameField.setText(cycle.getName());
+        holder.repsCycle.setText("X".concat(Integer.toString(cycle.getRepetitions())));
 
         List<CycleExercise> exercises=cycle.getCycleExercises().getContent();
 //        if(cycle.getCycleExercises() !=null){
@@ -63,10 +64,12 @@ public class CycleCardAdapter extends RecyclerView.Adapter<CycleCardAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView cycleNameField;
         RecyclerView recyclerView;
+        TextView repsCycle;
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             cycleNameField = itemView.findViewById(R.id.cycleNameField);
             recyclerView = itemView.findViewById(R.id.cycle_recycler_view);
+            repsCycle = itemView.findViewById(R.id.repetitionsCycle);
         }
     }
 }

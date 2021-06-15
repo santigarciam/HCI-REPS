@@ -136,6 +136,7 @@ public class VistaRutina extends Fragment {
 
                 }});
 
+
             ImageButton play_btn = view.findViewById(R.id.playRut);
 
             play_btn.setOnClickListener(new View.OnClickListener() {

@@ -163,7 +163,7 @@ public class ejecucionRut extends AppCompatActivity {
                 paused = !paused;
                 if(paused){
                     //TODO: cambiar por boton de pausa y mejorar el de play
-                    pauseView.setImageResource(R.drawable.ic_share);
+                    pauseView.setImageResource(R.drawable.ic_pause);
                 }else{
                     pauseView.setImageResource(R.drawable.ic_play);
                 }
@@ -296,13 +296,14 @@ public class ejecucionRut extends AppCompatActivity {
 
         if(!exerciseIterator.hasNext() && !cycleIterator.hasNext()){
             flag=true;
+            nextField.setText("");
+        }else{
+            nextField.setText(next.getExercise().getName());
         }
 
         currentExField.setText(current.getExercise().getName());
-        String descr = getString(R.string.descripcion_ej);
-        descrField.setText(descr.concat(": ").concat(current.getExercise().getDetail()));
-        timeRepsField.setText(current.getRepetitions()==0?current.getDuration()+"s":"x"+current.getRepetitions());
-        nextField.setText(next.getExercise().getName());
+        descrField.setText(current.getExercise().getDetail());
+        timeRepsField.setText(current.getRepetitions()==0?current.getDuration()+"s":"X "+current.getRepetitions());
         cycleField.setText(currentCycle.getName());
     }
 

@@ -93,8 +93,8 @@
         <RatingBar
             android:id="@+id/rutine_card_rating"
             style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="84dp"
-            android:layout_height="23dp"
+            android:layout_width="80dp"
+            android:layout_height="20dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:numStars="5"
