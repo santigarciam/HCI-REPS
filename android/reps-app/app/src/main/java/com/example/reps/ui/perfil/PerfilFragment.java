@@ -117,6 +117,11 @@ public class PerfilFragment extends Fragment {
                                     .show();
 
                             Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                            positiveButton.setBackgroundColor(getContext().getColor(R.color.grey));
+                            positiveButton.setTextColor(getContext().getColor(R.color.white));
+                            Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                            negativeButton.setBackgroundColor(getContext().getColor(R.color.our_blue));
+                            negativeButton.setTextColor(getContext().getColor(R.color.white));
                             positiveButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {

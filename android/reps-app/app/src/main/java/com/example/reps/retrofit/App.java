@@ -5,6 +5,7 @@ import android.app.Application;
 import com.example.reps.retrofit.AppPreferences;
 import com.example.reps.retrofit.api.repository.ExecutionRepository;
 import com.example.reps.retrofit.api.repository.FavouriteRepository;
+import com.example.reps.retrofit.api.repository.ReviewRepository;
 import com.example.reps.retrofit.api.repository.RoutineRepository;
 import com.example.reps.retrofit.api.repository.UserRepository;
 
@@ -15,6 +16,7 @@ public class App extends Application {
     private FavouriteRepository favouriteRepository;
     private RoutineRepository routineRepository;
     private ExecutionRepository executionRepository;
+    private ReviewRepository reviewRepository;
 
     public UserRepository getUserRepository() {
         return userRepository;
@@ -34,6 +36,10 @@ public class App extends Application {
         return executionRepository;
     }
 
+    public ReviewRepository getReviewRepository() {
+        return reviewRepository;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -43,5 +49,7 @@ public class App extends Application {
         favouriteRepository = new FavouriteRepository(this);
         routineRepository = new RoutineRepository(this);
         executionRepository = new ExecutionRepository(this);
+        reviewRepository = new ReviewRepository(this);
+
     }
 }
