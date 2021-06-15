@@ -6,6 +6,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -110,9 +112,21 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                 // en que fragmento este es el navigator a usa
                 // if(parent.getId() == R.id.fragment_home) {
 
-                Navigation.findNavController(view).navigate(
-                        HomeFragmentDirections.actionNavigationHomeToVistaRutina(routines.get(position).getId(), routines.get(position).isFavourite()));
+                //Navigation.findNavController(view).navigate(HomeFragmentDirections.actionNavigationHomeToVistaRutina(routines.get(position).getId(), routines.get(position).isFavourite()));
 
+                ///////////////////////////////////////////////////////
+
+//                int startDestination = Navigation.findNavController(view).getGraph().;
+//                NavOptions navOptions = new NavOptions.Builder()
+//                        .setPopUpTo(startDestination, true)
+//                        .build();
+                Bundle bundle = new Bundle();
+                bundle.putInt("ID_rutina",routines.get(position).getId());
+                bundle.putBoolean("isFav",routines.get(position).isFavourite());
+                Navigation.findNavController(view).navigate(R.id.vista_rutina, bundle);
+
+
+                //////////////////////////////////////////////////////
                 // }
                 // }else if (itemView.getId() == R.id.fragment_descubrir){
                 // Navigation.findNavController(view).navigate(DescubrirFragmentDirections.actionNavigationDescubrirToVistaRutina(position));

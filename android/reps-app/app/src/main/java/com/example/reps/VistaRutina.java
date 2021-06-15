@@ -43,6 +43,7 @@ import java.util.List;
 public class VistaRutina extends Fragment {
     TextView name,owner,descr;
     RatingBar ratingBar;
+    private boolean isFavAux;
 
     public VistaRutina() {
         // Required empty public constructor
@@ -67,7 +68,8 @@ public class VistaRutina extends Fragment {
         VistaRutinaArgs args = VistaRutinaArgs.fromBundle(getArguments());
         //TODO: HACER QUE EL ARG SEA TODO EL ROUTINECARD!!!
         if (getArguments() != null) {
-            if (args.getIsFav()){
+            isFavAux = args.getIsFav();
+            if (isFavAux){
                 ((ImageButton)view.findViewById(R.id.vista_rutina_fav_button)).setImageResource(R.drawable.baseline_favorite_black_24dp_pressed);
             }else{
                 ((ImageButton)view.findViewById(R.id.vista_rutina_fav_button)).setImageResource(R.drawable.baseline_favorite_black_24dp);
@@ -155,13 +157,14 @@ public class VistaRutina extends Fragment {
                 @Override
                 public void onClick(View view) {
                     //TODO: falta cambiar el true/false del routineCard
-                    if (!args.getIsFav()){
+                    if (!isFavAux){
                         app.getFavouriteRepository().addFavourite(args.getIDRutina()).observe(requireActivity(), r ->{
                             if (r.getStatus() == Status.SUCCESS) {
                                 ((ImageButton) fav_btn.findViewById(R.id.vista_rutina_fav_button))
                                         .setImageResource(R.drawable.baseline_favorite_black_24dp_pressed);
                                 Toast.makeText(view.getContext(), "Esta rutina fue agregada a la lista de favoritos", Toast.LENGTH_LONG)
                                         .show();
+                                isFavAux = !isFavAux;
                             }else{
 
                             }
@@ -173,6 +176,7 @@ public class VistaRutina extends Fragment {
                                         .setImageResource(R.drawable.baseline_favorite_black_24dp);
                                 Toast.makeText(view.getContext(), "Esta rutina fue borrada de la lista de favoritos", Toast.LENGTH_LONG)
                                         .show();
+                                isFavAux = !isFavAux;
                             }else{
 
                             }
