@@ -84,7 +84,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
         notifyDataSetChanged();
     }
 
-    public void setroutines(List<RoutineCard> rut) {
+    public void setRoutines(List<RoutineCard> rut) {
         routines = rut;
     }
 
@@ -93,7 +93,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, owner, description; // AGREGAR LAS VARIABLES DEL ROUTINE CARD QUE FALTAN
+        TextView name, owner, description;
         RatingBar ratingBar;
         ImageButton favButton;
 
@@ -108,29 +108,12 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                 int position = getAdapterPosition();
                 View parent = (View) itemView.getParentForAccessibility().getParentForAccessibility();
                 Log.d("COMPARACION", "ID parent " + parent.getId() + " ID fragment" + R.id.fragment_home);
-                // Todo: Ver este problema, cuando se toca la rutina y queremos abrirla depende
-                // en que fragmento este es el navigator a usa
-                // if(parent.getId() == R.id.fragment_home) {
 
-                //Navigation.findNavController(view).navigate(HomeFragmentDirections.actionNavigationHomeToVistaRutina(routines.get(position).getId(), routines.get(position).isFavourite()));
-
-                ///////////////////////////////////////////////////////
-
-//                int startDestination = Navigation.findNavController(view).getGraph().;
-//                NavOptions navOptions = new NavOptions.Builder()
-//                        .setPopUpTo(startDestination, true)
-//                        .build();
                 Bundle bundle = new Bundle();
                 bundle.putInt("ID_rutina",routines.get(position).getId());
                 bundle.putBoolean("isFav",routines.get(position).isFavourite());
                 Navigation.findNavController(view).navigate(R.id.vista_rutina, bundle);
 
-
-                //////////////////////////////////////////////////////
-                // }
-                // }else if (itemView.getId() == R.id.fragment_descubrir){
-                // Navigation.findNavController(view).navigate(DescubrirFragmentDirections.actionNavigationDescubrirToVistaRutina(position));
-                // }
 
             });
 
@@ -187,8 +170,6 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                     intent.setType("text/plain");
                     intent.putExtra(Intent.EXTRA_TEXT, myUri.toString());
                     context.startActivity(Intent.createChooser(intent, "Compartir"));
-                    // Toast.makeText(view.getContext(),"Link de rutina " + position + " copiado al
-                    // portapapeles", Toast.LENGTH_LONG).show();
                 }
             });
         }

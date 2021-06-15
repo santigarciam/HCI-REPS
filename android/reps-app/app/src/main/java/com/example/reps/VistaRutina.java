@@ -52,8 +52,8 @@ public class VistaRutina extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
+
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -64,10 +64,14 @@ public class VistaRutina extends Fragment {
         ratingBar = view.findViewById(R.id.vista_rutina_rating);
         List<List<CycleExercise>> ejercicios = new ArrayList<>();
         List<Cycle> ciclos = new ArrayList<>();
+
        // Routine rut;
         VistaRutinaArgs args = VistaRutinaArgs.fromBundle(getArguments());
         //TODO: HACER QUE EL ARG SEA TODO EL ROUTINECARD!!!
         if (getArguments() != null) {
+//            String link = getArguments().get("paramDeepLink").toString();
+//            link = Navigation.findNavController(view).handleDeepLink()
+//            Log.d("VISTA_RUTINA", "deepLinkParam: "+ link);
             isFavAux = args.getIsFav();
             if (isFavAux){
                 ((ImageButton)view.findViewById(R.id.vista_rutina_fav_button)).setImageResource(R.drawable.baseline_favorite_black_24dp_pressed);
