@@ -65,6 +65,7 @@ public class VistaRutina extends Fragment {
         List<Cycle> ciclos = new ArrayList<>();
        // Routine rut;
         VistaRutinaArgs args = VistaRutinaArgs.fromBundle(getArguments());
+        //TODO: HACER QUE EL ARG SEA TODO EL ROUTINECARD!!!
         if (getArguments() != null) {
             if (args.getIsFav()){
                 ((ImageButton)view.findViewById(R.id.vista_rutina_fav_button)).setImageResource(R.drawable.baseline_favorite_black_24dp_pressed);
@@ -152,7 +153,7 @@ public class VistaRutina extends Fragment {
             fav_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    //TODO: falta cambiar el true/false del routineCard
                     if (!args.getIsFav()){
                         app.getFavouriteRepository().addFavourite(args.getIDRutina()).observe(requireActivity(), r ->{
                             if (r.getStatus() == Status.SUCCESS) {

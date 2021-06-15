@@ -29,10 +29,11 @@
 
         <ImageButton
             android:id="@+id/vista_rutina_fav_button"
-            android:layout_width="60dp"
-            android:layout_height="58dp"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
             android:layout_marginEnd="8dp"
             android:backgroundTint="#FFFFFF"
+            android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@+id/rutine_card_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/rutine_card_title"
@@ -40,9 +41,10 @@
 
         <ImageButton
             android:id="@+id/rutine_card_share"
-            android:layout_width="71dp"
-            android:layout_height="49dp"
+            android:layout_width="49dp"
+            android:layout_height="44dp"
             android:backgroundTint="#FFFFFF"
+            android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@+id/vista_rutina_fav_button"
             app:layout_constraintEnd_toStartOf="@+id/vista_rutina_fav_button"
             app:layout_constraintTop_toTopOf="@+id/vista_rutina_fav_button"
@@ -55,7 +57,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="4dp"
             android:text="@string/autor_rutina"
-            android:textColor="@color/black"
+            android:textColor="@color/our_blue"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
@@ -91,9 +93,9 @@
         <RatingBar
             android:id="@+id/rutine_card_rating"
             style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_width="84dp"
+            android:layout_height="23dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:numStars="5"
             app:layout_constraintBottom_toBottomOf="parent"
