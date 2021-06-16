@@ -28,20 +28,22 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         /////
+        AppPreferences appPreferences = new AppPreferences(this);
+
         Intent intentURL = getIntent();
         Uri dataURL = intentURL.getData()!=null? intentURL.getData() : Uri.parse("www.null.com");
         if (intentURL.getData()!=null){
             int id = Integer.parseInt(dataURL.getLastPathSegment());
-            intentURL.putExtra("urlRoutineID",id);
+            appPreferences.setSharedRutID(id);
+            //intentURL.putExtra("urlRoutineID",id);
         }
 
-        AppPreferences appPreferences = new AppPreferences(this);
         if (appPreferences.getAuthToken() != null) {
             Intent intent = new Intent(this, LogedActivity.class);
 
-            if (intentURL.getData()!=null){
-                intent.putExtra("urlRoutineID",dataURL.getLastPathSegment());
-            }
+//            if (intentURL.getData()!=null){
+//                intent.putExtra("urlRoutineID",dataURL.getLastPathSegment());
+//            }
 
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);

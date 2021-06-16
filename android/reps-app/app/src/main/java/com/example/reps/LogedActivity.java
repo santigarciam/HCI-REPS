@@ -16,6 +16,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.reps.databinding.ActivityLogedBinding;
+import com.example.reps.retrofit.AppPreferences;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class LogedActivity extends AppCompatActivity {
@@ -53,14 +54,25 @@ public class LogedActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        Intent myIntent = getIntent();
-        if (myIntent.getStringExtra("urlRoutineID") != null){
-            Integer urlRoutineID = Integer.parseInt(myIntent.getStringExtra("urlRoutineID"));
+        AppPreferences appPreferences = new AppPreferences(this);
+        Log.d("LOGGED_ACTIVITY", "onCreate: " + appPreferences.getSharedRutID());
+        if (appPreferences.getSharedRutID() != -1){
+            Integer urlRoutineID = appPreferences.getSharedRutID();
+            appPreferences.setSharedRutID(-1);
             Bundle bundle = new Bundle();
             bundle.putInt("ID_rutina", urlRoutineID);
             bundle.putBoolean("isFav",false);
             navController.navigate(R.id.vista_rutina, bundle);
         }
+
+//        Intent myIntent = getIntent();
+//        if (myIntent.getStringExtra("urlRoutineID") != null){
+//            Integer urlRoutineID = Integer.parseInt(myIntent.getStringExtra("urlRoutineID"));
+//            Bundle bundle = new Bundle();
+//            bundle.putInt("ID_rutina", urlRoutineID);
+//            bundle.putBoolean("isFav",false);
+//            navController.navigate(R.id.vista_rutina, bundle);
+//        }
 
     }
 }
