@@ -15,8 +15,10 @@ import android.widget.TextView;
 import androidx.navigation.Navigation;
 
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.reps.retrofit.App;
+import com.example.reps.retrofit.api.model.Credentials;
 import com.example.reps.retrofit.api.model.VerificationCodeModel;
 import com.example.reps.retrofit.api.repository.Status;
 
@@ -24,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class VerificationCode extends Fragment {
     private App app;
-    private String mail;
+    private String mail,username,password;
 
 
     public VerificationCode() {
@@ -51,6 +53,8 @@ public class VerificationCode extends Fragment {
         VerificationCodeArgs args = VerificationCodeArgs.fromBundle(getArguments());
         if(getArguments()!=null){
             mail = args.getMailToConfirm();
+            password = args.getPassword();
+            username = args.getUsername();
         }
 
         app = (App)requireActivity().getApplication();
@@ -65,11 +69,18 @@ public class VerificationCode extends Fragment {
                 Log.d("OkHttpClient", "registers: "+code);
                 app.getUserRepository().verifyCode(new VerificationCodeModel(mail,code)).observe(requireActivity(),r->{
                     if(r.getStatus() == Status.SUCCESS){
-                        //TODO: logearse y guardar token
-                        Navigation.findNavController(view).navigate(VerificationCodeDirections.actionVerificationCodeToLogedActivity());
+                        app.getUserRepository().login(new Credentials(username,password)).observe(requireActivity(),l->{
+                            if(l.getStatus() == Status.SUCCESS){
+                                app.getPreferences().setAuthToken(l.getData().getToken());
+                                Navigation.findNavController(view).navigate(VerificationCodeDirections.actionVerificationCodeToLogedActivity());
+                            }else if (l.getStatus() == Status.ERROR){
+                                String errorMesagge = getResources().getString(R.string.error_mesagge_verificacion);
+                                Toast.makeText(getContext(),errorMesagge,Toast.LENGTH_LONG).show();
+                            }
+                        });
                     }else if(r.getStatus() == Status.ERROR){
-                        Log.d("OkHttpClient", "registers: DETAIL "+r.getError().getDetails()+"DESCR "+r.getError().getDescription());
-                        codeField.setError("Codigo invalido");
+                        String error = getString(R.string.codigo_invalido);
+                        codeField.setError(error);
                     }
                 });
             }
@@ -82,8 +93,16 @@ public class VerificationCode extends Fragment {
             @Override
             public void onClick(View view) {
                 String code = codeField.getText().toString();
-                app.getUserRepository().resendCode(new VerificationCodeModel(mail,code));
-                //todo llamado a la api de reenviar codigo
+                app.getUserRepository().resendCode(new VerificationCodeModel(mail,code)).observe(requireActivity(),r->{
+                    if(r.getStatus() == Status.SUCCESS){
+                        Toast.makeText(getContext(),getString(R.string.reenviar_codigo),Toast.LENGTH_LONG).show();
+                    }else if(r.getStatus() == Status.ERROR){
+                        String errorMesagge = getResources().getString(R.string.error_mesagge_verificacion);
+                        Toast.makeText(getContext(),errorMesagge,Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
             }
         });
 
