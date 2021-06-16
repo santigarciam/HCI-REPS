@@ -21,12 +21,17 @@ import com.example.reps.retrofit.api.model.Routine;
 import com.example.reps.retrofit.api.repository.Status;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HomeViewModel extends ViewModel {
 
     int value = 0;
     private List<RoutineCard> rutinas;
+
+    private Map<String,List<RoutineCard>> rutinasByDifficulty;
+
     private App app;
 
     RecyclerView verticalRecyclerView;
@@ -43,9 +48,15 @@ public class HomeViewModel extends ViewModel {
         rutinas = new ArrayList<>();
         app.getRoutineRepository().getAll(" ").observe(activity, r -> {
             if (r.getStatus() == Status.SUCCESS) {
+
                 List<Routine> ruts = r.getData().getContent();
+                // 0:rookie, 1:beginner, 2:intermediate, 3:advanced, 4:expert
+                rutinasByDifficulty = new HashMap<>();
+
                 for (Routine rut : ruts) {
                     rutinas.add(new RoutineCard(rut));
+                    rutinasByDifficulty.putIfAbsent(rut.getDifficulty(),new ArrayList<>());
+                    rutinasByDifficulty.get(rut.getDifficulty()).add(new RoutineCard(rut));
                 }
 
                 app.getFavouriteRepository().getFavourites().observe(activity, t -> {
@@ -59,22 +70,45 @@ public class HomeViewModel extends ViewModel {
                             }
                         }
 
-                        RoutineCardAdapter rAdapter = new RoutineCardAdapter(rutinas, container.getContext(), app, activity);
+                        for (Routine favRut : t.getData().getContent()){
+                            for (RoutineCard rut : rutinasByDifficulty.get(favRut.getDifficulty())){
+                                if (favRut.getId() == rut.getId()){
+                                    rut.setFavourite(true);
+                                    break;
+                                }
+                            }
+                        }
+
+                        arrayList1 = new ArrayList<>();
                         verticalRecyclerView = (RecyclerView) rootView.findViewById(R.id.section_rout_recycler_view);
 
                         verticalRecyclerView.setHasFixedSize(true);
                         verticalRecyclerView.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false));
-
-                        arrayList1 = new ArrayList<>();
                         verticalAdapter = new RoutineSectionAdapter(arrayList1, container.getContext(), app, activity);
                         verticalRecyclerView.setAdapter(verticalAdapter);
-                        RoutineSection verticalModel = new RoutineSection("Prueba 1", rutinas);
-                        arrayList1.add(verticalModel);
-                        RoutineSection verticalModel2 = new RoutineSection("Prueba 2", rutinas);
-                        arrayList1.add(verticalModel2);
-                        RoutineSection verticalModel3 = new RoutineSection("Prueba 3", rutinas);
-                        arrayList1.add(verticalModel3);
+                        int i = 0;
+                        for (List<RoutineCard> difficultyRoutineArr : rutinasByDifficulty.values()){
+                            RoutineSection verticalModel = new RoutineSection(difficultyRoutineArr.get(0).getDifficulty().toUpperCase(), difficultyRoutineArr);
+                            arrayList1.add(verticalModel);
+                        }
                         verticalAdapter.notifyDataSetChanged();
+
+//                        RoutineCardAdapter rAdapter = new RoutineCardAdapter(rutinas, container.getContext(), app, activity);
+//                        verticalRecyclerView = (RecyclerView) rootView.findViewById(R.id.section_rout_recycler_view);
+
+//                        verticalRecyclerView.setHasFixedSize(true);
+//                        verticalRecyclerView.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false));
+//
+//                        arrayList1 = new ArrayList<>();
+//                        verticalAdapter = new RoutineSectionAdapter(arrayList1, container.getContext(), app, activity);
+//                        verticalRecyclerView.setAdapter(verticalAdapter);
+//                        RoutineSection verticalModel = new RoutineSection("Prueba 1", rutinas);
+//                        arrayList1.add(verticalModel);
+//                        RoutineSection verticalModel2 = new RoutineSection("Prueba 2", rutinas);
+//                        arrayList1.add(verticalModel2);
+//                        RoutineSection verticalModel3 = new RoutineSection("Prueba 3", rutinas);
+//                        arrayList1.add(verticalModel3);
+//                        verticalAdapter.notifyDataSetChanged();
                     }
                 });
 

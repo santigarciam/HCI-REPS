@@ -20,7 +20,7 @@ public class RoutineSection {
     }
 
     public List<RoutineCard> getListOfRoutines() {
-        return listOfRoutines;
+        return listOfRoutines.subList(0,5);
     }
 
     public void setListOfRoutines(List<RoutineCard> listOfRoutines) {

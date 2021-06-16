@@ -53,8 +53,8 @@ public class VerificationCode extends Fragment {
         VerificationCodeArgs args = VerificationCodeArgs.fromBundle(getArguments());
         if(getArguments()!=null){
             mail = args.getMailToConfirm();
-            password = args.getPassword();
-            username = args.getUsername();
+            //password = args.getPassword();
+            //username = args.getUsername();
         }
 
         app = (App)requireActivity().getApplication();
