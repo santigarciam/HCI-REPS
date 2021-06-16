@@ -1,12 +1,15 @@
 package com.example.reps;
 
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavDeepLinkBuilder;
@@ -51,6 +54,24 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             setContentView(R.layout.activity_main);
+            Log.d("FIRST_FRAGMENT", "onViewCreated: " + appPreferences.getSharedRutID());
+            if (appPreferences.getSharedRutID() != -1) {
+                android.app.AlertDialog dialog = new AlertDialog.Builder(this)
+                        .setTitle("Inicia sesion o registrate")
+                        .setMessage("Para visualizar la rutina, debes tener una cuenta")
+                        .setPositiveButton("Ok", null)
+                        .show();
+
+                Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setBackgroundColor(this.getColor(R.color.our_blue));
+                button.setTextColor(this.getColor(R.color.white));
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+            }
         }
 
     }
