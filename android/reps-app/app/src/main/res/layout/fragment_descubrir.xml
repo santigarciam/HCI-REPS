@@ -53,9 +53,9 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/favourite_recycler_view"
+            android:id="@+id/descubrir_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="702dp" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

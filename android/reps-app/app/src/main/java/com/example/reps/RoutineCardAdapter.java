@@ -23,6 +23,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.reps.retrofit.App;
+import com.example.reps.retrofit.api.model.Routine;
 import com.example.reps.retrofit.api.repository.Status;
 import com.example.reps.ui.home.HomeFragmentDirections;
 

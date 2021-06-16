@@ -20,6 +20,9 @@ import com.example.reps.R;
 import com.example.reps.RoutineCard;
 import com.example.reps.RoutineCardAdapter;
 import com.example.reps.databinding.FragmentDescubrirBinding;
+import com.example.reps.retrofit.App;
+import com.example.reps.retrofit.api.model.Routine;
+import com.example.reps.retrofit.api.repository.Status;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -31,6 +34,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     private DescubrirViewModel descubrirViewModel;
     private FragmentDescubrirBinding binding;
     private SearchView searchView;
+    private App app;
 
     private String params = "";
     private String order = "";
@@ -39,30 +43,30 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     private String direc = "asc";
 
     ////////////////
-    private List<RoutineCard> rutinas;
+    private List<RoutineCard> rutinas=new ArrayList<>();
     RecyclerView verticalRecyclerView;
     RoutineCardAdapter rAdapter;
     ////////////////////
 
-    // TODO: remplazar esto por el llamado a la api
     public void init(View rootView, ViewGroup container){
-//        rutinas = new ArrayList<>();
-//        rutinas.add(new RoutineCard("Rut Tomas", "Paulo"));
-//        rutinas.add(new RoutineCard("Rut Lu", "Gaston"));
-//        rutinas.add(new RoutineCard("Rut Tomas", "Paulo"));
-//        rutinas.add(new RoutineCard("Rut Lu", "Gaston"));
-//        rutinas.add(new RoutineCard("Rut Tomas", "Paulo"));
-//        rutinas.add(new RoutineCard("Rut Lu", "Gaston"));
-//        rutinas.add(new RoutineCard("Rut Tomas", "Paulo"));
-//        rutinas.add(new RoutineCard("Rut Lu", "Gaston"));
-//        //////////////
-//         rAdapter = new RoutineCardAdapter(rutinas, container.getContext());
-//        verticalRecyclerView =(RecyclerView) rootView.findViewById(R.id.section_rout_recycler_viewDesc);
-//
-//        verticalRecyclerView.setHasFixedSize(true);
-//        verticalRecyclerView.setLayoutManager(new LinearLayoutManager( container.getContext(),LinearLayoutManager.VERTICAL,false));
-//
-//        verticalRecyclerView.setAdapter(rAdapter);
+
+        app.getRoutineRepository().getAll("").observe(requireActivity(),r->{
+            if(r.getStatus() == Status.SUCCESS){
+                for(Routine routine: r.getData().getContent()){
+                    rutinas.add(new RoutineCard(routine));
+                }
+                verticalRecyclerView = (RecyclerView) rootView.findViewById(R.id.descubrir_recycler_view);
+//                            Log.d(TAG, "onViewCreated: ");
+                rAdapter = new RoutineCardAdapter(rutinas,getContext(),app,requireActivity());
+                verticalRecyclerView.setHasFixedSize(true);
+                verticalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                verticalRecyclerView.setAdapter(rAdapter);
+
+
+                rAdapter.notifyDataSetChanged();
+            }
+        });
+
 
     }
     /////////////////////
@@ -72,14 +76,17 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
         super.onViewCreated(view, savedInstanceState);
         searchView = view.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(this);
+
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
+        app = (App) requireActivity().getApplication();
         descubrirViewModel =
                 new ViewModelProvider(this).get(DescubrirViewModel.class);
         binding = FragmentDescubrirBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         init(root,container);
+
 
 
 
