@@ -17,19 +17,24 @@ import com.example.reps.RoutineCardAdapter;
 import com.example.reps.RoutineSection;
 import com.example.reps.RoutineSectionAdapter;
 import com.example.reps.retrofit.App;
+import com.example.reps.retrofit.api.model.ContentExecution;
 import com.example.reps.retrofit.api.model.Routine;
 import com.example.reps.retrofit.api.repository.Status;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class HomeViewModel extends ViewModel {
 
     int value = 0;
     private List<RoutineCard> rutinas;
-
+    private Set<RoutineCard> rutinasRecientes;
     private Map<String,List<RoutineCard>> rutinasByDifficulty;
 
     private App app;
@@ -59,59 +64,68 @@ public class HomeViewModel extends ViewModel {
                     rutinasByDifficulty.get(rut.getDifficulty()).add(new RoutineCard(rut));
                 }
 
-                app.getFavouriteRepository().getFavourites().observe(activity, t -> {
-                    if (t.getStatus() == Status.SUCCESS){
-                        for (RoutineCard rut : rutinas){
-                            for (Routine favRut : t.getData().getContent()){
-                                if (favRut.getId() == rut.getId()){
-                                    Log.d("HOME_VIEW_MODEL", "rut id fav: " + favRut.getId());
-                                    rut.setFavourite(true);
+                app.getExecutionRepository().getCurrentUserExecutions(" ").observe(activity, h -> {
+                    if (h.getStatus() == Status.SUCCESS) {
+                        rutinasRecientes = new HashSet<>();
+                        List<ContentExecution> rutsEjecutadas = h.getData().getContent();
+                        Log.d("RUTS", "init: ");
+                        for (ContentExecution rut : rutsEjecutadas) {
+                            rutinasRecientes.add(new RoutineCard(rut.getRoutine()));
+                        }
+
+                        app.getFavouriteRepository().getFavourites().observe(activity, t -> {
+                            if (t.getStatus() == Status.SUCCESS){
+                                for (RoutineCard rut : rutinas){
+                                    for (Routine favRut : t.getData().getContent()){
+                                        if (favRut.getId() == rut.getId()){
+                                            Log.d("HOME_VIEW_MODEL", "rut id fav: " + favRut.getId());
+                                            rut.setFavourite(true);
+                                        }
+                                    }
                                 }
-                            }
-                        }
 
-                        for (Routine favRut : t.getData().getContent()){
-                            for (RoutineCard rut : rutinasByDifficulty.get(favRut.getDifficulty())){
-                                if (favRut.getId() == rut.getId()){
-                                    rut.setFavourite(true);
-                                    break;
+                                for (Routine favRut : t.getData().getContent()){
+                                    for (RoutineCard rut : rutinasByDifficulty.get(favRut.getDifficulty())){
+                                        if (favRut.getId() == rut.getId()){
+                                            rut.setFavourite(true);
+                                            break;
+                                        }
+                                    }
                                 }
+
+                                for (Routine favRut : t.getData().getContent()){
+                                    for (RoutineCard rut : rutinasRecientes){
+                                        if (favRut.getId() == rut.getId()){
+                                            rut.setFavourite(true);
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                arrayList1 = new ArrayList<>();
+                                verticalRecyclerView = (RecyclerView) rootView.findViewById(R.id.section_rout_recycler_view);
+
+                                verticalRecyclerView.setHasFixedSize(true);
+                                verticalRecyclerView.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false));
+                                verticalAdapter = new RoutineSectionAdapter(arrayList1, container.getContext(), app, activity);
+                                verticalRecyclerView.setAdapter(verticalAdapter);
+
+                                RoutineSection verticalModelRutsRecientes = new RoutineSection("Rutinas recientes", new ArrayList<>(rutinasRecientes));
+                                arrayList1.add(verticalModelRutsRecientes);
+
+                                int i = 0;
+                                for (List<RoutineCard> difficultyRoutineArr : rutinasByDifficulty.values()){
+                                    RoutineSection verticalModel = new RoutineSection(difficultyRoutineArr.get(0).getDifficulty().toUpperCase(), difficultyRoutineArr);
+                                    arrayList1.add(verticalModel);
+                                }
+                                verticalAdapter.notifyDataSetChanged();
+
                             }
-                        }
+                        });
+                    }else{
 
-                        arrayList1 = new ArrayList<>();
-                        verticalRecyclerView = (RecyclerView) rootView.findViewById(R.id.section_rout_recycler_view);
-
-                        verticalRecyclerView.setHasFixedSize(true);
-                        verticalRecyclerView.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false));
-                        verticalAdapter = new RoutineSectionAdapter(arrayList1, container.getContext(), app, activity);
-                        verticalRecyclerView.setAdapter(verticalAdapter);
-                        int i = 0;
-                        for (List<RoutineCard> difficultyRoutineArr : rutinasByDifficulty.values()){
-                            RoutineSection verticalModel = new RoutineSection(difficultyRoutineArr.get(0).getDifficulty().toUpperCase(), difficultyRoutineArr);
-                            arrayList1.add(verticalModel);
-                        }
-                        verticalAdapter.notifyDataSetChanged();
-
-//                        RoutineCardAdapter rAdapter = new RoutineCardAdapter(rutinas, container.getContext(), app, activity);
-//                        verticalRecyclerView = (RecyclerView) rootView.findViewById(R.id.section_rout_recycler_view);
-
-//                        verticalRecyclerView.setHasFixedSize(true);
-//                        verticalRecyclerView.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false));
-//
-//                        arrayList1 = new ArrayList<>();
-//                        verticalAdapter = new RoutineSectionAdapter(arrayList1, container.getContext(), app, activity);
-//                        verticalRecyclerView.setAdapter(verticalAdapter);
-//                        RoutineSection verticalModel = new RoutineSection("Prueba 1", rutinas);
-//                        arrayList1.add(verticalModel);
-//                        RoutineSection verticalModel2 = new RoutineSection("Prueba 2", rutinas);
-//                        arrayList1.add(verticalModel2);
-//                        RoutineSection verticalModel3 = new RoutineSection("Prueba 3", rutinas);
-//                        arrayList1.add(verticalModel3);
-//                        verticalAdapter.notifyDataSetChanged();
                     }
                 });
-
             }
         });
     }

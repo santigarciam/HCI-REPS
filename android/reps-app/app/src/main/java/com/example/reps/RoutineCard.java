@@ -2,6 +2,8 @@ package com.example.reps;
 
 import com.example.reps.retrofit.api.model.Routine;
 
+import java.util.Objects;
+
 public class RoutineCard {
     public String name;
     public String owner;
@@ -33,7 +35,18 @@ public class RoutineCard {
         this.isFavourite = false;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RoutineCard that = (RoutineCard) o;
+        return Objects.equals(id, that.id);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     public Integer getId() {
         return id;
