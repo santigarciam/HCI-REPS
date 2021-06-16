@@ -177,6 +177,8 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
             if (item.isFavourite()){
                 Log.d("ROUTINE_CARD_ADAPTER", "rut id fav: " + item.getId());
                 favButton.setImageResource(R.drawable.baseline_favorite_black_24dp_pressed);
+            }else{
+                favButton.setImageResource(R.drawable.baseline_favorite_black_24dp);
             }
             name.setText(item.getName());
             owner.setText(item.getOwner());
