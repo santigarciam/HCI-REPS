@@ -5,8 +5,11 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.PopupMenu;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -85,83 +88,124 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
 
 
 
-
-        root.findViewById(R.id.filterDescubrir).setOnClickListener(view -> {
-//            Animation animation = AnimationUtils.loadAnimation(getContext(),R.anim.filter_order_menu_animation);
-            PopupMenu popup = new PopupMenu(getContext(), view);
-
-            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
-
-                    if (menuItem.getItemId() == R.id.filterOpt1) {
-                        Toast.makeText(view.getContext(), "Opcion 1 seleccionada", Toast.LENGTH_LONG).show();
-                    }else if (menuItem.getItemId() == R.id.filterOpt2) {
-                        Toast.makeText(view.getContext(), "Opcion 2 seleccionada", Toast.LENGTH_LONG).show();
-                    }else  if (menuItem.getItemId() == R.id.filterOpt3) {
-                        Toast.makeText(view.getContext(), "Opcion 2 seleccionada", Toast.LENGTH_LONG).show();
-                    }
-                    return true;
-                }
-            });
-            popup.inflate(R.menu.filter_descubrir_menu);
-            popup.show();
-        });
-
-        root.findViewById(R.id.ordenarDescubrir).setOnClickListener(new View.OnClickListener() {
+        Spinner filterDescubrir = root.findViewById(R.id.filterDescubrir)  ;
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.filterOpt, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        filterDescubrir.setAdapter(adapter);
+        filterDescubrir.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String text = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(getContext(),text, Toast.LENGTH_LONG).show();
+            }
 
-                PopupMenu popup = new PopupMenu(getContext(), view);
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-                rutinas.clear();
-                    
-                popup.setOnMenuItemClickListener(menuItem -> {
-                    if (menuItem.getItemId() == R.id.orderOpt1) {
-
-                        app.getRoutineRepository().getAll("date","asc").observe(requireActivity(),r->{
-                            if(r.getStatus() == Status.SUCCESS){
-                                for(Routine routine:r.getData().getContent()){
-                                    rutinas.add(new RoutineCard(routine));
-                                }
-                                rAdapter.notifyDataSetChanged();
-                            }
-                        });
-                    }else  if (menuItem.getItemId() == R.id.orderOpt2) {
-                        app.getRoutineRepository().getAll("averageRating","asc").observe(requireActivity(),r->{
-                            if(r.getStatus() == Status.SUCCESS){
-                                for(Routine routine:r.getData().getContent()){
-                                    rutinas.add(new RoutineCard(routine));
-                                }
-                                rAdapter.notifyDataSetChanged();
-                            }
-                        });
-
-                    }else  if (menuItem.getItemId() == R.id.orderOpt3) {
-                        app.getRoutineRepository().getAll("difficulty","asc").observe(requireActivity(),r->{
-                            if(r.getStatus() == Status.SUCCESS){
-                                for(Routine routine:r.getData().getContent()){
-                                    rutinas.add(new RoutineCard(routine));
-                                }
-                                rAdapter.notifyDataSetChanged();
-                            }
-                        });
-                    }else  if (menuItem.getItemId() == R.id.orderOpt4) {
-                        app.getRoutineRepository().getAll("categoryId","asc").observe(requireActivity(),r->{
-                            if(r.getStatus() == Status.SUCCESS){
-                                for(Routine routine:r.getData().getContent()){
-                                    rutinas.add(new RoutineCard(routine));
-                                }
-                                rAdapter.notifyDataSetChanged();
-                            }
-                        });
-                    }
-                    return true;
-                });
-                popup.inflate(R.menu.order_descubrir_menu);
-                popup.show();
             }
         });
+
+        Spinner ordenarDescubrir = root.findViewById(R.id.ordenarDescubrir)  ;
+        ArrayAdapter<CharSequence> adapterOrder = ArrayAdapter.createFromResource(this.getContext(), R.array.orderOpt, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ordenarDescubrir.setAdapter(adapterOrder);
+        ordenarDescubrir.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String opt = adapterView.getItemAtPosition(i).toString();
+                List<String> opts = new ArrayList<>();
+                rutinas.clear();
+                opts.add(0, "");
+                opts.add(1, "date");
+                opts.add(2, "averageRating");
+                opts.add(3, "difficulty");
+                opts.add(4, "categoryId");
+
+                if (i != 0) {
+                    app.getRoutineRepository().getAll(opts.get(i), "asc").observe(requireActivity(), r -> {
+                                if (r.getStatus() == Status.SUCCESS) {
+                                    for (Routine routine : r.getData().getContent()) {
+                                        rutinas.add(new RoutineCard(routine));
+                                    }
+                                    rAdapter.notifyDataSetChanged();
+                                }
+                            }
+                    );
+                } else {
+                    app.getRoutineRepository().getAll().observe(requireActivity(), r -> {
+                                if (r.getStatus() == Status.SUCCESS) {
+                                    for (Routine routine : r.getData().getContent()) {
+                                        rutinas.add(new RoutineCard(routine));
+                                    }
+                                    rAdapter.notifyDataSetChanged();
+                                }
+                            }
+                    );
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
+//        root.findViewById(R.id.ordenarDescubrir).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                PopupMenu popup = new PopupMenu(getContext(), view);
+//
+//                rutinas.clear();
+//
+//                popup.setOnMenuItemClickListener(menuItem -> {
+//                    if (menuItem.getItemId() == R.id.orderOpt1) {
+//
+//                        app.getRoutineRepository().getAll("date","desc").observe(requireActivity(),r->{
+//                            if(r.getStatus() == Status.SUCCESS){
+//                                for(Routine routine:r.getData().getContent()){
+//                                    rutinas.add(new RoutineCard(routine));
+//                                }
+//                                rAdapter.notifyDataSetChanged();
+//                            }
+//                        });
+//                    }else  if (menuItem.getItemId() == R.id.orderOpt2) {
+//                        app.getRoutineRepository().getAll("averageRating","asc").observe(requireActivity(),r->{
+//                            if(r.getStatus() == Status.SUCCESS){
+//                                for(Routine routine:r.getData().getContent()){
+//                                    rutinas.add(new RoutineCard(routine));
+//                                }
+//                                rAdapter.notifyDataSetChanged();
+//                            }
+//                        });
+//
+//                    }else  if (menuItem.getItemId() == R.id.orderOpt3) {
+//                        app.getRoutineRepository().getAll("difficulty","asc").observe(requireActivity(),r->{
+//                            if(r.getStatus() == Status.SUCCESS){
+//                                for(Routine routine:r.getData().getContent()){
+//                                    rutinas.add(new RoutineCard(routine));
+//                                }
+//                                rAdapter.notifyDataSetChanged();
+//                            }
+//                        });
+//                    }else  if (menuItem.getItemId() == R.id.orderOpt4) {
+//                        app.getRoutineRepository().getAll("categoryId","asc").observe(requireActivity(),r->{
+//                            if(r.getStatus() == Status.SUCCESS){
+//                                for(Routine routine:r.getData().getContent()){
+//                                    rutinas.add(new RoutineCard(routine));
+//                                }
+//                                rAdapter.notifyDataSetChanged();
+//                            }
+//                        });
+//                    }
+//                    return true;
+//                });
+//                popup.inflate(R.menu.order_descubrir_menu);
+//                popup.show();
+//            }
+//        });
         return root;
     }
 
