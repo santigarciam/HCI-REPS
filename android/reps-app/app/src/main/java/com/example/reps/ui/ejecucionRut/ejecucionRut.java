@@ -51,7 +51,7 @@ public class ejecucionRut extends AppCompatActivity {
     private CycleExercise current,next;
     private Integer currentCycleRep=0;
     private Integer cantExCurrentCycle =0;
-    private TextView cycleField, currentExField  ,timeRepsField,descrField;
+    private TextView cycleField, currentExField  ,timeRepsField,descrField,startMessageField;
     ImageButton moreInfo ;
     Button nextField;
     private boolean isInitialized = false;
@@ -87,12 +87,14 @@ public class ejecucionRut extends AppCompatActivity {
         cycleField = findViewById(R.id.nombreCiclo);
         currentExField = findViewById(R.id.nombre_ejercicio);
         nextField = findViewById(R.id.siguiente_ejercicoBtn);
-//        nextField = findViewById(R.id.nextExField);
         timeRepsField = findViewById(R.id.timeExercise);
          moreInfo = findViewById(R.id.moreInfoBtn);
          descrField = findViewById(R.id.exercise_description);
         nextField.setVisibility(View.INVISIBLE);
         TextView sigField = findViewById(R.id.siguiente_ejText);
+        startMessageField = findViewById(R.id.mensaje_comienzo_field);
+        startMessageField.setText(R.string.mensaje_comienzo_ejecucion);
+        startMessageField.setVisibility(View.VISIBLE);
 
         sigField.setText("");
         app.getRoutineRepository().getRoutine(idRut).observe(this,r->{
@@ -113,21 +115,9 @@ public class ejecucionRut extends AppCompatActivity {
                                 //Obtengo los ejercicios de cada ciclo
                                 if(e.getStatus() == Status.SUCCESS){
                                     cycle.setCycleExercises(e.getData());
-                                    routineCycles.sort(new Comparator<Cycle>() {
-                                        @Override
-                                        public int compare(Cycle cycle, Cycle t1) {
-                                            return cycle.getOrder() -t1.getOrder();
-                                        }
-                                    });
                                     }
                             });
                         }
-                        routineCycles.sort(new Comparator<Cycle>() {
-                            @Override
-                            public int compare(Cycle cycle, Cycle t1) {
-                                return cycle.getOrder() -t1.getOrder();
-                            }
-                        });
                     }
                 });
             }
@@ -159,11 +149,8 @@ public class ejecucionRut extends AppCompatActivity {
             public void onClick(View view) {
                 moreInfoFlag = !moreInfoFlag;
                 if(moreInfoFlag){
-//                    int ident = getResources().getIdentifier("Reference:\t@android:drawable/arrow_down_float","drawable",getPackageName());
-//                    moreInfo.setImageResource(ident);
                     descrField.setVisibility(View.VISIBLE);
                 }else{
-//                    moreInfo.setImageResource(R);
                     descrField.setVisibility(View.INVISIBLE);
                 }
             }
@@ -176,7 +163,7 @@ public class ejecucionRut extends AppCompatActivity {
                 mostrarDialogoSalida();
             }
         });
-        //Button pauseBtn = findViewById(R.id.pauseBtn);
+
         CircleImageView pauseView = findViewById(R.id.pauseBtnView);
         pauseView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,6 +175,7 @@ public class ejecucionRut extends AppCompatActivity {
                     TextView sigField = findViewById(R.id.siguiente_ejText);
                     String mesage = getResources().getString(R.string.siguiente_ej);
                     sigField.setText(mesage);
+                    moreInfo.setVisibility(View.VISIBLE);
                     isInitialized = true;
                     pauseView.setImageResource(R.drawable.ic_pause);
                     endRoutineBtn.setVisibility(View.INVISIBLE);
@@ -212,6 +200,7 @@ public class ejecucionRut extends AppCompatActivity {
         timeRepsField.setText("");
         cycleField.setText("");
         nextField.setText("Siguente ejercicio...");
+        moreInfo.setVisibility(View.INVISIBLE);
 
 
 
@@ -220,6 +209,12 @@ public class ejecucionRut extends AppCompatActivity {
     private final List<Cycle> cycles = new ArrayList<>();
 
     private void prepareExecution() {
+        routineCycles.sort(new Comparator<Cycle>() {
+            @Override
+            public int compare(Cycle cycle, Cycle t1) {
+                return cycle.getOrder() -t1.getOrder();
+            }
+        });
         for(Cycle cycle:routineCycles){
             Integer repsCycle = cycle.getRepetitions() * cycle.getCycleExercises().getContent().size();
             for(int j=0;j<repsCycle;j++){
@@ -238,16 +233,17 @@ public class ejecucionRut extends AppCompatActivity {
             }
         }
 
+        startMessageField.setVisibility(View.GONE);
         exerciseIterator =exercises.iterator();
         currentCycleRep = currentCycle.getRepetitions();
         current = exerciseIterator.next();
         next = exerciseIterator.next();
-        nextField.setText(next.getExercise().getName());
+        nextField.setText(next.getExercise().getName().toUpperCase());
         currentExField.setText(current.getExercise().getName());
         descrField.setText(current.getExercise().getDetail());
 
         timeRepsField.setText(current.getRepetitions()==0?(current.getDuration()<10?"0"+current.getDuration()+"s":current.getDuration()+"s"):"X "+current.getRepetitions());
-        cycleField.setText(currentCycle.getName());
+        cycleField.setText(firstToUpperOtherLowerCase(currentCycle.getName()));
         CircleImageView pauseView = findViewById(R.id.pauseBtnView);
 
     }
@@ -324,13 +320,14 @@ public class ejecucionRut extends AppCompatActivity {
     public void finishRoutine(){
         app.getExecutionRepository().addRoutineExec(routine.getId(),new ExecutionInformation(2,false)).observe(this,r->{
             if(r.getStatus() == Status.SUCCESS){
-                DialogFragmentRate dialog = new DialogFragmentRate(routine.getId(),this);
-                dialog.setApp(app);
-                dialog.show(getSupportFragmentManager(),"rate");
+
             }else if(r.getStatus() == Status.ERROR){
                 Log.d("EXECUTION ", r.getError().getDescription()+ " "+r.getError().getDetails());
             }
         });
+        DialogFragmentRate dialog = new DialogFragmentRate(routine.getId(),this);
+        dialog.setApp(app);
+        dialog.show(getSupportFragmentManager(),"rate");
 
 
 
@@ -362,15 +359,22 @@ public class ejecucionRut extends AppCompatActivity {
                 TextView sigField = findViewById(R.id.siguiente_ejText);
                 String mesage = getResources().getString(R.string.ultimo_ejercicio_mensaje);
                 sigField.setText(mesage);
+                sigField.setTextSize(24);
 
             } else {
-                nextField.setText(next.getExercise().getName());
+                nextField.setText(next.getExercise().getName().toUpperCase());
             }
-            currentExField.setText(current.getExercise().getName());
+            currentExField.setText(firstToUpperOtherLowerCase(current.getExercise().getName()));
             descrField.setText(current.getExercise().getDetail());
             timeRepsField.setText(current.getRepetitions() == 0 ? (current.getDuration() < 10 ? "0" + current.getDuration() + "s" : current.getDuration() + "s") : "X " + current.getRepetitions());
-            cycleField.setText(currentCycle.getName());
+            cycleField.setText(firstToUpperOtherLowerCase(currentCycle.getName()));
         }
+
+    }
+
+    private String firstToUpperOtherLowerCase(String s){
+        String aux = s.substring(0,1);
+        return  aux.toUpperCase().concat(s.substring(1).toLowerCase());
 
     }
 }

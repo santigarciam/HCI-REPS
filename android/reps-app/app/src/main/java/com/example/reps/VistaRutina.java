@@ -111,19 +111,20 @@ public class VistaRutina extends Fragment {
                                        verticalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 //
                                        verticalRecyclerView.setAdapter(verticalAdapter);
-
+                                       ciclo.setName(firstToUpperOtherLowerCase(ciclo.getName()));
                                        arrayList1.add(ciclo);
                                    }
+                                   arrayList1.sort(new Comparator<Cycle>() {
+                                       @Override
+                                       public int compare(Cycle cycle, Cycle t1) {
+                                           return cycle.getOrder() - t1.getOrder();
+                                       }
+                                   });
+                                   verticalAdapter.notifyDataSetChanged();
                                });
                                i++;
                            }
-                           arrayList1.sort(new Comparator<Cycle>() {
-                               @Override
-                               public int compare(Cycle cycle, Cycle t1) {
-                                   return cycle.getOrder() - t1.getOrder();
-                               }
-                           });
-                           verticalAdapter.notifyDataSetChanged();
+
                        }
                    });
 
@@ -229,4 +230,10 @@ public class VistaRutina extends Fragment {
         return inflater.inflate(R.layout.fragment_vista_rutina, container, false);
     }
 
+
+    private String firstToUpperOtherLowerCase(String s){
+        String aux = s.substring(0,1);
+        return  aux.toUpperCase().concat(s.substring(1).toLowerCase());
+
+    }
 }
