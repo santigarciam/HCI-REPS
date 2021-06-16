@@ -34,6 +34,7 @@
     <string name="programarEntrenamiento_titulo">Programar un entrenamiento</string>
     <string name="programarEntrenamiento_fecha">Fecha</string>
     <string name="programarEntrenamiento_hora">Hora</string>
+    <string name="ultimo_ejercicio_mensaje">Ultimo ejercicio!</string>
     <string-array name="generos">
         <item>Masculino</item>
         <item>Femenino</item>
@@ -58,4 +59,7 @@
     <string name="siguiente_ej">Siguiente ejercicio:</string>
     <string name="califica_la_rutina">Califica la rutina</string>
     <string name="aceptar">Aceptar</string>
+    <string name="error_mesagge_verificacion">Hubo un error, por favor reintenlo</string>
+    <string name="codigo_invalido">Codigo invalido</string>
+    <string name="reenviar_codigo">Se ha reenviado el codigo a su casilla de correo</string>
 </resources>
