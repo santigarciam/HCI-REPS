@@ -20,6 +20,7 @@ import com.example.reps.databinding.FragmentFavoritosBinding;
 import com.example.reps.retrofit.App;
 import com.example.reps.retrofit.api.model.Routine;
 import com.example.reps.retrofit.api.repository.Status;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -32,12 +33,14 @@ public class FavoritosFragment extends Fragment {
     private App app;
     private List<RoutineCard> favRutinas;
     private RoutineCardAdapter rAdapter;
+    private ShimmerFrameLayout shimmerLayout;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentFavoritosBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        shimmerLayout = root.findViewById(R.id.shimmer_favoritos);
 
         app = (App) getActivity().getApplication();
         app.getFavouriteRepository().getFavourites().observe(getActivity(), r -> {
@@ -54,6 +57,10 @@ public class FavoritosFragment extends Fragment {
                 RecyclerView verticalRecyclerView = (RecyclerView) root.findViewById(R.id.favourite_recycler_view);
                 verticalRecyclerView.setHasFixedSize(true);
                 verticalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                shimmerLayout.stopShimmer();
+                shimmerLayout.hideShimmer();
+                shimmerLayout.setVisibility(View.GONE);
+                root.findViewById(R.id.searchView).setVisibility(View.VISIBLE);
                 verticalRecyclerView.setAdapter(rAdapter);
             }else{
 
