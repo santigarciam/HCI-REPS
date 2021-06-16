@@ -1,8 +1,10 @@
 package com.example.reps;
 
 import android.app.PendingIntent;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -50,6 +52,15 @@ public class LogedActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_loged);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        Intent myIntent = getIntent();
+        if (myIntent.getStringExtra("urlRoutineID") != null){
+            Integer urlRoutineID = Integer.parseInt(myIntent.getStringExtra("urlRoutineID"));
+            Bundle bundle = new Bundle();
+            bundle.putInt("ID_rutina", urlRoutineID);
+            bundle.putBoolean("isFav",false);
+            navController.navigate(R.id.vista_rutina, bundle);
+        }
 
     }
 }

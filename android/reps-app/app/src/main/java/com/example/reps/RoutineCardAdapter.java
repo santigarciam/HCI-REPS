@@ -161,8 +161,9 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
+                    int routineID = routines.get(position).getId();
                     ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-                    Uri myUri = Uri.parse("http://stackoverflow.com"); // cambiar al link de la rutina
+                    Uri myUri = Uri.parse("https://www.reps.com/routines/" + routineID); // cambiar al link de la rutina
                     ClipData clip = ClipData.newRawUri("Rutine Link", myUri);
                     clipboard.setPrimaryClip(clip);
 

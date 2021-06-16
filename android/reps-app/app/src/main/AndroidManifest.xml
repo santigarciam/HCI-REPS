@@ -36,12 +36,14 @@
 
 <!--            <nav-graph android:value="@navigation/mobile_navigation" />-->
 
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.VIEW"></action>-->
-<!--                <category android:name="android.intent.category.DEFAULT"></category>-->
-<!--                <category android:name="android.intent.category.BROWSABLE"></category>-->
-<!--                <data android:scheme="https" android:host="www.reps.com"></data>-->
-<!--            </intent-filter>-->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"></action>
+                <category android:name="android.intent.category.DEFAULT"></category>
+                <category android:name="android.intent.category.BROWSABLE"></category>
+                <data android:scheme="https"
+                      android:host="www.reps.com"
+                    android:pathPrefix="/routines"></data>
+            </intent-filter>
         </activity>
 
         <receiver android:name=".ReminderBroadcast" />

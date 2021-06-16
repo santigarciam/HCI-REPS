@@ -18,7 +18,7 @@
     <string name="program_entrenamiento">Programar entrenamiento</string>
     <string name="edit_perfil">Editar perfil</string>
     <string name="nombre_rutina">Nombre Rutina</string>
-    <string name="autor_rutina">Paulo Londra</string>
+    <string name="autor_rutina">Usuario</string>
     <string name="descripcion_rutina">Descripcion rutina</string>
     <string name="descripcion_ej">Descripcion </string>
     <string name="favicon">favIcon</string>
@@ -37,7 +37,6 @@
     <string-array name="generos">
         <item>Masculino</item>
         <item>Femenino</item>
-        <item>Otro</item>
     </string-array>
     <string name="ordenar">Ordenar</string>
     <string name="filtrar">Filtrar</string>

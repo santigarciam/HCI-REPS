@@ -1,5 +1,6 @@
 package com.example.reps;
 
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -7,11 +8,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -89,39 +92,39 @@ public class VistaRutina extends Fragment {
                    descr.setText(r.getData().getDetail());
                    ratingBar.setRating((float) (r.getData().getAverageRating()/2));
                    app.getRoutineRepository().getRoutineCycles(id).observe(requireActivity(),c-> {
-                        if(c.getStatus() == Status.SUCCESS){
-                            ciclos.addAll(c.getData().getContent());
-                            int i =0;
-                            List<Cycle> arrayList1 = new ArrayList<>();
-                            CycleCardAdapter verticalAdapter = new CycleCardAdapter(arrayList1,getContext());
+                       if (c.getStatus() == Status.SUCCESS) {
+                           ciclos.addAll(c.getData().getContent());
+                           int i = 0;
+                           List<Cycle> arrayList1 = new ArrayList<>();
+                           CycleCardAdapter verticalAdapter = new CycleCardAdapter(arrayList1, getContext());
 
 
-                            for(Cycle ciclo: ciclos) {
-                                int finalI = i;
-                                app.getRoutineRepository().getCycleExercise(ciclo.getId()).observe(requireActivity(), e -> {
-                                    if (e.getStatus() == Status.SUCCESS) {
-                                        ciclo.setCycleExercises(e.getData());
+                           for (Cycle ciclo : ciclos) {
+                               int finalI = i;
+                               app.getRoutineRepository().getCycleExercise(ciclo.getId()).observe(requireActivity(), e -> {
+                                   if (e.getStatus() == Status.SUCCESS) {
+                                       ciclo.setCycleExercises(e.getData());
 
-                                        RecyclerView verticalRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_vista_rutina);
+                                       RecyclerView verticalRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_vista_rutina);
 
-                                        verticalRecyclerView.setHasFixedSize(true);
-                                        verticalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                                       verticalRecyclerView.setHasFixedSize(true);
+                                       verticalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 //
-                                        verticalRecyclerView.setAdapter(verticalAdapter);
+                                       verticalRecyclerView.setAdapter(verticalAdapter);
 
-                                        arrayList1.add(ciclo);
-                                    }
-                                });
-                                i++;
-                            }
-                            arrayList1.sort(new Comparator<Cycle>() {
-                                @Override
-                                public int compare(Cycle cycle, Cycle t1) {
-                                    return cycle.getOrder() - t1.getOrder();
-                                }
-                            });
-                            verticalAdapter.notifyDataSetChanged();
-                        }
+                                       arrayList1.add(ciclo);
+                                   }
+                               });
+                               i++;
+                           }
+                           arrayList1.sort(new Comparator<Cycle>() {
+                               @Override
+                               public int compare(Cycle cycle, Cycle t1) {
+                                   return cycle.getOrder() - t1.getOrder();
+                               }
+                           });
+                           verticalAdapter.notifyDataSetChanged();
+                       }
                    });
 
 
@@ -147,7 +150,25 @@ public class VistaRutina extends Fragment {
 
                     });
 
-                }});
+                }else if (r.getStatus() == Status.ERROR){
+                    android.app.AlertDialog dialog = new AlertDialog.Builder(getContext())
+                            .setTitle("Rutina inexistente")
+                            .setMessage("Esta rutina fue borrada")
+                            .setPositiveButton("Ok", null)
+                            .show();
+
+                    Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                    button.setBackgroundColor(getContext().getColor(R.color.our_blue));
+                    button.setTextColor(getContext().getColor(R.color.white));
+                    button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    dialog.dismiss();
+                                    getActivity().finish();
+                                }
+                            });
+                }
+            });
 
 
             ImageButton play_btn = view.findViewById(R.id.playRut);

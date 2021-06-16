@@ -28,37 +28,30 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         /////
+        Intent intentURL = getIntent();
+        Uri dataURL = intentURL.getData()!=null? intentURL.getData() : Uri.parse("www.null.com");
+        if (intentURL.getData()!=null){
+            int id = Integer.parseInt(dataURL.getLastPathSegment());
+            intentURL.putExtra("urlRoutineID",id);
+        }
+
         AppPreferences appPreferences = new AppPreferences(this);
         if (appPreferences.getAuthToken() != null) {
             Intent intent = new Intent(this, LogedActivity.class);
+
+            if (intentURL.getData()!=null){
+                intent.putExtra("urlRoutineID",dataURL.getLastPathSegment());
+            }
+
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             this.finish();
-            //Navigation.findNavController(view).navigate(FirstFragmentDirections.actionFirstFragmentToLogedActivity());
+
         } else {
             setContentView(R.layout.activity_main);
         }
 
-//        Uri uri = getIntent().getData();
-//        if (uri != null){
-//            // https://www.reps.com/routines/{id}/
-//        String path = uri.toString();
-//            Log.d("MainActivity", "link recivido: " + path);
-//        Bundle bundle = new Bundle();
-//        bundle.putInt("ID_rutina", Integer.parseInt(path.substring(30, 31)));
-//            bundle.putBoolean("isFav",false);
-//            Navigation.findNavController(this, R.id.mainActivity).navigate(R.id.vista_rutina, bundle);
-
-//        PendingIntent pendingIntent = new NavDeepLinkBuilder(this)
-//                .setGraph(R.navigation.mobile_navigation)
-//                .setDestination(R.id.vista_rutina)
-//                .setArguments(bundle)
-//                .createPendingIntent();
-        //}
-        
     }
-
-
 
 
 }
