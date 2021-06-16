@@ -51,7 +51,7 @@ public class RoutineSectionAdapter extends RecyclerView.Adapter<RoutineSectionAd
         List<RoutineCard> singleItem = rSection.getListOfRoutines();
 
         holder.sectionTitle.setText(title);
-        RoutineCardAdapter routineList = new RoutineCardAdapter(singleItem, context, app, activity);
+        RoutineCardAdapterSmall routineList = new RoutineCardAdapterSmall(singleItem, context, app, activity);
         holder.recyclerView.setHasFixedSize(true);
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
         holder.recyclerView.setAdapter(routineList);
@@ -85,5 +85,19 @@ public class RoutineSectionAdapter extends RecyclerView.Adapter<RoutineSectionAd
             });
         }
 
+    }
+
+    private static class RoutineCardAdapterSmall extends RoutineCardAdapter{
+        public RoutineCardAdapterSmall(List<RoutineCard> routines, Context context, App app, Activity activity) {
+            super(routines, context, app, activity);
+        }
+
+        @NonNull
+        @NotNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+            View view = mInflater.inflate(R.layout.routine_card_small, null, false);
+            return new RoutineCardAdapter.ViewHolder(view);
+        }
     }
 }

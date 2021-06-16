@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,9 +18,10 @@ import com.example.reps.RoutineCard;
 import com.example.reps.RoutineCardAdapter;
 import com.example.reps.databinding.FragmentFavoritosBinding;
 import com.example.reps.retrofit.App;
-import com.example.reps.retrofit.api.model.ContentExecution;
 import com.example.reps.retrofit.api.model.Routine;
 import com.example.reps.retrofit.api.repository.Status;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;

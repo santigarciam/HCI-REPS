@@ -18,14 +18,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.reps.retrofit.App;
-import com.example.reps.retrofit.api.model.Routine;
 import com.example.reps.retrofit.api.repository.Status;
-import com.example.reps.ui.home.HomeFragmentDirections;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -36,7 +33,7 @@ import java.util.stream.Collectors;
 public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.ViewHolder> {
 
     public List<RoutineCard> routines;
-    private LayoutInflater mInflater;
+    protected LayoutInflater mInflater;
     private Context context;
     // almacna el estado original y no cambia en toda la busqueda
     private List<RoutineCard> originalRoutines;
