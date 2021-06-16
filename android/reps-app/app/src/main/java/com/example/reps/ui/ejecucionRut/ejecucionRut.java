@@ -51,10 +51,10 @@ public class ejecucionRut extends AppCompatActivity {
     private CycleExercise current,next;
     private Integer currentCycleRep=0;
     private Integer cantExCurrentCycle =0;
-    private TextView cycleField, currentExField ,nextField ,timeRepsField;
+    private TextView cycleField, currentExField  ,timeRepsField,descrField;
     ImageButton moreInfo ;
-    TextView descrField ;
-    private boolean firstClick = true;
+    Button nextField;
+    private boolean isInitialized = false;
     private Iterator<CycleExercise> exerciseIterator;
     private Iterator<Cycle> cycleIterator;
     private List<Cycle> routineCycles;
@@ -82,15 +82,19 @@ public class ejecucionRut extends AppCompatActivity {
         getSupportActionBar().hide();
 
 //        ejecucionRutArgs args = ejecucionRutArgs.fromBundle(savedInstanceState);
-        binding = ActivityEjecucionRutBinding.inflate(getLayoutInflater());
+//        binding = ActivityEjecucionRutBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_ejecucion_rut);
         cycleField = findViewById(R.id.nombreCiclo);
         currentExField = findViewById(R.id.nombre_ejercicio);
-        nextField = findViewById(R.id.nextExField);
+        nextField = findViewById(R.id.siguiente_ejercicoBtn);
+//        nextField = findViewById(R.id.nextExField);
         timeRepsField = findViewById(R.id.timeExercise);
          moreInfo = findViewById(R.id.moreInfoBtn);
          descrField = findViewById(R.id.exercise_description);
+        nextField.setVisibility(View.INVISIBLE);
+        TextView sigField = findViewById(R.id.siguiente_ejText);
 
+        sigField.setText("");
         app.getRoutineRepository().getRoutine(idRut).observe(this,r->{
             //Obtengo la rutina
             if(r.getStatus() == Status.SUCCESS){
@@ -130,7 +134,7 @@ public class ejecucionRut extends AppCompatActivity {
 
         });
 
-        Button nextExeBTN = findViewById(R.id.siguiente_ejercico);
+        Button nextExeBTN = findViewById(R.id.siguiente_ejercicoBtn);
         nextExeBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -149,27 +153,6 @@ public class ejecucionRut extends AppCompatActivity {
             }
         },0,1000);
 
-        //Button pauseBtn = findViewById(R.id.pauseBtn);
-        CircleImageView pauseView = findViewById(R.id.pauseBtnView);
-        pauseView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(firstClick){
-                    prepareExecution();
-                    firstClick = false;
-                }else {
-                    paused = !paused;
-                    if (paused) {
-                        //TODO: cambiar por boton de pausa y mejorar el de play
-                        pauseView.setImageResource(R.drawable.ic_pause);
-                    } else {
-                        pauseView.setImageResource(R.drawable.ic_play);
-                    }
-                }
-
-            }
-        });
 
         moreInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,26 +176,77 @@ public class ejecucionRut extends AppCompatActivity {
                 mostrarDialogoSalida();
             }
         });
+        //Button pauseBtn = findViewById(R.id.pauseBtn);
+        CircleImageView pauseView = findViewById(R.id.pauseBtnView);
+        pauseView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(!isInitialized){
+                    prepareExecution();
+                    nextField.setVisibility(View.VISIBLE);
+                    TextView sigField = findViewById(R.id.siguiente_ejText);
+                    String mesage = getResources().getString(R.string.siguiente_ej);
+                    sigField.setText(mesage);
+                    isInitialized = true;
+                    pauseView.setImageResource(R.drawable.ic_pause);
+                    endRoutineBtn.setVisibility(View.INVISIBLE);
+                }else {
+                    paused = !paused;
+                    if (paused) {
+                        endRoutineBtn.setVisibility(View.VISIBLE);
+                        pauseView.setImageResource(R.drawable.ic_play);
+                    } else {
+                        endRoutineBtn.setVisibility(View.INVISIBLE);
+                        pauseView.setImageResource(R.drawable.ic_pause);
+
+                    }
+                }
+
+            }
+        });
+
 
         currentExField.setText("");
         descrField.setText("");
         timeRepsField.setText("");
         cycleField.setText("");
-        nextField.setText("");
+        nextField.setText("Siguente ejercicio...");
 
 
 
     }
+    private final List<CycleExercise> exercises = new ArrayList<>();
+    private final List<Cycle> cycles = new ArrayList<>();
 
     private void prepareExecution() {
-        cycleIterator = routineCycles.iterator();
+        for(Cycle cycle:routineCycles){
+            Integer repsCycle = cycle.getRepetitions() * cycle.getCycleExercises().getContent().size();
+            for(int j=0;j<repsCycle;j++){
+                cycles.add(cycle);
+            }
+        }
+
+        cycleIterator = cycles.iterator();
         currentCycle = cycleIterator.next();
-        exerciseIterator = currentCycle.getCycleExercises().getContent().iterator();
+        for(Cycle cycle:routineCycles){
+            Integer repetitions = cycle.getRepetitions();
+            for(int i=0;i<repetitions;i++){
+                for(CycleExercise exercise: cycle.getCycleExercises().getContent()){
+                    exercises.add(exercise);
+                }
+            }
+        }
+
+        exerciseIterator =exercises.iterator();
         currentCycleRep = currentCycle.getRepetitions();
         current = exerciseIterator.next();
+        next = exerciseIterator.next();
+        nextField.setText(next.getExercise().getName());
         currentExField.setText(current.getExercise().getName());
         descrField.setText(current.getExercise().getDetail());
-        timeRepsField.setText(current.getRepetitions()==0?current.getDuration()+"s":"X "+current.getRepetitions());
+
+        timeRepsField.setText(current.getRepetitions()==0?(current.getDuration()<10?"0"+current.getDuration()+"s":current.getDuration()+"s"):"X "+current.getRepetitions());
         cycleField.setText(currentCycle.getName());
         CircleImageView pauseView = findViewById(R.id.pauseBtnView);
 
@@ -252,6 +286,11 @@ public class ejecucionRut extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        mostrarDialogoSalida();
+    }
+
     private void timerMethod(){
         this.runOnUiThread(TIMER_TI);
     }
@@ -283,45 +322,55 @@ public class ejecucionRut extends AppCompatActivity {
 
 
     public void finishRoutine(){
-        app.getExecutionRepository().addRoutineExec(routine.getId(),new ExecutionInformation(0,false)).observe(this,r->{
+        app.getExecutionRepository().addRoutineExec(routine.getId(),new ExecutionInformation(2,false)).observe(this,r->{
             if(r.getStatus() == Status.SUCCESS){
-
+                DialogFragmentRate dialog = new DialogFragmentRate(routine.getId(),this);
+                dialog.setApp(app);
+                dialog.show(getSupportFragmentManager(),"rate");
+            }else if(r.getStatus() == Status.ERROR){
+                Log.d("EXECUTION ", r.getError().getDescription()+ " "+r.getError().getDetails());
             }
         });
-        DialogFragmentRate dialog = new DialogFragmentRate(routine.getId(),this);
-        dialog.setApp(app);
-        dialog.show(getSupportFragmentManager(),"rate");
+
 
 
     }
-    private  boolean flag=false;
-    public void nextExercise(){
+    private  boolean finishRut = false;
 
-        if(exerciseIterator.hasNext()){
-            current = exerciseIterator.next();
+    public void nextExercise(){
+        if(isInitialized){
+            if (exerciseIterator.hasNext()) {
+                current = next;
+                next = exerciseIterator.next();
+                if (cycleIterator.hasNext()) {
+                    currentCycle = cycleIterator.next();
+                } else {
+                    finishRoutine();
+                }
+            } else {
+                if (finishRut) {
+                    finishRoutine();
+                } else {
+                    current = next;
+                    next = null;
+                    finishRut = true;
+                }
+            }
+
+            if (next == null) {
+                nextField.setVisibility(View.INVISIBLE);
+                TextView sigField = findViewById(R.id.siguiente_ejText);
+                String mesage = getResources().getString(R.string.ultimo_ejercicio_mensaje);
+                sigField.setText(mesage);
+
+            } else {
+                nextField.setText(next.getExercise().getName());
+            }
             currentExField.setText(current.getExercise().getName());
             descrField.setText(current.getExercise().getDetail());
-            timeRepsField.setText(current.getRepetitions()==0?current.getDuration()+"s":"X "+current.getRepetitions());
+            timeRepsField.setText(current.getRepetitions() == 0 ? (current.getDuration() < 10 ? "0" + current.getDuration() + "s" : current.getDuration() + "s") : "X " + current.getRepetitions());
             cycleField.setText(currentCycle.getName());
-        }else{
-            if(currentCycleRep-1 >0){
-                currentCycleRep -=1;
-                exerciseIterator = currentCycle.getCycleExercises().getContent().iterator();
-                nextExercise();
-            }else if(cycleIterator.hasNext()){
-                currentCycle = cycleIterator.next();
-                currentCycleRep = currentCycle.getRepetitions();
-                exerciseIterator = currentCycle.getCycleExercises().getContent().iterator();
-                current = exerciseIterator.next();
-                currentExField.setText(current.getExercise().getName());
-                descrField.setText(current.getExercise().getDetail());
-                timeRepsField.setText(current.getRepetitions()==0?current.getDuration()+"s":"X "+current.getRepetitions());
-                cycleField.setText(currentCycle.getName());
-            }else {
-                finishRoutine();
-            }
         }
-
 
     }
 }
