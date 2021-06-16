@@ -18,6 +18,9 @@
 
             android:id="@+id/action_navigation_home_to_fragment_full_section"
             app:destination="@id/fragment_full_section" />
+        <action
+            android:id="@+id/action_navigation_home_to_miProgresoFragment"
+            app:destination="@id/miProgresoFragment" />
     </fragment>
 
     <fragment

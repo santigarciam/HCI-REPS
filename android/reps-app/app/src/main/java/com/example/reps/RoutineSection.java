@@ -7,7 +7,7 @@ public class RoutineSection {
     private List<RoutineCard> listOfRoutines;
 
     public RoutineSection(String sectionTitle, List<RoutineCard> listOfRoutines) {
-        this.sectionTitle = sectionTitle;
+        this.sectionTitle = firstToUpperOtherLowerCase(sectionTitle);
         this.listOfRoutines = listOfRoutines;
     }
 
@@ -16,7 +16,7 @@ public class RoutineSection {
     }
 
     public void setSectionTitle(String sectionTitle) {
-        this.sectionTitle = sectionTitle;
+        this.sectionTitle = firstToUpperOtherLowerCase(sectionTitle);
     }
 
     public List<RoutineCard> getListOfRoutines() {
@@ -28,5 +28,11 @@ public class RoutineSection {
 
     public void setListOfRoutines(List<RoutineCard> listOfRoutines) {
         this.listOfRoutines = listOfRoutines;
+    }
+
+    private String firstToUpperOtherLowerCase(String s){
+        String aux = s.substring(0,1);
+        return aux.toUpperCase().concat(s.substring(1).toLowerCase());
+
     }
 }
