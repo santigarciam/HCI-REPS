@@ -20,6 +20,7 @@ import com.example.reps.retrofit.App;
 import com.example.reps.retrofit.api.model.ContentExecution;
 import com.example.reps.retrofit.api.model.Routine;
 import com.example.reps.retrofit.api.repository.Status;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -37,6 +38,8 @@ public class HomeViewModel extends ViewModel {
     private Set<RoutineCard> rutinasRecientes;
     private Map<String,List<RoutineCard>> rutinasByDifficulty;
 
+    private ShimmerFrameLayout shimmerLayout;
+
     private App app;
 
     RecyclerView verticalRecyclerView;
@@ -49,6 +52,7 @@ public class HomeViewModel extends ViewModel {
     }
 
     public void init(View rootView, ViewGroup container, FragmentActivity activity) {
+        shimmerLayout = rootView.findViewById(R.id.shimmer_home);
         app = (App) activity.getApplication();
         rutinas = new ArrayList<>();
         app.getRoutineRepository().getAll().observe(activity, r -> {
@@ -118,6 +122,9 @@ public class HomeViewModel extends ViewModel {
                                     RoutineSection verticalModel = new RoutineSection(difficultyRoutineArr.get(0).getDifficulty().toUpperCase(), difficultyRoutineArr);
                                     arrayList1.add(verticalModel);
                                 }
+                                shimmerLayout.stopShimmer();
+                                shimmerLayout.hideShimmer();
+                                shimmerLayout.setVisibility(View.GONE);
                                 verticalAdapter.notifyDataSetChanged();
 
                             }

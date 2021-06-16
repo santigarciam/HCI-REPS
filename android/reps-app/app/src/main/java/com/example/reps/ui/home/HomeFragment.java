@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.reps.LoadingDialog;
 import com.example.reps.databinding.FragmentHomeBinding;
 import com.example.reps.retrofit.App;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 public class HomeFragment extends Fragment {
 
