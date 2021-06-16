@@ -31,7 +31,6 @@ import java.util.List;
 
 public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTextListener{
 
-    private DescubrirViewModel descubrirViewModel;
     private FragmentDescubrirBinding binding;
     private SearchView searchView;
     private App app;
@@ -50,7 +49,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
 
     public void init(View rootView, ViewGroup container){
 
-        app.getRoutineRepository().getAll("").observe(requireActivity(),r->{
+        app.getRoutineRepository().getAll().observe(requireActivity(),r->{
             if(r.getStatus() == Status.SUCCESS){
                 for(Routine routine: r.getData().getContent()){
                     rutinas.add(new RoutineCard(routine));
@@ -61,8 +60,6 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
                 verticalRecyclerView.setHasFixedSize(true);
                 verticalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
                 verticalRecyclerView.setAdapter(rAdapter);
-
-
                 rAdapter.notifyDataSetChanged();
             }
         });
@@ -81,8 +78,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
 
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
         app = (App) requireActivity().getApplication();
-        descubrirViewModel =
-                new ViewModelProvider(this).get(DescubrirViewModel.class);
+
         binding = FragmentDescubrirBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         init(root,container);
@@ -118,16 +114,47 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
 
                 PopupMenu popup = new PopupMenu(getContext(), view);
 
+                rutinas.clear();
+                    
                 popup.setOnMenuItemClickListener(menuItem -> {
-
                     if (menuItem.getItemId() == R.id.orderOpt1) {
-                        Toast.makeText(view.getContext(), "Opcion 1 order seleccionada", Toast.LENGTH_LONG).show();
+
+                        app.getRoutineRepository().getAll("date","asc").observe(requireActivity(),r->{
+                            if(r.getStatus() == Status.SUCCESS){
+                                for(Routine routine:r.getData().getContent()){
+                                    rutinas.add(new RoutineCard(routine));
+                                }
+                                rAdapter.notifyDataSetChanged();
+                            }
+                        });
                     }else  if (menuItem.getItemId() == R.id.orderOpt2) {
-                        Toast.makeText(view.getContext(), "Opcion 2 order seleccionada", Toast.LENGTH_LONG).show();
+                        app.getRoutineRepository().getAll("averageRating","asc").observe(requireActivity(),r->{
+                            if(r.getStatus() == Status.SUCCESS){
+                                for(Routine routine:r.getData().getContent()){
+                                    rutinas.add(new RoutineCard(routine));
+                                }
+                                rAdapter.notifyDataSetChanged();
+                            }
+                        });
+
                     }else  if (menuItem.getItemId() == R.id.orderOpt3) {
-                        Toast.makeText(view.getContext(), "Opcion 3 order seleccionada", Toast.LENGTH_LONG).show();
+                        app.getRoutineRepository().getAll("difficulty","asc").observe(requireActivity(),r->{
+                            if(r.getStatus() == Status.SUCCESS){
+                                for(Routine routine:r.getData().getContent()){
+                                    rutinas.add(new RoutineCard(routine));
+                                }
+                                rAdapter.notifyDataSetChanged();
+                            }
+                        });
                     }else  if (menuItem.getItemId() == R.id.orderOpt4) {
-                        Toast.makeText(view.getContext(), "Opcion 4 order seleccionada", Toast.LENGTH_LONG).show();
+                        app.getRoutineRepository().getAll("categoryId","asc").observe(requireActivity(),r->{
+                            if(r.getStatus() == Status.SUCCESS){
+                                for(Routine routine:r.getData().getContent()){
+                                    rutinas.add(new RoutineCard(routine));
+                                }
+                                rAdapter.notifyDataSetChanged();
+                            }
+                        });
                     }
                     return true;
                 });

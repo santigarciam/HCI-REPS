@@ -26,21 +26,13 @@ import java.util.Map;
 
 
 public class FullSection extends Fragment {
-
-
-
     private List<RoutineCard> rutinas;
-
     private App app;
-
     private Map<String,List<RoutineCard>> rutinasByDifficulty;
-
     RecyclerView verticalRecyclerView;
     RoutineSectionAdapter verticalAdapter;
     RoutineCardAdapter rAdapter;
-    // private  RecyclerView horizontalRecyclerView;
     private ArrayList<RoutineSection> arrayList1;
-    // private  LogedActivity lgA;
     public FullSection() {
         // Required empty public constructor
     }
@@ -54,12 +46,11 @@ public class FullSection extends Fragment {
         if (getArguments() != null) {
             FullSectionArgs args = FullSectionArgs.fromBundle(getArguments());
             String titulo = args.getSectionTitle();
-            Log.d("HOME_VIEW_MODEL", "rut id fav: " + titulo);
             ((TextView)view.findViewById(R.id.full_section_rout_title)).setText(titulo);
 
 
             rutinas = new ArrayList<>();
-            app.getRoutineRepository().getAll(" ").observe(requireActivity(), r -> {
+            app.getRoutineRepository().getAll().observe(requireActivity(), r -> {
                 if (r.getStatus() == Status.SUCCESS) {
 
                     List<Routine> ruts = r.getData().getContent();

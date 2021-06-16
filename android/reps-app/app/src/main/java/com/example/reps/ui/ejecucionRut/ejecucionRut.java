@@ -357,6 +357,7 @@ public class ejecucionRut extends AppCompatActivity {
             if (next == null) {
                 nextField.setVisibility(View.INVISIBLE);
                 TextView sigField = findViewById(R.id.siguiente_ejText);
+                sigField.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 String mesage = getResources().getString(R.string.ultimo_ejercicio_mensaje);
                 sigField.setText(mesage);
                 sigField.setTextSize(24);

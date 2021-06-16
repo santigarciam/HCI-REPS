@@ -46,7 +46,7 @@ public class HomeViewModel extends ViewModel {
     public void init(View rootView, ViewGroup container, FragmentActivity activity) {
         app = (App) activity.getApplication();
         rutinas = new ArrayList<>();
-        app.getRoutineRepository().getAll(" ").observe(activity, r -> {
+        app.getRoutineRepository().getAll().observe(activity, r -> {
             if (r.getStatus() == Status.SUCCESS) {
 
                 List<Routine> ruts = r.getData().getContent();

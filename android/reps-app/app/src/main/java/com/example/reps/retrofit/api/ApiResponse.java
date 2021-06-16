@@ -19,6 +19,7 @@ import com.example.reps.retrofit.api.model.Error;
 import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public class ApiResponse<T> {
 
@@ -80,8 +81,8 @@ public class ApiResponse<T> {
 
     public static interface ApiRoutineService {
 
-//        @GET("routines?{params}")
-//        LiveData<ApiResponse<PagedList<Routine>>> getAll(@Path("params") String params);
+        @GET("routines")
+        LiveData<ApiResponse<PagedList<Routine>>> getAll(@Query("orderBy") String order,@Query("direction") String direction);
 
         @GET("routines")
         LiveData<ApiResponse<PagedList<Routine>>> getAll();

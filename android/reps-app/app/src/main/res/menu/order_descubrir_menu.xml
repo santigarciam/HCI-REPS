@@ -3,6 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/orderOpt1" android:title="@string/orderOptDate" />
     <item android:id="@+id/orderOpt2" android:title="@string/orderOptrating" />
-    <item android:id="@+id/orderOpt3" android:title="@string/orderOptSports" />
+    <item android:id="@+id/orderOpt3" android:title="@string/orderOptDifficulty" />
     <item android:id="@+id/orderOpt4" android:title="@string/orderOptCat" />
 </menu>

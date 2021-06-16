@@ -21,13 +21,24 @@ public class RoutineRepository {
         this.apiService = ApiClient.create(app, ApiResponse.ApiRoutineService.class);
     }
 
-    public LiveData<Resource<PagedList<Routine>>> getAll(String params) {
+    public LiveData<Resource<PagedList<Routine>>> getAll(String order,String dir) {
         return new NetworkBoundResource<PagedList<Routine>, PagedList<Routine>>() {
             @NonNull
             @Override
             protected LiveData<ApiResponse<PagedList<Routine>>> createCall() {
                 //TODO descomentar y hacer andar con params
-//                return apiService.getAll(params);
+             return apiService.getAll(order,dir);
+//                return apiService.getAll();
+            }
+        }.asLiveData();
+    }
+    public LiveData<Resource<PagedList<Routine>>> getAll() {
+        return new NetworkBoundResource<PagedList<Routine>, PagedList<Routine>>() {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<PagedList<Routine>>> createCall() {
+                //TODO descomentar y hacer andar con params
+
                 return apiService.getAll();
             }
         }.asLiveData();
