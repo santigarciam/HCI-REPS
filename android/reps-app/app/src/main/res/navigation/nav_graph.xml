@@ -59,6 +59,12 @@
         <action
             android:id="@+id/action_verificationCode_to_logedActivity"
             app:destination="@id/logedActivity" />
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
     </fragment>
 
 </navigation>
