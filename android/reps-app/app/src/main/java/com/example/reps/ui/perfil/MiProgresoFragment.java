@@ -83,20 +83,32 @@ public class MiProgresoFragment extends Fragment {
             if (r.getStatus() == Status.SUCCESS) {
                 historialRutinas = new ArrayList<>();
                 List<ContentExecution> ruts = r.getData().getContent();
-                Log.d("RUTS", "init: ");
                 for (ContentExecution rut : ruts) {
                     historialRutinas.add(new RoutineCard(rut.getRoutine()));
                 }
-                RoutineCardAdapter rAdapter = new RoutineCardAdapter(historialRutinas, getContext(), app, getActivity());
-                RecyclerView verticalRecyclerView = (RecyclerView) root.findViewById(R.id.miProgreso_recycler_view);
-                verticalRecyclerView.setHasFixedSize(true);
-                verticalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-                verticalRecyclerView.setAdapter(rAdapter);
+                app.getFavouriteRepository().getFavourites().observe(getActivity(), t -> {
+                    if (t.getStatus() == Status.SUCCESS) {
+                        for (RoutineCard rut : historialRutinas) {
+                            for (Routine favRut : t.getData().getContent()) {
+                                if (favRut.getId() == rut.getId()) {
+                                    Log.d("HOME_VIEW_MODEL", "rut id fav: " + favRut.getId());
+                                    rut.setFavourite(true);
+                                }
+                            }
+                        }
+                        RoutineCardAdapter rAdapter = new RoutineCardAdapter(historialRutinas, getContext(), app, getActivity());
+                        RecyclerView verticalRecyclerView = (RecyclerView) root.findViewById(R.id.miProgreso_recycler_view);
+                        verticalRecyclerView.setHasFixedSize(true);
+                        verticalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                        verticalRecyclerView.setAdapter(rAdapter);
+                    } else {
+
+                    }
+                });
             }else{
 
             }
         });
-
 
         return root;
     }
