@@ -8,6 +8,7 @@ public class RoutineCard {
     public String description;
     public Integer id;
     public boolean isFavourite;
+    private String difficulty;
     public float rating = 0;
 
     public RoutineCard(String name, String owner,String description,Integer id) {
@@ -18,14 +19,21 @@ public class RoutineCard {
         this.isFavourite = false;
     }
 
+    public String getDifficulty() {
+        return difficulty;
+    }
+
     public RoutineCard(Routine rut) {
         this.name = rut.getName();
         this.owner = rut.getUser().getUsername();
         this.description = rut.getDetail();
         this.id = rut.getId();
         this.rating = (float) (rut.getAverageRating()/2);
+        this.difficulty = rut.getDifficulty();
         this.isFavourite = false;
     }
+
+
 
     public Integer getId() {
         return id;

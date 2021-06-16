@@ -65,14 +65,6 @@ public class LogedActivity extends AppCompatActivity {
             navController.navigate(R.id.vista_rutina, bundle);
         }
 
-//        Intent myIntent = getIntent();
-//        if (myIntent.getStringExtra("urlRoutineID") != null){
-//            Integer urlRoutineID = Integer.parseInt(myIntent.getStringExtra("urlRoutineID"));
-//            Bundle bundle = new Bundle();
-//            bundle.putInt("ID_rutina", urlRoutineID);
-//            bundle.putBoolean("isFav",false);
-//            navController.navigate(R.id.vista_rutina, bundle);
-//        }
 
     }
 }

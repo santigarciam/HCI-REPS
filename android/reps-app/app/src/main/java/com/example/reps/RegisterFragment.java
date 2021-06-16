@@ -93,7 +93,7 @@ public class RegisterFragment extends Fragment {
                 app.getUserRepository().register(credentials).observe(requireActivity(),r->{
                     if(r.getStatus() == Status.SUCCESS){
                         Log.d(TAG,"Se registro");
-                        Navigation.findNavController(view).navigate(RegisterFragmentDirections.actionRegisterFragmentToVerificationCode(mail,username,password));
+                        Navigation.findNavController(view).navigate(RegisterFragmentDirections.actionRegisterFragmentToVerificationCode(mail));
                     }else if (r.getStatus() == Status.ERROR){
                         Toast.makeText(view.getContext(),"NO Se registro"+r.getError().getDescription(),Toast.LENGTH_LONG).show();
                     }
