@@ -20,6 +20,9 @@ public class RoutineSection {
     }
 
     public List<RoutineCard> getListOfRoutines() {
+        if(listOfRoutines.size() <5){
+            return listOfRoutines;
+        }
         return listOfRoutines.subList(0,5);
     }
 

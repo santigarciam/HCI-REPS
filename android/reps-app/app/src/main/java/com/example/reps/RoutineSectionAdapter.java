@@ -80,7 +80,7 @@ public class RoutineSectionAdapter extends RecyclerView.Adapter<RoutineSectionAd
             moreRoutines.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Navigation.findNavController(view).navigate(HomeFragmentDirections.actionNavigationHomeToFragmentFullSection(sectionTitle.getText().toString()));
+                    Navigation.findNavController(view).navigate(HomeFragmentDirections.actionNavigationHomeToFragmentFullSection(sectionTitle.getText().toString()));
                 }
             });
         }
