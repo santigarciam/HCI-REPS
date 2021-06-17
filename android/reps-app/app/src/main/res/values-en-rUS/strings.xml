@@ -107,4 +107,5 @@
     <string name="mensaje_notificacion">You have set a reminder in Reps app</string>
     <string name="ordenado_asc">Criteria ascending</string>
     <string name="ordenado_desc">Criteria descending</string>
+    <string name="mensaje_seccion_sin_rutinas">There are no routines for this section yet</string>
 </resources>

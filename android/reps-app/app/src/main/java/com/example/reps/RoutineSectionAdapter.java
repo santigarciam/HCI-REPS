@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -55,6 +57,17 @@ public class RoutineSectionAdapter extends RecyclerView.Adapter<RoutineSectionAd
         holder.recyclerView.setHasFixedSize(true);
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
         holder.recyclerView.setAdapter(routineList);
+        if (routineList.routines.size() == 0) {
+            holder.textoSinRutinas.setVisibility(View.VISIBLE);
+            holder.fondoSinRutinas.setVisibility(View.VISIBLE);
+            holder.pb1.setVisibility(View.VISIBLE);
+            holder.pb2.setVisibility(View.VISIBLE);
+        }else{
+            holder.textoSinRutinas.setVisibility(View.GONE);
+            holder.fondoSinRutinas.setVisibility(View.GONE);
+            holder.pb1.setVisibility(View.GONE);
+            holder.pb2.setVisibility(View.GONE);
+        }
 
     }
 
@@ -70,12 +83,29 @@ public class RoutineSectionAdapter extends RecyclerView.Adapter<RoutineSectionAd
         RecyclerView recyclerView;
         Button moreRoutines;
 
+        TextView textoSinRutinas;
+        ImageView fondoSinRutinas;
+        ProgressBar pb1, pb2;
+
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             sectionTitle = itemView.findViewById(R.id.section_rout_title);
             recyclerView = itemView.findViewById(R.id.section_rout_recycler_view);
             moreRoutines = itemView.findViewById(R.id.section_rout_button);
+
+            textoSinRutinas = itemView.findViewById(R.id.mensaje_seccion_sin_rutinas);
+            fondoSinRutinas = itemView.findViewById(R.id.fondo_seccion_sin_rutinas);
+
+            pb1 = itemView.findViewById(R.id.progressBar1);
+            pb2 = itemView.findViewById(R.id.progressBar2);
+//            if (rutinasRecientes.size() == 0){
+//                ((TextView) itemView.findViewById(R.id.section_rout_recycler_view)).setVisibility(View.VISIBLE);
+//                ((ImageView) itemView.findViewById(R.id.section_rout_recycler_view)).setVisibility(View.VISIBLE);
+//            }else{
+//                ((TextView) itemView.findViewById(R.id.mensaje_seccion_sin_rutinas)).setVisibility(View.GONE);
+//                ((ImageView) itemView.findViewById(R.id.fondo_seccion_sin_rutinas)).setVisibility(View.GONE);
+//            }
 
             moreRoutines.setOnClickListener(new View.OnClickListener() {
                 @Override
