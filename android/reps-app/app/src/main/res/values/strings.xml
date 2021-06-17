@@ -19,22 +19,22 @@
     <string name="edit_perfil">Editar perfil</string>
     <string name="nombre_rutina">Nombre Rutina</string>
     <string name="autor_rutina">Usuario</string>
-    <string name="descripcion_rutina">Descripcion rutina</string>
-    <string name="descripcion_ej">Descripcion </string>
+    <string name="descripcion_rutina">Descripción rutina</string>
+    <string name="descripcion_ej">Descripción </string>
     <string name="favicon">favIcon</string>
     <string name="reps_logo">reps_logo</string>
-    <string name="editProfile_titulo">Editar informacion</string>
+    <string name="editProfile_titulo">Editar información</string>
     <string name="editProfile_hint_nombre_input">Nombre</string>
     <string name="editProfile_hint_apellido_input">Apellido</string>
     <string name="editProfile_hint_avatar_url_input">Avatar URL</string>
     <string name="editProfile_guardar_button">Guardar</string>
     <string name="editProfile_cancelar_button">Cancelar</string>
     <string name="editProfile_hint_fecha_input">Fecha de nacimiento</string>
-    <string name="editProfile_titulo_generos">Genero:</string>
+    <string name="editProfile_titulo_generos">Género:</string>
     <string name="programarEntrenamiento_titulo">Programar un entrenamiento</string>
     <string name="programarEntrenamiento_fecha">Fecha</string>
     <string name="programarEntrenamiento_hora">Hora</string>
-    <string name="ultimo_ejercicio_mensaje">Ultimo ejercicio!</string>
+    <string name="ultimo_ejercicio_mensaje">¡Último ejercicio!</string>
     <string-array name="generos">
         <item>Masculino</item>
         <item>Femenino</item>
@@ -51,9 +51,9 @@
 
 
     <string name="orderOptDate">Fecha</string>
-    <string name="orderOptrating">Puntuacion</string>
+    <string name="orderOptrating">Puntuación</string>
     <string name="orderOptSports">Deportes</string>
-    <string name="orderOptCat">Categoria</string>
+    <string name="orderOptCat">Categoría</string>
 
 
     <string name="verification_code_text">Ingrese su código de verificación</string>
@@ -67,25 +67,25 @@
     <string name="siguiente_ej">Siguiente ejercicio:</string>
     <string name="califica_la_rutina">Califica la rutina</string>
     <string name="aceptar">Aceptar</string>
-    <string name="error_mesagge_verificacion">Hubo un error, por favor reintenlo</string>
-    <string name="codigo_invalido">Codigo invalido</string>
+    <string name="error_mesagge_verificacion">Hubo un error, por favor reinténtelo</string>
+    <string name="codigo_invalido">Código inválido</string>
     <string name="reenviar_codigo">Se ha reenviado el codigo a su casilla de correo</string>
-    <string name="mensaje_comienzo_ejecucion">Presiona el boton para comenzar el entrenamiento!</string>
+    <string name="mensaje_comienzo_ejecucion">¡Presione el botón para comenzar el entrenamiento!</string>
     <string name="orderOptDifficulty">Dificultad</string>
-    <string name="error_register_dif_contra">Las contraseñas no coinciden. Vuelve a intentarlo</string>
-    <string name="error_register_largo_contra">Usa 8 caracteres como mínimo para la contraseña</string>
+    <string name="error_register_dif_contra">Las contraseñas no coinciden. Vuelva a intentarlo</string>
+    <string name="error_register_largo_contra">Use 8 caracteres como mínimo para la contraseña</string>
     <string name="error_contrasena_incorrecta">Contraseña incorrecta</string>
     <string name="error_usuario_incorrecto">Usuario incorrecto</string>
     <string name="campo_requerido">Este campo es obligatorio</string>
     <string name="error_mail_constraint">Este mail ya se encuentra registrado</string>
-    <string name="error_username_constraint">Este nombre de usuario esta en uso</string>
+    <string name="error_username_constraint">Este nombre de usuario está en uso</string>
 
-    <string name="alert_titulo_login_o_register">Inicia sesion o registrate</string>
-    <string name="alert_mensaje_login_o_register">Para visualizar la rutina, debes tener una cuenta</string>
+    <string name="alert_titulo_login_o_register">Inicie sesión o regístrese</string>
+    <string name="alert_mensaje_login_o_register">Para visualizar la rutina, debe tener una cuenta</string>
     <string name="routines_section_titulo_rutinas_recientes">Rutinas recientes</string>
 
     <string name="titulo_seccion_rutinas">Titulo seccion</string>
-    <string name="texto_boton_ver_mas_seccion_rutina">Ver mas</string>
+    <string name="texto_boton_ver_mas_seccion_rutina">Ver más</string>
     <string name="string_rutina_quote">Rutina \"</string>
     <string name="string_quote_agregada_a_favoritos">\" agregada a favoritos</string>
     <string name="string_quote_borrada_de_favoritos">\" eliminada de favoritos</string>
@@ -94,27 +94,27 @@
     <string name="string_rutina_inexistente_mensaje">Esta rutina no existe. Tal vez fue borrada.</string>
     <string name="terminar">Terminar</string>
     <string name="string_alert_terminar_rutina_titulo">Terminar Rutina</string>
-    <string name="string_alert_terminar_rutina_mensaje">¿Seguro que deseas terminar la rutina</string>
+    <string name="string_alert_terminar_rutina_mensaje">¿Seguro que desea terminar la rutina</string>
     <string name="string_alert_terminar_rutina_si">Si</string>
     <string name="salir">Salir</string>
     <string name="buscar_rutina">Buscar rutina</string>
     <string name="buscar_rutina_fav">Buscar rutina favorita</string>
     <string name="editar_perfil_config">EDITAR PERFIL</string>
     <string name="ayuda_config">AYUDA</string>
-    <string name="cerrar_sesion_config">CERRAR SESION</string>
+    <string name="cerrar_sesion_config">CERRAR SESIÓN</string>
     <string name="alert_titulo_ayuda">Ayuda</string>
     <string name="alert_mensaje_ayuda">Julio 2021 - TP3 - HCI - Grupo 8</string>
-    <string name="alert_titulo_cerrar_sesion">Cerrar Sesion</string>
-    <string name="alert_mensaje_cerrar_sesion">¿Seguro que quieres cerrar sesion?</string>
+    <string name="alert_titulo_cerrar_sesion">Cerrar Sesión</string>
+    <string name="alert_mensaje_cerrar_sesion">¿Seguro que desea cerrar sesión?</string>
     <string name="historial">Historial de rutinas ejecutadas</string>
-    <string name="toast_notificacion_creada">Se seteo el recordatorio correctamente</string>
-    <string name="titulo_notificacion">Llego la hora de entrenar... no hay excusas</string>
+    <string name="toast_notificacion_creada">Se seteó el recordatorio correctamente</string>
+    <string name="titulo_notificacion">Llegó la hora de entrenar... no hay excusas</string>
     <string name="mensaje_notificacion">Has establecido un recordatorio en Reps</string>
     <string name="ordenado_asc">Criterios ascendentemente</string>
     <string name="ordenado_desc">Criterios descendentemente</string>
     <string name="fin">FIN</string>
-    <string name="mensaje_seccion_sin_rutinas">Aun no existen rutinas para esta seccion</string>
+    <string name="mensaje_seccion_sin_rutinas">Aún no existen rutinas para esta sección</string>
     <string name="welcomemesagge">Administra tus entrenamientos de manera inteligente</string>
     <string name="fav_no_ruts_message">No hay rutinas favoritas</string>
-    <string name="norutssearch">No existen rutinas para esta busqueda</string>
+    <string name="norutssearch">No hay rutinas para esta búsqueda</string>
 </resources>
