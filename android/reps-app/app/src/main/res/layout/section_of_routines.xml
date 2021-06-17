@@ -44,11 +44,22 @@
         android:id="@+id/divider"
         android:layout_width="401dp"
         android:layout_height="7dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:background="?android:attr/listDivider"
         android:backgroundTint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- comentarioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/shimmer_full_section"
+        tools:ignore="MissingConstraints">
+        <include
+            layout="@layout/shimmer_full_section_layout" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

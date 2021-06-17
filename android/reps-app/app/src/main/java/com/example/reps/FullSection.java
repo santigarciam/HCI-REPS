@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.reps.retrofit.App;
 import com.example.reps.retrofit.api.model.Routine;
 import com.example.reps.retrofit.api.repository.Status;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,6 +34,8 @@ public class FullSection extends Fragment {
     RoutineSectionAdapter verticalAdapter;
     RoutineCardAdapter rAdapter;
     private ArrayList<RoutineSection> arrayList1;
+    private ShimmerFrameLayout shimmerLayout;
+
     public FullSection() {
         // Required empty public constructor
     }
@@ -41,7 +44,7 @@ public class FullSection extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        shimmerLayout = view.findViewById(R.id.shimmer_full_section);
         App app = (App) requireActivity().getApplication();
         if (getArguments() != null) {
             FullSectionArgs args = FullSectionArgs.fromBundle(getArguments());
@@ -89,6 +92,10 @@ public class FullSection extends Fragment {
                             verticalRecyclerView.setHasFixedSize(true);
                             verticalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
                             verticalRecyclerView.setAdapter(rAdapter);
+                            shimmerLayout.stopShimmer();
+                            shimmerLayout.hideShimmer();
+                            shimmerLayout.setVisibility(View.GONE);
+                            ((TextView)view.findViewById(R.id.full_section_rout_title)).setVisibility(View.VISIBLE);
                             rAdapter.notifyDataSetChanged();
                         }
                     });
