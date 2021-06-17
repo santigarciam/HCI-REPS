@@ -53,7 +53,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     RoutineCardAdapter rAdapter;
     ////////////////////
 
-    public void init(View rootView, ViewGroup container){
+    public void init(View rootView){
         shimmerLayout = rootView.findViewById(R.id.shimmer_descubrir);
         rutinas = new ArrayList<>();
         app.getRoutineRepository().getAll().observe(requireActivity(),r->{
@@ -79,9 +79,12 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
                         rootView.findViewById(R.id.ordenarDescubrir).setVisibility(View.VISIBLE);
                         rootView.findViewById(R.id.filterDescubrir).setVisibility(View.VISIBLE);
                         rootView.findViewById(R.id.ascOrDescBtn).setVisibility(View.VISIBLE);
-                        shimmerLayout.stopShimmer();
-                        shimmerLayout.hideShimmer();
-                        shimmerLayout.setVisibility(View.GONE);
+                        if(shimmerLayout!=null) {
+                            shimmerLayout.stopShimmer();
+                            shimmerLayout.hideShimmer();
+                            shimmerLayout.setVisibility(View.GONE);
+
+                        }
                         rAdapter.notifyDataSetChanged();
                     }
                 });
