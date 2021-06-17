@@ -360,6 +360,17 @@ public class ejecucionRut extends AppCompatActivity {
                 nextField.setVisibility(View.INVISIBLE);
                 TextView sigField = findViewById(R.id.siguiente_ejText);
                 sigField.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                Button lastExBtn = findViewById(R.id.lastExeBtn);
+                if(current.getRepetitions()>0) {
+                    lastExBtn.setVisibility(View.VISIBLE);
+                    lastExBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            finishRoutine();
+                        }
+                    });
+                    lastExBtn.setText(getString(R.string.fin));
+                }
                 String mesage = getResources().getString(R.string.ultimo_ejercicio_mensaje);
                 sigField.setText(mesage);
                 sigField.setTextSize(24);

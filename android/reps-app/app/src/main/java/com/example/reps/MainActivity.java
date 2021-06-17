@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         AppPreferences appPreferences = new AppPreferences(this);
 
         Intent intentURL = getIntent();
+        intentURL.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Uri dataURL = intentURL.getData()!=null? intentURL.getData() : Uri.parse("www.null.com");
         if (intentURL.getData()!=null){
             int id = Integer.parseInt(dataURL.getLastPathSegment());

@@ -87,12 +87,12 @@
         android:id="@+id/nombre_ejercicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:text="@string/exercise_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
@@ -112,7 +112,7 @@
         android:id="@+id/timeExercise"
         android:layout_width="120dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="8dp"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="48sp"
@@ -158,9 +158,10 @@
 
     <TextView
         android:id="@+id/exercise_description"
-        android:layout_width="0dp"
-        android:layout_height="92dp"
+        android:layout_width="569dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="1dp"
+        android:layout_marginBottom="23dp"
         android:text="Descr"
         android:textSize="16sp"
         android:visibility="invisible"
@@ -183,6 +184,22 @@
         app:layout_constraintBottom_toTopOf="@+id/pauseBtnView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/lastExeBtn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/our_blue"
+        android:text="Button"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/siguiente_ejercicoBtn"
+        app:layout_constraintEnd_toEndOf="@+id/siguiente_ejercicoBtn"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/siguiente_ejercicoBtn"
+        app:layout_constraintTop_toTopOf="@+id/siguiente_ejercicoBtn"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
