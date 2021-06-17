@@ -95,7 +95,7 @@ public class FullSection extends Fragment {
                             shimmerLayout.stopShimmer();
                             shimmerLayout.hideShimmer();
                             shimmerLayout.setVisibility(View.GONE);
-                            ((TextView)view.findViewById(R.id.full_section_rout_title)).setVisibility(View.VISIBLE);
+                            (view.findViewById(R.id.full_section_rout_title)).setVisibility(View.VISIBLE);
                             rAdapter.notifyDataSetChanged();
                         }
                     });

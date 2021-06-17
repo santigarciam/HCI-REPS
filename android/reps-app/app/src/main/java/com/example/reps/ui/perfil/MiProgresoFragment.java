@@ -18,6 +18,7 @@ import com.example.reps.retrofit.App;
 import com.example.reps.retrofit.api.model.ContentExecution;
 import com.example.reps.retrofit.api.model.Routine;
 import com.example.reps.retrofit.api.repository.Status;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,8 @@ public class MiProgresoFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ShimmerFrameLayout shimmerLayout;
 
     public MiProgresoFragment() {
         // Required empty public constructor
@@ -67,6 +70,7 @@ public class MiProgresoFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     private App app;
@@ -77,7 +81,7 @@ public class MiProgresoFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_mi_progreso, container, false);
-
+        shimmerLayout = root.findViewById(R.id.shimmer_mi_progreso);
         app = (App) getActivity().getApplication();
         app.getExecutionRepository().getCurrentUserExecutions(" ").observe(getActivity(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
@@ -100,6 +104,10 @@ public class MiProgresoFragment extends Fragment {
                         RecyclerView verticalRecyclerView = (RecyclerView) root.findViewById(R.id.miProgreso_recycler_view);
                         verticalRecyclerView.setHasFixedSize(true);
                         verticalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                        shimmerLayout.stopShimmer();
+                        shimmerLayout.hideShimmer();
+                        shimmerLayout.setVisibility(View.GONE);
+                        (root.findViewById(R.id.miProgreso_titulo)).setVisibility(View.VISIBLE);
                         verticalRecyclerView.setAdapter(rAdapter);
                     } else {
 

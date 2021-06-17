@@ -51,15 +51,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- comentarioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
-
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/shimmer_full_section"
-        tools:ignore="MissingConstraints">
-        <include
-            layout="@layout/shimmer_full_section_layout" />
-    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
