@@ -135,7 +135,6 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
                     if (menuItem.getItemId() == R.id.filterOpt0) {
                         filterBy = "rookie";
                         filterBtn.setText(getString(R.string.filterOptRookie));
-
                     }else if (menuItem.getItemId() == R.id.filterOpt1) {
                         filterBy = "beginner";
                         filterBtn.setText(getString(R.string.filterOptBegginer));
