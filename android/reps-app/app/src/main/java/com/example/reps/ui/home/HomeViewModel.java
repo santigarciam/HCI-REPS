@@ -114,7 +114,7 @@ public class HomeViewModel extends ViewModel {
                                 verticalAdapter = new RoutineSectionAdapter(arrayList1, container.getContext(), app, activity);
                                 verticalRecyclerView.setAdapter(verticalAdapter);
 
-                                RoutineSection verticalModelRutsRecientes = new RoutineSection("Rutinas recientes", new ArrayList<>(rutinasRecientes));
+                                RoutineSection verticalModelRutsRecientes = new RoutineSection(activity.getString(R.string.routines_section_titulo_rutinas_recientes), new ArrayList<>(rutinasRecientes));
                                 arrayList1.add(verticalModelRutsRecientes);
 
                                 int i = 0;

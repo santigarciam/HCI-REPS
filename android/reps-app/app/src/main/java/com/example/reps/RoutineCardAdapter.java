@@ -131,8 +131,8 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                                 routines.get(position).setFavourite(true);
                                 ((ImageButton) itemView.findViewById(R.id.vista_rutina_fav_button))
                                         .setImageResource(R.drawable.baseline_favorite_black_24dp_pressed);
-                                Toast.makeText(view.getContext(), "Rutina \"" + routines.get(position).getName() + "\" agregada a favoritos", Toast.LENGTH_LONG)
-                                        .show();
+                                //Toast.makeText(view.getContext(), "Rutina \"" + routines.get(position).getName() + "\" agregada a favoritos", Toast.LENGTH_LONG).show();
+                                Toast.makeText(view.getContext(), activity.getString(R.string.string_rutina_quote) + routines.get(position).getName() + activity.getString(R.string.string_quote_agregada_a_favoritos), Toast.LENGTH_LONG).show();
                             }else{
 
                             }
@@ -143,8 +143,8 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                                 routines.get(position).setFavourite(false);
                                 ((ImageButton) itemView.findViewById(R.id.vista_rutina_fav_button))
                                         .setImageResource(R.drawable.baseline_favorite_black_24dp);
-                                Toast.makeText(view.getContext(), "Rutina \"" + routines.get(position).getName() + "\" eliminada de favoritos", Toast.LENGTH_LONG)
-                                        .show();
+                                //Toast.makeText(view.getContext(), "Rutina \"" + routines.get(position).getName() + "\" eliminada de favoritos", Toast.LENGTH_LONG).show();
+                                Toast.makeText(view.getContext(), activity.getString(R.string.string_rutina_quote) + routines.get(position).getName() + activity.getString(R.string.string_quote_borrada_de_favoritos), Toast.LENGTH_LONG).show();
                                 auxNotify(position);
                             }else{
 
@@ -168,7 +168,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/plain");
                     intent.putExtra(Intent.EXTRA_TEXT, myUri.toString());
-                    context.startActivity(Intent.createChooser(intent, "Compartir"));
+                    context.startActivity(Intent.createChooser(intent, activity.getString(R.string.string_compartir_rutina) + " \"" +routines.get(position).getName() + "\""));
                 }
             });
         }

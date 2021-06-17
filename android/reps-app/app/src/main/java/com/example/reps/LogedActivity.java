@@ -22,15 +22,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class LogedActivity extends AppCompatActivity {
 
     private ActivityLogedBinding binding;
-    // TODO: Borrar comentarios de aca
-//    int value = 0;
-//    List<RoutineCard> rutinas;
-//
-//    //////////////////
-//    RecyclerView verticalRecyclerView;
-//    RoutineSectionAdapter verticalAdapter;
-//    RecyclerView horizontalRecyclerView;
-//    ArrayList<RoutineSection> arrayList1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

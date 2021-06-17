@@ -50,11 +50,12 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             setContentView(R.layout.activity_main);
-            Log.d("FIRST_FRAGMENT", "onViewCreated: " + appPreferences.getSharedRutID());
+            //Log.d("FIRST_FRAGMENT", "onViewCreated: " + appPreferences.getSharedRutID());
             if (appPreferences.getSharedRutID() != -1) {
+
                 android.app.AlertDialog dialog = new AlertDialog.Builder(this)
-                        .setTitle("Inicia sesion o registrate")
-                        .setMessage("Para visualizar la rutina, debes tener una cuenta")
+                        .setTitle(getString(R.string.alert_titulo_login_o_register))
+                        .setMessage(getString(R.string.alert_mensaje_login_o_register))
                         .setPositiveButton("Ok", null)
                         .show();
 
