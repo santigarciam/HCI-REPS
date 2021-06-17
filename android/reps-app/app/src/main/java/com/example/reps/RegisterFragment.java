@@ -57,42 +57,55 @@ public class RegisterFragment extends Fragment {
         app = (App) requireActivity().getApplication();
 
         final NavController navController = Navigation.findNavController(view);
-        // TODO Aca esto no sirve pero puede servir para cuando querramos cortar cuando no esta logueado
-
-
-//        registerViewModel.getToken().observe(getViewLifecycleOwner(), (Observer<MutableLiveData<Integer>>) user -> {
-//            if (token == null) {
-//                showWelcomeMessage();
-//            } else {
-//                navController.navigate(R.id.login_fragment);
-//            }
-//        });
-
 
         Button btn_register = view.findViewById(R.id.register_button_register);
         TextView mailField = view.findViewById(R.id.register_input_email);
         TextView usernameField = view.findViewById(R.id.register_input_user);
         TextView passwordField = view.findViewById(R.id.register_input_password);
+        TextView passwordCheckField = view.findViewById(R.id.register_input_rep_password);
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String mail = mailField.getText().toString();
+                if(mail.length()==0){
+                    mailField.setError(getString(R.string.campo_requerido));
+                }
                 String username = usernameField.getText().toString();
+                if(username.length()==0){
+                    usernameField.setError(getString(R.string.campo_requerido));
+                }
                 String password = passwordField.getText().toString();
+                String passwordCheck = passwordCheckField.getText().toString();
                 CredentialRegister credentials = new CredentialRegister(username,password,"Jhon","Doe","male",03022000, mail,"101010","url",null);
-
-                app.getUserRepository().register(credentials).observe(requireActivity(),r->{
-                    if(r.getStatus() == Status.SUCCESS){
-                        Log.d(TAG,"Se registro");
-                        Navigation.findNavController(view).navigate(RegisterFragmentDirections.actionRegisterFragmentToVerificationCode(mail,username,password));
-                    }else if (r.getStatus() == Status.ERROR){
-                        //Toast.makeText(view.getContext(),"NO Se registro"+r.getError().getDescription(),Toast.LENGTH_LONG).show();
+                if(password.length()<8){
+                    passwordField.setError(getString(R.string.error_register_largo_contra));
+                }else {
+                    if (passwordCheck.equals(password) && username.length()!=0 && mail.length()!=0) {
+                        app.getUserRepository().register(credentials).observe(requireActivity(), r -> {
+                            if (r.getStatus() == Status.SUCCESS) {
+                                Log.d(TAG, "Se registro"+username+password);
+                                //Log.d(TAG, "onClick: ");
+                                Navigation.findNavController(view).navigate(RegisterFragmentDirections.actionRegisterFragmentToVerificationCode(mail, username, password));
+                            } else if (r.getStatus() == Status.ERROR) {
+                                for(String error:r.getError().getDetails()){
+                                    if(error.contains("constraint failed: User.email")){
+                                        mailField.setError(getString(R.string.error_mail_constraint));
+                                    }else if(error.contains(" User.username")){
+                                        usernameField.setError(getString(R.string.error_username_constraint));
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        passwordField.setError(getString(R.string.error_register_dif_contra));
+                        passwordCheckField.setError(getString(R.string.error_register_dif_contra));
                     }
-                });
-           }
+                }
+            }
         });
     }
+
 
     @Override
     public void onDestroy() {

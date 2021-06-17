@@ -52,9 +52,10 @@ public class HomeViewModel extends ViewModel {
     }
 
     public void init(View rootView, ViewGroup container, FragmentActivity activity) {
-        shimmerLayout = rootView.findViewById(R.id.shimmer_home);
+
         app = (App) activity.getApplication();
         rutinas = new ArrayList<>();
+        shimmerLayout = rootView.findViewById(R.id.shimmer_home);
         app.getRoutineRepository().getAll().observe(activity, r -> {
             if (r.getStatus() == Status.SUCCESS) {
 
