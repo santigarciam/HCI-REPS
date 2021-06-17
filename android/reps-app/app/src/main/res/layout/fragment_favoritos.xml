@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="@string/fav_no_ruts_message"
             android:textAlignment="center"
-            android:textColor="#4D000000"
+            android:textColor="?android:attr/textColorSecondary"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/favourite_recycler_view"
             app:layout_constraintEnd_toEndOf="parent"

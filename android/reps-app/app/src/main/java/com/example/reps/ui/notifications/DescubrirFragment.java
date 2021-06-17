@@ -108,19 +108,20 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
         init(view);
         ImageButton isAscOrDescBtn = view.findViewById(R.id.ascOrDescBtn);
         if(isAsc){
-            isAscOrDescBtn.setRotation(270);
-        }else{
             isAscOrDescBtn.setRotation(90);
+        }else{
+            isAscOrDescBtn.setRotation(270);
+
         }
         isAscOrDescBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 isAsc = !isAsc;
                 if(isAsc){
-                    isAscOrDescBtn.setRotation(270);
+                    isAscOrDescBtn.setRotation(90);
                     Toast.makeText(view.getContext(), requireActivity().getString(R.string.ordenado_asc), Toast.LENGTH_LONG).show();
                 }else{
-                    isAscOrDescBtn.setRotation(90);
+                   isAscOrDescBtn.setRotation(270);
                     Toast.makeText(view.getContext(), requireActivity().getString(R.string.ordenado_desc), Toast.LENGTH_LONG).show();
                 }
 

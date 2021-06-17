@@ -19,8 +19,6 @@
         android:id="@+id/usr_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:backgroundTint="@color/white"
         tools:context=".ui.perfil.PerfilFragment">
 
 
@@ -35,7 +33,8 @@
             android:src="@drawable/baseline_settings_black_24dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?android:attr/textColorPrimary"/>
 
         <TextView
             android:id="@+id/profile_nombre_apellido"
@@ -44,7 +43,7 @@
             android:layout_marginTop="16dp"
             android:text="Nombre Apellido"
             android:textAlignment="center"
-            android:textColor="#000000"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="28sp"
             android:textStyle="bold"
             android:visibility="gone"
@@ -57,7 +56,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/hint_nombre_de_usuario"
-            android:textColor="#504A4A"
+            android:textColor="?android:attr/textColorSecondary"
+
             android:textColorHint="#636060"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
@@ -72,10 +72,11 @@
             android:elevation="0dp"
             android:text="@string/progreso"
             android:textAlignment="textStart"
-            android:textColor="#000000"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/our_blue"
             android:textSize="18dp"
             android:visibility="gone"
-            app:backgroundTint="#00FFFFFF"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -88,10 +89,11 @@
             android:elevation="0dp"
             android:text="@string/program_entrenamiento"
             android:textAlignment="textStart"
-            android:textColor="#000000"
+            android:textColor="@color/design_default_color_on_primary"
+            app:backgroundTint="?android:attr/colorPrimary"
             android:textSize="18dp"
             android:visibility="gone"
-            app:backgroundTint="#00FFFFFF"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"

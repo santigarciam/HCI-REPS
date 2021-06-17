@@ -36,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="@string/texto_boton_ver_mas_seccion_rutina"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/section_rout_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/section_rout_title" />
