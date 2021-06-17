@@ -18,6 +18,7 @@
             android:layout_marginBottom="42dp"
             android:backgroundTint="#FFFFFF"
             android:contentDescription="@string/favicon"
+            android:visibility="gone"
             android:scaleType="fitCenter"
             android:src="@drawable/baseline_favorite_black_24dp"
             app:layout_constraintBottom_toTopOf="@+id/recycler_view_vista_rutina"
@@ -29,6 +30,7 @@
             android:layout_height="87dp"
             android:layout_marginTop="16dp"
             android:contentDescription="@string/reps_logo"
+            android:visibility="gone"
             android:src="@drawable/reps_logo_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -42,6 +44,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/nombre_rutina"
             android:textAlignment="center"
+            android:visibility="gone"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,6 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/autor_rutina"
+            android:visibility="gone"
             android:textColor="@color/our_blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.545"
@@ -79,6 +84,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
             android:scaleType="fitCenter"
+            android:visibility="gone"
             android:src="@drawable/baseline_person_black_24dp"
             app:layout_constraintEnd_toStartOf="@+id/autorRut"
             app:layout_constraintTop_toBottomOf="@+id/vista_rutina_rating" />
@@ -88,6 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:visibility="gone"
             android:text="@string/descripcion_rutina"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -102,6 +109,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:backgroundTint="#00FFFFFF"
+            android:visibility="gone"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_play"
             app:layout_constraintEnd_toStartOf="@+id/shareRut"
@@ -116,6 +124,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="42dp"
             android:backgroundTint="#00FFFFFF"
+            android:visibility="gone"
             android:scaleType="fitXY"
             android:src="@drawable/ic_share"
             app:layout_constraintBottom_toTopOf="@+id/recycler_view_vista_rutina"
@@ -134,6 +143,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/playRut"
             app:layout_constraintVertical_bias="0.0" />
+
+        <!-- comentarioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shimmer_vista_rutina"
+            tools:ignore="MissingConstraints">
+            <include
+                layout="@layout/shimmer_vista_rutina_layout" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

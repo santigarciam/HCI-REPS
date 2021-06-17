@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ import com.example.reps.retrofit.api.model.Routine;
 import com.example.reps.retrofit.api.repository.Status;
 import com.example.reps.ui.ejecucionRut.ejecucionRut;
 import com.example.reps.ui.ejecucionRut.ejecucionRutina;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -50,6 +52,7 @@ public class VistaRutina extends Fragment {
     private boolean isFavAux;
 
     private String nombreRutina;
+    private ShimmerFrameLayout shimmerLayout;
 
     public VistaRutina() {
         // Required empty public constructor
@@ -63,7 +66,13 @@ public class VistaRutina extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        shimmerLayout = view.findViewById(R.id.shimmer_vista_rutina);
         App app = (App) requireActivity().getApplication();
+        ImageView image = view.findViewById(R.id.repsLogoRut);
+        ImageView imageProfile = view.findViewById(R.id.imageView7);
+        ImageButton favButton = view.findViewById(R.id.vista_rutina_fav_button);
+        ImageButton playButton = view.findViewById(R.id.playRut);
+        ImageButton shareButton = view.findViewById(R.id.shareRut);
         name = view.findViewById(R.id.nombreRut);
         owner = view.findViewById(R.id.autorRut);
         descr = view.findViewById(R.id.descripcionRut);
@@ -117,7 +126,19 @@ public class VistaRutina extends Fragment {
                                            return cycle.getOrder() - t1.getOrder();
                                        }
                                    });
+                                   shimmerLayout.stopShimmer();
+                                   shimmerLayout.hideShimmer();
+                                   shimmerLayout.setVisibility(View.GONE);
                                    verticalAdapter.notifyDataSetChanged();
+                                   image.setVisibility(View.VISIBLE);
+                                   imageProfile.setVisibility(View.VISIBLE);
+                                   favButton.setVisibility(View.VISIBLE);
+                                   playButton.setVisibility(View.VISIBLE);
+                                   shareButton.setVisibility(View.VISIBLE);
+                                   name.setVisibility(View.VISIBLE);
+                                   owner.setVisibility(View.VISIBLE);
+                                   descr.setVisibility(View.VISIBLE);
+                                   ratingBar.setVisibility(View.VISIBLE);
                                });
                                i++;
                            }
