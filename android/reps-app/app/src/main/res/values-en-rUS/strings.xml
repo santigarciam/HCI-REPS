@@ -113,4 +113,5 @@
     <string name="fin">FINISH</string>
     <string name="mensaje_seccion_sin_rutinas">There are no routines for this section yet</string>
     <string name="welcomemesagge">Manage your workouts intelligently</string>
+    <string name="fav_no_ruts_message">There are no favourite routines</string>
 </resources>

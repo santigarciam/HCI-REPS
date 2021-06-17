@@ -113,4 +113,5 @@
     <string name="fin">FIN</string>
     <string name="mensaje_seccion_sin_rutinas">Aun no existen rutinas para esta seccion</string>
     <string name="welcomemesagge">welcomeMesagge</string>
+    <string name="fav_no_ruts_message">No hay rutinas favoritas</string>
 </resources>
