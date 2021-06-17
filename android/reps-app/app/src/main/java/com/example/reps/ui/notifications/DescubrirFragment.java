@@ -50,7 +50,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     RoutineCardAdapter rAdapter;
     ////////////////////
 
-    public void init(View rootView, ViewGroup container){
+    public void init(View rootView){
 
         rutinas = new ArrayList<>();
         app.getRoutineRepository().getAll().observe(requireActivity(),r->{
@@ -80,6 +80,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
         });
 
 
+
     }
     /////////////////////
 
@@ -88,6 +89,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
         super.onViewCreated(view, savedInstanceState);
         searchView = view.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(this);
+        init(view);
         ImageButton isAscOrDescBtn = view.findViewById(R.id.ascOrDescBtn);
         if(isAsc){
             isAscOrDescBtn.setRotation(270);
@@ -118,7 +120,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
 
         binding = FragmentDescubrirBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        init(root,container);
+        init(root);
 
 
 
@@ -273,7 +275,10 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     // Va escuchando cuando ingresamos letras en el text view
     @Override
     public boolean onQueryTextChange(String s) {
-        rAdapter.filter(s);
+        if(rAdapter !=null){
+
+            rAdapter.filter(s);
+        }
 
         return false;
     }

@@ -14,10 +14,10 @@
         <SearchView
             android:id="@+id/searchView"
             android:layout_width="match_parent"
-            android:layout_height="29dp"
+            android:layout_height="wrap_content"
             android:iconifiedByDefault="false"
-            android:queryHint="Busque rutinas" />
-<!--        TODO: Poner string en el hint-->
+            android:queryHint="Busque rutinas"/>
+        <!--        TODO: Poner string en el hint-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -25,37 +25,57 @@
 
             <Button
                 android:id="@+id/ordenarDescubrir"
-                android:layout_width="255dp"
-                android:layout_height="44dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="12dp"
-                android:backgroundTint="@color/grey"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/white"
                 android:text="@string/ordenar"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
                 app:icon="@android:drawable/arrow_down_float"
-                app:layout_constraintEnd_toStartOf="@+id/filterDescubrir"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:iconGravity="end"
+                app:iconTint="@color/grey"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/filterDescubrir"
-                android:layout_width="255dp"
-                android:layout_height="44dp"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="@color/grey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:backgroundTint="@color/white"
                 android:text="@string/filtrar"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
                 app:icon="@android:drawable/arrow_down_float"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:iconGravity="end"
+                app:iconTint="@color/grey"
+                app:layout_constraintBottom_toBottomOf="@+id/ordenarDescubrir"
                 app:layout_constraintStart_toEndOf="@+id/ordenarDescubrir"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/ordenarDescubrir" />
+
+            <ImageButton
+                android:id="@+id/ascOrDescBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:backgroundTint="#00FFFFFF"
+                android:rotation="90"
+                android:src="?attr/homeAsUpIndicator"
+                app:layout_constraintBottom_toBottomOf="@+id/filterDescubrir"
+                app:layout_constraintStart_toEndOf="@+id/filterDescubrir"
+                app:layout_constraintTop_toTopOf="@+id/filterDescubrir" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/favourite_recycler_view"
+            android:id="@+id/descubrir_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="702dp" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

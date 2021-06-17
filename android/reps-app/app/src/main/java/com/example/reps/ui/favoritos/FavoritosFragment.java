@@ -103,6 +103,7 @@ public class FavoritosFragment  extends Fragment implements SearchView.OnQueryTe
     // Va escuchando cuando ingresamos letras en el text view
     @Override
     public boolean onQueryTextChange(String s) {
+        if(rAdapter!= null)
         rAdapter.filter(s);
 
         return false;
