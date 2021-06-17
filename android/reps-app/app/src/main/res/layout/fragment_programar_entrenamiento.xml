@@ -58,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="70dp"
             android:text="@string/editProfile_guardar_button"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/programarEntrenamiento_cancelar_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/programarEntrenamiento_cancelar_button" />
@@ -69,6 +70,7 @@
             android:layout_marginStart="70dp"
             android:layout_marginTop="16dp"
             android:backgroundTint="#C5C2C2"
+
             android:text="@string/editProfile_cancelar_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/programarEntrenamiento_hora_input" />

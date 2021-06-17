@@ -63,7 +63,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/section_rout_title"
-        app:srcCompat="@drawable/fondo_blanco" />
+        app:srcCompat="@drawable/fondo_blanco"
+        app:tint="?android:attr/colorBackground"/>
 
     <TextView
         android:id="@+id/mensaje_seccion_sin_rutinas"

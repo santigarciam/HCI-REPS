@@ -27,7 +27,7 @@ public interface ApiUserService {
     LiveData<ApiResponse<ResponseBody>> verifyCode(@Body VerificationCodeModel verificationCodeModel);
 
     @POST("users/resend_verification")
-    LiveData<ApiResponse<Token>> resendCode(@Body VerificationCodeModel verificationCodeModel);
+    LiveData<ApiResponse<ResponseBody>> resendCode(@Body VerificationCodeModel verificationCodeModel);
 
     @POST("users")
     LiveData<ApiResponse<User>> register(@Body CredentialRegister credentials);

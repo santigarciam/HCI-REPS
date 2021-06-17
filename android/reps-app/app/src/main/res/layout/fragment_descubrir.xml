@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
                 android:background="@android:color/tab_indicator_text"
                 android:backgroundTint="?android:attr/textColorHintInverse"
                 android:text="@string/ordenar"
@@ -38,6 +39,7 @@
                 app:icon="@android:drawable/arrow_down_float"
                 app:iconGravity="end"
                 app:iconTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
                 android:background="@android:color/secondary_text_dark_nodisable"
                 android:backgroundTint="?android:attr/textColorHintInverse"
                 android:text="@string/filtrar"
@@ -56,6 +59,7 @@
                 app:icon="@android:drawable/arrow_down_float"
                 app:iconGravity="end"
                 app:iconTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ordenarDescubrir"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,15 +68,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="8dp"
                 android:backgroundTint="#00FFFFFF"
                 android:rotation="90"
                 android:src="?attr/homeAsUpIndicator"
-                app:tint="@color/grey"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/filterDescubrir"
                 app:layout_constraintStart_toEndOf="@+id/filterDescubrir"
-                app:layout_constraintTop_toTopOf="@+id/filterDescubrir" />
+                app:layout_constraintTop_toTopOf="@+id/filterDescubrir"
+                app:tint="@color/grey" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

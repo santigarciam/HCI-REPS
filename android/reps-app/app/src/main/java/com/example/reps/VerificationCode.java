@@ -83,6 +83,7 @@ public class VerificationCode extends Fragment {
                                 progressBar.setVisibility(View.INVISIBLE);
                                 app.getPreferences().setAuthToken(l.getData().getToken());
                                 Navigation.findNavController(view).navigate(VerificationCodeDirections.actionVerificationCodeToLogedActivity());
+                                requireActivity().finish();
                             }else if (l.getStatus() == Status.ERROR){
                                 progressBar.setVisibility(View.INVISIBLE);
                                 String errorMesagge = getResources().getString(R.string.error_mesagge_verificacion);

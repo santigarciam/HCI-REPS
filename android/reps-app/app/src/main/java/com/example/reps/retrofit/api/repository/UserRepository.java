@@ -47,12 +47,12 @@ public class UserRepository {
         }.asLiveData();
     }
 
-    public LiveData<Resource<Token>> resendCode(VerificationCodeModel credentials) {
-        return new NetworkBoundResource<Token, Token>()
+    public LiveData<Resource<ResponseBody>> resendCode(VerificationCodeModel credentials) {
+        return new NetworkBoundResource<ResponseBody, ResponseBody>()
         {
             @NonNull
             @Override
-            protected LiveData<ApiResponse<Token>> createCall() {
+            protected LiveData<ApiResponse<ResponseBody>> createCall() {
                 return apiService.resendCode(credentials);
             }
         }.asLiveData();

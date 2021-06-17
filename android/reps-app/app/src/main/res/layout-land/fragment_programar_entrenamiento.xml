@@ -58,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="168dp"
             android:text="@string/editProfile_guardar_button"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/programarEntrenamiento_cancelar_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/programarEntrenamiento_cancelar_button" />

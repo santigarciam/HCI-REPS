@@ -130,9 +130,10 @@ public class PerfilFragment extends Fragment {
                                     appPreferences.setAuthToken(null);
                                     Intent intent = new Intent(getContext(), MainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
                                     getActivity().finish();
                                     dialog.dismiss();
+                                    startActivity(intent);
+
 
                                 }
                             });

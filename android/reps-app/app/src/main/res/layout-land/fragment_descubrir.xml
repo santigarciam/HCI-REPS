@@ -17,7 +17,6 @@
             android:layout_height="wrap_content"
             android:iconifiedByDefault="false"
             android:queryHint="Busque rutinas"/>
-        <!--        TODO: Poner string en el hint-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -31,13 +30,15 @@
 
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:backgroundTint="@color/white"
+                android:background="@android:color/tab_indicator_text"
+                android:backgroundTint="?android:attr/textColorHintInverse"
                 android:text="@string/ordenar"
-                android:textColor="@color/grey"
+                android:textColor="@color/white"
                 android:textSize="12sp"
+                app:cornerRadius="2dp"
                 app:icon="@android:drawable/arrow_down_float"
                 app:iconGravity="end"
-                app:iconTint="@color/grey"
+                app:iconTint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -47,13 +48,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:backgroundTint="@color/white"
+                android:background="@android:color/secondary_text_dark_nodisable"
+                android:backgroundTint="?android:attr/textColorHintInverse"
                 android:text="@string/filtrar"
-                android:textColor="@color/grey"
+                android:textColor="@color/white"
                 android:textSize="12sp"
                 app:icon="@android:drawable/arrow_down_float"
                 app:iconGravity="end"
-                app:iconTint="@color/grey"
+                app:iconTint="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/ordenarDescubrir"
                 app:layout_constraintStart_toEndOf="@+id/ordenarDescubrir"
                 app:layout_constraintTop_toTopOf="@+id/ordenarDescubrir" />
@@ -65,6 +67,7 @@
                 android:layout_marginStart="16dp"
                 android:backgroundTint="#00FFFFFF"
                 android:rotation="90"
+                app:tint="@color/grey"
                 android:src="?attr/homeAsUpIndicator"
                 app:layout_constraintBottom_toBottomOf="@+id/filterDescubrir"
                 app:layout_constraintStart_toEndOf="@+id/filterDescubrir"
