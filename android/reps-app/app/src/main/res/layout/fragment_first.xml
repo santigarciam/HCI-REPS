@@ -73,7 +73,7 @@
                 android:id="@+id/welcomeField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
+                android:layout_marginBottom="32dp"
                 android:background="#20000000"
                 android:text="@string/welcomemesagge"
                 android:textAlignment="center"
@@ -81,10 +81,10 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold|italic"
+                app:layout_constraintBottom_toTopOf="@+id/first_button_login"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
 

@@ -315,6 +315,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
         }
         if(rutinas!=null && rutinas.isEmpty()){
             TextView  noMatch = requireActivity().findViewById(R.id.noRutsSearch);
+            if(noMatch !=null)
             noMatch.setVisibility(View.VISIBLE);
         }
 

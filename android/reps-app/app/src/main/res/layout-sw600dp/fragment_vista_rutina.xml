@@ -16,7 +16,7 @@
             android:layout_height="69dp"
             android:layout_marginStart="32dp"
             android:layout_marginBottom="42dp"
-            android:backgroundTint="#FFFFFF"
+            android:backgroundTint="#00FFFFFF"
             android:contentDescription="@string/favicon"
             android:scaleType="fitCenter"
             android:src="@drawable/baseline_favorite_black_24dp"
