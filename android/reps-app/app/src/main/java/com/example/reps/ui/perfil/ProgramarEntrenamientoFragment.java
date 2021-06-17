@@ -171,7 +171,7 @@ public class ProgramarEntrenamientoFragment extends Fragment {
         root.findViewById(R.id.programarEntrenamiento_guardar_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Se seteo el recordatorio correctamente.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), requireActivity().getString(R.string.toast_notificacion_creada), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getContext(), ReminderBroadcast.class);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);

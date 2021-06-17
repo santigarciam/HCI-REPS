@@ -49,6 +49,8 @@ public class VistaRutina extends Fragment {
     RatingBar ratingBar;
     private boolean isFavAux;
 
+    private String nombreRutina;
+
     public VistaRutina() {
         // Required empty public constructor
     }
@@ -73,9 +75,6 @@ public class VistaRutina extends Fragment {
         VistaRutinaArgs args = VistaRutinaArgs.fromBundle(getArguments());
         //TODO: HACER QUE EL ARG SEA TODO EL ROUTINECARD!!!
         if (getArguments() != null) {
-//            String link = getArguments().get("paramDeepLink").toString();
-//            link = Navigation.findNavController(view).handleDeepLink()
-//            Log.d("VISTA_RUTINA", "deepLinkParam: "+ link);
             isFavAux = args.getIsFav();
             if (isFavAux){
                 ((ImageButton)view.findViewById(R.id.vista_rutina_fav_button)).setImageResource(R.drawable.baseline_favorite_black_24dp_pressed);
@@ -84,10 +83,9 @@ public class VistaRutina extends Fragment {
             }
             Integer id = args.getIDRutina();
             app.getRoutineRepository().getRoutine(id).observe(requireActivity(),r->{
-                // TODO: Cambiar esto de imprimir por el manejo de la API
                 if(r.getStatus() == Status.SUCCESS) {
-
                    name.setText(r.getData().getName());
+                   nombreRutina = r.getData().getName();
                     owner.setText(r.getData().getUser().getUsername());
                    descr.setText(r.getData().getDetail());
                    ratingBar.setRating((float) (r.getData().getAverageRating()/2));
@@ -97,7 +95,6 @@ public class VistaRutina extends Fragment {
                            int i = 0;
                            List<Cycle> arrayList1 = new ArrayList<>();
                            CycleCardAdapter verticalAdapter = new CycleCardAdapter(arrayList1, getContext());
-
 
                            for (Cycle ciclo : ciclos) {
                                int finalI = i;
@@ -136,25 +133,25 @@ public class VistaRutina extends Fragment {
                     share_btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            int position = args.getIDRutina();
-                            ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-                            Uri myUri = Uri.parse("http://stackoverflow.com"); //cambiar al link de la rutina
+                            //int position = args.getIDRutina();
+                            ClipboardManager clipboard = (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                            Uri myUri = Uri.parse("https://www.reps.com/routines/" + args.getIDRutina());
                             ClipData clip = ClipData.newRawUri("Rutine Link", myUri);
                             clipboard.setPrimaryClip(clip);
 
                             Intent intent = new Intent(Intent.ACTION_SEND);
                             intent.setType("text/plain");
-                            intent.putExtra(Intent.EXTRA_STREAM, myUri);
-                            getContext().startActivity(Intent.createChooser(intent, "Compartir"));
-                            //Toast.makeText(view.getContext(),"Link de rutina " + position + " copiado al portapapeles", Toast.LENGTH_LONG).show();
+                            intent.putExtra(Intent.EXTRA_TEXT, myUri.toString());
+                            getContext().startActivity(Intent.createChooser(intent, requireActivity().getString(R.string.string_compartir_rutina) + " \"" + nombreRutina + "\""));
                         }
 
                     });
 
                 }else if (r.getStatus() == Status.ERROR){
+
                     android.app.AlertDialog dialog = new AlertDialog.Builder(getContext())
-                            .setTitle("Rutina inexistente")
-                            .setMessage("Esta rutina fue borrada")
+                            .setTitle(requireActivity().getString(R.string.string_rutina_inexistente_titulo))
+                            .setMessage(requireActivity().getString(R.string.string_rutina_inexistente_mensaje))
                             .setPositiveButton("Ok", null)
                             .show();
 
@@ -195,8 +192,7 @@ public class VistaRutina extends Fragment {
                             if (r.getStatus() == Status.SUCCESS) {
                                 ((ImageButton) fav_btn.findViewById(R.id.vista_rutina_fav_button))
                                         .setImageResource(R.drawable.baseline_favorite_black_24dp_pressed);
-                                Toast.makeText(view.getContext(), "Esta rutina fue agregada a la lista de favoritos", Toast.LENGTH_LONG)
-                                        .show();
+                                Toast.makeText(view.getContext(), requireActivity().getString(R.string.string_rutina_quote) + nombreRutina + requireActivity().getString(R.string.string_quote_agregada_a_favoritos), Toast.LENGTH_LONG).show();
                                 isFavAux = !isFavAux;
                             }else{
 
@@ -207,8 +203,8 @@ public class VistaRutina extends Fragment {
                             if (r.getStatus() == Status.SUCCESS) {
                                 ((ImageButton) fav_btn.findViewById(R.id.vista_rutina_fav_button))
                                         .setImageResource(R.drawable.baseline_favorite_black_24dp);
-                                Toast.makeText(view.getContext(), "Esta rutina fue borrada de la lista de favoritos", Toast.LENGTH_LONG)
-                                        .show();
+                                Toast.makeText(view.getContext(), requireActivity().getString(R.string.string_rutina_quote) + nombreRutina + requireActivity().getString(R.string.string_quote_borrada_de_favoritos), Toast.LENGTH_LONG).show();
+
                                 isFavAux = !isFavAux;
                             }else{
 

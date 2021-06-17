@@ -48,20 +48,10 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ImageButton btn_back = view.findViewById(R.id.login_back);
         app = (App) requireActivity().getApplication();
         if(app == null){
             Log.d(TAG, "onViewCreated: Error app");
         }
-
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.firstFragment);
-            }
-        });
-
-
 
         Button btn_login = view.findViewById(R.id.login_button_register);
         TextView usernameField = view.findViewById(R.id.login_input_user);
@@ -82,7 +72,6 @@ public class LoginFragment extends Fragment {
                 app.getUserRepository().login(credentials).observe(requireActivity(), r->{
 //                    while(r.getStatus() == Status.LOADING);
                         if (r.getStatus() == Status.SUCCESS) {
-                            Log.d(TAG, "Se logueo correctamente con las siguientes credentials. User: " + username + " Password: " + password);
                             app.getPreferences().setAuthToken(r.getData().getToken());
                             progressBar.setVisibility(View.INVISIBLE);
                             ////////////////////////////////////////////////////////
@@ -95,9 +84,9 @@ public class LoginFragment extends Fragment {
                         }else if(r.getStatus() == Status.ERROR){
                             progressBar.setVisibility(View.INVISIBLE);
                             if (r.getError().getDetails().contains("Password does not match")){
-                                passwordField.setError("Contraseña incorrecta");
+                                passwordField.setError(getString(R.string.error_contrasena_incorrecta));
                             }else{
-                                usernameField.setError("Usuario incorrecto");
+                                usernameField.setError(getString(R.string.error_usuario_incorrecto));
                             }
                         } else {
                             progressBar.setVisibility(View.VISIBLE);

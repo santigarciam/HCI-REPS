@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">REPS</string>
+    <string name="first_button_text_login">LOG IN</string>
+    <string name="first_button_text_registrarse">REGISTER</string>
+    <string name="hint_nombre_de_usuario">Username</string>
+    <string name="hint_contrasena">Password</string>
+    <string name="hint_rep_contrasena">Repeat password</string>
+    <string name="hint_email">Email address</string>
+    <string name="register_button_back_desc">register_button_back_desc</string>
+    <string name="image_reps_logo">image_reps_logo</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_loged">MainActivityLogged</string>
+    <string name="title_home">Home</string>
+    <string name="title_descubrir">Explore</string>
+    <string name="title_favoritos">Favourites</string>
+    <string name="title_perfil">Profile</string>
+    <string name="progreso">My progress</string>
+    <string name="program_entrenamiento">Schedule training</string>
+    <string name="edit_perfil">Edit profile</string>
+    <string name="nombre_rutina">Routine name</string>
+    <string name="autor_rutina">User</string>
+    <string name="descripcion_rutina">Routine description</string>
+    <string name="descripcion_ej">Description</string>
+    <string name="favicon">favIcon</string>
+    <string name="reps_logo">reps_logo</string>
+    <string name="editProfile_titulo">Edit information</string>
+    <string name="editProfile_hint_nombre_input">Name</string>
+    <string name="editProfile_hint_apellido_input">Surname</string>
+    <string name="editProfile_hint_avatar_url_input">Avatar URL</string>
+    <string name="editProfile_guardar_button">Save</string>
+    <string name="editProfile_cancelar_button">Cancel</string>
+    <string name="editProfile_hint_fecha_input">Birthdate</string>
+    <string name="editProfile_titulo_generos">Genre:</string>
+    <string name="programarEntrenamiento_titulo">Schedule training</string>
+    <string name="programarEntrenamiento_fecha">Date</string>
+    <string name="programarEntrenamiento_hora">Hour</string>
+    <string name="ultimo_ejercicio_mensaje">Last exercise!</string>
+    <string-array name="generos">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string name="ordenar">Order by</string>
+    <string name="filtrar">Filter by</string>
+
+    <string name="filterOptRookie">Amateur</string>
+    <string name="filterOptBegginer">Beginner</string>
+    <string name="filterOptInter">Intermediate</string>
+    <string name="filterOptAdv">Advanced</string>
+    <string name="filterOptExpert">Expert</string>
+
+
+    <string name="orderOptDate">Date</string>
+    <string name="orderOptrating">Rating</string>
+    <string name="orderOptSports">Sports</string>
+    <string name="orderOptCat">Category</string>
+
+    <string name="verification_code_text">Insert verification code received</string>
+    <string name="resend_code">Resend</string>
+    <string name="confirm_code">Confirm</string>
+    <string name="nombre_ejercicio">Exercise name</string>
+    <string name="repeticiones">Duration/Reps</string>
+    <string name="nombre_ciclo">Cycle name</string>
+    <string name="next_ex">next</string>
+    <string name="exercise_name">Exercise name</string>
+    <string name="siguiente_ej">Next exercise:</string>
+    <string name="califica_la_rutina">Rate the routine</string>
+    <string name="aceptar">Accept</string>
+    <string name="error_mesagge_verificacion">An error occurred, please try again</string>
+    <string name="codigo_invalido">Invalid code</string>
+    <string name="reenviar_codigo">The code has been forwarded to your mailbox</string>
+    <string name="mensaje_comienzo_ejecucion">Press the play button to start training!</string>
+    <string name="orderOptDifficulty">Difficulty</string>
+
+    <string name="error_contrasena_incorrecta">Incorrect password</string>
+    <string name="error_usuario_incorrecto">Incorrect username</string>
+
+    <string name="alert_titulo_login_o_register">Login or register</string>
+    <string name="alert_mensaje_login_o_register">You must be logged in to your account to view the routine</string>
+    <string name="routines_section_titulo_rutinas_recientes">Recent routines</string>
+
+    <string name="titulo_seccion_rutinas">Section title</string>
+    <string name="texto_boton_ver_mas_seccion_rutina">See more</string>
+    <string name="string_rutina_quote">Routine \"</string>
+    <string name="string_quote_agregada_a_favoritos">\" added to favourites</string>
+    <string name="string_quote_borrada_de_favoritos">\" removed from favourites</string>
+    <string name="string_compartir_rutina">Share routine</string>
+    <string name="string_rutina_inexistente_titulo">Non-existent routine</string>
+    <string name="string_rutina_inexistente_mensaje">This routine does not exist. Maybe it was erased</string>
+    <string name="terminar">Finish</string>
+    <string name="string_alert_terminar_rutina_titulo">End routine</string>
+    <string name="string_alert_terminar_rutina_mensaje">Are you sure you want to exit the routine</string>
+    <string name="string_alert_terminar_rutina_si">Yes</string>
+    <string name="salir">Exit</string>
+    <string name="buscar_rutina">Search routine</string>
+    <string name="buscar_rutina_fav">Search favourite routine</string>
+    <string name="editar_perfil_config">Edit profile</string>
+    <string name="ayuda_config">Help</string>
+    <string name="cerrar_sesion_config">Log out</string>
+    <string name="alert_titulo_ayuda">Help</string>
+    <string name="alert_titulo_cerrar_sesion">Log out</string>
+    <string name="alert_mensaje_ayuda">July 2021 - TP3 - HCI - Group 8</string>
+    <string name="alert_mensaje_cerrar_sesion">Are you sure you want to log out?</string>
+    <string name="historial">Routines history</string>
+    <string name="toast_notificacion_creada">Reminder set correctly</string>
+    <string name="titulo_notificacion">It is time to train... there are no excuses</string>
+    <string name="mensaje_notificacion">You have set a reminder in Reps app</string>
+    <string name="ordenado_asc">Criteria ascending</string>
+    <string name="ordenado_desc">Criteria descending</string>
+</resources>

@@ -68,14 +68,6 @@ public class RegisterFragment extends Fragment {
 //            }
 //        });
 
-        ImageButton btn_back = view.findViewById(R.id.register_back);
-
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.firstFragment);
-            }
-        });
 
         Button btn_register = view.findViewById(R.id.register_button_register);
         TextView mailField = view.findViewById(R.id.register_input_email);
@@ -95,11 +87,9 @@ public class RegisterFragment extends Fragment {
                         Log.d(TAG,"Se registro");
                         Navigation.findNavController(view).navigate(RegisterFragmentDirections.actionRegisterFragmentToVerificationCode(mail,username,password));
                     }else if (r.getStatus() == Status.ERROR){
-                        Toast.makeText(view.getContext(),"NO Se registro"+r.getError().getDescription(),Toast.LENGTH_LONG).show();
+                        //Toast.makeText(view.getContext(),"NO Se registro"+r.getError().getDescription(),Toast.LENGTH_LONG).show();
                     }
                 });
-
-//                app.getUserRepository().
            }
         });
     }

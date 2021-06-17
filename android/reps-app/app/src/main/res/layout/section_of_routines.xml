@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Titulo Seccion"
+        android:text="@string/titulo_seccion_rutinas"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="Ver todas"
+        android:text="@string/texto_boton_ver_mas_seccion_rutina"
         app:layout_constraintBottom_toBottomOf="@+id/section_rout_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/section_rout_title" />

@@ -52,7 +52,7 @@
 
             android:layout_marginEnd="8dp"
             android:backgroundTint="@color/grey"
-            android:text="Salir"
+            android:text="@string/salir"
             app:layout_constraintBaseline_toBaselineOf="@+id/confirmRate"
             app:layout_constraintEnd_toStartOf="@+id/confirmRate" />
     </androidx.constraintlayout.widget.ConstraintLayout>
