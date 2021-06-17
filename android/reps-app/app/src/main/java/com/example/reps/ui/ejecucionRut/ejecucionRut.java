@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.example.reps.DialogFragmentRate;
 import com.example.reps.MainActivity;
 import com.example.reps.R;
-import com.example.reps.databinding.ActivityLogedBinding;
+
 import com.example.reps.retrofit.App;
 import com.example.reps.retrofit.AppPreferences;
 import com.example.reps.retrofit.api.model.Cycle;
@@ -149,8 +149,10 @@ public class ejecucionRut extends AppCompatActivity {
             public void onClick(View view) {
                 moreInfoFlag = !moreInfoFlag;
                 if(moreInfoFlag){
+                    moreInfo.setRotation(180);
                     descrField.setVisibility(View.VISIBLE);
                 }else{
+                    moreInfo.setRotation(0);
                     descrField.setVisibility(View.INVISIBLE);
                 }
             }
