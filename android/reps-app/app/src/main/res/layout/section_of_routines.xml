@@ -51,5 +51,58 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/fondo_seccion_sin_rutinas"
+        android:layout_width="0dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/section_rout_title"
+        app:srcCompat="@drawable/fondo_blanco" />
+
+    <TextView
+        android:id="@+id/mensaje_seccion_sin_rutinas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:elevation="2dp"
+        android:text="@string/mensaje_seccion_sin_rutinas"
+        android:textColor="#00B2EB"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/fondo_seccion_sin_rutinas"
+        app:layout_constraintStart_toStartOf="@+id/fondo_seccion_sin_rutinas"
+        app:layout_constraintTop_toTopOf="@+id/fondo_seccion_sin_rutinas" />
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/our_light_blue"
+        android:indeterminateTintMode="src_atop"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fondo_seccion_sin_rutinas" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:visibility="gone"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/our_light_blue"
+        android:indeterminateTintMode="src_atop"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/fondo_seccion_sin_rutinas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
