@@ -31,6 +31,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/rutine_card_share"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,23 +62,24 @@
             android:id="@+id/rutine_card_user"
             android:layout_width="104dp"
             android:layout_height="19dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="4dp"
             android:text="@string/autor_rutina"
             android:textColor="@color/our_blue"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
-            app:layout_constraintTop_toBottomOf="@+id/descripcionRut" />
+            app:layout_constraintTop_toTopOf="@+id/imageView4"
+            app:layout_constraintVertical_bias="1.0" />
 
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="37dp"
             android:layout_height="26dp"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/rutine_card_rating"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descripcionRut"
             app:srcCompat="@drawable/baseline_person_black_24dp" />
 
         <TextView

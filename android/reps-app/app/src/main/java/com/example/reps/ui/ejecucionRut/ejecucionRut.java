@@ -86,10 +86,25 @@ public class ejecucionRut extends AppCompatActivity {
         setContentView(R.layout.activity_ejecucion_rut);
         cycleField = findViewById(R.id.nombreCiclo);
         currentExField = findViewById(R.id.nombre_ejercicio);
+        moreInfo = findViewById(R.id.moreInfoBtn);
+        descrField = findViewById(R.id.exercise_description);
+        currentExField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moreInfoFlag = !moreInfoFlag;
+                if(moreInfoFlag){
+                    moreInfo.setRotation(180);
+                    descrField.setVisibility(View.VISIBLE);
+                }else{
+                    moreInfo.setRotation(0);
+                    descrField.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
         nextField = findViewById(R.id.siguiente_ejercicoBtn);
         timeRepsField = findViewById(R.id.timeExercise);
-         moreInfo = findViewById(R.id.moreInfoBtn);
-         descrField = findViewById(R.id.exercise_description);
+
+
         nextField.setVisibility(View.INVISIBLE);
         TextView sigField = findViewById(R.id.siguiente_ejText);
         startMessageField = findViewById(R.id.mensaje_comienzo_field);

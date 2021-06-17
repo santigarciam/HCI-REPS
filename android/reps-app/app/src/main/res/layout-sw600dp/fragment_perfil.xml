@@ -26,8 +26,8 @@
 
         <ImageButton
             android:id="@+id/profile_config_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="64dp"
+            android:layout_height="59dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:adjustViewBounds="true"
@@ -38,35 +38,34 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/profile_nombre_apellido"
-            android:layout_width="171dp"
-            android:layout_height="28dp"
+            android:layout_width="273dp"
+            android:layout_height="55dp"
             android:layout_marginTop="16dp"
             android:text="Nombre Apellido"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="28sp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_avatar_image" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/profile_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/hint_nombre_de_usuario"
             android:textColor="#504A4A"
             android:textColorHint="#636060"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_nombre_apellido" />
 
         <Button
-            android:visibility="gone"
             android:id="@+id/profile_progress_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -74,6 +73,8 @@
             android:text="@string/progreso"
             android:textAlignment="textStart"
             android:textColor="#000000"
+            android:textSize="18dp"
+            android:visibility="gone"
             app:backgroundTint="#00FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -81,7 +82,6 @@
             app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
         <Button
-            android:visibility="gone"
             android:id="@+id/profile_programar_entrenamiento_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -89,6 +89,8 @@
             android:text="@string/program_entrenamiento"
             android:textAlignment="textStart"
             android:textColor="#000000"
+            android:textSize="18dp"
+            android:visibility="gone"
             app:backgroundTint="#00FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -96,26 +98,26 @@
             app:layout_constraintTop_toBottomOf="@+id/profile_progress_button" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:visibility="gone"
             android:id="@+id/profile_avatar_image"
-            android:layout_width="191dp"
-            android:layout_height="116dp"
-            android:layout_marginTop="50dp"
+            android:layout_width="252dp"
+            android:layout_height="188dp"
+            android:layout_marginTop="99dp"
             android:layout_marginBottom="20dp"
             android:src="@drawable/profile_avatar"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/profile_nombre_apellido"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.526"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:visibility="gone"
             android:id="@+id/divider2"
             android:layout_width="729dp"
             android:layout_height="1dp"
             android:layout_marginTop="24dp"
             android:background="?android:attr/listDivider"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_username" />
@@ -127,8 +129,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/shimmer_perfil"
             tools:ignore="MissingConstraints">
+
             <include
-                layout="@layout/shimmer_perfil_layout" />
+                layout="@layout/shimmer_perfil_layout"
+                android:layout_width="593dp"
+                android:layout_height="match_parent" />
         </com.facebook.shimmer.ShimmerFrameLayout>
 
 

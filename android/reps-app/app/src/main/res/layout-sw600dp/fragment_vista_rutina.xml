@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VistaRutina">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/vista_rutina_fav_button"
+            android:layout_width="75dp"
+            android:layout_height="69dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="42dp"
+            android:backgroundTint="#FFFFFF"
+            android:contentDescription="@string/favicon"
+            android:scaleType="fitCenter"
+            android:src="@drawable/baseline_favorite_black_24dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/recycler_view_vista_rutina"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/repsLogoRut"
+            android:layout_width="168dp"
+            android:layout_height="108dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/reps_logo"
+            android:src="@drawable/reps_logo_icon"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nombreRut"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/nombre_rutina"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/repsLogoRut" />
+
+        <RatingBar
+            android:id="@+id/vista_rutina_rating"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nombreRut" />
+
+        <TextView
+            android:id="@+id/autorRut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/autor_rutina"
+            android:textColor="@color/our_blue"
+            android:textSize="20dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.545"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vista_rutina_rating" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="30dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/baseline_person_black_24dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/autorRut"
+            app:layout_constraintTop_toBottomOf="@+id/vista_rutina_rating" />
+
+        <TextView
+            android:id="@+id/descripcionRut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/descripcion_rutina"
+            android:textSize="20dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/autorRut" />
+
+        <ImageButton
+            android:id="@+id/playRut"
+            android:layout_width="135dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="#00FFFFFF"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_play"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/shareRut"
+            app:layout_constraintHorizontal_bias="0.529"
+            app:layout_constraintStart_toEndOf="@+id/vista_rutina_fav_button"
+            app:layout_constraintTop_toBottomOf="@+id/descripcionRut" />
+
+        <ImageButton
+            android:id="@+id/shareRut"
+            android:layout_width="75dp"
+            android:layout_height="69dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="42dp"
+            android:backgroundTint="#00FFFFFF"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_share"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/recycler_view_vista_rutina"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_vista_rutina"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/playRut"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <!-- comentarioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shimmer_vista_rutina"
+            tools:ignore="MissingConstraints">
+
+            <include
+                layout="@layout/shimmer_vista_rutina_layout"
+                android:layout_width="598dp"
+                android:layout_height="match_parent"
+                android:visibility="visible" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

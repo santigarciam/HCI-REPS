@@ -97,9 +97,9 @@
     <string name="salir">Exit</string>
     <string name="buscar_rutina">Search routine</string>
     <string name="buscar_rutina_fav">Search favourite routine</string>
-    <string name="editar_perfil_config">Edit profile</string>
-    <string name="ayuda_config">Help</string>
-    <string name="cerrar_sesion_config">Log out</string>
+    <string name="editar_perfil_config">EDIT PROFILE</string>
+    <string name="ayuda_config">HELP</string>
+    <string name="cerrar_sesion_config">LOG OUT</string>
     <string name="alert_titulo_ayuda">Help</string>
     <string name="alert_titulo_cerrar_sesion">Log out</string>
     <string name="alert_mensaje_ayuda">July 2021 - TP3 - HCI - Group 8</string>
@@ -114,4 +114,5 @@
     <string name="mensaje_seccion_sin_rutinas">There are no routines for this section yet</string>
     <string name="welcomemesagge">Manage your workouts intelligently</string>
     <string name="fav_no_ruts_message">There are no favourite routines</string>
+    <string name="norutssearch">No routines for this search</string>
 </resources>

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ import com.example.reps.retrofit.api.repository.Status;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -219,6 +221,10 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     private void retrieveRoutines(){
         Log.d("Retrieve ruts", "retrieveRoutines: ");
         String ascOrDesc = isAsc?"asc":"desc";
+
+            TextView noMatch = requireActivity().findViewById(R.id.noRutsSearch);
+            noMatch.setVisibility(View.INVISIBLE);
+
         rutinas = new ArrayList<>();
         final String finalToFilter = filterBy;
         app.getFavouriteRepository().getFavourites().observe(requireActivity(),f->{
@@ -244,7 +250,10 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
                                 }
                             }
                         }
-
+                        if(rutinas.isEmpty()){
+//                             noMatch = requireActivity().findViewById(R.id.noRutsSearch);
+                            noMatch.setVisibility(View.VISIBLE);
+                        }
                         rAdapter.setRoutines(rutinas);
                         rAdapter.notifyDataSetChanged();
                     }
@@ -270,6 +279,10 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
                                     }
                                 }
                             }
+                            if(rutinas.isEmpty()){
+//                             noMatch = requireActivity().findViewById(R.id.noRutsSearch);
+                                noMatch.setVisibility(View.VISIBLE);
+                            }
                             rAdapter.setRoutines(rutinas);
                             rAdapter.notifyDataSetChanged();
                         }
@@ -286,6 +299,11 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     @Override
     public boolean onQueryTextSubmit(String s) {
         this.search = s;
+        if(rutinas.isEmpty()){
+            TextView  noMatch = requireActivity().findViewById(R.id.noRutsSearch);
+
+            noMatch.setVisibility(View.VISIBLE);
+        }
         return false;
     }
 
@@ -293,8 +311,11 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     @Override
     public boolean onQueryTextChange(String s) {
         if(rAdapter !=null){
-
             rAdapter.filter(s);
+        }
+        if(rutinas!=null && rutinas.isEmpty()){
+            TextView  noMatch = requireActivity().findViewById(R.id.noRutsSearch);
+            noMatch.setVisibility(View.VISIBLE);
         }
 
         return false;

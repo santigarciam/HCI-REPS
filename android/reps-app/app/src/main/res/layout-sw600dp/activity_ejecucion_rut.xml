@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ejDescr"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ejecucionRut.ejecucionRut">
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="248dp"
+        android:layout_height="59dp"
+
+        android:elevation="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/reps_logo" />
+
+    <Button
+        android:id="@+id/siguiente_ejercicoBtn"
+        android:layout_width="312dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/next_ex"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:cornerRadius="@dimen/cardview_default_radius"
+        app:icon="@android:drawable/ic_media_play"
+        app:iconGravity="end"
+        app:iconPadding="0dp"
+        app:iconTint="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--    <Button-->
+    <!--        android:id="@+id/pauseBtn"-->
+    <!--        android:layout_width="104dp"-->
+    <!--        android:layout_height="110dp"-->
+    <!--        android:layout_marginBottom="60dp"-->
+    <!--        app:cornerRadius="50dp"-->
+    <!--        app:icon="@android:drawable/ic_media_play"-->
+    <!--        app:iconPadding="0dp"-->
+    <!--        app:iconSize="75dp"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/nextExField"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.495"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+    <TextView
+        android:id="@+id/nombreCiclo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/nombre_ciclo"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nombreCiclo" />
+
+
+    <TextView
+        android:id="@+id/nombre_ejercicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/exercise_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+    <TextView
+        android:id="@+id/siguiente_ejText"
+        android:layout_width="277dp"
+        android:layout_height="33dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/siguiente_ej"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/siguiente_ejercicoBtn"
+        app:layout_constraintStart_toStartOf="@+id/siguiente_ejercicoBtn" />
+
+
+    <TextView
+        android:id="@+id/timeExercise"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="144dp"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/siguiente_ejText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nombre_ejercicio"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/pauseBtnView"
+        android:layout_width="216dp"
+        android:layout_height="167dp"
+
+        android:src="@drawable/ic_play"
+        app:layout_constraintBottom_toTopOf="@+id/siguiente_ejText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeExercise"
+        app:layout_constraintVertical_bias="0.441">
+
+    </de.hdodenhof.circleimageview.CircleImageView>
+
+    <Button
+        android:id="@+id/endBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/grey"
+        android:text="@string/terminar"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/moreInfoBtn"
+        android:layout_width="36dp"
+        android:layout_height="26dp"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/nombre_ejercicio"
+        app:layout_constraintStart_toEndOf="@+id/nombre_ejercicio"
+        app:layout_constraintTop_toTopOf="@+id/nombre_ejercicio"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@android:drawable/arrow_down_float" />
+
+    <TextView
+        android:id="@+id/exercise_description"
+        android:layout_width="0dp"
+        android:layout_height="92dp"
+        android:layout_marginEnd="1dp"
+        android:text="Descr"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/nombre_ejercicio"
+        app:layout_constraintTop_toBottomOf="@+id/nombre_ejercicio" />
+
+    <TextView
+        android:id="@+id/mensaje_comienzo_field"
+        android:layout_width="255dp"
+        android:layout_height="132dp"
+        android:layout_marginBottom="80dp"
+        android:text="@string/mensaje_comienzo_ejecucion"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/pauseBtnView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/lastExeBtn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/fin"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/siguiente_ejercicoBtn"
+        app:layout_constraintEnd_toEndOf="@+id/siguiente_ejercicoBtn"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/siguiente_ejercicoBtn"
+        app:layout_constraintTop_toTopOf="@+id/siguiente_ejercicoBtn"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

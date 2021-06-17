@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rutine_card"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
     app:cardCornerRadius="10dp"
@@ -13,12 +13,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rutine_card_constraint_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="160dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteX="1dp">
+        android:layout_width="437dp"
+        android:layout_height="186dp">
 
         <TextView
             android:id="@+id/rutine_card_title"
@@ -26,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="470dp"
+            android:layout_marginEnd="200dp"
             android:text="@string/nombre_rutina"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -61,14 +57,12 @@
             android:id="@+id/rutine_card_user"
             android:layout_width="104dp"
             android:layout_height="19dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="4dp"
             android:text="@string/autor_rutina"
             android:textColor="@color/our_blue"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
-            app:layout_constraintTop_toBottomOf="@+id/descripcionRut" />
+            app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -82,13 +76,10 @@
 
         <TextView
             android:id="@+id/descripcionRut"
-            android:layout_width="0dp"
-            android:layout_height="33dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="128dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="@string/descripcion_rutina"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/rutine_card_title"
             app:layout_constraintTop_toBottomOf="@+id/rutine_card_title" />
 
@@ -97,7 +88,7 @@
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="80dp"
             android:layout_height="20dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:numStars="5"
             app:layout_constraintBottom_toBottomOf="parent"

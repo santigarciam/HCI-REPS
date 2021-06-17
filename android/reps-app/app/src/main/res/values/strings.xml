@@ -99,9 +99,9 @@
     <string name="salir">Salir</string>
     <string name="buscar_rutina">Buscar rutina</string>
     <string name="buscar_rutina_fav">Buscar rutina favorita</string>
-    <string name="editar_perfil_config">Editar Perfil</string>
-    <string name="ayuda_config">Ayuda</string>
-    <string name="cerrar_sesion_config">Cerrar Sesion</string>
+    <string name="editar_perfil_config">EDITAR PERFIL</string>
+    <string name="ayuda_config">AYUDA</string>
+    <string name="cerrar_sesion_config">CERRAR SESION</string>
     <string name="alert_titulo_ayuda">Ayuda</string>
     <string name="alert_mensaje_ayuda">Julio 2021 - TP3 - HCI - Grupo 8</string>
     <string name="alert_titulo_cerrar_sesion">Cerrar Sesion</string>
@@ -116,4 +116,5 @@
     <string name="mensaje_seccion_sin_rutinas">Aun no existen rutinas para esta seccion</string>
     <string name="welcomemesagge">Administra tus entrenamientos de manera inteligente</string>
     <string name="fav_no_ruts_message">No hay rutinas favoritas</string>
+    <string name="norutssearch">No existen rutinas para esta busqueda</string>
 </resources>

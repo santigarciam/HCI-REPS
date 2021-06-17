@@ -16,11 +16,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/historial"
             android:textSize="28dp"
             android:textStyle="bold"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,8 +39,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/shimmer_mi_progreso"
             tools:ignore="MissingConstraints">
+
             <include
-                layout="@layout/shimmer_full_section_layout" />
+                layout="@layout/shimmer_full_section_layout"
+                android:layout_width="619dp"
+                android:layout_height="944dp" />
         </com.facebook.shimmer.ShimmerFrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

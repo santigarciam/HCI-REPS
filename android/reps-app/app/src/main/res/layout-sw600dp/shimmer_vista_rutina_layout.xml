@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/loader34"
+        android:layout_width="71dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="320dp"
+        android:elevation="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/fondo_gris"
+        app:layout_constraintBottom_toTopOf="@+id/loader31"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/loader29" />
+
+    <ImageView
+        android:id="@+id/loader10"
+        android:layout_width="169dp"
+        android:layout_height="117dp"
+        android:layout_marginStart="154dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="154dp"
+        android:elevation="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/fondo_gris"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/loader24"
+        android:layout_width="158dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="153dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="154dp"
+        android:elevation="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/fondo_gris"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loader10" />
+
+    <ImageView
+        android:id="@+id/loader25"
+        android:layout_width="94dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="159dp"
+        android:elevation="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/fondo_gris"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loader24" />
+
+    <ImageView
+        android:id="@+id/loader26"
+        android:layout_width="178dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="126dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="127dp"
+        android:elevation="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/fondo_gris"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loader27" />
+
+    <ImageView
+        android:id="@+id/loader28"
+        android:layout_width="86dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="42dp"
+        android:elevation="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/fondo_gris"
+        app:layout_constraintBottom_toTopOf="@+id/loader31"
+        app:layout_constraintEnd_toStartOf="@+id/loader29"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/loader30"
+        android:layout_width="71dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="42dp"
+        android:elevation="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/fondo_gris"
+        app:layout_constraintBottom_toTopOf="@+id/loader31"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/loader29" />
+
+    <ImageView
+        android:id="@+id/loader29"
+        android:layout_width="134dp"
+        android:layout_height="113dp"
+        android:layout_marginTop="8dp"
+        android:elevation="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/fondo_gris"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loader26" />
+
+    <ImageView
+        android:id="@+id/loader31"
+        android:layout_width="192dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:elevation="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/fondo_gris"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loader29" />
+
+    <ImageView
+        android:id="@+id/loader32"
+        android:layout_width="578dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:elevation="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/fondo_gris"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loader31" />
+
+    <ImageView
+        android:id="@+id/loader33"
+        android:layout_width="582dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:elevation="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/fondo_gris"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loader32" />
+
+    <ImageView
+        android:id="@+id/loader27"
+        android:layout_width="76dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="167dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="168dp"
+        android:elevation="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/fondo_gris"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loader25" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
