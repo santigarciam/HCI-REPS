@@ -110,4 +110,5 @@
     <string name="mensaje_notificacion">You have set a reminder in Reps app</string>
     <string name="ordenado_asc">Criteria ascending</string>
     <string name="ordenado_desc">Criteria descending</string>
+    <string name="fin">FINISH</string>
 </resources>

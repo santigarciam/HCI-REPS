@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,10 +64,13 @@ public class RegisterFragment extends Fragment {
         TextView usernameField = view.findViewById(R.id.register_input_user);
         TextView passwordField = view.findViewById(R.id.register_input_password);
         TextView passwordCheckField = view.findViewById(R.id.register_input_rep_password);
+        ProgressBar progressBar = view.findViewById(R.id.register_prog);
+
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String mail = mailField.getText().toString();
                 if(mail.length()==0){
                     mailField.setError(getString(R.string.campo_requerido));
@@ -82,19 +86,27 @@ public class RegisterFragment extends Fragment {
                     passwordField.setError(getString(R.string.error_register_largo_contra));
                 }else {
                     if (passwordCheck.equals(password) && username.length()!=0 && mail.length()!=0) {
+                        progressBar.setVisibility(View.VISIBLE);
                         app.getUserRepository().register(credentials).observe(requireActivity(), r -> {
                             if (r.getStatus() == Status.SUCCESS) {
+                                progressBar.setVisibility(View.INVISIBLE);
                                 Log.d(TAG, "Se registro"+username+password);
                                 //Log.d(TAG, "onClick: ");
                                 Navigation.findNavController(view).navigate(RegisterFragmentDirections.actionRegisterFragmentToVerificationCode(mail, username, password));
                             } else if (r.getStatus() == Status.ERROR) {
+                                progressBar.setVisibility(View.INVISIBLE);
                                 for(String error:r.getError().getDetails()){
                                     if(error.contains("constraint failed: User.email")){
                                         mailField.setError(getString(R.string.error_mail_constraint));
                                     }else if(error.contains(" User.username")){
                                         usernameField.setError(getString(R.string.error_username_constraint));
+                                    }else if(error.contains("validation for format email")){
+                                        mailField.setError("");
                                     }
                                 }
+                            }else{
+                                Log.d(TAG, "LOADING: ");
+                                progressBar.setVisibility(View.VISIBLE);
                             }
                         });
                     } else {
@@ -102,8 +114,10 @@ public class RegisterFragment extends Fragment {
                         passwordCheckField.setError(getString(R.string.error_register_dif_contra));
                     }
                 }
+
             }
         });
+
     }
 
 

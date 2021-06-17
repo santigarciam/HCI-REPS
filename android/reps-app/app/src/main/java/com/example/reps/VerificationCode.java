@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.navigation.Navigation;
@@ -63,10 +64,14 @@ public class VerificationCode extends Fragment {
 
         Button confirmBtn = requireActivity().findViewById(R.id.confirmCode);
         TextView codeField = requireActivity().findViewById(R.id.verificationCode);
+        ProgressBar progressBar = view.findViewById(R.id.progressBarCode);
+        progressBar.setVisibility(View.INVISIBLE);
+
 
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 String code = codeField.getText().toString();
                 Log.d("OkHttpClient", "registers: "+code);
                 app.getUserRepository().verifyCode(new VerificationCodeModel(mail,code)).observe(requireActivity(),r->{
@@ -75,14 +80,17 @@ public class VerificationCode extends Fragment {
                         Credentials credentials = new Credentials(username,password);
                         app.getUserRepository().login(credentials).observe(requireActivity(),l->{
                             if(l.getStatus() == Status.SUCCESS){
+                                progressBar.setVisibility(View.INVISIBLE);
                                 app.getPreferences().setAuthToken(l.getData().getToken());
                                 Navigation.findNavController(view).navigate(VerificationCodeDirections.actionVerificationCodeToLogedActivity());
                             }else if (l.getStatus() == Status.ERROR){
+                                progressBar.setVisibility(View.INVISIBLE);
                                 String errorMesagge = getResources().getString(R.string.error_mesagge_verificacion);
                                 Toast.makeText(getContext(),errorMesagge,Toast.LENGTH_LONG).show();
                             }
                         });
                     }else if(r.getStatus() == Status.ERROR){
+                        progressBar.setVisibility(View.INVISIBLE);
                         String error = getString(R.string.codigo_invalido);
                         codeField.setError(error);
                     }
@@ -98,7 +106,9 @@ public class VerificationCode extends Fragment {
             public void onClick(View view) {
                 String code = codeField.getText().toString();
                 app.getUserRepository().resendCode(new VerificationCodeModel(mail,code)).observe(requireActivity(),r->{
+                    progressBar.setVisibility(View.VISIBLE);
                     if(r.getStatus() == Status.SUCCESS){
+                        progressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(getContext(),getString(R.string.reenviar_codigo),Toast.LENGTH_LONG).show();
                     }else if(r.getStatus() == Status.ERROR){
                         String errorMesagge = getResources().getString(R.string.error_mesagge_verificacion);

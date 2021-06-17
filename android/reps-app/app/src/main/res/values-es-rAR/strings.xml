@@ -110,4 +110,5 @@
     <string name="mensaje_notificacion">Has establecido un recordatorio en Reps</string>
     <string name="ordenado_asc">Criterios ascendentemente</string>
     <string name="ordenado_desc">Criterios descendentemente</string>
+    <string name="fin">FIN</string>
 </resources>
