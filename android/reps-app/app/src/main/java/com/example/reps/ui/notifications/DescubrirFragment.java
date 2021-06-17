@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -37,12 +38,15 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     private SearchView searchView;
     private App app;
     private String orderBy = "";
+    private String filterBy = "";
 
     private String params = "";
     private String order = "";
     private String search = "";
     private String difficulty = "";
     private String direc = "asc";
+    private boolean isAsc = true;
+
 
     ////////////////
     private List<RoutineCard> rutinas=new ArrayList<>();
@@ -58,13 +62,24 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
                 for(Routine routine: r.getData().getContent()){
                     rutinas.add(new RoutineCard(routine));
                 }
-                verticalRecyclerView = (RecyclerView) rootView.findViewById(R.id.descubrir_recycler_view);
-//                            Log.d(TAG, "onViewCreated: ");
-                rAdapter = new RoutineCardAdapter(rutinas,getContext(),app,requireActivity());
-                verticalRecyclerView.setHasFixedSize(true);
-                verticalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-                verticalRecyclerView.setAdapter(rAdapter);
-                rAdapter.notifyDataSetChanged();
+                app.getFavouriteRepository().getFavourites().observe(requireActivity(),f->{
+                    if(f.getStatus() == Status.SUCCESS){
+                        for (RoutineCard rut : rutinas){
+                            for (Routine favRut : f.getData().getContent()){
+                                if (favRut.getId() == rut.getId()){
+                                    rut.setFavourite(true);
+                                }
+                            }
+                        }
+                        verticalRecyclerView = (RecyclerView) rootView.findViewById(R.id.descubrir_recycler_view);
+                        rAdapter = new RoutineCardAdapter(rutinas,getContext(),app,requireActivity());
+                        verticalRecyclerView.setHasFixedSize(true);
+                        verticalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                        verticalRecyclerView.setAdapter(rAdapter);
+                        rAdapter.notifyDataSetChanged();
+                    }
+                });
+
             }
         });
 
@@ -77,6 +92,28 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
         super.onViewCreated(view, savedInstanceState);
         searchView = view.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(this);
+        ImageButton isAscOrDescBtn = view.findViewById(R.id.ascOrDescBtn);
+        if(isAsc){
+            isAscOrDescBtn.setRotation(270);
+        }else{
+            isAscOrDescBtn.setRotation(90);
+        }
+        isAscOrDescBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isAsc = !isAsc;
+                if(isAsc){
+                    isAscOrDescBtn.setRotation(270);
+                }else{
+                    isAscOrDescBtn.setRotation(90);
+                }
+
+                retrieveRoutines();
+            }
+        });
+
+
+
 
     }
 
@@ -89,56 +126,35 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
 
 
 
-
-        root.findViewById(R.id.filterDescubrir).setOnClickListener(view -> {
+        Button filterBtn = root.findViewById(R.id.filterDescubrir);
+       filterBtn.setOnClickListener(view -> {
 //            Animation animation = AnimationUtils.loadAnimation(getContext(),R.anim.filter_order_menu_animation);
             PopupMenu popup = new PopupMenu(getContext(), view);
 
             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
-                    String toFilter = "";
+
 //                    rookie, beginner, intermediate, advanced, expert
-                    if (menuItem.getItemId() == R.id.filterOpt1) {
-                        toFilter = "rookie";
-                    }else if (menuItem.getItemId() == R.id.filterOpt2) {
-                        toFilter = "beginner";
-                    }else  if (menuItem.getItemId() == R.id.filterOpt3) {
-                        toFilter = "intermediate";
-                    }else if (menuItem.getItemId() == R.id.filterOpt4) {
-                        toFilter = "advanced";
-                    }else  if (menuItem.getItemId() == R.id.filterOpt0) {
-                        toFilter = "expert";
+                    if (menuItem.getItemId() == R.id.filterOpt0) {
+                        filterBy = "rookie";
+                        filterBtn.setText(getString(R.string.filterOptRookie));
+
+                    }else if (menuItem.getItemId() == R.id.filterOpt1) {
+                        filterBy = "beginner";
+                        filterBtn.setText(getString(R.string.filterOptBegginer));
+                    }else  if (menuItem.getItemId() == R.id.filterOpt2) {
+                        filterBy = "intermediate";
+                        filterBtn.setText(getString(R.string.filterOptInter));
+                    }else if (menuItem.getItemId() == R.id.filterOpt3) {
+                        filterBy = "advanced";
+                        filterBtn.setText(getString(R.string.filterOptAdv));
+                    }else  if (menuItem.getItemId() == R.id.filterOpt4) {
+                        filterBy = "expert";
+                        filterBtn.setText(getString(R.string.filterOptExpert));
                     }
 
-                    rutinas = new ArrayList<>();
-                    String finalToFilter = toFilter;
-                    Log.d("ORDERBY2", orderBy);
-                    if(!orderBy.equals("")){
-                        app.getRoutineRepository().getAll().observe(requireActivity(), r->{
-                            if(r.getStatus() == Status.SUCCESS){
-                                for(Routine rut: r.getData().getContent()){
-                                    if(rut.getDifficulty().equals(finalToFilter)){
-                                        rutinas.add(new RoutineCard(rut));
-                                    }
-                                }
-                                rAdapter.setRoutines(rutinas);
-                                rAdapter.notifyDataSetChanged();
-                            }
-                        });
-                    }else{
-                        app.getRoutineRepository().getAll(orderBy,"asc").observe(requireActivity(), r->{
-                            if(r.getStatus() == Status.SUCCESS){
-                                for(Routine rut: r.getData().getContent()){
-                                    if(rut.getDifficulty().equals(finalToFilter)){
-                                        rutinas.add(new RoutineCard(rut));
-                                    }
-                                }
-                                rAdapter.setRoutines(rutinas);
-                                rAdapter.notifyDataSetChanged();
-                            }
-                        });
-                    }
+                   retrieveRoutines();
 
 
 
@@ -171,15 +187,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
                         orderBy="categoryId";
 
                     }
-                    app.getRoutineRepository().getAll(orderBy,"asc").observe(requireActivity(),r->{
-                        if(r.getStatus() == Status.SUCCESS){
-                            for(Routine routine:r.getData().getContent()){
-                                rutinas.add(new RoutineCard(routine));
-                            }
-                            rAdapter.setRoutines(rutinas);
-                            rAdapter.notifyDataSetChanged();
-                        }
-                    });
+                    retrieveRoutines();
                     return true;
                 });
                 popup.inflate(R.menu.order_descubrir_menu);
@@ -195,13 +203,75 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
         binding = null;
     }
 
+    private void retrieveRoutines(){
+        String ascOrDesc = isAsc?"asc":"desc";
+        rutinas = new ArrayList<>();
+        final String finalToFilter = filterBy;
+        app.getFavouriteRepository().getFavourites().observe(requireActivity(),f->{
+            if(f.getStatus() == Status.SUCCESS){
+                if(!orderBy.equals("")){
+                app.getRoutineRepository().getAll(orderBy,ascOrDesc).observe(requireActivity(), r->{
+                    if(r.getStatus() == Status.SUCCESS){
+                        if(filterBy.equals("")){
+                            for(Routine rut: r.getData().getContent()){
+                                rutinas.add(new RoutineCard(rut));
+                            }
+                        }else{
+                            for(Routine rut: r.getData().getContent()){
+                                if(rut.getDifficulty().equals(finalToFilter)){
+                                    rutinas.add(new RoutineCard(rut));
+                                }
+                            }
+                        }
+                        for (RoutineCard rut : rutinas){
+                            for (Routine favRut : f.getData().getContent()){
+                                if (favRut.getId() == rut.getId()){
+                                    rut.setFavourite(true);
+                                }
+                            }
+                        }
+
+                        rAdapter.setRoutines(rutinas);
+                        rAdapter.notifyDataSetChanged();
+                    }
+                });
+            }else{
+                    app.getRoutineRepository().getAll().observe(requireActivity(), r->{
+                        if(r.getStatus() == Status.SUCCESS){
+                            if(filterBy.equals("")){
+                                for(Routine rut: r.getData().getContent()){
+                                    rutinas.add(new RoutineCard(rut));
+                                }
+                            }else{
+                                for(Routine rut: r.getData().getContent()){
+                                    if(rut.getDifficulty().equals(finalToFilter)){
+                                        rutinas.add(new RoutineCard(rut));
+                                    }
+                                }
+                            }
+                            for (RoutineCard rut : rutinas){
+                                for (Routine favRut : f.getData().getContent()){
+                                    if (favRut.getId() == rut.getId()){
+                                        rut.setFavourite(true);
+                                    }
+                                }
+                            }
+                            rAdapter.setRoutines(rutinas);
+                            rAdapter.notifyDataSetChanged();
+                        }
+                    });
+                }
+            }
+        });
+
+    }
+
 
 
     // Se ejecuta cuando presionamos para realizar la busqueda
     @Override
     public boolean onQueryTextSubmit(String s) {
         this.search = s;
-        filterRoutines();
         return false;
     }
 
@@ -213,30 +283,4 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
         return false;
     }
 
-    public void filterRoutines(){
-        if (this.difficulty!= ""){
-            if (this.params!=""){
-                this.params += "&";
-            }
-            this.params += "difficulty=" + this.difficulty;
-        }
-        if (this.search!= ""){
-            if (this.params!=""){
-                this.params += "&";
-            }
-            this.params += "search=" + this.search;
-        }
-        if (this.order!= ""){
-            if (this.params!=""){
-                this.params += "&";
-            }
-            this.params += "orderBy=" + this.order;
-        }
-        if (this.params!=""){
-            this.params += "&";
-        }
-        this.params += "direction=" + this.direc;
-        //llamada a la api
-        this.params="";
-    }
 }

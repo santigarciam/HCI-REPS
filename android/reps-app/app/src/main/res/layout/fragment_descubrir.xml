@@ -27,12 +27,13 @@
                 android:id="@+id/ordenarDescubrir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
 
                 android:backgroundTint="@color/white"
                 android:text="@string/ordenar"
                 android:textColor="@color/grey"
+                android:textSize="12sp"
                 app:icon="@android:drawable/arrow_down_float"
                 app:iconGravity="end"
                 app:iconTint="@color/grey"
@@ -43,16 +44,30 @@
                 android:id="@+id/filterDescubrir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="36dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:backgroundTint="@color/white"
                 android:text="@string/filtrar"
                 android:textColor="@color/grey"
+                android:textSize="12sp"
                 app:icon="@android:drawable/arrow_down_float"
                 app:iconGravity="end"
                 app:iconTint="@color/grey"
                 app:layout_constraintStart_toEndOf="@+id/ordenarDescubrir"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/ascOrDescBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="#00FFFFFF"
+                android:rotation="90"
+                android:src="?attr/homeAsUpIndicator"
+                app:layout_constraintBottom_toBottomOf="@+id/filterDescubrir"
+                app:layout_constraintStart_toEndOf="@+id/filterDescubrir"
+                app:layout_constraintTop_toTopOf="@+id/filterDescubrir" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
