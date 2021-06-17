@@ -38,12 +38,13 @@ public class FavoritosFragment  extends Fragment implements SearchView.OnQueryTe
     private List<RoutineCard> favRutinas;
     private RoutineCardAdapter rAdapter;
     private ShimmerFrameLayout shimmerLayout;
+    public static View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentFavoritosBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        root = binding.getRoot();
         shimmerLayout = root.findViewById(R.id.shimmer_favoritos);
 
         app = (App) getActivity().getApplication();
@@ -76,14 +77,6 @@ public class FavoritosFragment  extends Fragment implements SearchView.OnQueryTe
             }
         });
 
-        root.findViewById(R.id.favourite_recycler_view).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("FavoritosFragment", "onClick: recyclerView!!!!");
-                rAdapter.notifyDataSetChanged();
-            }
-        });
-
         return root;
     }
 
@@ -93,6 +86,10 @@ public class FavoritosFragment  extends Fragment implements SearchView.OnQueryTe
         super.onViewCreated(view, savedInstanceState);
         searchView = view.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(this);
+    }
+
+    public static View getRoot(){
+        return root;
     }
 
     @Override
@@ -123,6 +120,11 @@ public class FavoritosFragment  extends Fragment implements SearchView.OnQueryTe
         @Override
         public void auxNotify(int position) {
             super.routines.remove(position);
+            if (routines.size() == 0){
+                root.findViewById(R.id.fav_no_ruts_message).setVisibility(View.VISIBLE);
+            }else{
+                root.findViewById(R.id.fav_no_ruts_message).setVisibility(View.GONE);
+            }
             notifyDataSetChanged();
         }
     }
