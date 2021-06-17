@@ -90,6 +90,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
         });
 
 
+
     }
     /////////////////////
 
@@ -98,6 +99,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
         super.onViewCreated(view, savedInstanceState);
         searchView = view.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(this);
+        init(view);
         ImageButton isAscOrDescBtn = view.findViewById(R.id.ascOrDescBtn);
         if(isAsc){
             isAscOrDescBtn.setRotation(270);
@@ -130,7 +132,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
 
         binding = FragmentDescubrirBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        init(root,container);
+        init(root);
 
 
 
@@ -147,7 +149,6 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
                     if (menuItem.getItemId() == R.id.filterOpt0) {
                         filterBy = "rookie";
                         filterBtn.setText(getString(R.string.filterOptRookie));
-
                     }else if (menuItem.getItemId() == R.id.filterOpt1) {
                         filterBy = "beginner";
                         filterBtn.setText(getString(R.string.filterOptBegginer));
@@ -286,7 +287,10 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     // Va escuchando cuando ingresamos letras en el text view
     @Override
     public boolean onQueryTextChange(String s) {
-        rAdapter.filter(s);
+        if(rAdapter !=null){
+
+            rAdapter.filter(s);
+        }
 
         return false;
     }
