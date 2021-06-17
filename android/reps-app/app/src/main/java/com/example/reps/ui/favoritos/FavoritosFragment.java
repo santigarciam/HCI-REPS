@@ -7,8 +7,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,10 +29,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavoritosFragment extends Fragment {
-
+public class FavoritosFragment  extends Fragment implements SearchView.OnQueryTextListener {
+    private String search;
     private FragmentFavoritosBinding binding;
     private App app;
+    private SearchView searchView;
     private List<RoutineCard> favRutinas;
     private RoutineCardAdapter rAdapter;
     private ShimmerFrameLayout shimmerLayout;
@@ -78,11 +81,31 @@ public class FavoritosFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+
+        super.onViewCreated(view, savedInstanceState);
+        searchView = view.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(this);
+    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        this.search = s;
+        return false;
+    }
+
+    // Va escuchando cuando ingresamos letras en el text view
+    @Override
+    public boolean onQueryTextChange(String s) {
+        rAdapter.filter(s);
+
+        return false;
     }
 
     private static class RoutineCardAdapterFav extends RoutineCardAdapter{
