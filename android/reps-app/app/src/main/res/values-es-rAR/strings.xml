@@ -48,8 +48,11 @@
     <string name="filterOptInter">Intermedio</string>
     <string name="filterOptAdv">Avanzado</string>
     <string name="filterOptExpert">Experto</string>
-
-
+    <string name="error_register_dif_contra">Las contraseñas no coinciden. Vuelve a intentarlo</string>
+    <string name="error_register_largo_contra">Usa 8 caracteres como mínimo para la contraseña</string>
+    <string name="campo_requerido">Este campo es obligatorio</string>
+    <string name="error_mail_constraint">Este mail ya se encuentra registrado</string>
+    <string name="error_username_constraint">Este nombre de usuario esta en uso</string>
     <string name="orderOptDate">Fecha</string>
     <string name="orderOptrating">Puntuacion</string>
     <string name="orderOptSports">Deportes</string>

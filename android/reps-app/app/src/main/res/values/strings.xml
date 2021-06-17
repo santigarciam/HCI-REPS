@@ -72,9 +72,13 @@
     <string name="reenviar_codigo">Se ha reenviado el codigo a su casilla de correo</string>
     <string name="mensaje_comienzo_ejecucion">Presiona el boton para comenzar el entrenamiento!</string>
     <string name="orderOptDifficulty">Dificultad</string>
-
+    <string name="error_register_dif_contra">Las contraseñas no coinciden. Vuelve a intentarlo</string>
+    <string name="error_register_largo_contra">Usa 8 caracteres como mínimo para la contraseña</string>
     <string name="error_contrasena_incorrecta">Contraseña incorrecta</string>
     <string name="error_usuario_incorrecto">Usuario incorrecto</string>
+    <string name="campo_requerido">Este campo es obligatorio</string>
+    <string name="error_mail_constraint">Este mail ya se encuentra registrado</string>
+    <string name="error_username_constraint">Este nombre de usuario esta en uso</string>
 
     <string name="alert_titulo_login_o_register">Inicia sesion o registrate</string>
     <string name="alert_mensaje_login_o_register">Para visualizar la rutina, debes tener una cuenta</string>

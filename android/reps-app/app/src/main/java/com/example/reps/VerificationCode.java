@@ -1,5 +1,6 @@
 package com.example.reps;
 
+import android.net.wifi.hotspot2.pps.Credential;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.reps.retrofit.App;
+import com.example.reps.retrofit.api.model.CredentialRegister;
 import com.example.reps.retrofit.api.model.Credentials;
 import com.example.reps.retrofit.api.model.VerificationCodeModel;
 import com.example.reps.retrofit.api.repository.Status;
@@ -53,8 +55,8 @@ public class VerificationCode extends Fragment {
         VerificationCodeArgs args = VerificationCodeArgs.fromBundle(getArguments());
         if(getArguments()!=null){
             mail = args.getMailToConfirm();
-            //password = args.getPassword();
-            //username = args.getUsername();
+            password = args.getPassword();
+            username = args.getUsername();
         }
 
         app = (App)requireActivity().getApplication();
@@ -69,7 +71,9 @@ public class VerificationCode extends Fragment {
                 Log.d("OkHttpClient", "registers: "+code);
                 app.getUserRepository().verifyCode(new VerificationCodeModel(mail,code)).observe(requireActivity(),r->{
                     if(r.getStatus() == Status.SUCCESS){
-                        app.getUserRepository().login(new Credentials(username,password)).observe(requireActivity(),l->{
+                        Log.d("OkHttpClient", "registers: "+username+password);
+                        Credentials credentials = new Credentials(username,password);
+                        app.getUserRepository().login(credentials).observe(requireActivity(),l->{
                             if(l.getStatus() == Status.SUCCESS){
                                 app.getPreferences().setAuthToken(l.getData().getToken());
                                 Navigation.findNavController(view).navigate(VerificationCodeDirections.actionVerificationCodeToLogedActivity());
