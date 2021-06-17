@@ -39,12 +39,8 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     private App app;
     private String orderBy = "";
     private String filterBy = "";
-
-    private String params = "";
-    private String order = "";
     private String search = "";
-    private String difficulty = "";
-    private String direc = "asc";
+
     private boolean isAsc = true;
 
 
