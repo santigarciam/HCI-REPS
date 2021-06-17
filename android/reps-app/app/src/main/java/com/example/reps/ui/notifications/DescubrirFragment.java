@@ -54,6 +54,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     ////////////////////
 
     public void init(View rootView){
+        Log.d("Retrieve ruts", "init: ");
         shimmerLayout = rootView.findViewById(R.id.shimmer_descubrir);
         rutinas = new ArrayList<>();
         app.getRoutineRepository().getAll().observe(requireActivity(),r->{
@@ -135,7 +136,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
 
         binding = FragmentDescubrirBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        init(root);
+//        init(root);
 
 
 
@@ -216,6 +217,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     }
 
     private void retrieveRoutines(){
+        Log.d("Retrieve ruts", "retrieveRoutines: ");
         String ascOrDesc = isAsc?"asc":"desc";
         rutinas = new ArrayList<>();
         final String finalToFilter = filterBy;
