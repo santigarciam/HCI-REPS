@@ -111,4 +111,5 @@
     <string name="ordenado_asc">Criteria ascending</string>
     <string name="ordenado_desc">Criteria descending</string>
     <string name="mensaje_seccion_sin_rutinas">There are no routines for this section yet</string>
+    <string name="fav_no_ruts_message">No hay rutinas favoritas</string>
 </resources>

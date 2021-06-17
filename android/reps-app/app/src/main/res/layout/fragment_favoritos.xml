@@ -11,6 +11,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/fav_no_ruts_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fav_no_ruts_message"
+            android:textAlignment="center"
+            android:textColor="#4D000000"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/favourite_recycler_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <SearchView
             android:id="@+id/searchView"
             android:visibility="gone"
@@ -21,7 +34,9 @@
             android:queryHint="@string/buscar_rutina_fav"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" >
+
+        </SearchView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favourite_recycler_view"
@@ -32,7 +47,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchView"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0" >
+
+        </androidx.recyclerview.widget.RecyclerView>
 
         <!-- comentarioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
 
@@ -41,8 +58,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/shimmer_favoritos"
             tools:ignore="MissingConstraints">
-            <include
-                layout="@layout/shimmer_favoritos_layout" />
+
+            <include layout="@layout/shimmer_favoritos_layout" />
+
         </com.facebook.shimmer.ShimmerFrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

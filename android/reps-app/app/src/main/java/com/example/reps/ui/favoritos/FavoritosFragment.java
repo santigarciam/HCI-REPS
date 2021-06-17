@@ -28,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.Inflater;
 
 public class FavoritosFragment  extends Fragment implements SearchView.OnQueryTextListener {
     private String search;
@@ -64,6 +65,11 @@ public class FavoritosFragment  extends Fragment implements SearchView.OnQueryTe
                 shimmerLayout.hideShimmer();
                 shimmerLayout.setVisibility(View.GONE);
                 root.findViewById(R.id.searchView).setVisibility(View.VISIBLE);
+                if (favRutinas.size() == 0){
+                    root.findViewById(R.id.fav_no_ruts_message).setVisibility(View.VISIBLE);
+                }else{
+                    root.findViewById(R.id.fav_no_ruts_message).setVisibility(View.GONE);
+                }
                 verticalRecyclerView.setAdapter(rAdapter);
             }else{
 
