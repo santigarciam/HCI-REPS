@@ -55,23 +55,6 @@ public class PerfilFragment extends Fragment {
 
         shimmerLayout = root.findViewById(R.id.shimmer_perfil);
 
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                shimmerLayout.stopShimmer();
-                shimmerLayout.hideShimmer();
-                shimmerLayout.setVisibility(View.GONE);
-
-                root.findViewById(R.id.profile_avatar_image).setVisibility(View.VISIBLE);
-                root.findViewById(R.id.profile_username).setVisibility(View.VISIBLE);
-                root.findViewById(R.id.profile_config_button).setVisibility(View.VISIBLE);
-                root.findViewById(R.id.profile_nombre_apellido).setVisibility(View.VISIBLE);
-                root.findViewById(R.id.profile_programar_entrenamiento_button).setVisibility(View.VISIBLE);
-                root.findViewById(R.id.profile_progress_button).setVisibility(View.VISIBLE);
-                root.findViewById(R.id.divider2).setVisibility(View.VISIBLE);
-            }
-        }, 1000);
-
         ///////////////////////////////////////////
         // SetUp informacion del usuario de la api
         app = (App) getActivity().getApplication();
@@ -85,6 +68,17 @@ public class PerfilFragment extends Fragment {
                 if (!currentUser.getGender().equals("male")){
                     ((CircleImageView)root.findViewById(R.id.profile_avatar_image)).setImageDrawable(getResources().getDrawable(R.drawable.profile_avatar_female));
                 }
+                shimmerLayout.stopShimmer();
+                shimmerLayout.hideShimmer();
+                shimmerLayout.setVisibility(View.GONE);
+
+                root.findViewById(R.id.profile_avatar_image).setVisibility(View.VISIBLE);
+                root.findViewById(R.id.profile_username).setVisibility(View.VISIBLE);
+                root.findViewById(R.id.profile_config_button).setVisibility(View.VISIBLE);
+                root.findViewById(R.id.profile_nombre_apellido).setVisibility(View.VISIBLE);
+                root.findViewById(R.id.profile_programar_entrenamiento_button).setVisibility(View.VISIBLE);
+                root.findViewById(R.id.profile_progress_button).setVisibility(View.VISIBLE);
+                root.findViewById(R.id.divider2).setVisibility(View.VISIBLE);
             }else if(r.getStatus() == Status.ERROR){
                 Log.d("PROFILE", "onCreateView: ERROR");
             }

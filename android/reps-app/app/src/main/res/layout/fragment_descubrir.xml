@@ -15,6 +15,7 @@
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:iconifiedByDefault="false"
             android:queryHint="@string/buscar_rutina"/>
 
@@ -28,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
-
+                android:visibility="gone"
                 android:backgroundTint="@color/white"
                 android:text="@string/ordenar"
                 android:textColor="@color/grey"
@@ -49,6 +50,7 @@
                 android:text="@string/filtrar"
                 android:textColor="@color/grey"
                 android:textSize="12sp"
+                android:visibility="gone"
                 app:icon="@android:drawable/arrow_down_float"
                 app:iconGravity="end"
                 app:iconTint="@color/grey"
@@ -62,6 +64,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="#00FFFFFF"
+                android:visibility="gone"
                 android:rotation="90"
                 android:src="?attr/homeAsUpIndicator"
                 app:layout_constraintBottom_toBottomOf="@+id/filterDescubrir"
@@ -74,6 +77,17 @@
             android:id="@+id/descubrir_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <!-- comentarioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shimmer_descubrir"
+            tools:ignore="MissingConstraints">
+            <include
+                layout="@layout/shimmer_descubrir_layout" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
     </LinearLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

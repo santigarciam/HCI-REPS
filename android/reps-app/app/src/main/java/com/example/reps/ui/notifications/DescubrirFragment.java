@@ -26,6 +26,7 @@ import com.example.reps.databinding.FragmentDescubrirBinding;
 import com.example.reps.retrofit.App;
 import com.example.reps.retrofit.api.model.Routine;
 import com.example.reps.retrofit.api.repository.Status;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -41,6 +42,8 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     private String filterBy = "";
     private String search = "";
 
+    private ShimmerFrameLayout shimmerLayout;
+
     private boolean isAsc = true;
 
 
@@ -51,7 +54,7 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
     ////////////////////
 
     public void init(View rootView, ViewGroup container){
-
+        shimmerLayout = rootView.findViewById(R.id.shimmer_descubrir);
         rutinas = new ArrayList<>();
         app.getRoutineRepository().getAll().observe(requireActivity(),r->{
             if(r.getStatus() == Status.SUCCESS){
@@ -72,6 +75,13 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
                         verticalRecyclerView.setHasFixedSize(true);
                         verticalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
                         verticalRecyclerView.setAdapter(rAdapter);
+                        rootView.findViewById(R.id.searchView).setVisibility(View.VISIBLE);
+                        rootView.findViewById(R.id.ordenarDescubrir).setVisibility(View.VISIBLE);
+                        rootView.findViewById(R.id.filterDescubrir).setVisibility(View.VISIBLE);
+                        rootView.findViewById(R.id.ascOrDescBtn).setVisibility(View.VISIBLE);
+                        shimmerLayout.stopShimmer();
+                        shimmerLayout.hideShimmer();
+                        shimmerLayout.setVisibility(View.GONE);
                         rAdapter.notifyDataSetChanged();
                     }
                 });
