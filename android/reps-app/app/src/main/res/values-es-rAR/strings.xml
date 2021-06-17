@@ -115,4 +115,5 @@
     <string name="welcomemesagge">Administre sus entrenamientos de manera inteligente</string>
     <string name="fav_no_ruts_message">No hay rutinas favoritas</string>
     <string name="norutssearch">No hay rutinas para esta búsqueda</string>
+    <string name="show_password">Mostrar contraseña</string>
 </resources>

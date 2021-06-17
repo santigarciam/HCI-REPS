@@ -2,19 +2,20 @@ package com.example.reps;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import com.example.reps.databinding.FragmentLoginBinding;
 import com.example.reps.retrofit.App;
@@ -27,6 +28,11 @@ public class LoginFragment extends Fragment {
     private App app;
     public static final String TAG = "LOGIN_FRAG";
     private FragmentLoginBinding binding;
+    Button btn_login ;
+    TextView usernameField ;
+    TextView passwordField;
+    ProgressBar progressBar;
+    CheckBox showPass  ;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -47,16 +53,26 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+         btn_login = view.findViewById(R.id.login_button_register);
+         usernameField = view.findViewById(R.id.login_input_user);
+         passwordField = view.findViewById(R.id.login_input_password);
+         progressBar = view.findViewById(R.id.login_progress_bar);
+         showPass  = view.findViewById(R.id.checkBoxPasswordLogin);
 
         app = (App) requireActivity().getApplication();
         if(app == null){
             Log.d(TAG, "onViewCreated: Error app");
         }
 
-        Button btn_login = view.findViewById(R.id.login_button_register);
-        TextView usernameField = view.findViewById(R.id.login_input_user);
-        TextView passwordField = view.findViewById(R.id.login_input_password);
-        ProgressBar progressBar = view.findViewById(R.id.login_progress_bar);
+
+        showPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onCheckboxClicked(view);
+            }
+        });
+
+
 
 
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -65,9 +81,8 @@ public class LoginFragment extends Fragment {
 
                 String username = usernameField.getText().toString();
                 String password = passwordField.getText().toString();
-                //todo: desharcodear con lo comentado arriba
-//                String username = "userr";
-//                String password = "password";
+
+
                 Credentials credentials = new Credentials(username,password);
                 app.getUserRepository().login(credentials).observe(requireActivity(), r->{
 //                    while(r.getStatus() == Status.LOADING);
@@ -99,5 +114,24 @@ public class LoginFragment extends Fragment {
             }
         });
 
+    }
+
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.checkBoxPasswordLogin:
+                if (checked){
+                    passwordField.setTransformationMethod(null);
+                }
+            else{
+                    passwordField.setTransformationMethod(new PasswordTransformationMethod());
+
+                }
+                // Remove the meat
+                break;
+        }
     }
 }

@@ -1,11 +1,13 @@
 package com.example.reps;
 
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -29,6 +31,12 @@ public class RegisterFragment extends Fragment {
     private RegisterViewModel registerViewModel;
     private MainActivity mainActivity;
     private App app;
+    Button btn_register ;
+    TextView mailField ;
+    TextView usernameField ;
+    TextView passwordField;
+    TextView passwordCheckField ;
+    ProgressBar progressBar ;
 
 
     public RegisterFragment() {
@@ -59,12 +67,21 @@ public class RegisterFragment extends Fragment {
 
         final NavController navController = Navigation.findNavController(view);
 
-        Button btn_register = view.findViewById(R.id.register_button_register);
-        TextView mailField = view.findViewById(R.id.register_input_email);
-        TextView usernameField = view.findViewById(R.id.register_input_user);
-        TextView passwordField = view.findViewById(R.id.register_input_password);
-        TextView passwordCheckField = view.findViewById(R.id.register_input_rep_password);
-        ProgressBar progressBar = view.findViewById(R.id.register_prog);
+       btn_register = view.findViewById(R.id.register_button_register);
+        mailField = view.findViewById(R.id.register_input_email);
+      usernameField = view.findViewById(R.id.register_input_user);
+        passwordField = view.findViewById(R.id.register_input_password);
+         passwordCheckField = view.findViewById(R.id.register_input_rep_password);
+         progressBar = view.findViewById(R.id.register_prog);
+        CheckBox checkBoxR = view.findViewById(R.id.checkBoxPasswordRegister);
+
+        checkBoxR.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                onCheckboxClickedR(view);
+            }
+        });
 
 
         btn_register.setOnClickListener(new View.OnClickListener() {
@@ -126,15 +143,26 @@ public class RegisterFragment extends Fragment {
         super.onDestroy();
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
 
-        // Esto sirve para cuando se rota la pantalla
-//        TextView mail = getView().findViewById(R.id.register_input_email);
-//        registerViewModel.getCurrentMail().setValue(mail.getText().toString());
-//        TextView userName = getView().findViewById(R.id.register_input_user);
-//        registerViewModel.getUserName().setValue(userName.getText().toString());
-//        TextView password = getView().findViewById(R.id.register_input_password);
-//        registerViewModel.getPassword().setValue(password.getText().toString());
+    }
 
+    public void onCheckboxClickedR(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
 
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.checkBoxPasswordRegister:
+                if (checked){
+                    passwordField.setTransformationMethod(null);
+                    passwordCheckField.setTransformationMethod(null);
+                }
+                else{
+                    passwordField.setTransformationMethod(new PasswordTransformationMethod());
+                    passwordCheckField.setTransformationMethod(new PasswordTransformationMethod());
 
+                }
+                // Remove the meat
+                break;
+        }
     }
 }

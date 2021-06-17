@@ -115,4 +115,5 @@
     <string name="welcomemesagge">Manage your workouts intelligently</string>
     <string name="fav_no_ruts_message">There are no favourite routines</string>
     <string name="norutssearch">No routines for this search</string>
+    <string name="show_password">Show password</string>
 </resources>
