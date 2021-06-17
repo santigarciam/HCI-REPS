@@ -12,7 +12,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="729dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="1dp">
 

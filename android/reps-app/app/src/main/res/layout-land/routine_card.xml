@@ -14,7 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rutine_card_constraint_layout"
         android:layout_width="729dp"
-        android:layout_height="190dp"
+        android:layout_height="160dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

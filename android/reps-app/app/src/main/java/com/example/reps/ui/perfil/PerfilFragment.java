@@ -108,6 +108,9 @@ public class PerfilFragment extends Fragment {
                                     .setMessage("TP3 - Grupo 8")
                                     .setPositiveButton("Ok", null)
                                     .show();
+                            Button psBtn = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                            psBtn.setBackgroundColor(getContext().getColor(R.color.our_blue));
+                            psBtn.setTextColor(getContext().getColor(R.color.white));
                         }else if(menuItem.getItemId() == R.id.menu_profile_log_out){
                             AlertDialog dialog = new AlertDialog.Builder(getContext())
                                     .setTitle("Cerrar Sesion")
