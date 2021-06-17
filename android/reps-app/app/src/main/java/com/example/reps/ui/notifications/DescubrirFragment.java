@@ -100,8 +100,10 @@ public class DescubrirFragment extends Fragment implements  SearchView.OnQueryTe
                 isAsc = !isAsc;
                 if(isAsc){
                     isAscOrDescBtn.setRotation(270);
+                    Toast.makeText(view.getContext(), requireActivity().getString(R.string.ordenado_asc), Toast.LENGTH_LONG).show();
                 }else{
                     isAscOrDescBtn.setRotation(90);
+                    Toast.makeText(view.getContext(), requireActivity().getString(R.string.ordenado_desc), Toast.LENGTH_LONG).show();
                 }
 
                 retrieveRoutines();

@@ -42,19 +42,18 @@
     </string-array>
     <string name="ordenar">Ordenar</string>
     <string name="filtrar">Filtrar</string>
-    <string-array name="filterOpt">
-        <item>Filtrar</item>
-        <item>Principiante</item>
-        <item>Intermedio</item>
-        <item>Experto</item>
-    </string-array>
-    <string-array name="orderOpt">
-        <item>Ordenar</item>
-        <item>Fecha</item>
-        <item>Puntuacion</item>
-        <item>Deportes</item>
-        <item>Categoria</item>
-    </string-array>
+
+    <string name="filterOptRookie">Aficionado</string>
+    <string name="filterOptBegginer">Principiante</string>
+    <string name="filterOptInter">Intermedio</string>
+    <string name="filterOptAdv">Avanzado</string>
+    <string name="filterOptExpert">Experto</string>
+
+
+    <string name="orderOptDate">Fecha</string>
+    <string name="orderOptrating">Puntuacion</string>
+    <string name="orderOptSports">Deportes</string>
+    <string name="orderOptCat">Categoria</string>
 
     <string name="verification_code_text">Ingrese su código de verificación</string>
     <string name="resend_code">Reenviar</string>
@@ -88,4 +87,24 @@
     <string name="string_compartir_rutina">Compartir rutina</string>
     <string name="string_rutina_inexistente_titulo">Rutina inexistente</string>
     <string name="string_rutina_inexistente_mensaje">Esta rutina no existe. Tal vez fue borrada.</string>
+    <string name="terminar">Terminar</string>
+    <string name="string_alert_terminar_rutina_titulo">Terminar Rutina</string>
+    <string name="string_alert_terminar_rutina_mensaje">¿Seguro que deseas terminar la rutina</string>
+    <string name="string_alert_terminar_rutina_si">Si</string>
+    <string name="salir">Salir</string>
+    <string name="buscar_rutina">Buscar rutina</string>
+    <string name="buscar_rutina_fav">Buscar rutina favorita</string>
+    <string name="editar_perfil_config">Editar Perfil</string>
+    <string name="ayuda_config">Ayuda</string>
+    <string name="cerrar_sesion_config">Cerrar Sesion</string>
+    <string name="alert_titulo_ayuda">Ayuda</string>
+    <string name="alert_titulo_cerrar_sesion">Cerrar Sesion</string>
+    <string name="alert_mensaje_ayuda">Julio 2021 - TP3 - HCI - Grupo 8</string>
+    <string name="alert_mensaje_cerrar_sesion">¿Seguro que quieres cerrar sesion?</string>
+    <string name="historial">Historial de rutinas ejecutadas</string>
+    <string name="toast_notificacion_creada">Se seteo el recordatorio correctamente</string>
+    <string name="titulo_notificacion">Llego la hora de entrenar... no hay excusas</string>
+    <string name="mensaje_notificacion">Has establecido un recordatorio en Reps</string>
+    <string name="ordenado_asc">Criterios ascendentemente</string>
+    <string name="ordenado_desc">Criterios descendentemente</string>
 </resources>

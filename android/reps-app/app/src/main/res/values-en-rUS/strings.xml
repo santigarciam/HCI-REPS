@@ -42,19 +42,18 @@
     </string-array>
     <string name="ordenar">Order by</string>
     <string name="filtrar">Filter by</string>
-    <string-array name="filterOpt">
-        <item>Filter by</item>
-        <item>Beginner</item>
-        <item>Intermediate</item>
-        <item>Expert</item>
-    </string-array>
-    <string-array name="orderOpt">
-        <item>Order by</item>
-        <item>Date</item>
-        <item>Rating</item>
-        <item>Sport</item>
-        <item>Category</item>
-    </string-array>
+
+    <string name="filterOptRookie">Amateur</string>
+    <string name="filterOptBegginer">Beginner</string>
+    <string name="filterOptInter">Intermediate</string>
+    <string name="filterOptAdv">Advanced</string>
+    <string name="filterOptExpert">Expert</string>
+
+
+    <string name="orderOptDate">Date</string>
+    <string name="orderOptrating">Rating</string>
+    <string name="orderOptSports">Sports</string>
+    <string name="orderOptCat">Category</string>
 
     <string name="verification_code_text">Insert verification code received</string>
     <string name="resend_code">Resend</string>
@@ -88,4 +87,24 @@
     <string name="string_compartir_rutina">Share routine</string>
     <string name="string_rutina_inexistente_titulo">Non-existent routine</string>
     <string name="string_rutina_inexistente_mensaje">This routine does not exist. Maybe it was erased</string>
+    <string name="terminar">Finish</string>
+    <string name="string_alert_terminar_rutina_titulo">End routine</string>
+    <string name="string_alert_terminar_rutina_mensaje">Are you sure you want to exit the routine</string>
+    <string name="string_alert_terminar_rutina_si">Yes</string>
+    <string name="salir">Exit</string>
+    <string name="buscar_rutina">Search routine</string>
+    <string name="buscar_rutina_fav">Search favourite routine</string>
+    <string name="editar_perfil_config">Edit profile</string>
+    <string name="ayuda_config">Help</string>
+    <string name="cerrar_sesion_config">Log out</string>
+    <string name="alert_titulo_ayuda">Help</string>
+    <string name="alert_titulo_cerrar_sesion">Log out</string>
+    <string name="alert_mensaje_ayuda">July 2021 - TP3 - HCI - Group 8</string>
+    <string name="alert_mensaje_cerrar_sesion">Are you sure you want to log out?</string>
+    <string name="historial">Routines history</string>
+    <string name="toast_notificacion_creada">Reminder set correctly</string>
+    <string name="titulo_notificacion">It is time to train... there are no excuses</string>
+    <string name="mensaje_notificacion">You have set a reminder in Reps app</string>
+    <string name="ordenado_asc">Criteria ascending</string>
+    <string name="ordenado_desc">Criteria descending</string>
 </resources>

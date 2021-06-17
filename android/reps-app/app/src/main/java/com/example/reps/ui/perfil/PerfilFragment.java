@@ -104,16 +104,16 @@ public class PerfilFragment extends Fragment {
                             Navigation.findNavController(view).navigate(PerfilFragmentDirections.actionNavigationPerfilToEditProfileFragment2());
                         }else if(menuItem.getItemId() == R.id.menu_profile_help){
                             AlertDialog dialog = new AlertDialog.Builder(getContext())
-                                    .setTitle("Ayuda")
-                                    .setMessage("TP3 - Grupo 8")
+                                    .setTitle(requireActivity().getString(R.string.alert_titulo_ayuda))
+                                    .setMessage(requireActivity().getString(R.string.alert_mensaje_ayuda))
                                     .setPositiveButton("Ok", null)
                                     .show();
                         }else if(menuItem.getItemId() == R.id.menu_profile_log_out){
                             AlertDialog dialog = new AlertDialog.Builder(getContext())
-                                    .setTitle("Cerrar Sesion")
-                                    .setMessage("¿Seguro que quieres cerrar sesion?")
-                                    .setPositiveButton("Si", null)
-                                    .setNegativeButton("Cancelar", null)
+                                    .setTitle(requireActivity().getString(R.string.alert_titulo_cerrar_sesion))
+                                    .setMessage(requireActivity().getString(R.string.alert_mensaje_cerrar_sesion))
+                                    .setPositiveButton(requireActivity().getString(R.string.string_alert_terminar_rutina_si), null)
+                                    .setNegativeButton(requireActivity().getString(R.string.editProfile_cancelar_button), null)
                                     .show();
 
                             Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);

@@ -16,9 +16,9 @@ public class ReminderBroadcast extends BroadcastReceiver {
         PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "programarEntrenamiento")
-                .setSmallIcon(R.drawable.reps_logo_icon)
-                .setContentTitle("Llego la hora de entrenar... no hay excusas")
-                .setContentText("Has establecido un recordatorio en Reps.")
+                .setSmallIcon(R.drawable.reps_logo_icon_no_background)
+                .setContentTitle(context.getString(R.string.titulo_notificacion))
+                .setContentText(context.getString(R.string.mensaje_notificacion))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true)
                 .setContentIntent(resultPendingIntent);

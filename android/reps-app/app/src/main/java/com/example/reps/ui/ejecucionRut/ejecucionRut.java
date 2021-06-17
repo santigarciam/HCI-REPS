@@ -252,10 +252,10 @@ public class ejecucionRut extends AppCompatActivity {
 
     private void mostrarDialogoSalida(){
         android.app.AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Terminar Rutina")
-                .setMessage("¿Seguro que deseas terminar la rutina: ".concat(routine.getName()).concat(" ?"))
-                .setPositiveButton("Si", null)
-                .setNegativeButton("Cancelar", null)
+                .setTitle(this.getString(R.string.string_alert_terminar_rutina_titulo))
+                .setMessage(this.getString(R.string.string_alert_terminar_rutina_mensaje) + " \""+ (routine.getName()) + "\" ?")
+                .setPositiveButton(this.getString(R.string.string_alert_terminar_rutina_si), null)
+                .setNegativeButton(this.getString(R.string.editProfile_cancelar_button), null)
                 .show();
 
         Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
