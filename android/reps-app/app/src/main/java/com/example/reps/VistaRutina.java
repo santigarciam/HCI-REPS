@@ -126,19 +126,24 @@ public class VistaRutina extends Fragment {
                                            return cycle.getOrder() - t1.getOrder();
                                        }
                                    });
-                                   shimmerLayout.stopShimmer();
-                                   shimmerLayout.hideShimmer();
-                                   shimmerLayout.setVisibility(View.GONE);
+                                   if (shimmerLayout != null){
+                                       shimmerLayout.stopShimmer();
+                                       shimmerLayout.hideShimmer();
+                                       shimmerLayout.setVisibility(View.GONE);
+                                   }
                                    verticalAdapter.notifyDataSetChanged();
-                                   image.setVisibility(View.VISIBLE);
-                                   imageProfile.setVisibility(View.VISIBLE);
-                                   favButton.setVisibility(View.VISIBLE);
-                                   playButton.setVisibility(View.VISIBLE);
-                                   shareButton.setVisibility(View.VISIBLE);
-                                   name.setVisibility(View.VISIBLE);
-                                   owner.setVisibility(View.VISIBLE);
-                                   descr.setVisibility(View.VISIBLE);
-                                   ratingBar.setVisibility(View.VISIBLE);
+                                   if (image != null){
+                                       image.setVisibility(View.VISIBLE);
+                                       imageProfile.setVisibility(View.VISIBLE);
+                                       favButton.setVisibility(View.VISIBLE);
+                                       playButton.setVisibility(View.VISIBLE);
+                                       shareButton.setVisibility(View.VISIBLE);
+                                       name.setVisibility(View.VISIBLE);
+                                       owner.setVisibility(View.VISIBLE);
+                                       descr.setVisibility(View.VISIBLE);
+                                       ratingBar.setVisibility(View.VISIBLE);
+                                   }
+
                                });
                                i++;
                            }

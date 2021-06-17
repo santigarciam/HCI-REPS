@@ -104,9 +104,11 @@ public class MiProgresoFragment extends Fragment {
                         RecyclerView verticalRecyclerView = (RecyclerView) root.findViewById(R.id.miProgreso_recycler_view);
                         verticalRecyclerView.setHasFixedSize(true);
                         verticalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-                        shimmerLayout.stopShimmer();
-                        shimmerLayout.hideShimmer();
-                        shimmerLayout.setVisibility(View.GONE);
+                        if (shimmerLayout != null){
+                            shimmerLayout.stopShimmer();
+                            shimmerLayout.hideShimmer();
+                            shimmerLayout.setVisibility(View.GONE);
+                        }
                         (root.findViewById(R.id.miProgreso_titulo)).setVisibility(View.VISIBLE);
                         verticalRecyclerView.setAdapter(rAdapter);
                     } else {
