@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -287,7 +288,13 @@ public class ejecucionRut extends AppCompatActivity {
         Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
         negativeButton.setBackgroundColor(getColor(R.color.our_blue));
         negativeButton.setTextColor(getColor(R.color.white));
-        negativeButton.setPadding(0,0,5,0);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(20,0,20,0);
+        negativeButton.setLayoutParams(params);
         negativeButton
                 .setOnClickListener(new View.OnClickListener() {
             @Override

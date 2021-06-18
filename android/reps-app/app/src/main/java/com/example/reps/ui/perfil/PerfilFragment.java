@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -110,8 +111,8 @@ public class PerfilFragment extends Fragment {
                                     .setTitle(requireActivity().getString(R.string.alert_titulo_cerrar_sesion))
                                     .setMessage(requireActivity().getString(R.string.alert_mensaje_cerrar_sesion))
                                     .setPositiveButton(requireActivity().getString(R.string.string_alert_terminar_rutina_si), null)
-                                    .setNegativeButton(requireActivity().getString(R.string.editProfile_cancelar_button), null)
-                                    .show();
+                                    .setNegativeButton(requireActivity().getString(R.string.editProfile_cancelar_button), null).show();
+
 
                             Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
                             positiveButton.setBackgroundColor(getContext().getColor(R.color.grey));
@@ -119,6 +120,15 @@ public class PerfilFragment extends Fragment {
                             Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
                             negativeButton.setBackgroundColor(getContext().getColor(R.color.our_blue));
                             negativeButton.setTextColor(getContext().getColor(R.color.white));
+
+
+                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                                    LinearLayout.LayoutParams.WRAP_CONTENT
+                            );
+                            params.setMargins(20,0,20,0);
+                            negativeButton.setLayoutParams(params);
+
                             positiveButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
