@@ -13,19 +13,28 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rutine_card_constraint_layout"
-        android:layout_width="729dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="2"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteX="1dp">
 
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <TextView
             android:id="@+id/rutine_card_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="@string/nombre_rutina"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -36,30 +45,24 @@
             android:id="@+id/vista_rutina_fav_button"
             android:layout_width="47dp"
             android:layout_height="47dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:backgroundTint="#00FFFFFF"
             android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="@+id/rutine_card_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/rutine_card_share"
-            app:layout_constraintTop_toTopOf="@+id/rutine_card_title"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/baseline_favorite_black_24dp" />
 
         <ImageButton
             android:id="@+id/rutine_card_share"
-            android:layout_width="49dp"
-            android:layout_height="44dp"
-            android:layout_marginStart="300dp"
-            android:layout_marginEnd="64dp"
+            android:layout_width="46dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
             android:backgroundTint="#00FFFFFF"
             android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="@+id/vista_rutina_fav_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.842"
-            app:layout_constraintStart_toEndOf="@+id/rutine_card_title"
-            app:layout_constraintTop_toTopOf="@+id/vista_rutina_fav_button"
-            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintEnd_toStartOf="@+id/vista_rutina_fav_button"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/baseline_reply_black_24" />
 
         <TextView
@@ -78,8 +81,8 @@
             android:id="@+id/imageView4"
             android:layout_width="37dp"
             android:layout_height="26dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -88,12 +91,14 @@
 
         <TextView
             android:id="@+id/descripcionRut"
-            android:layout_width="177dp"
+            android:layout_width="0dp"
             android:layout_height="65dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/descripcion_rutina"
-            app:layout_constraintStart_toStartOf="@+id/rutine_card_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rutine_card_title" />
 
         <RatingBar
@@ -102,11 +107,17 @@
             android:layout_width="80dp"
             android:layout_height="20dp"
             android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
             android:numStars="5"
-            app:layout_constraintBottom_toBottomOf="@+id/rutine_card_user"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/rutine_card_user"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <LinearLayout
+            android:layout_width="37dp"
+            android:layout_height="9dp"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="17dp"
+            tools:layout_editor_absoluteY="96dp"></LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

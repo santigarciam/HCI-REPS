@@ -22,6 +22,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/descubrir_recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="309dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ordenarDescubrir" />
+
             <Button
                 android:id="@+id/ordenarDescubrir"
                 android:layout_width="wrap_content"
@@ -29,7 +38,6 @@
                 android:layout_marginStart="24dp"
 
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:background="@color/our_blue"
                 android:backgroundTint="?android:attr/textColorHintInverse"
                 android:text="@string/ordenar"
@@ -39,7 +47,6 @@
                 app:icon="@android:drawable/arrow_down_float"
                 app:iconGravity="end"
                 app:iconTint="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -74,11 +81,6 @@
                 app:layout_constraintTop_toTopOf="@+id/filterDescubrir" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/descubrir_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>
