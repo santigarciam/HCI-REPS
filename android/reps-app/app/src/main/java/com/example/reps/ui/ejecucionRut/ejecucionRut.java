@@ -104,6 +104,7 @@ public class ejecucionRut extends AppCompatActivity {
         });
         nextField = findViewById(R.id.siguiente_ejercicoBtn);
         timeRepsField = findViewById(R.id.timeExercise);
+        timeRepsField.setVisibility(View.VISIBLE);
 
 
         nextField.setVisibility(View.INVISIBLE);
@@ -342,6 +343,7 @@ public class ejecucionRut extends AppCompatActivity {
 
 
     public void finishRoutine(){
+        timeRepsField.setVisibility(View.INVISIBLE);
         app.getExecutionRepository().addRoutineExec(routine.getId(),new ExecutionInformation(2,false)).observe(this,r->{
             if(r.getStatus() == Status.SUCCESS){
 
