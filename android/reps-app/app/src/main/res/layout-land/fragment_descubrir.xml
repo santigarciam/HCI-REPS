@@ -30,7 +30,7 @@
 
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@android:color/tab_indicator_text"
+                android:background="@color/our_blue"
                 android:backgroundTint="?android:attr/textColorHintInverse"
                 android:text="@string/ordenar"
                 android:textColor="@color/white"
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:background="@android:color/secondary_text_dark_nodisable"
+                android:background="@color/our_blue"
                 android:backgroundTint="?android:attr/textColorHintInverse"
                 android:text="@string/filtrar"
                 android:textColor="@color/white"
