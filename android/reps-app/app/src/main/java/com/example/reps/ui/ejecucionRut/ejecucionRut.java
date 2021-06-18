@@ -402,7 +402,7 @@ public class ejecucionRut extends AppCompatActivity {
             }
             currentExField.setText(firstToUpperOtherLowerCase(current.getExercise().getName()));
             descrField.setText(current.getExercise().getDetail());
-            timeRepsField.setText(current.getRepetitions() == 0 ? (current.getDuration() < 10 ? "0" + current.getDuration() + "s" : current.getDuration() + "s") : "X " + current.getRepetitions());
+            timeRepsField.setText(current.getRepetitions() == 0 ? (current.getDuration() < 10 ? "0" + current.getDuration() + "s" : current.getDuration() + "s") : "x " + current.getRepetitions());
             cycleField.setText(firstToUpperOtherLowerCase(currentCycle.getName()));
         }
 
